@@ -1,0 +1,19 @@
+{
+    "name": "MarkBaker/PHPGeodetic",
+    "type": "library",
+    "description": "Geodetic library",
+    "keywords": ["geo","geodetic","latitude","longitude",""ECEF","ellipsoid"],
+    "homepage": "https://github.com/MarkBaker/PHPGeodetic",
+    "license": "LGPL",
+    "authors": [
+        {
+            "name": "Mark Baker",
+            "email": "mbaker@inviqa.com",
+            "homepage": "",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    }
+}
