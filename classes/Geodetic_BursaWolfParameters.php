@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  An Set of Bursa-Wolf Parameters for a Helmert Translation.
+ *  A set of Bursa-Wolf Parameters for a Helmert Translation.
  *
  *  @package Geodetic
  *  @copyright  Copyright (c) 2012 Mark Baker (https://github.com/MarkBaker/PHPGeodetic)
@@ -139,6 +139,11 @@ class Geodetic_BursaWolfParameters
         return $this->_scaleFactor;
     }
 
+    /**
+     *  Reverse the sign of all the Bursa-Wolf parameter values
+     *
+     *  @return    void
+     */
     public function invert()
     {
         $this->_translationVectors->getX()->invertValue();

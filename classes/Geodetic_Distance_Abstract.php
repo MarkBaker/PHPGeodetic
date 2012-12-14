@@ -8,10 +8,39 @@
  */
 abstract class Geodetic_Distance_Abstract implements Geodetic_XyzFormat_Interface
 {
+    /**
+     *  The X-distance
+     *
+     *  @access protected
+     *  @var    Geodetic_Distance
+     */
     protected $_xValue;
+
+    /**
+     *  The Y-distance
+     *
+     *  @access protected
+     *  @var    Geodetic_Distance
+     */
     protected $_yValue;
+
+    /**
+     *  The Z-distance
+     *
+     *  @access protected
+     *  @var    Geodetic_Distance
+     */
     protected $_zValue;
 
+    /**
+     *  Set the three Distance values, as used for the Translation Vectors
+     *
+     *  @param     Integer|Float|Geodetic_Distance    $xDistance    The X-Distance value
+     *  @param     Integer|Float|Geodetic_Distance    $yDistance    The Y-Distance value
+     *  @param     Integer|Float|Geodetic_Distance    $zDistance    The Z-Distance value
+     *  @param     string                              $uom         Unit of measure for all three Distance values
+     *                                                                  (if they are passed as integer or float)
+     */
     protected function setValues($xDistance,
                                  $yDistance,
                                  $zDistance,
@@ -30,31 +59,61 @@ abstract class Geodetic_Distance_Abstract implements Geodetic_XyzFormat_Interfac
         );
     }
 
+    /**
+     *  Set the X-Distance value
+     *
+     *  @param     Geodetic_Distance    $distance    The Distance value
+     */
     protected function setX($xValue)
     {
         $this->_xValue = $xValue;
     }
 
+    /**
+     *  Get the X-Distance value
+     *
+     *  @return     Geodetic_Distance    The Distance value
+     */
     public function getX()
     {
         return $this->_xValue;
     }
 
+    /**
+     *  Set the Y-Distance value
+     *
+     *  @param     Geodetic_Distance    $distance    The Distance value
+     */
     protected function setY($yValue)
     {
         $this->_yValue = $yValue;
     }
 
+    /**
+     *  Get the Y-Distance value
+     *
+     *  @return     Geodetic_Distance    The Distance value
+     */
     public function getY()
     {
         return $this->_yValue;
     }
 
+    /**
+     *  Set the Z-Distance value
+     *
+     *  @param     Geodetic_Distance    $distance    The Distance value
+     */
     protected function setZ($zValue)
     {
         $this->_zValue = $zValue;
     }
 
+    /**
+     *  Get the Z-Distance value
+     *
+     *  @return     Geodetic_Distance    The Distance value
+     */
     public function getZ()
     {
         return $this->_zValue;

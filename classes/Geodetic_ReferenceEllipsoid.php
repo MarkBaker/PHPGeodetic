@@ -63,6 +63,12 @@ class Geodetic_ReferenceEllipsoid
     const IERS_2003                   = 'IERS 2003';
 
 
+    /**
+     *  Values for all pre-defined Reference Ellipsoids
+     *
+     *  @access private
+     *  @var    mixed[]
+     */
     private static $_ellipsoidData = array(
         self::AIRY_1830 => array(
             'key'                => 'AIRY_1830',

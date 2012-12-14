@@ -252,4 +252,138 @@ class Geodetic_LatLong
         return new Geodetic_ECEF($ecefCoordinates);
     }
 
+    /**
+     *  Get the distance between two Latitude/Longitude objects using the Haversine formula
+     *
+     *  @param     Geodetic_LatLong    $distanceToPoint
+     *  @return    Geodetic_Distance
+     *  @throws    Geodetic_Exception
+     */
+    public function getDistanceHaversine(Geodetic_LatLong $distanceToPoint)
+    {
+        $earthMeanRadius = 6371009.0; // metres
+
+        $deltaLatitude =  $distanceToPoint->getLatitude()->getValue(Geodetic_Angle::RADIANS) -
+            $this->_latitude->getValue(Geodetic_Angle::RADIANS);
+        $deltaLongitude = $distanceToPoint->getLongitude()->getValue(Geodetic_Angle::RADIANS) -
+            $this->_longitude->getValue(Geodetic_Angle::RADIANS);
+        $aValue = sin($deltaLatitude / 2) * sin($deltaLatitude / 2) +
+             cos($this->_latitude->getValue(Geodetic_Angle::RADIANS)) *
+                 cos($distanceToPoint->getLatitude()->getValue(Geodetic_Angle::RADIANS)) *
+             sin($deltaLongitude / 2) * sin($deltaLongitude / 2);
+        $cValue = 2 * atan2(sqrt($aValue), sqrt(1 - $aValue));
+
+        return new Geodetic_Distance(
+            $earthMeanRadius * $cValue
+        );
+    }
+
+    /**
+     *  Get the distance between two Latitude/Longitude objects using the Vincenty formula
+     *
+     *  @param     Geodetic_LatLong               $distanceToPoint
+     *  @param     Geodetic_ReferenceEllipsoid    $ellipsoid
+     *  @return    Geodetic_Distance
+     *  @throws    Geodetic_Exception
+     */
+    public function getDistanceVincenty(Geodetic_LatLong $distanceToPoint,
+                                        Geodetic_ReferenceEllipsoid $ellipsoid = NULL)
+    {
+        if (is_null($ellipsoid))
+            $ellipsoid = new Geodetic_ReferenceEllipsoid(Geodetic_ReferenceEllipsoid::WGS_84);
+
+        $semiMajor = $ellipsoid->getSemiMajorAxis();
+        $semiMinor = $ellipsoid->getSemiMinorAxis();
+        $flattening = $ellipsoid->getFlattening();
+
+        $lDifference = $this->_longitude->getValue(Geodetic_Angle::RADIANS) -
+            $distanceToPoint->getLongitude()->getValue(Geodetic_Angle::RADIANS);
+
+        $U1 = atan((1 - $flattening) * tan($distanceToPoint->getLatitude()->getValue(Geodetic_Angle::RADIANS)));
+        $U2 = atan((1 - $flattening) * tan($this->_latitude->getValue(Geodetic_Angle::RADIANS)));
+
+        $sinU1 = sin($U1);
+        $cosU1 = cos($U1);
+        $sinU2 = sin($U2);
+        $cosU2 = cos($U2);
+
+        $lambda = $lDifference;
+        $lambdaP = 2 * M_PI;
+        $iterLimit = 20;
+        while(abs($lambda - $lambdaP) > 1e-12 && $iterLimit>0) {
+            $sinLambda = sin($lambda);
+            $cosLambda = cos($lambda);
+            $sinSigma = sqrt(
+                ($cosU2 * $sinLambda) * ($cosU2 * $sinLambda) +
+                ($cosU1 * $sinU2 - $sinU1 * $cosU2 * $cosLambda) *
+                ($cosU1 * $sinU2 - $sinU1 * $cosU2 * $cosLambda)
+            );
+            if ($sinSigma == 0.0)  //  co-incident points
+                return new Geodetic_Distance();
+
+            $cosSigma = $sinU1 * $sinU2 + $cosU1 * $cosU2 * $cosLambda;
+            $sigma = atan2($sinSigma, $cosSigma);
+            $alpha = asin($cosU1 * $cosU2 * $sinLambda / $sinSigma);
+            $cosSqAlpha = cos($alpha) * cos($alpha);
+            $cos2SigmaM = $cosSigma - 2 * $sinU1 * $sinU2 / $cosSqAlpha;
+            $cValue = $flattening / 16 * $cosSqAlpha * (4 + $flattening * (4 - 3 * $cosSqAlpha));
+            $lambdaP = $lambda;
+            $lambda = $lDifference + (1 - $cValue) * $flattening * sin($alpha) *
+                ($sigma + $cValue * $sinSigma * (
+                    $cos2SigmaM + $cValue * $cosSigma * (-1 + 2 * $cos2SigmaM * $cos2SigmaM))
+                );
+        }
+
+        $uSq = $cosSqAlpha * $ellipsoid->getSecondEccentricitySquared();
+        $aValue = 1 + $uSq / 16384 * (4096 + $uSq * (-768 + $uSq * (320 - 175 * $uSq)));
+        $bValue = $uSq / 1024 * (256 + $uSq * (-128 + $uSq * (74 - 47 * $uSq)));
+
+        $deltaSigma = $bValue * $sinSigma * ($cos2SigmaM + $bValue / 4 *
+            ($cosSigma * (-1 + 2 * $cos2SigmaM * $cos2SigmaM)- $bValue / 6 * $cos2SigmaM *
+            (-3 + 4 * $sinSigma * $sinSigma) * (-3 + 4 * $cos2SigmaM * $cos2SigmaM)));
+
+        return new Geodetic_Distance(
+            $semiMinor * $aValue * ($sigma - $deltaSigma)
+        );
+    }
+
+    /**
+     *  Get the initial bearing for a great circle route between two Latitude/Longitude objects
+     *
+     *  @param     Geodetic_LatLong    $bearingToPoint
+     *  @return    Geodetic_Angle
+     *  @throws    Geodetic_Exception
+     */
+    public function getInitialBearing(Geodetic_LatLong $bearingToPoint)
+    {
+        $deltaLongitude = $bearingToPoint->getLongitude()->getValue(Geodetic_Angle::RADIANS) -
+            $this->_longitude->getValue(Geodetic_Angle::RADIANS);
+
+        $yValue = sin($deltaLongitude) * cos($bearingToPoint->getLatitude()->getValue(Geodetic_Angle::RADIANS));
+        $xValue = cos($this->_latitude->getValue(Geodetic_Angle::RADIANS)) *
+            sin($bearingToPoint->getLatitude()->getValue(Geodetic_Angle::RADIANS)) -
+            sin($this->_latitude->getValue(Geodetic_Angle::RADIANS)) *
+            cos($bearingToPoint->getLatitude()->getValue(Geodetic_Angle::RADIANS)) *
+            cos($deltaLongitude);
+
+        $bearing = atan2($yValue, $xValue);
+
+        return new Geodetic_Angle(rad2deg($bearing) + 360 % 360);
+    }
+
+    /**
+     *  Get the final bearing for a great circle route between two Latitude/Longitude objects
+     *
+     *  @param     Geodetic_LatLong    $bearingToPoint
+     *  @return    Geodetic_Angle
+     *  @throws    Geodetic_Exception
+     */
+    public function getFinalBearing(Geodetic_LatLong $bearingToPoint)
+    {
+        $initialBearing = $bearingToPoint->getInitialBearing($this);
+        $finalBearing = $initialBearing->getValue() + 180 % 360;
+
+        return new Geodetic_Angle($finalBearing);
+    }
+
 }

@@ -8,10 +8,39 @@
  */
 abstract class Geodetic_Angle_Abstract implements Geodetic_XyzFormat_Interface
 {
+    /**
+     *  The X-angle
+     *
+     *  @access protected
+     *  @var    Geodetic_Angle
+     */
     protected $_xAngle;
+
+    /**
+     *  The Y-angle
+     *
+     *  @access protected
+     *  @var    Geodetic_Angle
+     */
     protected $_yAngle;
+
+    /**
+     *  The Z-angle
+     *
+     *  @access protected
+     *  @var    Geodetic_Angle
+     */
     protected $_zAngle;
 
+    /**
+     *  Set the three Angle values, as used for the Rotation Matrix
+     *
+     *  @param     Integer|Float|Geodetic_Angle    $xAngle    The X-Angle value
+     *  @param     Integer|Float|Geodetic_Angle    $yAngle    The Y-Angle value
+     *  @param     Integer|Float|Geodetic_Angle    $zAngle    The Z-Angle value
+     *  @param     string                          $uom       Unit of measure for all Angle values
+     *                                                            (if they are passed as integer or float)
+     */
     protected function setValues($xAngle,
                                  $yAngle,
                                  $zAngle,
@@ -30,31 +59,61 @@ abstract class Geodetic_Angle_Abstract implements Geodetic_XyzFormat_Interface
         );
     }
 
-    protected function setX($xAngle)
+    /**
+     *  Set the X-Angle value
+     *
+     *  @param     Geodetic_Angle    $angle    The Angle value
+     */
+    protected function setX(Geodetic_Angle $xAngle)
     {
         $this->_xAngle = $xAngle;
     }
 
+    /**
+     *  Get the X-Angle value
+     *
+     *  @return     Geodetic_Angle    The Angle value
+     */
     public function getX()
     {
         return $this->_xAngle;
     }
 
-    protected function setY($yAngle)
+    /**
+     *  Set the Y-Angle value
+     *
+     *  @param     Geodetic_Angle    $angle    The Angle value
+     */
+    protected function setY(Geodetic_Angle $yAngle)
     {
         $this->_yAngle = $yAngle;
     }
 
+    /**
+     *  Get the Y-Angle value
+     *
+     *  @return     Geodetic_Angle    The Angle value
+     */
     public function getY()
     {
         return $this->_yAngle;
     }
 
-    protected function setZ($zAngle)
+    /**
+     *  Set the Z-Angle value
+     *
+     *  @param     Geodetic_Angle    $angle    The Angle value
+     */
+    protected function setZ(Geodetic_Angle $zAngle)
     {
         $this->_zAngle = $zAngle;
     }
 
+    /**
+     *  Get the Z-Angle value
+     *
+     *  @return     Geodetic_Angle    The Angle value
+     */
     public function getZ()
     {
         return $this->_zAngle;

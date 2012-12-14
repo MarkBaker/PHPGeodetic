@@ -29,6 +29,12 @@ class Geodetic_Datum
     const IRELAND_1965  = 'Ireland 1965';
 
 
+    /**
+     *  Values for all pre-defined Datums
+     *
+     *  @access private
+     *  @var    mixed[]
+     */
     private static $_geodeticDatums = array(
         self::OSGB36 => array(
             'key' => 'OSGB36',
