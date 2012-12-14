@@ -57,3 +57,6 @@ echo 'Initial Bearing: ' , round($initialBearing->getValue(Geodetic_Angle::DEGRE
 
 $finalBearing = $latLongTokyo->getFinalBearing($latLongSeattle);
 echo 'Final Bearing: ' , round($finalBearing->getValue(Geodetic_Angle::DEGREES), 3), ' ' ,Geodetic_Angle::DEGREES , PHP_EOL;
+
+$midpoint = $latLongTokyo->getMidpoint($latLongSeattle);
+echo 'Midpoint: ' , $midpoint->getLatitude()->toDMS(2), ' ' ,$midpoint->getLongitude()->toDMS(2) , PHP_EOL;
