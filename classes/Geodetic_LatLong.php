@@ -255,7 +255,7 @@ class Geodetic_LatLong
     /**
      *  Get the distance between two Latitude/Longitude objects using the Haversine formula
      *
-     *  @param     Geodetic_LatLong    $distanceToPoint
+     *  @param     Geodetic_LatLong    $distanceToPoint    The destination point
      *  @return    Geodetic_Distance
      *  @throws    Geodetic_Exception
      */
@@ -281,7 +281,7 @@ class Geodetic_LatLong
     /**
      *  Get the distance between two Latitude/Longitude objects using the Vincenty formula
      *
-     *  @param     Geodetic_LatLong               $endPoint
+     *  @param     Geodetic_LatLong               $endPoint    The destination point
      *  @param     Geodetic_ReferenceEllipsoid    $ellipsoid
      *  @return    Geodetic_Distance
      *  @throws    Geodetic_Exception
@@ -350,7 +350,7 @@ class Geodetic_LatLong
     /**
      *  Get the initial bearing for a great circle route between two Latitude/Longitude objects
      *
-     *  @param     Geodetic_LatLong    $endPoint
+     *  @param     Geodetic_LatLong    $endPoint    The destination point
      *  @return    Geodetic_Angle
      *  @throws    Geodetic_Exception
      */
@@ -374,7 +374,7 @@ class Geodetic_LatLong
     /**
      *  Get the final bearing for a great circle route between two Latitude/Longitude objects
      *
-     *  @param     Geodetic_LatLong    $endPoint
+     *  @param     Geodetic_LatLong    $endPoint    The destination point
      *  @return    Geodetic_Angle
      *  @throws    Geodetic_Exception
      */
@@ -386,11 +386,31 @@ class Geodetic_LatLong
         return new Geodetic_Angle($finalBearing);
     }
 
+    private static function _cleanLatitude($latitude)
+    {
+        if ($latitude > M_PI_2)
+            $latitude -= M_PI;
+        elseif ($latitude < -M_PI_2)
+            $latitude += M_PI;
+
+        return $latitude;
+    }
+
+    private static function _cleanLongitude($longitude)
+    {
+        if ($longitude > M_PI)
+            $longitude -= 2 * M_PI;
+        elseif ($longitude < -M_PI)
+            $longitude += 2 * M_PI;
+
+        return $longitude;
+    }
+
     /**
      *  Get the midpoint for a great circle route between two Latitude/Longitude objects
      *
-     *  @param     Geodetic_LatLong    $endPoint
-     *  @return    Geodetic_Angle
+     *  @param     Geodetic_LatLong    $endPoint    The destination point
+     *  @return    Geodetic_LatLong
      *  @throws    Geodetic_Exception
      */
     public function getMidpoint(Geodetic_LatLong $endPoint)
@@ -412,20 +432,48 @@ class Geodetic_LatLong
         $midpointLongitude = $this->_longitude->getValue(Geodetic_Angle::RADIANS) +
             atan2($yModified, cos($this->_latitude->getValue(Geodetic_Angle::RADIANS)) + $xModified);
 
-        if ($midpointLatitude > M_PI_2)
-            $midpointLatitude -= M_PI;
-        elseif ($midpointLatitude < -M_PI_2)
-            $midpointLatitude += M_PI;
+        return new Geodetic_LatLong(
+            new Geodetic_LatLong_CoordinateValues(
+                self::_cleanLatitude($midpointLatitude),
+                self::_cleanLongitude($midpointLongitude),
+                Geodetic_Angle::RADIANS
+            )
+        );
+    }
 
-        if ($midpointLongitude > M_PI)
-            $midpointLongitude -= 2 * M_PI;
-        elseif ($midpointLongitude < -M_PI)
-            $midpointLongitude += 2 * M_PI;
+    /**
+     *  Get the destination for a given initial bearing and distance along a great circle route
+     *
+     *  @param     Geodetic_Angle       $bearing    Initial bearing
+     *  @param     Geodetic_Distance    $distance
+     *  @return    Geodetic_LatLong
+     *  @throws    Geodetic_Exception
+     */
+    public function getDestination(Geodetic_Angle $bearing,
+                                   Geodetic_Distance $distance)
+    {
+        $earthMeanRadius = 6371009.0; // metres
+
+        $destinationLatitude = asin(
+            sin($this->_latitude->getValue(Geodetic_Angle::RADIANS)) *
+                cos($distance->getValue() / $earthMeanRadius) +
+            cos($this->_latitude->getValue(Geodetic_Angle::RADIANS)) *
+                sin($distance->getValue() / $earthMeanRadius) *
+                cos($bearing->getValue(Geodetic_Angle::RADIANS))
+        );
+        $destinationLongitude = $this->_longitude->getValue(Geodetic_Angle::RADIANS) +
+            atan2(
+                sin($bearing->getValue(Geodetic_Angle::RADIANS)) *
+                    sin($distance->getValue() / $earthMeanRadius) *
+                    cos($this->_latitude->getValue(Geodetic_Angle::RADIANS)),
+                cos($distance->getValue() / $earthMeanRadius) -
+                    sin($this->_latitude->getValue(Geodetic_Angle::RADIANS)) * sin($destinationLatitude)
+            );
 
         return new Geodetic_LatLong(
             new Geodetic_LatLong_CoordinateValues(
-                $midpointLatitude,
-                $midpointLongitude,
+                self::_cleanLatitude($destinationLatitude),
+                self::_cleanLongitude($destinationLongitude),
                 Geodetic_Angle::RADIANS
             )
         );
