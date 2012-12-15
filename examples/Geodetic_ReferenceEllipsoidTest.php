@@ -32,6 +32,13 @@ foreach(Geodetic_ReferenceEllipsoid::getEllipsoidNames() as $ellipsoid) {
          $ref->getSecondEccentricitySquared() .
          PHP_EOL;
 
+    echo '    Mean Radius .......................... ' .
+         $ref->getMeanRadius(Geodetic_Distance::KILOMETRES) .
+         ' ' . Geodetic_Distance::KILOMETRES . PHP_EOL;
+    echo '    Volumetric Radius .................... ' .
+         $ref->getVolumetricRadius(Geodetic_Distance::KILOMETRES) .
+         ' ' . Geodetic_Distance::KILOMETRES . PHP_EOL;
+
     echo '    Radius of Curvature' . PHP_EOL;
     echo '        (Meridian) ' . PHP_EOL;
     for ($l = -90; $l <= 90; $l+=15) {

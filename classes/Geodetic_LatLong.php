@@ -255,6 +255,8 @@ class Geodetic_LatLong
     /**
      *  Get the distance between two Latitude/Longitude objects using the Haversine formula
      *
+     *  The Haversine Formula calculates the distance to your destination point assuming a spherical Earth
+     *
      *  @param     Geodetic_LatLong    $distanceToPoint    The destination point
      *  @return    Geodetic_Distance
      *  @throws    Geodetic_Exception
@@ -281,6 +283,8 @@ class Geodetic_LatLong
     /**
      *  Get the distance between two Latitude/Longitude objects using the Vincenty formula
      *
+     *  The Vincenty Formula calculates the distance to your destination point based on the specified ellipsoid
+     *
      *  @param     Geodetic_LatLong               $endPoint    The destination point
      *  @param     Geodetic_ReferenceEllipsoid    $ellipsoid
      *  @return    Geodetic_Distance
@@ -292,25 +296,24 @@ class Geodetic_LatLong
         if (is_null($ellipsoid))
             $ellipsoid = new Geodetic_ReferenceEllipsoid(Geodetic_ReferenceEllipsoid::WGS_84);
 
-        $semiMajor = $ellipsoid->getSemiMajorAxis();
         $semiMinor = $ellipsoid->getSemiMinorAxis();
         $flattening = $ellipsoid->getFlattening();
 
         $lDifference = $this->_longitude->getValue(Geodetic_Angle::RADIANS) -
             $endPoint->getLongitude()->getValue(Geodetic_Angle::RADIANS);
 
-        $U1 = atan((1 - $flattening) * tan($endPoint->getLatitude()->getValue(Geodetic_Angle::RADIANS)));
-        $U2 = atan((1 - $flattening) * tan($this->_latitude->getValue(Geodetic_Angle::RADIANS)));
+        $U1Value = atan((1 - $flattening) * tan($endPoint->getLatitude()->getValue(Geodetic_Angle::RADIANS)));
+        $U2Value = atan((1 - $flattening) * tan($this->_latitude->getValue(Geodetic_Angle::RADIANS)));
 
-        $sinU1 = sin($U1);
-        $cosU1 = cos($U1);
-        $sinU2 = sin($U2);
-        $cosU2 = cos($U2);
+        $sinU1 = sin($U1Value);
+        $cosU1 = cos($U1Value);
+        $sinU2 = sin($U2Value);
+        $cosU2 = cos($U2Value);
 
         $lambda = $lDifference;
         $lambdaP = 2 * M_PI;
         $iterLimit = 20;
-        while(abs($lambda - $lambdaP) > 1e-12 && $iterLimit>0) {
+        while(abs($lambda - $lambdaP) > 1E-12 && $iterLimit>0) {
             $sinLambda = sin($lambda);
             $cosLambda = cos($lambda);
             $sinSigma = sqrt(

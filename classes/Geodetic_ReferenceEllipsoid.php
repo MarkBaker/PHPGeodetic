@@ -567,6 +567,46 @@ class Geodetic_ReferenceEllipsoid
     }
 
     /**
+     *  Get the Mean Radius this Reference Ellipsoid object
+     *
+     *  @param     string    $uom    Unit of Measure for the returned value
+     *  @return    float     Mean Radius for this ellipsoid
+     *  @throws    Geodetic_Exception
+     */
+    public function getMeanRadius($uom = Geodetic_Distance::METRES)
+    {
+        if ($this->_dirty)
+            $this->_calculateDerivedParameters();
+
+        return Geodetic_Distance::convertFromMeters(
+            (2 * $this->_semiMajorAxis->getValue() + $this->_semiMinorAxis->getValue()) / 3,
+            $uom
+        );
+    }
+
+    /**
+     *  Get the Volumetric Radius this Reference Ellipsoid object
+     *
+     *  @param     string    $uom    Unit of Measure for the returned value
+     *  @return    float     Volumetric Radius for this ellipsoid
+     *  @throws    Geodetic_Exception
+     */
+    public function getVolumetricRadius($uom = Geodetic_Distance::METRES)
+    {
+        if ($this->_dirty)
+            $this->_calculateDerivedParameters();
+
+        return Geodetic_Distance::convertFromMeters(
+            pow(
+                $this->_semiMajorAxis->getValue() * $this->_semiMajorAxis->getValue() *
+                    $this->_semiMinorAxis->getValue(),
+                1/3
+            ),
+            $uom
+        );
+    }
+
+    /**
      *  Get the Radius of Curvature along the Meridian at a specified latitude
      *      for this Reference Ellipsoid object
      *
