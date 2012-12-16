@@ -21,12 +21,11 @@
  */
 class Geodetic_Datum
 {
-    const OSGB          = 'Ordnance Survey - Great Britain (1936)';
-    const OSGB36        = 'Ordnance Survey - Great Britain (1936)';
-    const OGB_7         = 'Ordnance Survey - Great Britain (1936)';
+    const OSGB          = 'OSGB36';
+    const OSGB36        = 'OSGB36';
     const WGS1984       = 'WGS84';
     const WGS84         = 'WGS84';
-    const IRELAND_1965  = 'Ireland 1965';
+    const IRELAND_1965  = 'IRELAND_1965';
 
 
     /**
@@ -37,10 +36,11 @@ class Geodetic_Datum
      */
     private static $_geodeticDatums = array(
         self::OSGB36 => array(
-            'key' => 'OSGB36',
-            'defaultRegion'          => 'GB - Great Britain',
-            'referenceEllipsoid'     => Geodetic_ReferenceEllipsoid::AIRY_1830,
-            'regions'                => array(
+            'name' => 'Ordnance Survey - Great Britain (1936)',
+            'synonyms'            => 'OSGB',
+            'defaultRegion'       => 'GB - Great Britain',
+            'referenceEllipsoid'  => Geodetic_ReferenceEllipsoid::AIRY_1830,
+            'regions'             => array(
                 'GB - Great Britain' => array(
                     'translationVectors' => array(
                         'x' => 446.448,     //  metres
@@ -59,10 +59,11 @@ class Geodetic_Datum
             ),
         ),
         self::WGS84 => array(    //    Global GPS
-            'key' => 'WGS84',
-            'defaultRegion'          => 'Global Definition',
-            'referenceEllipsoid'     => Geodetic_ReferenceEllipsoid::WGS_84,
-            'regions'                => array(
+            'name'                => 'WGS 1984',
+            'synonyms'            => 'WGS1984',
+            'defaultRegion'       => 'Global Definition',
+            'referenceEllipsoid'  => Geodetic_ReferenceEllipsoid::WGS_84,
+            'regions'             => array(
                 'Global Definition' => array(
                     'translationVectors' => array(
                         'x' => 0.0,     //  metres
@@ -81,10 +82,11 @@ class Geodetic_Datum
             ),
         ),
         self::IRELAND_1965 => array( //  Ireland 1965
-            'key' => 'IRELAND_1965',
-            'defaultRegion'          => 'Ireland',
-            'referenceEllipsoid'     => Geodetic_ReferenceEllipsoid::AIRY_MODIFIED,
-            'regions'                => array(
+            'name'                => 'Ireland 1965',
+            'synonyms'            => '',
+            'defaultRegion'       => 'Ireland',
+            'referenceEllipsoid'  => Geodetic_ReferenceEllipsoid::AIRY_MODIFIED,
+            'regions'             => array(
                 'Ireland' => array(
                     'translationVectors' => array(
                         'x' => 482.53,     //  metres
@@ -105,6 +107,7 @@ class Geodetic_Datum
     );
 
 
+    protected $_datumReference;
     protected $_datumName;
     protected $_regionName;
 
@@ -127,7 +130,17 @@ class Geodetic_Datum
 
 
     /**
-     *    Get the Name of this Datum object
+     *    Get the internal reference name of this Datum object
+     *
+     *    @return   string    The reference name of this datum
+     */
+    public function getDatumReference()
+    {
+        return $this->_datumReference;
+    }
+
+    /**
+     *    Get the descriptive name of this Datum object
      *
      *    @return   string    The name of this datum
      */
@@ -147,28 +160,51 @@ class Geodetic_Datum
     }
 
     /**
+     * Validate a Datum Name or synonym
+     *
+     * @param    string    $datum     The name of the datum to validate, or a synonym for that name
+     * @return   string    The actual name used internally for the requested datum
+     * @throws   Geodetic_Exception
+     */
+    private static function _isValidDatum($datum) {
+        if (is_null($datum))
+            throw new Geodetic_Exception('A Datum name must be specified');
+
+        if (!isset(self::$_geodeticDatums[$datum])) {
+            if (defined('self::'.$datum)) {
+                $datum = constant('self::'.$datum);
+                if (!isset(self::$_geodeticDatums[$datum])) {
+                    throw new Geodetic_Exception('"'.$datum.'" is not a valid datum');
+                }
+            } else {
+                throw new Geodetic_Exception('"'.$datum.'" is not a valid datum');
+            }
+        }
+
+        return $datum;
+    }
+
+    /**
      * Set the Data for this Datum object
      *
-     * @param    $datum     The name of the datum to use for this ellipsoid
-     * @param    $region    The name of a region within this datum to use for Helmert Transform Bursa-Wolf parameters.
-     *                      If no region is specified, the object will use a default set of values for the
-     *                          Helmert transform Bursa-Wolf parameters from the region defined in defaultRegion for
-     *                          the Datum.
+     * @param    string    $datum     The name of the datum to use for this ellipsoid
+     * @param    string    $region    The name of a region within this datum to use for Helmert Transform Bursa-Wolf parameters.
+     *                                If no region is specified, the object will use a default set of values for the
+     *                                    Helmert transform Bursa-Wolf parameters from the region defined in defaultRegion for
+     *                                    the Datum.
+     * @return   Geodetic_Datum
      * @throws   Geodetic_Exception
      */
     public function setDatum($datum = NULL,
                              $region = NULL)
     {
-        if (is_null($datum))
-            throw new Geodetic_Exception('A Datum name must be specified');
-
-        if (!isset(self::$_geodeticDatums[$datum]))
-            throw new Geodetic_Exception('"'.$datum.'" is not a valid datum');
+        $datum = self::_isValidDatum($datum);
 
         if (is_null($region))
             $region = self::$_geodeticDatums[$datum]['defaultRegion'];
 
-        $this->_datumName = $datum;
+        $this->_datumReference = $datum;
+        $this->_datumName = self::$_geodeticDatums[$datum]['name'];
         $this->_ellipsoidName = self::$_geodeticDatums[$datum]['referenceEllipsoid'];
         $this->_ellipsoid = new Geodetic_ReferenceEllipsoid($this->_ellipsoidName);
 
@@ -188,7 +224,7 @@ class Geodetic_Datum
         if (is_null($region))
             throw new Geodetic_Exception('A Region name must be specified');
 
-        $datum = $this->_datumName;
+        $datum = $this->_datumReference;
         if (!isset(self::$_geodeticDatums[$datum]['regions'][$region]))
             throw new Geodetic_Exception('"'.$region.'" is not a valid region for this datum');
 
@@ -253,13 +289,13 @@ class Geodetic_Datum
     public static function getDatumNames()
     {
         return array_combine(
-            array_map(
-                function ($datum) {
-                    return $datum['key'];
-                },
+            array_keys(
                 self::$_geodeticDatums
             ),
-            array_keys(
+            array_map(
+                function ($datum) {
+                    return $datum['name'];
+                },
                 self::$_geodeticDatums
             )
         );
@@ -272,11 +308,7 @@ class Geodetic_Datum
      */
     public static function getRegionNamesForDatum($datum = NULL)
     {
-        if (is_null($datum))
-            throw new Geodetic_Exception('Datum must be specified');
-
-        if (!isset(self::$_geodeticDatums[$datum]))
-            throw new Geodetic_Exception($datum.' is not a valid datum');
+        $datum = self::_isValidDatum($datum);
 
         return array_unique(
             array_keys(self::$_geodeticDatums[$datum]['regions'])

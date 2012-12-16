@@ -1,52 +1,53 @@
 <?php
 
+$lat = 53.408630096933194;
+$long = -2.991746664047241;
+$height = 0.0;
+
 include('../Geodetic.phar');
 
 
-$ref = new Geodetic_ReferenceEllipsoid();
-foreach(Geodetic_ReferenceEllipsoid::getEllipsoidNames() as $ellipsoid) {
-    echo 'Ellipsoid: ' . $ellipsoid . PHP_EOL;
-    $ref->setEllipsoid($ellipsoid);
-    echo '    Semi-Major Axis (Equatorial Radius) .. ' .
-         $ref->getSemiMajorAxis(Geodetic_Distance::KILOMETRES) .
-         ' ' . Geodetic_Distance::KILOMETRES . PHP_EOL;
-    echo '    Semi-Minor Axis (Polar Radius) ....... ' .
-         $ref->getSemiMinorAxis(Geodetic_Distance::KILOMETRES) .
-         ' ' . Geodetic_Distance::KILOMETRES . PHP_EOL;
-    echo '    Flattening ........................... ' .
-         $ref->getFlattening() .
-         PHP_EOL;
-    echo '    Inverse Flattening ................... ' .
-         $ref->getInverseFlattening() .
-         PHP_EOL;
-    echo '    First Eccentricity ................... ' .
-         $ref->getFirstEccentricity() .
-         PHP_EOL;
-    echo '    First Eccentricity Squared ........... ' .
-         $ref->getFirstEccentricitySquared() .
-         PHP_EOL;
-    echo '    Second Eccentricity .................. ' .
-         $ref->getSecondEccentricity() .
-         PHP_EOL;
-    echo '    Second Eccentricity Squared .......... ' .
-         $ref->getSecondEccentricitySquared() .
-         PHP_EOL;
+$latLong = new Geodetic_LatLong(
+    new Geodetic_LatLong_CoordinateValues(
+        $lat,
+        $long,
+        Geodetic_Angle::DEGREES,
+        $height,
+        Geodetic_Distance::METRES
+    )
+);
 
-    echo '    Radius of Curvature' . PHP_EOL;
-    echo '        (Meridian) ' . PHP_EOL;
-    for ($l = -90; $l <= 90; $l+=15) {
-        echo str_pad(sprintf('%+02d', $l), 15, ' ', STR_PAD_LEFT) .
-             '° ......................... ' .
-             $ref->getRadiusOfCurvatureMeridian($l, NULL, Geodetic_Distance::KILOMETRES) .
-             ' ' . Geodetic_Distance::KILOMETRES . PHP_EOL;
-    }
-    echo '        (Prime Vertical) ' . PHP_EOL;
-    for ($l = -90; $l <= 90; $l+=15) {
-        echo str_pad(sprintf('%+02d', $l), 15, ' ', STR_PAD_LEFT) .
-             '° ......................... ' .
-             $ref->getRadiusOfCurvaturePrimeVertical($l, NULL, Geodetic_Distance::KILOMETRES) .
-             ' ' . Geodetic_Distance::KILOMETRES . PHP_EOL;
-    }
+echo 'OSGB36 Coordinates' , PHP_EOL;
 
-    echo PHP_EOL;
-}
+echo 'Latitude: ' , $latLong->getLatitude()->getValue() , ' ' , Geodetic_Angle::DEGREES , PHP_EOL;
+echo 'Longitude: ' , $latLong->getLongitude()->getValue() , ' ' , Geodetic_Angle::DEGREES , PHP_EOL;
+echo 'Height: ' , $latLong->getHeight()->getValue() , ' ' , Geodetic_Distance::METRES , PHP_EOL;
+
+echo PHP_EOL , 'Convert to ECEF' , PHP_EOL , PHP_EOL;
+$fromDatum = new Geodetic_Datum(Geodetic_Datum::OSGB36);
+$ecef = $latLong->toECEF($fromDatum);
+
+//    http://www.oc.nps.edu/oc2902w/coord/llhxyz.htm
+
+echo 'X: ' , $ecef->getX()->getValue(Geodetic_Distance::KILOMETRES) , ' ' , Geodetic_Distance::KILOMETRES , PHP_EOL;
+echo 'Y: ' , $ecef->getY()->getValue(Geodetic_Distance::KILOMETRES) , ' ' , Geodetic_Distance::KILOMETRES , PHP_EOL;
+echo 'Z: ' , $ecef->getZ()->getValue(Geodetic_Distance::KILOMETRES) , ' ' , Geodetic_Distance::KILOMETRES , PHP_EOL;
+
+echo PHP_EOL , 'Convert from OSGB36 to WGS84' , PHP_EOL , PHP_EOL;
+$ecef->toWGS84($fromDatum);
+
+echo 'X: ' , $ecef->getX()->getValue(Geodetic_Distance::KILOMETRES) , ' ' , Geodetic_Distance::KILOMETRES , PHP_EOL;
+echo 'Y: ' , $ecef->getY()->getValue(Geodetic_Distance::KILOMETRES) , ' ' , Geodetic_Distance::KILOMETRES , PHP_EOL;
+echo 'Z: ' , $ecef->getZ()->getValue(Geodetic_Distance::KILOMETRES) , ' ' , Geodetic_Distance::KILOMETRES , PHP_EOL;
+
+
+$toDatum = new Geodetic_Datum(Geodetic_Datum::WGS84);
+echo PHP_EOL , 'Convert back to Lat/Long for WGS84' , PHP_EOL , PHP_EOL;
+$newLatLong = $ecef->toLatLong($toDatum);
+
+echo 'Latitude: ' , $newLatLong->getLatitude()->getValue() , ' ' , Geodetic_Angle::DEGREES , PHP_EOL;
+echo 'Longitude: ' , $newLatLong->getLongitude()->getValue() , ' ' , Geodetic_Angle::DEGREES , PHP_EOL;
+echo 'Height: ' , $newLatLong->getHeight()->getValue() , ' ' , Geodetic_Distance::METRES , PHP_EOL;
+
+echo 'Latitude: ' , $newLatLong->getLatitude()->toDMS() , PHP_EOL;
+echo 'Longitude: ' , $newLatLong->getLongitude()->toDMS() , PHP_EOL;

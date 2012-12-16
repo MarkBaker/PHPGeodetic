@@ -4,9 +4,9 @@ include('../classes/Geodetic_Autoloader.php');
 
 
 $ref = new Geodetic_Datum();
-foreach(Geodetic_Datum::getDatumNames() as $datum) {
-    echo 'Datum: ' , $datum , PHP_EOL;
-    $ref->setDatum($datum);
+foreach(Geodetic_Datum::getDatumNames() as $datumRef => $datumName) {
+    echo 'Datum: ' , $datumName , PHP_EOL;
+    $ref->setDatum($datumRef);
     echo '    Reference Ellipsoid .................. ' ,
          $ref->getReferenceEllipsoidName() , PHP_EOL;
     echo '    Semi-Major Axis (Equatorial Radius) .. ' ,
@@ -31,7 +31,7 @@ foreach(Geodetic_Datum::getDatumNames() as $datum) {
          $ref->getReferenceEllipsoid()->getSecondEccentricitySquared() , PHP_EOL;
 
     echo '    Regions' , PHP_EOL;
-    foreach(Geodetic_Datum::getRegionNamesForDatum($datum) as $region) {
+    foreach(Geodetic_Datum::getRegionNamesForDatum($datumRef) as $region) {
         echo '        ' , $region , PHP_EOL;
     }
     echo '    Default Region ....................... ' , $ref->getRegionName() , PHP_EOL;

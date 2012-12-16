@@ -12,8 +12,8 @@ class ReferenceEllipsoidTest extends PHPUnit_Framework_TestCase
         //    ... of the correct type
         $this->assertTrue(is_a($referenceEllipsoidObject, 'Geodetic_ReferenceEllipsoid'));
 
-        $referenceEllipsoidName = $referenceEllipsoidObject->getEllipsoidName();
-        $this->assertEquals('WGS 1984', $referenceEllipsoidName);
+        $referenceEllipsoidReference = $referenceEllipsoidObject->getEllipsoidReference();
+        $this->assertEquals('WGS_84', $referenceEllipsoidReference);
     }
 
     public function testInstantiateWithNull()
@@ -38,7 +38,25 @@ class ReferenceEllipsoidTest extends PHPUnit_Framework_TestCase
 
         $referenceEllipsoidObject->setEllipsoid(Geodetic_ReferenceEllipsoid::MODIFIED_AIRY);
         $referenceEllipsoidName = $referenceEllipsoidObject->getEllipsoidName();
-        $this->assertEquals('Airy Modified', $referenceEllipsoidName);
+        $this->assertEquals('Airy Modified (1849)', $referenceEllipsoidName);
+    }
+
+    public function testSetEllipsoidSynonym()
+    {
+        $referenceEllipsoidObject = new Geodetic_ReferenceEllipsoid(Geodetic_ReferenceEllipsoid::MODIFIED_AIRY);
+
+        $referenceEllipsoidName = $referenceEllipsoidObject->getEllipsoidName();
+        $this->assertEquals('Airy Modified (1849)', $referenceEllipsoidName);
+    }
+
+    /**
+     * @expectedException Geodetic_Exception
+     */
+    public function testSetEllipsoidInvalid()
+    {
+        $referenceEllipsoidObject = new Geodetic_ReferenceEllipsoid();
+
+        $referenceEllipsoidObject->setEllipsoid('Invalid');
     }
 
     public function testGetSemiMajorAxis()

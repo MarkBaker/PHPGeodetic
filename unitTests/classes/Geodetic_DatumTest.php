@@ -12,8 +12,8 @@ class DatumTest extends PHPUnit_Framework_TestCase
         //    ... of the correct type
         $this->assertTrue(is_a($datumObject, 'Geodetic_Datum'));
 
-        $datumName = $datumObject->getDatumName();
-        $this->assertEquals('WGS84', $datumName);
+        $datumReference = $datumObject->getDatumReference();
+        $this->assertEquals('WGS84', $datumReference);
     }
 
     public function testInstantiateWithNull()
@@ -37,8 +37,26 @@ class DatumTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Ordnance Survey - Great Britain (1936)', $datumName);
 
         $datumObject->setDatum(Geodetic_Datum::WGS1984);
+        $datumReference = $datumObject->getDatumReference();
+        $this->assertEquals('WGS84', $datumReference);
+    }
+
+    public function testSetDatumSynonym()
+    {
+        $datumObject = new Geodetic_Datum(Geodetic_Datum::OSGB);
+
         $datumName = $datumObject->getDatumName();
-        $this->assertEquals('WGS84', $datumName);
+        $this->assertEquals('Ordnance Survey - Great Britain (1936)', $datumName);
+    }
+
+    /**
+     * @expectedException Geodetic_Exception
+     */
+    public function testSetDatumInvalid()
+    {
+        $datumObject = new Geodetic_Datum();
+
+        $datumObject->setDatum('Invalid');
     }
 
     public function testGetDatumNames()
@@ -72,7 +90,7 @@ class DatumTest extends PHPUnit_Framework_TestCase
 
         $datumObject->setDatum(Geodetic_Datum::OSGB36);
         $ellipsoidName = $datumObject->getReferenceEllipsoidName();
-        $this->assertEquals('Airy (1830)', $ellipsoidName);
+        $this->assertEquals('AIRY_1830', $ellipsoidName);
     }
 
     public function testGetReferenceEllipsoid()

@@ -272,14 +272,20 @@ class Geodetic_UTM
             pow(1.0 - $eSquared * sin($phi) * sin($phi), 1.5);
         $dValue = $easting / ($nValue * $utmF0);
 
-        $latitude = ( $phi - ($nValue * tan($phi) / $rValue) *
-            ($dValue * $dValue / 2.0 - (5.0 + (3.0 * $tValue) + (10.0 * $cValue) - (4.0 * $cValue * $cValue) - (9.0 * $ePrimeSquared)) * pow($dValue, 4.0) / 24.0 +
-            (61.0 + (90.0 * $tValue) + (298.0 * $cValue) + (45.0 * $tValue * $tValue) - (252.0 * $ePrimeSquared) - (3.0 * $cValue * $cValue)) * pow($dValue, 6.0) / 720.0)) * (180.0 / pi());
+        $latitude = ($phi - ($nValue * tan($phi) / $rValue) *
+                            ($dValue * $dValue / 2.0 -
+                                (5.0 + (3.0 * $tValue) + (10.0 * $cValue) - (4.0 * $cValue * $cValue) - (9.0 * $ePrimeSquared)) *
+                            pow($dValue, 4.0) / 24.0 +
+                            (61.0 + (90.0 * $tValue) + (298.0 * $cValue) + (45.0 * $tValue * $tValue) -
+                                (252.0 * $ePrimeSquared) - (3.0 * $cValue * $cValue)) *
+                            pow($dValue, 6.0) / 720.0)) * (180.0 / M_PI);
 
         $longitude = $longitudeOrigin +
-            (($dValue - (1.0 + 2.0 * $tValue + $cValue) * pow($dValue, 3.0) / 6.0 +
-                (5.0 - (2.0 * $cValue) + (28.0 * $tValue) - (3.0 * $cValue * $cValue) + (8.0 * $ePrimeSquared) + (24.0 * $tValue * $tValue)) * pow($dValue, 5.0) / 120.0) /
-                cos($phi)) * (180.0 / pi());
+                     (($dValue - (1.0 + 2.0 * $tValue + $cValue) * pow($dValue, 3.0) / 6.0 +
+                         (5.0 - (2.0 * $cValue) + (28.0 * $tValue) - (3.0 * $cValue * $cValue) + (8.0 * $ePrimeSquared) +
+                         (24.0 * $tValue * $tValue)) * pow($dValue, 5.0) / 120.0) /
+                         cos($phi)) *
+                     (180.0 / M_PI);
 
         $latLongCoordinates = new Geodetic_LatLong_CoordinateValues(
             $latitude,

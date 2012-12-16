@@ -6,6 +6,7 @@ This library provides methods for:
  * Conversion of angles (bearings, latitudes and longitudes) between degrees, radians, minutes, seconds and gradians.
  * Conversion of distance between metres and kilometres, miles, nautical miles, yards, feet, inches and astronomical units.
  * Conversion of positions between Latitude/Longitude and ECEF (Earth-Centred, Earth Fixed); and vice versa.
+ * Conversion of positions between Latitude/Longitude and UTM (Universal Transverse Mercator); and vice versa.
  * Helmert Translations for conversion between datums.
  * Great Circle distance calculations using either the Haversine or Vincenty formulae.
  * Calculation of Initial and final bearings, and midpoint value for great circle routes.
@@ -17,7 +18,7 @@ This library provides methods for:
 
 
 ## Want to contribute?
-Fork this!
+Fork this library!
 
 ## License
 PHPGeodetic is licensed under [LGPL (GNU LESSER GENERAL PUBLIC LICENSE)](https://github.com/MarkBaker/PHPGeodetic/blob/master/LICENSE.md)

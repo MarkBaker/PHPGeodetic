@@ -17,7 +17,7 @@ $latLongLiverpool = new Geodetic_LatLong(
     )
 );
 
-echo 'Liverpool' , PHP_EOL;
+echo 'Starting Point: Liverpool' , PHP_EOL;
 echo '    Latitude: ' , $latLongLiverpool->getLatitude()->getValue() , ' ' ,Geodetic_Angle::DEGREES , PHP_EOL;
 echo '    Longitude: ' , $latLongLiverpool->getLongitude()->getValue() , ' ' ,Geodetic_Angle::DEGREES , PHP_EOL;
 echo '    Height: ' , $latLongLiverpool->getHeight()->getValue() , ' ' ,Geodetic_Distance::METRES , PHP_EOL;

@@ -24,44 +24,44 @@
  */
 class Geodetic_ReferenceEllipsoid
 {
-    const AIRY_1830                   = 'Airy (1830)';
-    const AIRY_MODIFIED               = 'Airy Modified';
-    const MODIFIED_AIRY               = 'Airy Modified';
-    const AUSTRALIAN_1965             = 'Australian National (1965)';
-    const BESSEL_1841                 = 'Bessel (1841)';
-    const BESSEL_NAMIBIA_1841         = 'Bessel - Namibia (1841)';
-    const CLARKE_1866                 = 'Clarke (1866)';
-    const CLARKE_1880                 = 'Clarke (1880)';
-    const EVEREST_INDIA_1830          = 'Everest - India (1830)';
-    const EVEREST_MALAYSIA_SINGAPORE  = 'Everest - Malaysia and Singapore (1964)';
-    const EVEREST_MALAYSIA_1969       = 'Everest - Malaysia (1969)';
-    const EVEREST_PAKISTAN            = 'Everest - Pakistan';
-    const EVEREST_SABAH_SARAWAK       = 'Everest - Sabah Sarawak';
-    const FISHER_1960                 = 'Fisher (1960)';
-    const FISHER_1968                 = 'Fisher (1968)';
-    const FISCHER_MODIFIED_1960       = 'Fischer Modified (1960)';
-    const MODIFIED_FISCHER_1960       = 'Fischer Modified (1960)';
-    const GRS_1980                    = 'GRS 1980';
-    const GRS_80                      = 'GRS 1980';
-    const HAYFORD_1909                = 'Hayford (1909)';
-    const HELMERT_1906                = 'Helmert (1906)';
-    const HOUGH_1906                  = 'Hough (1906)';
-    const INDONESIAN_1974             = 'Indonesian (1974)';
-    const INTERNATIONAL_1924          = 'International (1924)';
-    const KRASOVSKY_1940              = 'Krasovsky (1940)';
-    const SGS_1985                    = 'SGS 1985';
-    const SGS_85                      = 'SGS 1985';
-    const SOUTH_AMERICAN_1969         = 'South American (1969)';
-    const WGS_1960                    = 'WGS 1960';
-    const WGS_60                      = 'WGS 1960';
-    const WGS_1966                    = 'WGS 1966';
-    const WGS_66                      = 'WGS 1966';
-    const WGS_1972                    = 'WGS 1972';
-    const WGS_72                      = 'WGS 1972';
-    const WGS_1984                    = 'WGS 1984';
-    const WGS_84                      = 'WGS 1984';
-    const IERS_1989                   = 'IERS 1989';
-    const IERS_2003                   = 'IERS 2003';
+    const AIRY_1830                   = 'AIRY_1830';
+    const AIRY_MODIFIED               = 'AIRY_MODIFIED';
+    const MODIFIED_AIRY               = 'AIRY_MODIFIED';
+    const AUSTRALIAN_1965             = 'AUSTRALIAN_1965';
+    const BESSEL_1841                 = 'BESSEL_1841';
+    const BESSEL_NAMIBIA_1841         = 'BESSEL_NAMIBIA_1841';
+    const CLARKE_1866                 = 'CLARKE_1866';
+    const CLARKE_1880                 = 'CLARKE_1880';
+    const EVEREST_INDIA_1830          = 'EVEREST_INDIA_1830';
+    const EVEREST_MALAYSIA_SINGAPORE  = 'EVEREST_MALAYSIA_SINGAPORE';
+    const EVEREST_MALAYSIA_1969       = 'EVEREST_MALAYSIA_1969';
+    const EVEREST_PAKISTAN            = 'EVEREST_PAKISTAN';
+    const EVEREST_SABAH_SARAWAK       = 'EVEREST_SABAH_SARAWAK';
+    const FISHER_1960                 = 'FISHER_1960';
+    const FISHER_1968                 = 'FISHER_1968';
+    const FISCHER_MODIFIED_1960       = 'FISCHER_MODIFIED_1960';
+    const MODIFIED_FISCHER_1960       = 'FISCHER_MODIFIED_1960';
+    const GRS_1980                    = 'GRS_80';
+    const GRS_80                      = 'GRS_80';
+    const HAYFORD_1909                = 'HAYFORD_1909';
+    const HELMERT_1906                = 'HELMERT_1906';
+    const HOUGH_1906                  = 'HOUGH_1906';
+    const INDONESIAN_1974             = 'INDONESIAN_1974';
+    const INTERNATIONAL_1924          = 'INTERNATIONAL_1924';
+    const KRASOVSKY_1940              = 'KRASOVSKY_1940';
+    const SGS_1985                    = 'SGS_1985';
+    const SGS_85                      = 'SGS_1985';
+    const SOUTH_AMERICAN_1969         = 'SOUTH_AMERICAN_1969';
+    const WGS_1960                    = 'WGS_60';
+    const WGS_60                      = 'WGS_60';
+    const WGS_1966                    = 'WGS_66';
+    const WGS_66                      = 'WGS_66';
+    const WGS_1972                    = 'WGS_72';
+    const WGS_72                      = 'WGS_72';
+    const WGS_1984                    = 'WGS_84';
+    const WGS_84                      = 'WGS_84';
+    const IERS_1989                   = 'IERS_1989';
+    const IERS_2003                   = 'IERS_2003';
 
 
     /**
@@ -72,181 +72,211 @@ class Geodetic_ReferenceEllipsoid
      */
     private static $_ellipsoidData = array(
         self::AIRY_1830 => array(
-            'key'                => 'AIRY_1830',
+            'name'               => 'Airy (1830)',
+            'synonyms'           => '',
             'semiMajorAxis'      => 6377563.396,
             'semiMinorAxis'      => 6356256.909,
             'inverseFlattening'  => 299.32496126649505
         ),
         self::AIRY_MODIFIED => array(
-            'key'                => 'AIRY_MODIFIED',
+            'name'               => 'Airy Modified (1849)',
+            'synonyms'           => 'MODIFIED_AIRY',
             'semiMajorAxis'      => 6377340.189,
             'semiMinorAxis'      => 6356034.448,
             'inverseFlattening'  => 299.32496546352854
         ),
         self::AUSTRALIAN_1965 => array(
-            'key'                => 'AUSTRALIAN_1965',
+            'name'               => 'Australian National (1965)',
+            'synonyms'           => '',
             'semiMajorAxis'      => 6378160.0,
             'semiMinorAxis'      => 6356774.719,
             'inverseFlattening'  => 298.249997276158
         ),
         self::BESSEL_1841 => array(
-            'key'                => 'BESSEL_1841',
+            'name'               => 'Bessel (1841)',
+            'synonyms'           => '',
             'semiMajorAxis'      => 6377397.155,
             'semiMinorAxis'      => 6356078.963,
             'inverseFlattening'  => 299.15281535132334
         ),
         self::BESSEL_NAMIBIA_1841 => array(
-            'key'                => 'BESSEL_NAMIBIA_1841',
+            'name'               => 'Bessel - Namibia (1841)',
+            'synonyms'           => '',
             'semiMajorAxis'      => 6377483.865,
             'semiMinorAxis'      => 6356165.383,
             'inverseFlattening'  => 299.152813272542
         ),
         self::CLARKE_1866 => array(
-            'key'                => 'CLARKE_1866',
+            'name'               => 'Clarke (1866)',
+            'synonyms'           => '',
             'semiMajorAxis'      => 6378206.4,
             'semiMinorAxis'      => 6356583.8,
             'inverseFlattening'  => 294.9786982138982
         ),
         self::CLARKE_1880 => array(
-            'key'                => 'CLARKE_1880',
+            'name'               => 'Clarke (1880)',
+            'synonyms'           => '',
             'semiMajorAxis'      => 6378249.145,
             'semiMinorAxis'      => 6356514.87,
             'inverseFlattening'  => 293.4650060791153
         ),
         self::EVEREST_INDIA_1830 => array(
-            'key'                => 'EVEREST_INDIA_1830',
+            'name'               => 'Everest - India (1830)',
+            'synonyms'           => '',
             'semiMajorAxis'      => 6377276.345,
             'semiMinorAxis'      => 6356075.413,
             'inverseFlattening'  => 300.8016980102568
         ),
         self::EVEREST_MALAYSIA_SINGAPORE => array(
-            'key'                => 'EVEREST_MALAYSIA_SINGAPORE',
+            'name'               => 'Everest - Malaysia and Singapore (1964)',
+            'synonyms'           => '',
             'semiMajorAxis'      => 6377304.063,
             'semiMinorAxis'      => 6356103.039,
             'inverseFlattening'  => 300.8017000971244
         ),
         self::EVEREST_MALAYSIA_1969 => array(
-            'key'                => 'EVEREST_MALAYSIA_1969',
+            'name'               => 'Everest - Malaysia (1969)',
+            'synonyms'           => '',
             'semiMajorAxis'      => 6377295.664,
             'semiMinorAxis'      => 6356094.668,
             'inverseFlattening'  => 300.8017012030905
         ),
         self::EVEREST_PAKISTAN => array(
-            'key'                => 'EVEREST_PAKISTAN',
+            'name'               => 'Everest - Pakistan',
+            'synonyms'           => '',
             'semiMajorAxis'      => 6377309.613,
             'semiMinorAxis'      => 6356109.571,
             'inverseFlattening'  => 300.81589522323446
         ),
         self::EVEREST_SABAH_SARAWAK => array(
-            'key'                => 'EVEREST_SABAH_SARAWAK',
+            'name'               => 'Everest - Sabah Sarawak',
+            'synonyms'           => '',
             'semiMajorAxis'      => 6377298.556,
             'semiMinorAxis'      => 6356097.550,
             'inverseFlattening'  => 300.801700
         ),
         self::FISHER_1960 => array(
-            'key'                => 'FISHER_1960',
+            'name'               => 'Fisher (1960)',
+            'synonyms'           => '',
             'semiMajorAxis'      => 6378155.0,
             'semiMinorAxis'      => 6356773.32,
             'inverseFlattening'  => 298.2999932652668
         ),
         self::FISCHER_MODIFIED_1960 => array(
-            'key'                => 'FISCHER_MODIFIED_1960',
+            'name'               => 'Fischer Modified (1960)',
+            'synonyms'           => 'MODIFIED_FISCHER_1960',
             'semiMajorAxis'      => 6378155.000,
             'semiMinorAxis'      => 6356773.320,
             'inverseFlattening'  => 298.300000
         ),
         self::FISHER_1968 => array(
-            'key'                => 'FISHER_1968',
+            'name'               => 'Fisher (1968)',
+            'synonyms'           => '',
             'semiMajorAxis'      => 6378150.000,
             'semiMinorAxis'      => 6356768.337,
             'inverseFlattening'  => 298.300000
         ),
         self::GRS_80 => array(
-            'key'                => 'GRS_80',
+            'name'               => 'Geodetic Reference System (1980)',
+            'synonyms'           => 'GRS_1980',
             'semiMajorAxis'      => 6378137.0,
             'semiMinorAxis'      => 6356752.3141,
             'inverseFlattening'  => 298.2572215381486
         ),
         self::HAYFORD_1909 => array(
-            'key'                => 'HAYFORD_1909',
+            'name'               => 'Hayford (1909)',
+            'synonyms'           => '',
             'semiMajorAxis'      => 6378388.0,
             'semiMinorAxis'      => 6356911.946,
             'inverseFlattening'  => 296.9999982305938
         ),
         self::HELMERT_1906 => array(
-            'key'                => 'HELMERT_1906',
+            'name'               => 'Helmert (1906)',
+            'synonyms'           => '',
             'semiMajorAxis'      => 6378200.0,
             'semiMinorAxis'      => 6356818.17,
             'inverseFlattening'  => 298.3000051913226
         ),
         self::HOUGH_1906 => array(
-            'key'                => 'HOUGH_1906',
+            'name'               => 'Hough (1906)',
+            'synonyms'           => '',
             'semiMajorAxis'      => 6378270.0,
             'semiMinorAxis'      => 6356794.343,
             'inverseFlattening'  => 296.99999399320365
         ),
         self::INDONESIAN_1974 => array(
-            'key'                => 'INDONESIAN_1974',
+            'name'               => 'Indonesian (1974)',
+            'synonyms'           => '',
             'semiMajorAxis'      => 6378160.0,
             'semiMinorAxis'      => 6356774.504,
             'inverseFlattening'  => 298.2469988070381
         ),
         self::INTERNATIONAL_1924 => array(
-            'key'                => 'INTERNATIONAL_1924',
+            'name'               => 'International (1924)',
+            'synonyms'           => '',
             'semiMajorAxis'      => 6378388.0,
             'semiMinorAxis'      => 6356911.946,
             'inverseFlattening'  => 296.9999982305938
         ),
         self::KRASOVSKY_1940 => array(
-            'key'                => 'KRASOVSKY_1940',
+            'name'               => 'Krasovsky (1940)',
+            'synonyms'           => '',
             'semiMajorAxis'      => 6378245.0,
             'semiMinorAxis'      => 6356863.019,
             'inverseFlattening'  => 298.30000316622187
         ),
         self::SGS_1985          => array(
-            'key'                => 'SGS_1985',
+            'name'               => 'Soviet Geodetic System (1985)',
+            'synonyms'           => 'SGS_85',
             'semiMajorAxis'      => 6378136.000,
             'semiMinorAxis'      => 6356751.302,
             'inverseFlattening'  => 298.257000
         ),
         self::SOUTH_AMERICAN_1969 => array(
-            'key'                => 'SOUTH_AMERICAN_1969',
+            'name'               => 'South American (1969)',
+            'synonyms'           => '',
             'semiMajorAxis'      => 6378160.0,
             'semiMinorAxis'      => 6356774.719,
             'inverseFlattening'  => 298.249997276158
         ),
         self::WGS_60 => array(
-            'key'                => 'WGS_60',
+            'name'               => 'World Geodetic System (1960)',
+            'synonyms'           => 'WGS_1960',
             'semiMajorAxis'      => 6378165.000,
             'semiMinorAxis'      => 6356783.287,
             'inverseFlattening'  => 298.300000
         ),
         self::WGS_66 => array(
-            'key'                => 'WGS_66',
+            'name'               => 'World Geodetic System (1966)',
+            'synonyms'           => 'WGS_1966',
             'semiMajorAxis'      => 6378145.000,
             'semiMinorAxis'      => 6356759.769,
             'inverseFlattening'  => 298.250000
         ),
         self::WGS_72 => array(
-            'key'                => 'WGS_72',
+            'name'               => 'World Geodetic System (1972)',
+            'synonyms'           => 'WGS_1972',
             'semiMajorAxis'      => 6378135.0,
             'semiMinorAxis'      => 6356750.52,
             'inverseFlattening'  => 298.2599997755319
         ),
         self::WGS_84 => array(
-            'key'                => 'WGS_84',
+            'name'               => 'World Geodetic System (1984)',
+            'synonyms'           => 'WGS_1984',
             'semiMajorAxis'      => 6378137.0,
             'semiMinorAxis'      => 6356752.3142,
             'inverseFlattening'  => 298.2572229328697
         ),
         self::IERS_1989 => array(
-            'key'                => 'IERS_1989',
+            'name'               => 'International Earth Rotation and Reference Systems Service (1989)',
+            'synonyms'           => '',
             'semiMajorAxis'      => 6378136,
             'semiMinorAxis'      => 6356751.302,
             'inverseFlattening'  => 298.257
         ),
         self::IERS_2003 => array(
-            'key'                => 'IERS_2003',
+            'name'               => 'International Earth Rotation and Reference Systems Service (2003)',
+            'synonyms'           => '',
             'semiMajorAxis'      => 6378136.6,
             'semiMinorAxis'      => 6356751.9,
             'inverseFlattening'  => 298.25642
@@ -256,6 +286,7 @@ class Geodetic_ReferenceEllipsoid
 
     protected $_dirty = TRUE;
 
+    protected $_ellipsoidReference;
     protected $_ellipsoidName;
 
     protected $_semiMajorAxis;
@@ -324,7 +355,17 @@ class Geodetic_ReferenceEllipsoid
 
 
     /**
-     *  Get the name of the Reference Ellipsoid used for this object
+     *  Get the internal reference name of the Reference Ellipsoid used for this object
+     *
+     *  @return    string    The name of this ellipsoid
+     */
+    public function getEllipsoidReference()
+    {
+        return $this->_ellipsoidReference;
+    }   //  getEllipsoidName()
+
+    /**
+     *  Get the descriptive name of the Reference Ellipsoid used for this object
      *
      *  @return    string    The name of this ellipsoid
      */
@@ -332,6 +373,31 @@ class Geodetic_ReferenceEllipsoid
     {
         return $this->_ellipsoidName;
     }   //  getEllipsoidName()
+
+    /**
+     * Validate an Ellipsoid Name or synonym
+     *
+     * @param    string    $ellipsoid    The name of the ellipsoid to validate, or a synonym for that name
+     * @return   string    The actual name used internally for the requested ellipsoid
+     * @throws   Geodetic_Exception
+     */
+    private static function _isValidEllipsoid($ellipsoid) {
+        if (is_null($ellipsoid))
+            throw new Geodetic_Exception('An Ellipsoid name must be specified');
+
+        if (!isset(self::$_ellipsoidData[$ellipsoid])) {
+            if (defined('self::'.$ellipsoid)) {
+                $ellipsoid = constant('self::'.$ellipsoid);
+                if (!isset(self::$_ellipsoidData[$ellipsoid])) {
+                    throw new Geodetic_Exception('"'.$ellipsoid.'" is not a valid ellipsoid');
+                }
+            } else {
+                throw new Geodetic_Exception('"'.$ellipsoid.'" is not a valid ellipsoid');
+            }
+        }
+
+        return $ellipsoid;
+    }
 
     /**
      *  Set the Data for this Reference Ellipsoid object
@@ -342,16 +408,12 @@ class Geodetic_ReferenceEllipsoid
      */
     public function setEllipsoid($ellipsoidName = NULL)
     {
+        $ellipsoidName = self::_isValidEllipsoid($ellipsoidName);
+
         $this->_semiMajorAxis = new Geodetic_Distance();
         $this->_semiMinorAxis = new Geodetic_Distance();
-
-        if (is_null($ellipsoidName))
-            throw new Geodetic_Exception('Ellipsoid name must be specified');
-
-        if (!isset(self::$_ellipsoidData[$ellipsoidName]))
-            throw new Geodetic_Exception($ellipsoidName . ' is not a recognised Ellipsoid');
-
-        $this->_ellipsoidName = $ellipsoidName;
+        $this->_ellipsoidReference = $ellipsoidName;
+        $this->_ellipsoidName = self::$_ellipsoidData[$ellipsoidName]['name'];
 
         //    All pre-configured Ellipsoid dimensions are already defined in meters,
         //        so we don't need to do any UOM conversions here
@@ -684,13 +746,13 @@ class Geodetic_ReferenceEllipsoid
     public static function getEllipsoidNames()
     {
         return array_combine(
-            array_map(
-                function ($ellipsoidData) {
-                    return $ellipsoidData['key'];
-                },
+            array_keys(
                 self::$_ellipsoidData
             ),
-            array_keys(
+            array_map(
+                function ($ellipsoidData) {
+                    return $ellipsoidData['name'];
+                },
                 self::$_ellipsoidData
             )
         );
