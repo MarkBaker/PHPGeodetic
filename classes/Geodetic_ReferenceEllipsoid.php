@@ -43,11 +43,12 @@ class Geodetic_ReferenceEllipsoid
     const MODIFIED_FISCHER_1960       = 'Fischer Modified (1960)';
     const GRS_1980                    = 'GRS 1980';
     const GRS_80                      = 'GRS 1980';
+    const HAYFORD_1909                = 'Hayford (1909)';
     const HELMERT_1906                = 'Helmert (1906)';
     const HOUGH_1906                  = 'Hough (1906)';
     const INDONESIAN_1974             = 'Indonesian (1974)';
     const INTERNATIONAL_1924          = 'International (1924)';
-    const KRASSOVSKY_1940             = 'Krassovsky (1940)';
+    const KRASOVSKY_1940              = 'Krasovsky (1940)';
     const SGS_1985                    = 'SGS 1985';
     const SGS_85                      = 'SGS 1985';
     const SOUTH_AMERICAN_1969         = 'South American (1969)';
@@ -166,6 +167,12 @@ class Geodetic_ReferenceEllipsoid
             'semiMinorAxis'      => 6356752.3141,
             'inverseFlattening'  => 298.2572215381486
         ),
+        self::HAYFORD_1909 => array(
+            'key'                => 'HAYFORD_1909',
+            'semiMajorAxis'      => 6378388.0,
+            'semiMinorAxis'      => 6356911.946,
+            'inverseFlattening'  => 296.9999982305938
+        ),
         self::HELMERT_1906 => array(
             'key'                => 'HELMERT_1906',
             'semiMajorAxis'      => 6378200.0,
@@ -190,8 +197,8 @@ class Geodetic_ReferenceEllipsoid
             'semiMinorAxis'      => 6356911.946,
             'inverseFlattening'  => 296.9999982305938
         ),
-        self::KRASSOVSKY_1940 => array(
-            'key'                => 'KRASSOVSKY_1940',
+        self::KRASOVSKY_1940 => array(
+            'key'                => 'KRASOVSKY_1940',
             'semiMajorAxis'      => 6378245.0,
             'semiMinorAxis'      => 6356863.019,
             'inverseFlattening'  => 298.30000316622187

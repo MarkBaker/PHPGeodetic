@@ -253,6 +253,83 @@ class Geodetic_LatLong
     }
 
     /**
+     *  Convert this Latitude/Longitude to a Univeral Transverse Mercator Geodetic_UTM object using a specified Datum
+     *
+     *  @param     Geodetic_Datum    $datum    The Datum to use for this transform
+     *  @return    Geodetic_UTF      The Univeral Transverse Mercator Geodetic_UTM object that matches this Latitude/Longitude
+     *  @throws    Geodetic_Exception
+     */
+    public function toUTM(Geodetic_Datum $datum = NULL)
+    {
+        if (is_null($datum)) {
+            throw new Geodetic_Exception('You must specify a datum to use for this conversion');
+        }
+
+        $ellipsoid = $datum->getReferenceEllipsoid();
+        $eSquared = $ellipsoid->getFirstEccentricitySquared();
+        $eSquared2 = $eSquared * $eSquared;
+        $eSquared3 = $eSquared * $eSquared * $eSquared;
+
+        $utmF0 = 0.9996;
+
+        $utmLongitudeZone = Geodetic_UTM::identifyLongitudeZone(
+            $this->_latitude->getValue(),
+            $this->_longitude->getValue()
+        );
+        $utmLatitudeZone = Geodetic_UTM::identifyLatitudeZone($this->_latitude->getValue());
+        $longitudeOrigin = Geodetic_Angle::convertFromDegrees(
+            ($utmLongitudeZone - 1) * 6 - 180 + 3,
+            Geodetic_Angle::RADIANS
+        );
+
+        $ePrimeSquared = ($eSquared) / (1 - $eSquared);
+
+        $nValue = $ellipsoid->getSemiMajorAxis() /
+            sqrt(
+                1 - $eSquared *
+                sin($this->_latitude->getValue(Geodetic_Angle::RADIANS)) *
+                sin($this->_latitude->getValue(Geodetic_Angle::RADIANS))
+            );
+        $tValue = tan($this->_latitude->getValue(Geodetic_Angle::RADIANS)) *
+                  tan($this->_latitude->getValue(Geodetic_Angle::RADIANS));
+        $cValue = $ePrimeSquared *
+                  cos($this->_latitude->getValue(Geodetic_Angle::RADIANS)) *
+                  cos($this->_latitude->getValue(Geodetic_Angle::RADIANS) );
+        $aValue = cos($this->_latitude->getValue(Geodetic_Angle::RADIANS)) *
+                  ($this->_longitude->getValue(Geodetic_Angle::RADIANS) - $longitudeOrigin);
+
+        $mValue = $ellipsoid->getSemiMajorAxis() * (
+            (1 - $eSquared / 4 - 3 * $eSquared2 / 64 - 5 * $eSquared3 / 256) *
+            $this->_latitude->getValue(Geodetic_Angle::RADIANS) -
+                (3 * $eSquared / 8 + 3 * $eSquared2 / 32 + 45 * $eSquared3 / 1024) *
+            sin(2 * $this->_latitude->getValue(Geodetic_Angle::RADIANS)) +
+                (15 * $eSquared2 / 256 + 45 * $eSquared3 / 1024) *
+            sin(4 * $this->_latitude->getValue(Geodetic_Angle::RADIANS)) -
+                (35 * $eSquared3 / 3072) * sin(6 * $this->_latitude->getValue(Geodetic_Angle::RADIANS))
+        );
+
+        $UTMEasting = ($utmF0 * $nValue * ($aValue + (1 - $tValue + $cValue) * pow($aValue, 3.0) / 6 +
+                      (5 - 18 * $tValue + $tValue * $tValue + 72 * $cValue - 58 * $ePrimeSquared) *
+                      pow($aValue, 5.0) / 120) + 500000.0);
+
+        $UTMNorthing = ($utmF0 * ($mValue + $nValue * tan($this->_latitude->getValue(Geodetic_Angle::RADIANS)) *
+                       ($aValue * $aValue / 2 + (5 - $tValue + (9 * $cValue) + (4 * $cValue * $cValue)) * pow($aValue, 4.0) / 24 +
+                       (61 - (58 * $tValue) + ($tValue * $tValue) + (600 * $cValue) - (330 * $ePrimeSquared)) *
+                       pow($aValue, 6.0) / 720)));
+
+        // Adjust for the southern hemisphere
+        if ($this->_latitude->getValue(Geodetic_Angle::RADIANS) < 0) {
+            $UTMNorthing += 10000000.0;
+        }
+
+        return new Geodetic_UTM($UTMNorthing,
+                                $UTMEasting,
+                                $utmLatitudeZone,
+                                $utmLongitudeZone
+        );
+    }
+
+    /**
      *  Get the distance between two Latitude/Longitude objects using the Haversine formula
      *
      *  The Haversine Formula calculates the distance to your destination point assuming a spherical Earth
