@@ -19,11 +19,11 @@ class LatLongTest extends PHPUnit_Framework_TestCase
             ->method('getValue')
             ->will($this->returnValue(12345.67890));
 
-        $this->_xLatitude = $this->getMock('Geodetic_Distance');
+        $this->_xLatitude = $this->getMock('Geodetic_Angle');
         $this->_xLatitude->expects($this->any())
             ->method('getValue')
             ->will($this->returnValue(0.93215644417122));
-        $this->_yLongitude = $this->getMock('Geodetic_Distance');
+        $this->_yLongitude = $this->getMock('Geodetic_Angle');
         $this->_yLongitude->expects($this->any())
             ->method('getValue')
             ->will($this->returnValue(-0.052215829673181));
@@ -40,6 +40,17 @@ class LatLongTest extends PHPUnit_Framework_TestCase
             ->method('getY')
             ->will($this->returnValue($this->_yLongitude));
         $this->_xyz->expects($this->any())
+            ->method('getZ')
+            ->will($this->returnValue($this->_zHeight));
+
+        $this->_zyx = $this->getMock('Geodetic_LatLong_CoordinateValues');
+        $this->_zyx->expects($this->any())
+            ->method('getY')
+            ->will($this->returnValue($this->_xLatitude));
+        $this->_zyx->expects($this->any())
+            ->method('getX')
+            ->will($this->returnValue($this->_yLongitude));
+        $this->_zyx->expects($this->any())
             ->method('getZ')
             ->will($this->returnValue($this->_zHeight));
     }
@@ -207,6 +218,96 @@ class LatLongTest extends PHPUnit_Framework_TestCase
         $latLongObject = new Geodetic_LatLong($this->_xyz);
 
         $ecef = $latLongObject->toECEF();
+    }
+
+    public function testConvertToUTM()
+    {
+        $latLongObject = new Geodetic_LatLong($this->_xyz);
+
+        $datum = new Geodetic_Datum(Geodetic_Datum::WGS84);
+        $utm = $latLongObject->toUTM($datum);
+        $this->assertTrue(is_object($utm));
+        $this->assertTrue(is_a($utm, 'Geodetic_UTM'));
+    }
+
+    /**
+     * @expectedException Geodetic_Exception
+     */
+    public function testConvertToUTMNoDatum()
+    {
+        $latLongObject = new Geodetic_LatLong($this->_xyz);
+
+        $utm = $latLongObject->toUTM();
+    }
+
+    public function testGetDistanceHaversine()
+    {
+        $latLongObject = new Geodetic_LatLong($this->_xyz);
+        $destinationObject = new Geodetic_LatLong($this->_zyx);
+
+        $distance = $latLongObject->getDistanceHaversine($destinationObject);
+        $this->assertTrue(is_object($distance));
+        $this->assertTrue(is_a($distance, 'Geodetic_Distance'));
+    }
+
+    public function testGetDistanceHaversineWithEllipsoid()
+    {
+        $latLongObject = new Geodetic_LatLong($this->_xyz);
+        $destinationObject = new Geodetic_LatLong($this->_zyx);
+
+        $ellipsoid = new Geodetic_ReferenceEllipsoid(Geodetic_ReferenceEllipsoid::AIRY_1830);
+        $distance = $latLongObject->getDistanceHaversine($destinationObject, $ellipsoid);
+        $this->assertTrue(is_object($distance));
+        $this->assertTrue(is_a($distance, 'Geodetic_Distance'));
+    }
+
+    public function testGetDistanceVincenty()
+    {
+        $latLongObject = new Geodetic_LatLong($this->_xyz);
+        $destinationObject = new Geodetic_LatLong($this->_zyx);
+
+        $distance = $latLongObject->getDistanceVincenty($destinationObject);
+        $this->assertTrue(is_object($distance));
+        $this->assertTrue(is_a($distance, 'Geodetic_Distance'));
+    }
+
+    public function testGetInitialBearing()
+    {
+        $latLongObject = new Geodetic_LatLong($this->_xyz);
+        $destinationObject = new Geodetic_LatLong($this->_zyx);
+
+        $bearing = $latLongObject->getInitialBearing($destinationObject);
+        $this->assertTrue(is_object($bearing));
+        $this->assertTrue(is_a($bearing, 'Geodetic_Angle'));
+    }
+
+    public function testGetFinalBearing()
+    {
+        $latLongObject = new Geodetic_LatLong($this->_xyz);
+        $destinationObject = new Geodetic_LatLong($this->_zyx);
+
+        $bearing = $latLongObject->getFinalBearing($destinationObject);
+        $this->assertTrue(is_object($bearing));
+        $this->assertTrue(is_a($bearing, 'Geodetic_Angle'));
+    }
+
+    public function testGetMidpoint()
+    {
+        $latLongObject = new Geodetic_LatLong($this->_xyz);
+        $destinationObject = new Geodetic_LatLong($this->_zyx);
+
+        $position = $latLongObject->getMidpoint($destinationObject);
+        $this->assertTrue(is_object($position));
+        $this->assertTrue(is_a($position, 'Geodetic_LatLong'));
+    }
+
+    public function testGetDestination()
+    {
+        $latLongObject = new Geodetic_LatLong($this->_xyz);
+
+        $position = $latLongObject->getDestination($this->_angle, $this->_distance);
+        $this->assertTrue(is_object($position));
+        $this->assertTrue(is_a($position, 'Geodetic_LatLong'));
     }
 
 }

@@ -170,7 +170,7 @@ class Geodetic_LatLong
      *  @throws    Geodetic_Exception
      */
     public static function validateLatitude($latitude = NULL,
-                                             $degrad = Geodetic_Angle::DEGREES)
+                                            $degrad = Geodetic_Angle::DEGREES)
     {
         if (is_null($latitude))
             throw new Geodetic_Exception('You must specify Latitude');
@@ -200,7 +200,7 @@ class Geodetic_LatLong
      *  @throws    Geodetic_Exception
      */
     public static function validateLongitude($longitude = NULL,
-                                              $degrad = Geodetic_Angle::DEGREES)
+                                             $degrad = Geodetic_Angle::DEGREES)
     {
         if (is_null($longitude))
             throw new Geodetic_Exception('You must specify Longitude');
@@ -334,13 +334,22 @@ class Geodetic_LatLong
      *
      *  The Haversine Formula calculates the distance to your destination point assuming a spherical Earth
      *
-     *  @param     Geodetic_LatLong    $distanceToPoint    The destination point
-     *  @return    Geodetic_Distance
+     *  @param     Geodetic_LatLong               $distanceToPoint    The destination point
+     *  @param     Geodetic_ReferenceEllipsoid    $ellipsoid          If left blank, a default value of 6371009.0 metres will
+     *                                                                    be used for the Earth Mean Radius for the calculation;
+     *                                                                If a reference ellipsoid is specified, the Authalic Radius
+     *                                                                    for that ellipsoid will be used.
+     *  @return    Geodetic_Distance              The great circle distance between this Lat/Long and the $endpoint Lat/Long
      *  @throws    Geodetic_Exception
      */
-    public function getDistanceHaversine(Geodetic_LatLong $distanceToPoint)
+    public function getDistanceHaversine(Geodetic_LatLong $distanceToPoint,
+                                         Geodetic_ReferenceEllipsoid $ellipsoid = NULL)
     {
-        $earthMeanRadius = 6371009.0; // metres
+        if (!is_null($ellipsoid)) {
+            $earthMeanRadius = $ellipsoid->getAuthalicRadius();
+        } else {
+            $earthMeanRadius = 6371009.0; // metres
+        }
 
         $deltaLatitude =  $distanceToPoint->getLatitude()->getValue(Geodetic_Angle::RADIANS) -
             $this->_latitude->getValue(Geodetic_Angle::RADIANS);
@@ -364,7 +373,7 @@ class Geodetic_LatLong
      *
      *  @param     Geodetic_LatLong               $endPoint    The destination point
      *  @param     Geodetic_ReferenceEllipsoid    $ellipsoid
-     *  @return    Geodetic_Distance
+     *  @return    Geodetic_Distance              The great circle distance between this Lat/Long and the $endpoint Lat/Long
      *  @throws    Geodetic_Exception
      */
     public function getDistanceVincenty(Geodetic_LatLong $endPoint,
@@ -431,7 +440,7 @@ class Geodetic_LatLong
      *  Get the initial bearing for a great circle route between two Latitude/Longitude objects
      *
      *  @param     Geodetic_LatLong    $endPoint    The destination point
-     *  @return    Geodetic_Angle
+     *  @return    Geodetic_Angle      The initial bearing to reach $endPoint
      *  @throws    Geodetic_Exception
      */
     public function getInitialBearing(Geodetic_LatLong $endPoint)
@@ -455,7 +464,7 @@ class Geodetic_LatLong
      *  Get the final bearing for a great circle route between two Latitude/Longitude objects
      *
      *  @param     Geodetic_LatLong    $endPoint    The destination point
-     *  @return    Geodetic_Angle
+     *  @return    Geodetic_Angle      The final bearing when $endPoint is reached
      *  @throws    Geodetic_Exception
      */
     public function getFinalBearing(Geodetic_LatLong $endPoint)
@@ -466,6 +475,12 @@ class Geodetic_LatLong
         return new Geodetic_Angle($finalBearing);
     }
 
+    /**
+     *  Ensure that a latitude value falls within a valid range
+     *
+     *  @param     float    $latitude    The latitude in radians
+     *  @return    float    The "fixed" latitude in radians
+     */
     private static function _cleanLatitude($latitude)
     {
         if ($latitude > M_PI_2)
@@ -476,6 +491,12 @@ class Geodetic_LatLong
         return $latitude;
     }
 
+    /**
+     *  Ensure that a longitude value falls within a valid range
+     *
+     *  @param     float    $latitude    The latitude in radians
+     *  @return    float    The "fixed" latitude in radians
+     */
     private static function _cleanLongitude($longitude)
     {
         if ($longitude > M_PI)
@@ -490,7 +511,7 @@ class Geodetic_LatLong
      *  Get the midpoint for a great circle route between two Latitude/Longitude objects
      *
      *  @param     Geodetic_LatLong    $endPoint    The destination point
-     *  @return    Geodetic_LatLong
+     *  @return    Geodetic_LatLong    The midpoint Lat/Long between this Lat/Long and the $endpoint Lat/Long
      *  @throws    Geodetic_Exception
      */
     public function getMidpoint(Geodetic_LatLong $endPoint)
@@ -524,15 +545,25 @@ class Geodetic_LatLong
     /**
      *  Get the destination for a given initial bearing and distance along a great circle route
      *
-     *  @param     Geodetic_Angle       $bearing    Initial bearing
-     *  @param     Geodetic_Distance    $distance
-     *  @return    Geodetic_LatLong
+     *  @param     Geodetic_Angle                 $bearing      Initial bearing
+     *  @param     Geodetic_Distance              $distance     Distance to travel along the route
+     *  @param     Geodetic_ReferenceEllipsoid    $ellipsoid    If left blank, a default value of 6371009.0 metres will
+     *                                                              be used for the Earth Mean Radius for the calculation;
+     *                                                          If a reference ellipsoid is specified, the Authalic Radius for
+     *                                                              that ellipsoid will be used.
+     *  @return    Geodetic_LatLong               The endpoint Lat/Long for a journey from this Lat/Long starting on a bearing
+     *                                                of $bearing and travelling for $distance along a great circle route
      *  @throws    Geodetic_Exception
      */
     public function getDestination(Geodetic_Angle $bearing,
-                                   Geodetic_Distance $distance)
+                                   Geodetic_Distance $distance,
+                                   Geodetic_ReferenceEllipsoid $ellipsoid = NULL)
     {
-        $earthMeanRadius = 6371009.0; // metres
+        if (!is_null($ellipsoid)) {
+            $earthMeanRadius = $ellipsoid->getAuthalicRadius();
+        } else {
+            $earthMeanRadius = 6371009.0; // metres
+        }
 
         $destinationLatitude = asin(
             sin($this->_latitude->getValue(Geodetic_Angle::RADIANS)) *

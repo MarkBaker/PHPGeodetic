@@ -43,7 +43,7 @@ class DatumTest extends PHPUnit_Framework_TestCase
 
     public function testSetDatumSynonym()
     {
-        $datumObject = new Geodetic_Datum(Geodetic_Datum::OSGB);
+        $datumObject = new Geodetic_Datum('OSGB');
 
         $datumName = $datumObject->getDatumName();
         $this->assertEquals('Ordnance Survey - Great Britain (1936)', $datumName);

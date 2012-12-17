@@ -104,10 +104,14 @@ class Geodetic_UTM
                          $latitudeZone = NULL,
                          $longitudeZone = NULL)
     {
-        $this->setNorthing($northing);
-        $this->setEasting($easting);
-        $this->setLatitudeZone($latitudeZone);
-        $this->setLongitudeZone($longitudeZone);
+        if (!is_null($northing))
+            $this->setNorthing($northing);
+        if (!is_null($easting))
+            $this->setEasting($easting);
+        if (!is_null($latitudeZone))
+            $this->setLatitudeZone($latitudeZone);
+        if (!is_null($longitudeZone))
+            $this->setLongitudeZone($longitudeZone);
     }
 
 

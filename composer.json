@@ -2,7 +2,7 @@
     "name": "MarkBaker/PHPGeodetic",
     "type": "library",
     "description": "Geodetic library",
-    "keywords": ["geo","geodetic","latitude","longitude",""ECEF","ellipsoid"],
+    "keywords": ["geo","geodetic","latitude","longitude",""ECEF","UTM","mercator","ellipsoid"],
     "homepage": "https://github.com/MarkBaker/PHPGeodetic",
     "license": "LGPL",
     "authors": [

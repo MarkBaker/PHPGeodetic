@@ -43,7 +43,7 @@ class ReferenceEllipsoidTest extends PHPUnit_Framework_TestCase
 
     public function testSetEllipsoidSynonym()
     {
-        $referenceEllipsoidObject = new Geodetic_ReferenceEllipsoid(Geodetic_ReferenceEllipsoid::MODIFIED_AIRY);
+        $referenceEllipsoidObject = new Geodetic_ReferenceEllipsoid('MODIFIED_AIRY');
 
         $referenceEllipsoidName = $referenceEllipsoidObject->getEllipsoidName();
         $this->assertEquals('Airy Modified (1849)', $referenceEllipsoidName);
@@ -267,6 +267,14 @@ class ReferenceEllipsoidTest extends PHPUnit_Framework_TestCase
 
         $meanRadius = $referenceEllipsoidObject->getMeanRadius();
         $this->assertEquals(6371008.771400, $meanRadius, '', 0.1e-6);
+    }
+
+    public function testGetAuthalicRadius()
+    {
+        $referenceEllipsoidObject = new Geodetic_ReferenceEllipsoid(Geodetic_ReferenceEllipsoid::WGS_1984);
+
+        $meanRadius = $referenceEllipsoidObject->getAuthalicRadius();
+        $this->assertEquals(6371007.1809034, $meanRadius, '', 0.1e-6);
     }
 
     public function testGetVolumetricRadius()

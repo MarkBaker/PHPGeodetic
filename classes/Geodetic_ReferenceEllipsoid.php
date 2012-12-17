@@ -672,24 +672,14 @@ class Geodetic_ReferenceEllipsoid
         $semiMinorSquared = $this->_semiMinorAxis->getValue() * $this->_semiMinorAxis->getValue();
 
         return Geodetic_Distance::convertFromMeters(
-            sqrt((
-                ($this->_semiMajorAxis->getValue() * $this->_semiMajorAxis->getValue()) +
-                (($this->_semiMajorAxis->getValue() * $this->_semiMinorAxis->getValue() * $this->_semiMinorAxis->getValue()) /
-                  sqrt(
-                      ($this->_semiMajorAxis->getValue() * $this->_semiMajorAxis->getValue()) -
-                     ($this->_semiMinorAxis->getValue() * $this->_semiMinorAxis->getValue())
-                  )
-                ) *
-                log(
-                    ($this->_semiMajorAxis->getValue() +
-                     sqrt(
-                         ($this->_semiMajorAxis->getValue() * $this->_semiMajorAxis->getValue()) -
-                         ($this->_semiMinorAxis->getValue() * $this->_semiMinorAxis->getValue())
-                     )
-                    ) /
-                    $this->_semiMinorAxis->getValue()
-                )
-               ) / 2
+            sqrt(
+                ($semiMajorSquared +
+                 (($this->_semiMajorAxis->getValue() * $semiMinorSquared) / sqrt($semiMajorSquared - $semiMinorSquared)) *
+                 log(
+                    ($this->_semiMajorAxis->getValue() + sqrt($semiMajorSquared - $semiMinorSquared)) /
+                     $this->_semiMinorAxis->getValue()
+                 )
+                ) / 2
             ),
             $uom
         );
