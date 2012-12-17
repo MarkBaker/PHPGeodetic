@@ -654,7 +654,51 @@ class Geodetic_ReferenceEllipsoid
     }
 
     /**
+     *  Get the Authalic Radius this Reference Ellipsoid object
+     *
+     *  The authalic ("equal area") radius is the radius of a hypothetical perfect sphere which has the same surface area
+     *      as the reference ellipsoid.
+     *
+     *  @param     string    $uom    Unit of Measure for the returned value
+     *  @return    float     Authalic Radius for this ellipsoid
+     *  @throws    Geodetic_Exception
+     */
+    public function getAuthalicRadius($uom = Geodetic_Distance::METRES)
+    {
+        if ($this->_dirty)
+            $this->_calculateDerivedParameters();
+
+        $semiMajorSquared = $this->_semiMajorAxis->getValue() * $this->_semiMajorAxis->getValue();
+        $semiMinorSquared = $this->_semiMinorAxis->getValue() * $this->_semiMinorAxis->getValue();
+
+        return Geodetic_Distance::convertFromMeters(
+            sqrt((
+                ($this->_semiMajorAxis->getValue() * $this->_semiMajorAxis->getValue()) +
+                (($this->_semiMajorAxis->getValue() * $this->_semiMinorAxis->getValue() * $this->_semiMinorAxis->getValue()) /
+                  sqrt(
+                      ($this->_semiMajorAxis->getValue() * $this->_semiMajorAxis->getValue()) -
+                     ($this->_semiMinorAxis->getValue() * $this->_semiMinorAxis->getValue())
+                  )
+                ) *
+                log(
+                    ($this->_semiMajorAxis->getValue() +
+                     sqrt(
+                         ($this->_semiMajorAxis->getValue() * $this->_semiMajorAxis->getValue()) -
+                         ($this->_semiMinorAxis->getValue() * $this->_semiMinorAxis->getValue())
+                     )
+                    ) /
+                    $this->_semiMinorAxis->getValue()
+                )
+               ) / 2
+            ),
+            $uom
+        );
+    }
+
+    /**
      *  Get the Volumetric Radius this Reference Ellipsoid object
+     *
+     *  This is the radius of a sphere of equal volume to the ellipsoid
      *
      *  @param     string    $uom    Unit of Measure for the returned value
      *  @return    float     Volumetric Radius for this ellipsoid

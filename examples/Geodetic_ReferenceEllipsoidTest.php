@@ -58,6 +58,9 @@ foreach($ellipsoidList as $ellipsoid) {
 	    echo '    Volumetric Radius .................... ' .
 	         $ref->getVolumetricRadius(Geodetic_Distance::KILOMETRES) .
 	         ' ' . Geodetic_Distance::KILOMETRES . PHP_EOL;
+	    echo '    Authalic Radius ...................... ' .
+	         $ref->getAuthalicRadius(Geodetic_Distance::KILOMETRES) .
+	         ' ' . Geodetic_Distance::KILOMETRES . PHP_EOL;
 
 	    echo '    Radius of Curvature' . PHP_EOL;
 	    echo '        (Meridian) ' . PHP_EOL;
