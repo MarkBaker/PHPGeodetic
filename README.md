@@ -5,6 +5,8 @@ This library provides methods for:
 
  * Conversion of angles (bearings, latitudes and longitudes) between degrees, radians, minutes, seconds and gradians.
  * Conversion of distance between metres and kilometres, miles, nautical miles, yards, feet, inches and astronomical units.
+ * Conversion of areas between square metres, kilometres, hectares, square miles, square yards, acres, etc.
+ * Calculation of Reference Ellipsoid derived properties such as eccentricity; mean, authalic and volumetric radii; and radius of curvature in the prime vertical and the meridian 
  * Conversion of positions between Latitude/Longitude and ECEF (Earth-Centred, Earth Fixed); and vice versa.
  * Conversion of positions between Latitude/Longitude and UTM (Universal Transverse Mercator); and vice versa.
  * Helmert Translations for conversion between datums.

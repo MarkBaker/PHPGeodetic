@@ -78,7 +78,7 @@ class Geodetic_Distance extends Geodetic_Measure_Abstract
         if (is_null($uom)) {
             $uom = self::METRES;
         } elseif (!in_array($uom, self::getUOMs())) {
-            throw new Geodetic_Exception($uom . ' is not a valid unit of measure');
+            throw new Geodetic_Exception($uom . ' is not a recognised Unit of Measure');
         }
 
         $this->_distance = self::convertToMeters($distance, $uom);
@@ -96,7 +96,7 @@ class Geodetic_Distance extends Geodetic_Measure_Abstract
         if (is_null($uom)) {
             $uom = self::METRES;
         } elseif (!in_array($uom, self::getUOMs())) {
-            throw new Geodetic_Exception($uom . ' is not a valid unit of measure');
+            throw new Geodetic_Exception($uom . ' is not a recognised Unit of Measure');
         }
 
         return self::convertFromMeters($this->_distance, $uom);

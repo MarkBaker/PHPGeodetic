@@ -19,7 +19,7 @@ class Geodetic_Angle extends Geodetic_Measure_Abstract
 
     /**
      *  Unit of Measure conversion reference values
-     *  This array, indexed by the UoM names, holds the conversion factor for each UoM translating to/from arcseconds
+     *  This array, indexed by the UoM names, holds the conversion factor for each UoM translating to/from degrees
      *
      *  @access private
      *  @var    float[]
@@ -76,7 +76,7 @@ class Geodetic_Angle extends Geodetic_Measure_Abstract
         if (is_null($uom)) {
             $uom = self::DEGREES;
         } elseif (!in_array($uom, self::getUOMs())) {
-            throw new Geodetic_Exception($uom . ' is not a valid unit of measure');
+            throw new Geodetic_Exception($uom . ' is not a recognised Unit of Measure');
         }
 
         $this->_angle = self::convertToDegrees($angle, $uom);
@@ -104,7 +104,7 @@ class Geodetic_Angle extends Geodetic_Measure_Abstract
         if (is_null($uom)) {
             $uom = self::DEGREES;
         } elseif (!in_array($uom, self::getUOMs())) {
-            throw new Geodetic_Exception($uom . ' is not a valid unit of measure');
+            throw new Geodetic_Exception($uom . ' is not a recognised Unit of Measure');
         }
 
         return self::convertFromDegrees($this->_angle, $uom);
