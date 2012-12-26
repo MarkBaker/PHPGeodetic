@@ -26,6 +26,14 @@ class Geodetic_Datum
     const WGS1984       = 'WGS84';
     const WGS84         = 'WGS84';
     const IRELAND_1965  = 'IRELAND_1965';
+    const ED50_ED77     = 'ED50_ED77';
+    const WGS1972       = 'WGS72';
+    const WGS72         = 'WGS72';
+    const WGS1972BE     = 'WGS72BE';
+    const WGS72BE       = 'WGS72BE';
+    const NAD27         = 'NAD27';
+    const AGD66         = 'AGD66';
+    const AGD84         = 'AGD84';
 
 
     /**
@@ -38,20 +46,22 @@ class Geodetic_Datum
         self::OSGB36 => array(
             'name' => 'Ordnance Survey - Great Britain (1936)',
             'synonyms'            => 'OSGB',
+            'epsg_id'             => '4277',
+            'esri_name'           => 'D_OSGB_1936',
             'defaultRegion'       => 'GB - Great Britain',
             'referenceEllipsoid'  => Geodetic_ReferenceEllipsoid::AIRY_1830,
             'regions'             => array(
                 'GB - Great Britain' => array(
                     'translationVectors' => array(
-                        'x' => 446.448,     //  metres
-                        'y' => -125.157,    //  metres
-                        'z' => 542.06,      //  metres
+                        'x' => 446.448,
+                        'y' => -125.157,
+                        'z' => 542.06,
                     ),
                     'translationVectorsUOM' => Geodetic_Distance::METRES,
                     'rotationMatrix' => array(
-                        'x' => 0.1502,      //  arcseconds
-                        'y' => 0.247,       //  arcseconds
-                        'z' => 0.8421,      //  arcseconds
+                        'x' => 0.1502,
+                        'y' => 0.247,
+                        'z' => 0.8421,
                    ),
                     'rotationMatrixUOM' => Geodetic_Angle::ARCSECONDS,
                     'scaleFactor' => -20.4894    //  ppm
@@ -61,27 +71,29 @@ class Geodetic_Datum
         self::WGS84 => array(    //    Global GPS
             'name'                => 'WGS 1984',
             'synonyms'            => 'WGS1984',
+            'epsg_id'             => '4326',
+            'esri_name'           => 'D_WGS_1984',
             'defaultRegion'       => 'Global Definition',
             'referenceEllipsoid'  => Geodetic_ReferenceEllipsoid::WGS_84,
             'regions'             => array(
                 'Global Definition' => array(
                     'translationVectors' => array(
-                        'x' => 0.0,     //  metres
-                        'y' => 0.0,     //  metres
-                        'z' => 0.0,     //  metres
+                        'x' => 0.0,
+                        'y' => 0.0,
+                        'z' => 0.0,
                     ),
                     'translationVectorsUOM' => Geodetic_Distance::METRES,
                     'rotationMatrix' => array(
-                        'x' => 0.0,    //  arcseconds
-                        'y' => 0.0,    //  arcseconds
-                        'z' => 0.0,    //  arcseconds
+                        'x' => 0.0,
+                        'y' => 0.0,
+                        'z' => 0.0,
                     ),
                     'rotationMatrixUOM' => Geodetic_Angle::ARCSECONDS,
                     'scaleFactor' => 0.0    //  ppm
                 ),
             ),
         ),
-        self::IRELAND_1965 => array( //  Ireland 1965
+        self::IRELAND_1965 => array(
             'name'                => 'Ireland 1965',
             'synonyms'            => '',
             'defaultRegion'       => 'Ireland',
@@ -89,18 +101,348 @@ class Geodetic_Datum
             'regions'             => array(
                 'Ireland' => array(
                     'translationVectors' => array(
-                        'x' => 482.53,     //  metres
-                        'y' => -130.596,     //  metres
-                        'z' => 564.557,     //  metres
+                        'x' => 482.53,
+                        'y' => -130.596,
+                        'z' => 564.557,
                     ),
                     'translationVectorsUOM' => Geodetic_Distance::METRES,
                     'rotationMatrix' => array(
-                        'x' => -1.042,    //  arcseconds
-                        'y' => -0.214,    //  arcseconds
-                        'z' => -0.631,    //  arcseconds
+                        'x' => -1.042,
+                        'y' => -0.214,
+                        'z' => -0.631,
                     ),
                     'rotationMatrixUOM' => Geodetic_Angle::ARCSECONDS,
                     'scaleFactor' => 8.15    //  ppm
+                ),
+            ),
+        ),
+        self::AGD66 => array(
+            'name'                => 'Australian Geodetic Datum 1966',
+            'synonyms'            => '',
+            'epsg_id'             => '4202',
+            'esri_name'           => 'D_Australian_1966',
+            'defaultRegion'       => 'Australia',
+            'referenceEllipsoid'  => Geodetic_ReferenceEllipsoid::AUSTRALIAN_1965,
+            'regions'             => array(
+                'Australia' => array(
+                    'translationVectors' => array(
+                        'x' => -117.81,
+                        'y' => -51.54,
+                        'z' => 137.78,
+                    ),
+                    'translationVectorsUOM' => Geodetic_Distance::METRES,
+                    'rotationMatrix' => array(
+                        'x' => -0.303,
+                        'y' => -0.446,
+                        'z' => -0.234,
+                    ),
+                    'rotationMatrixUOM' => Geodetic_Angle::RADIANS,
+                    'scaleFactor' => -0.29    //  ppm
+                ),
+            ),
+        ),
+        self::AGD84 => array(
+            'name'                => 'Australian Geodetic Datum 1984',
+            'synonyms'            => '',
+            'epsg_id'             => '4203',
+            'esri_name'           => 'D_Australian_1984',
+            'defaultRegion'       => 'Australia',
+            'referenceEllipsoid'  => Geodetic_ReferenceEllipsoid::AUSTRALIAN_1965,
+            'regions'             => array(
+                'Australia' => array(
+                    'translationVectors' => array(
+                        'x' => -117.76,
+                        'y' => -51.51,
+                        'z' => 139.06,
+                    ),
+                    'translationVectorsUOM' => Geodetic_Distance::METRES,
+                    'rotationMatrix' => array(
+                        'x' => -0.292,
+                        'y' => -0.443,
+                        'z' => -0.277,
+                    ),
+                    'rotationMatrixUOM' => Geodetic_Angle::RADIANS,
+                    'scaleFactor' => -0.191    //  ppm
+                ),
+            ),
+        ),
+        self::ED50_ED77 => array(
+            'name'                => 'European 1950',
+            'synonyms'            => '',
+            'epsg_id'             => '4154',
+            'esri_name'           => 'D_European_1950_ED77',
+            'defaultRegion'       => 'Europe',
+            'referenceEllipsoid'  => Geodetic_ReferenceEllipsoid::INTERNATIONAL_1924,
+            'regions'             => array(
+                'Europe' => array(
+                    'translationVectors' => array(
+                        'x' => -110.33,
+                        'y' => -97.73,
+                        'z' => -119.85,
+                    ),
+                    'translationVectorsUOM' => Geodetic_Distance::METRES,
+                    'rotationMatrix' => array(
+                        'x' => 0.342,
+                        'y' => 1.163,
+                        'z' => 0.272,
+                    ),
+                    'rotationMatrixUOM' => Geodetic_Angle::RADIANS,
+                    'scaleFactor' => 0.063    //  ppm
+                ),
+            ),
+        ),
+        self::WGS72 => array(
+            'name'                => 'WGS 1972',
+            'synonyms'            => 'WGS1972',
+            'epsg_id'             => '4322',
+            'esri_name'           => 'D_WGS_1972',
+            'defaultRegion'       => 'Global',
+            'referenceEllipsoid'  => Geodetic_ReferenceEllipsoid::WGS_72,
+            'regions'             => array(
+                'Europe' => array(
+                    'translationVectors' => array(
+                        'x' => 0.0,
+                        'y' => 0.0,
+                        'z' => 4.5,
+                    ),
+                    'translationVectorsUOM' => Geodetic_Distance::METRES,
+                    'rotationMatrix' => array(
+                        'x' => 0.0,
+                        'y' => 0.0,
+                        'z' => 0.554,
+                    ),
+                    'rotationMatrixUOM' => Geodetic_Angle::ARCSECONDS,
+                    'scaleFactor' => 0.219    //  ppm
+                ),
+            ),
+        ),
+        self::WGS72BE => array(
+            'name'                => 'WGS 1972 BE',
+            'synonyms'            => 'WGS1972BE',
+            'epsg_id'             => '4324',
+            'esri_name'           => 'D_WGS_1972_BE',
+            'defaultRegion'       => 'Global',
+            'referenceEllipsoid'  => Geodetic_ReferenceEllipsoid::WGS_72,
+            'regions'             => array(
+                'Global' => array(
+                    'translationVectors' => array(
+                        'x' => 0.0,
+                        'y' => 0.0,
+                        'z' => 1.9,
+                    ),
+                    'translationVectorsUOM' => Geodetic_Distance::METRES,
+                    'rotationMatrix' => array(
+                        'x' => 0.0,
+                        'y' => 0.0,
+                        'z' => 0.814,
+                    ),
+                    'rotationMatrixUOM' => Geodetic_Angle::ARCSECONDS,
+                    'scaleFactor' => -0.38    //  ppm
+                ),
+            ),
+        ),
+        self::NAD27 => array(
+            'name'                => 'NAD27',
+            'synonyms'            => '',
+            'epsg_id'             => '4267',
+            'esri_name'           => 'D_North_American_1927',
+            'defaultRegion'       => 'North America',
+            'referenceEllipsoid'  => Geodetic_ReferenceEllipsoid::CLARKE_1866,
+            'regions'             => array(
+                'North America' => array(
+                    'translationVectors' => array(
+                        'x' => -8.0,
+                        'y' => 160.0,
+                        'z' => 176.0,
+                    ),
+                    'translationVectorsUOM' => Geodetic_Distance::METRES,
+                    'rotationMatrix' => array(
+                        'x' => 0.0,
+                        'y' => 0.0,
+                        'z' => 0.0,
+                    ),
+                    'rotationMatrixUOM' => Geodetic_Angle::ARCSECONDS,
+                    'scaleFactor' => 0.0    //  ppm
+                ),
+                'Aleutian Islands' => array(
+                    'translationVectors' => array(
+                        'x' => -2.0,
+                        'y' => 0.0,
+                        'z' => 4.0,
+                    ),
+                    'translationVectorsUOM' => Geodetic_Distance::METRES,
+                    'rotationMatrix' => array(
+                        'x' => 0.0,
+                        'y' => 0.0,
+                        'z' => 0.0,
+                    ),
+                    'rotationMatrixUOM' => Geodetic_Angle::ARCSECONDS,
+                    'scaleFactor' => 0.0    //  ppm
+                ),
+                'Aleutian Islands - East' => array(
+                    'translationVectors' => array(
+                        'x' => -2.0,
+                        'y' => 152.0,
+                        'z' => 149.0,
+                    ),
+                    'translationVectorsUOM' => Geodetic_Distance::METRES,
+                    'rotationMatrix' => array(
+                        'x' => 0.0,
+                        'y' => 0.0,
+                        'z' => 0.0,
+                    ),
+                    'rotationMatrixUOM' => Geodetic_Angle::ARCSECONDS,
+                    'scaleFactor' => 0.0    //  ppm
+                ),
+                'Aleutian Islands - West' => array(
+                    'translationVectors' => array(
+                        'x' => -2.0,
+                        'y' => 204.0,
+                        'z' => 105.0,
+                    ),
+                    'translationVectorsUOM' => Geodetic_Distance::METRES,
+                    'rotationMatrix' => array(
+                        'x' => 0.0,
+                        'y' => 0.0,
+                        'z' => 0.0,
+                    ),
+                    'rotationMatrixUOM' => Geodetic_Angle::ARCSECONDS,
+                    'scaleFactor' => 0.0    //  ppm
+                ),
+                'Bahamas' => array(
+                    'translationVectors' => array(
+                        'x' => -4.0,
+                        'y' => 154.0,
+                        'z' => 178.0,
+                    ),
+                    'translationVectorsUOM' => Geodetic_Distance::METRES,
+                    'rotationMatrix' => array(
+                        'x' => 0.0,
+                        'y' => 0.0,
+                        'z' => 0.0,
+                    ),
+                    'rotationMatrixUOM' => Geodetic_Angle::ARCSECONDS,
+                    'scaleFactor' => 0.0    //  ppm
+                ),
+                'Canada' => array(
+                    'translationVectors' => array(
+                        'x' => -10.0,
+                        'y' => 158.0,
+                        'z' => 187.0,
+                    ),
+                    'translationVectorsUOM' => Geodetic_Distance::METRES,
+                    'rotationMatrix' => array(
+                        'x' => 0.0,
+                        'y' => 0.0,
+                        'z' => 0.0,
+                    ),
+                    'rotationMatrixUOM' => Geodetic_Angle::ARCSECONDS,
+                    'scaleFactor' => 0.0    //  ppm
+                ),
+                'Canada - Alberta and British Columbia' => array(
+                    'translationVectors' => array(
+                        'x' => -7.0,
+                        'y' => 162.0,
+                        'z' => 188.0,
+                    ),
+                    'translationVectorsUOM' => Geodetic_Distance::METRES,
+                    'rotationMatrix' => array(
+                        'x' => 0.0,
+                        'y' => 0.0,
+                        'z' => 0.0,
+                    ),
+                    'rotationMatrixUOM' => Geodetic_Angle::ARCSECONDS,
+                    'scaleFactor' => 0.0    //  ppm
+                ),
+                'Canada - East' => array(
+                    'translationVectors' => array(
+                        'x' => -22.0,
+                        'y' => 160.0,
+                        'z' => 190.0,
+                    ),
+                    'translationVectorsUOM' => Geodetic_Distance::METRES,
+                    'rotationMatrix' => array(
+                        'x' => 0.0,
+                        'y' => 0.0,
+                        'z' => 0.0,
+                    ),
+                    'rotationMatrixUOM' => Geodetic_Angle::ARCSECONDS,
+                    'scaleFactor' => 0.0    //  ppm
+                ),
+                'Canada - Manitoba / Ontario' => array(
+                    'translationVectors' => array(
+                        'x' => -9.0,
+                        'y' => 157.0,
+                        'z' => 184.0,
+                    ),
+                    'translationVectorsUOM' => Geodetic_Distance::METRES,
+                    'rotationMatrix' => array(
+                        'x' => 0.0,
+                        'y' => 0.0,
+                        'z' => 0.0,
+                    ),
+                    'rotationMatrixUOM' => Geodetic_Angle::ARCSECONDS,
+                    'scaleFactor' => 0.0    //  ppm
+                ),
+                'Canada - NW Territories and Saskatchewan' => array(
+                    'translationVectors' => array(
+                        'x' => 4.0,
+                        'y' => 159.0,
+                        'z' => 188.0,
+                    ),
+                    'translationVectorsUOM' => Geodetic_Distance::METRES,
+                    'rotationMatrix' => array(
+                        'x' => 0.0,
+                        'y' => 0.0,
+                        'z' => 0.0,
+                    ),
+                    'rotationMatrixUOM' => Geodetic_Angle::ARCSECONDS,
+                    'scaleFactor' => 0.0    //  ppm
+                ),
+                'Canada - Yukon' => array(
+                    'translationVectors' => array(
+                        'x' => -7.0,
+                        'y' => 139.0,
+                        'z' => 181.0,
+                    ),
+                    'translationVectorsUOM' => Geodetic_Distance::METRES,
+                    'rotationMatrix' => array(
+                        'x' => 0.0,
+                        'y' => 0.0,
+                        'z' => 0.0,
+                    ),
+                    'rotationMatrixUOM' => Geodetic_Angle::ARCSECONDS,
+                    'scaleFactor' => 0.0    //  ppm
+                ),
+                'Canal Zone' => array(
+                    'translationVectors' => array(
+                        'x' => 0.0,
+                        'y' => 125.0,
+                        'z' => 201.0,
+                    ),
+                    'translationVectorsUOM' => Geodetic_Distance::METRES,
+                    'rotationMatrix' => array(
+                        'x' => 0.0,
+                        'y' => 0.0,
+                        'z' => 0.0,
+                    ),
+                    'rotationMatrixUOM' => Geodetic_Angle::ARCSECONDS,
+                    'scaleFactor' => 0.0    //  ppm
+                ),
+                'Carribbean' => array(
+                    'translationVectors' => array(
+                        'x' => -3.0,
+                        'y' => 143.0,
+                        'z' => 183.0,
+                    ),
+                    'translationVectorsUOM' => Geodetic_Distance::METRES,
+                    'rotationMatrix' => array(
+                        'x' => 0.0,
+                        'y' => 0.0,
+                        'z' => 0.0,
+                    ),
+                    'rotationMatrixUOM' => Geodetic_Angle::ARCSECONDS,
+                    'scaleFactor' => 0.0    //  ppm
                 ),
             ),
         ),

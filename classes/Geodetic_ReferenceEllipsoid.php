@@ -24,44 +24,75 @@
  */
 class Geodetic_ReferenceEllipsoid
 {
-    const AIRY_1830                   = 'AIRY_1830';
-    const AIRY_MODIFIED               = 'AIRY_MODIFIED';
-    const MODIFIED_AIRY               = 'AIRY_MODIFIED';
-    const AUSTRALIAN_1965             = 'AUSTRALIAN_1965';
-    const BESSEL_1841                 = 'BESSEL_1841';
-    const BESSEL_NAMIBIA_1841         = 'BESSEL_NAMIBIA_1841';
-    const CLARKE_1866                 = 'CLARKE_1866';
-    const CLARKE_1880                 = 'CLARKE_1880';
-    const EVEREST_INDIA_1830          = 'EVEREST_INDIA_1830';
-    const EVEREST_MALAYSIA_SINGAPORE  = 'EVEREST_MALAYSIA_SINGAPORE';
-    const EVEREST_MALAYSIA_1969       = 'EVEREST_MALAYSIA_1969';
-    const EVEREST_PAKISTAN            = 'EVEREST_PAKISTAN';
-    const EVEREST_SABAH_SARAWAK       = 'EVEREST_SABAH_SARAWAK';
-    const FISHER_1960                 = 'FISHER_1960';
-    const FISHER_1968                 = 'FISHER_1968';
-    const FISCHER_MODIFIED_1960       = 'FISCHER_MODIFIED_1960';
-    const MODIFIED_FISCHER_1960       = 'FISCHER_MODIFIED_1960';
-    const GRS_1980                    = 'GRS_80';
-    const GRS_80                      = 'GRS_80';
-    const HAYFORD_1909                = 'HAYFORD_1909';
-    const HELMERT_1906                = 'HELMERT_1906';
-    const HOUGH_1906                  = 'HOUGH_1906';
-    const INDONESIAN_1974             = 'INDONESIAN_1974';
-    const INTERNATIONAL_1924          = 'INTERNATIONAL_1924';
-    const KRASOVSKY_1940              = 'KRASOVSKY_1940';
-    const SGS_1985                    = 'SGS_1985';
-    const SGS_85                      = 'SGS_1985';
-    const SOUTH_AMERICAN_1969         = 'SOUTH_AMERICAN_1969';
-    const WGS_1960                    = 'WGS_60';
-    const WGS_60                      = 'WGS_60';
-    const WGS_1966                    = 'WGS_66';
-    const WGS_66                      = 'WGS_66';
-    const WGS_1972                    = 'WGS_72';
-    const WGS_72                      = 'WGS_72';
-    const WGS_1984                    = 'WGS_84';
-    const WGS_84                      = 'WGS_84';
-    const IERS_1989                   = 'IERS_1989';
-    const IERS_2003                   = 'IERS_2003';
+    const AIRY_1830                      = 'AIRY_1830';
+    const AIRY_MODIFIED                  = 'AIRY_MODIFIED';
+    const MODIFIED_AIRY                  = 'AIRY_MODIFIED';
+    const AUSTRALIAN_1965                = 'AUSTRALIAN_1965';
+    const AUTHALIC_SPHERE                = 'AUTHALIC_SPHERE';
+    const ATS_1977                       = 'ATS_1977';
+    const BESSEL_1841                    = 'BESSEL_1841';
+    const BESSEL_MODIFIED                = 'BESSEL_MODIFIED';
+    const MODIFIED_BESSEL                = 'BESSEL_MODIFIED';
+    const BESSEL_1841_NAMIBIA            = 'BESSEL_1841_NAMIBIA';
+    const BESSEL_NAMIBIA_GLM             = 'BESSEL_NAMIBIA_GLM';
+    const CGCS_2000                      = 'CGCS_2000';
+    const CLARKE_1858                    = 'CLARKE_1858';
+    const CLARKE_1866                    = 'CLARKE_1866';
+    const CLARKE_1866_MICHIGAN           = 'CLARKE_1866_MICHIGAN';
+    const CLARKE_1880                    = 'CLARKE_1880';
+    const CLARKE_1880_ARC                = 'CLARKE_1880_ARC';
+    const CLARKE_1880_BENOIT             = 'CLARKE_1880_BENOIT';
+    const CLARKE_1880_IGN                = 'CLARKE_1880_IGN';
+    const CLARKE_1880_INTERNATIONAL_FOOT = 'CLARKE_1880_INTERNATIONAL_FOOT';
+    const CLARKE_1880_RGS                = 'CLARKE_1880_RGS';
+    const CLARKE_1880_SGA_1922           = 'CLARKE_1880_SGA_1922';
+    const DANISH_1876                    = 'DANISH_1876';
+    const EVEREST_1830                   = 'EVEREST_1830';
+    const EVEREST_MODIFIED               = 'EVEREST_MODIFIED';
+    const EVEREST_1830_ADJUSTMENT_1937   = 'EVEREST_1830_ADJUSTMENT_1937';
+    const EVEREST_1830_ADJUSTMENT_1962   = 'EVEREST_1830_ADJUSTMENT_1962';
+    const EVEREST_1830_ADJUSTMENT_1967   = 'EVEREST_1830_ADJUSTMENT_1967';
+    const EVEREST_1830_ADJUSTMENT_1975   = 'EVEREST_1830_ADJUSTMENT_1975';
+    const EVEREST_1830_RSO_1969          = 'EVEREST_1830_RSO_1969';
+    const FISHER_1960                    = 'FISHER_1960';
+    const FISHER_1968                    = 'FISHER_1968';
+    const FISCHER_MODIFIED               = 'FISCHER_MODIFIED';
+    const MODIFIED_FISCHER               = 'FISCHER_MODIFIED';
+    const GEM_10C                        = 'GEM_10C';
+    const GRS_1967                       = 'GRS_67';
+    const GRS_67                         = 'GRS_67';
+    const GRS_MODIFIED_1967              = 'GRS_MODIFIED_67';
+    const GRS_MODIFIED_67                = 'GRS_MODIFIED_67';
+    const GRS_1967_MODIFIED              = 'GRS_MODIFIED_67';
+    const GRS_67_MODIFIED                = 'GRS_MODIFIED_67';
+    const GRS_1980                       = 'GRS_80';
+    const GRS_80                         = 'GRS_80';
+    const HELMERT_1906                   = 'HELMERT_1906';
+    const HOUGH_1906                     = 'HOUGH_1906';
+    const HUGHES_1980                    = 'HUGHES_1980';
+    const IAG_1975                       = 'IAG_1975';
+    const INDONESIAN_1974                = 'INDONESIAN_1974';
+    const INTERNATIONAL_1924             = 'INTERNATIONAL_1924';
+    const INTERNATIONAL_1924_AUTHALIC    = 'INTERNATIONAL_1924_AUTHALIC';
+    const KRASSOWSKY_1940                = 'KRASSOWSKY_1940';
+    const NWL_9D                         = 'NWL_9D';
+    const OSU_86F                        = 'OSU_86F';
+    const OSU_91A                        = 'OSU_91A';
+    const PLESSIS_1817                   = 'PLESSIS_1817';
+    const POPULAR_VISUALISATION_SPHERE   = 'POPULAR_VISUALISATION_SPHERE';
+    const PZ_90                          = 'PZ_90';
+    const STRUVE_1860                    = 'STRUVE_1860';
+    const WAR_OFFICE                     = 'WAR_OFFICE';
+    const WGS_1960                       = 'WGS_60';
+    const WGS_60                         = 'WGS_60';
+    const WGS_1966                       = 'WGS_66';
+    const WGS_66                         = 'WGS_66';
+    const WGS_1972                       = 'WGS_72';
+    const WGS_72                         = 'WGS_72';
+    const WGS_1984                       = 'WGS_84';
+    const WGS_84                         = 'WGS_84';
+    const IERS_1989                      = 'IERS_1989';
+    const IERS_2003                      = 'IERS_2003';
 
 
     /**
@@ -74,174 +105,364 @@ class Geodetic_ReferenceEllipsoid
         self::AIRY_1830 => array(
             'name'               => 'Airy (1830)',
             'synonyms'           => '',
+            'epsg_id'            => '7001',
             'semiMajorAxis'      => 6377563.396,
-            'semiMinorAxis'      => 6356256.909,
-            'inverseFlattening'  => 299.32496126649505
+            'inverseFlattening'  => 299.3249646
         ),
         self::AIRY_MODIFIED => array(
             'name'               => 'Airy Modified (1849)',
             'synonyms'           => 'MODIFIED_AIRY',
+            'epsg_id'            => '7002',
             'semiMajorAxis'      => 6377340.189,
-            'semiMinorAxis'      => 6356034.448,
-            'inverseFlattening'  => 299.32496546352854
+            'inverseFlattening'  => 299.3249646
+        ),
+        self::ATS_1977 => array(
+            'name'               => 'Average Terrestrial System (1977)',
+            'synonyms'           => '',
+            'epsg_id'            => '7041',
+            'semiMajorAxis'      => 6378135.0,
+            'inverseFlattening'  => 298.257
         ),
         self::AUSTRALIAN_1965 => array(
             'name'               => 'Australian National (1965)',
             'synonyms'           => '',
+            'epsg_id'            => '7003',
             'semiMajorAxis'      => 6378160.0,
-            'semiMinorAxis'      => 6356774.719,
-            'inverseFlattening'  => 298.249997276158
+            'inverseFlattening'  => 298.25
+        ),
+        self::AUTHALIC_SPHERE => array(
+            'name'               => 'Authalic Sphere',
+            'synonyms'           => '',
+            'epsg_id'            => '7035',
+            'semiMajorAxis'      => 6371000.0,
+            'semiMinorAxis'      => 6371000.0
         ),
         self::BESSEL_1841 => array(
             'name'               => 'Bessel (1841)',
             'synonyms'           => '',
+            'epsg_id'            => '7004',
             'semiMajorAxis'      => 6377397.155,
-            'semiMinorAxis'      => 6356078.963,
-            'inverseFlattening'  => 299.15281535132334
+            'inverseFlattening'  => 299.1528128
         ),
-        self::BESSEL_NAMIBIA_1841 => array(
-            'name'               => 'Bessel - Namibia (1841)',
+        self::BESSEL_MODIFIED => array(
+            'name'               => 'Bessel Modified',
+            'synonyms'           => 'MODIFIED_BESSEL',
+            'epsg_id'            => '7005',
+            'semiMajorAxis'      => 6377492.018,
+            'inverseFlattening'  => 299.1528128
+        ),
+        self::BESSEL_1841_NAMIBIA => array(
+            'name'               => 'Bessel (1841) - Namibia',
             'synonyms'           => '',
+            'epsg_id'            => '7006',
             'semiMajorAxis'      => 6377483.865,
-            'semiMinorAxis'      => 6356165.383,
-            'inverseFlattening'  => 299.152813272542
+            'inverseFlattening'  => 299.1528128
+        ),
+        self::BESSEL_NAMIBIA_GLM => array(
+            'name'               => 'Bessel - Namibia GLM',
+            'synonyms'           => '',
+            'epsg_id'            => '7046',
+            'semiMajorAxis'      => 6377397.155,
+            'inverseFlattening'  => 299.1528128
+        ),
+        self::CGCS_2000 => array(
+            'name'               => 'CGCS 2000',
+            'synonyms'           => '',
+            'epsg_id'            => '1024',
+            'semiMajorAxis'      => 6378137.0,
+            'inverseFlattening'  => 298.257222101
+        ),
+        self::CLARKE_1858 => array(
+            'name'               => 'Clarke (1858)',
+            'synonyms'           => '',
+            'epsg_id'            => '7007',
+            'semiMajorAxis'      => 6378293.64520876,
+            'inverseFlattening'  => 294.260676369261
         ),
         self::CLARKE_1866 => array(
             'name'               => 'Clarke (1866)',
             'synonyms'           => '',
+            'epsg_id'            => '7008',
             'semiMajorAxis'      => 6378206.4,
-            'semiMinorAxis'      => 6356583.8,
-            'inverseFlattening'  => 294.9786982138982
+            'inverseFlattening'  => 294.978698213898
+        ),
+        self::CLARKE_1866_MICHIGAN => array(
+            'name'               => 'Clarke (1866) - Michigan',
+            'synonyms'           => '',
+            'epsg_id'            => '7009',
+            'semiMajorAxis'      => 6378450.0475489,
+            'inverseFlattening'  => 294.978697164674
         ),
         self::CLARKE_1880 => array(
             'name'               => 'Clarke (1880)',
             'synonyms'           => '',
+            'epsg_id'            => '7034',
+            'semiMajorAxis'      => 6378249.14480801,
+            'inverseFlattening'  => 293.46630765563
+        ),
+        self::CLARKE_1880_ARC => array(
+            'name'               => 'Clarke (1880) - Arc',
+            'synonyms'           => '',
+            'epsg_id'            => '7013',
             'semiMajorAxis'      => 6378249.145,
-            'semiMinorAxis'      => 6356514.87,
-            'inverseFlattening'  => 293.4650060791153
+            'inverseFlattening'  => 293.4663077
         ),
-        self::EVEREST_INDIA_1830 => array(
-            'name'               => 'Everest - India (1830)',
+        self::CLARKE_1880_BENOIT => array(
+            'name'               => 'Clarke (1880) - Benoit',
             'synonyms'           => '',
-            'semiMajorAxis'      => 6377276.345,
-            'semiMinorAxis'      => 6356075.413,
-            'inverseFlattening'  => 300.8016980102568
+            'epsg_id'            => '7010',
+            'semiMajorAxis'      => 6378300.789,
+            'inverseFlattening'  => 293.466315538981
         ),
-        self::EVEREST_MALAYSIA_SINGAPORE => array(
-            'name'               => 'Everest - Malaysia and Singapore (1964)',
+        self::CLARKE_1880_IGN => array(
+            'name'               => 'Clarke (1880) - IGN',
             'synonyms'           => '',
+            'epsg_id'            => '7011',
+            'semiMajorAxis'      => 6378249.2,
+            'inverseFlattening'  => 293.466021293627
+        ),
+        self::CLARKE_1880_INTERNATIONAL_FOOT => array(
+            'name'               => 'Clarke (1880) - International Foot',
+            'synonyms'           => '',
+            'epsg_id'            => '7055',
+            'semiMajorAxis'      => 6378306.3696,
+            'inverseFlattening'  => 293.46630765563
+        ),
+        self::CLARKE_1880_RGS => array(
+            'name'               => 'Clarke (1880) - RGS',
+            'synonyms'           => '',
+            'epsg_id'            => '7012',
+            'semiMajorAxis'      => 6378249.145,
+            'inverseFlattening'  => 293.465
+        ),
+        self::CLARKE_1880_SGA_1922 => array(
+            'name'               => 'Clarke (1880) - SGA 1922',
+            'synonyms'           => '',
+            'epsg_id'            => '7014',
+            'semiMajorAxis'      => 6378249.2,
+            'inverseFlattening'  => 293.46598
+        ),
+        self::DANISH_1876 => array(
+            'name'               => 'Danish (1876)',
+            'synonyms'           => '',
+            'epsg_id'            => '7051',
+            'semiMajorAxis'      => 6377019.25666,
+            'inverseFlattening'  => 300.0
+        ),
+        self::EVEREST_1830 => array(
+            'name'               => 'Everest (1830)',
+            'synonyms'           => '',
+            'epsg_id'            => '7042',
+            'semiMajorAxis'      => 6377299.36559538,
+            'inverseFlattening'  => 300.801725543361
+        ),
+        self::EVEREST_MODIFIED => array(
+            'name'               => 'Everest Modified (1830)',
+            'synonyms'           => 'MODIFIED_EVEREST',
+            'epsg_id'            => '7018',
             'semiMajorAxis'      => 6377304.063,
-            'semiMinorAxis'      => 6356103.039,
-            'inverseFlattening'  => 300.8017000971244
+            'inverseFlattening'  => 300.8017
         ),
-        self::EVEREST_MALAYSIA_1969 => array(
-            'name'               => 'Everest - Malaysia (1969)',
+        self::EVEREST_1830_ADJUSTMENT_1937 => array(
+            'name'               => 'Everest (1830) - 1937 Adjustment',
             'synonyms'           => '',
-            'semiMajorAxis'      => 6377295.664,
-            'semiMinorAxis'      => 6356094.668,
-            'inverseFlattening'  => 300.8017012030905
+            'epsg_id'            => '7015',
+            'semiMajorAxis'      => 6377276.345,
+            'inverseFlattening'  => 300.8017
         ),
-        self::EVEREST_PAKISTAN => array(
-            'name'               => 'Everest - Pakistan',
+        self::EVEREST_1830_ADJUSTMENT_1962 => array(
+            'name'               => 'Everest (1830) - 1962 Adjustment',
             'synonyms'           => '',
-            'semiMajorAxis'      => 6377309.613,
-            'semiMinorAxis'      => 6356109.571,
-            'inverseFlattening'  => 300.81589522323446
+            'epsg_id'            => '7044',
+            'semiMajorAxis'      => 6377301.243,
+            'inverseFlattening'  => 300.8017255
         ),
-        self::EVEREST_SABAH_SARAWAK => array(
-            'name'               => 'Everest - Sabah Sarawak',
+        self::EVEREST_1830_ADJUSTMENT_1967 => array(
+            'name'               => 'Everest (1830) - 1967 Adjustment',
             'synonyms'           => '',
+            'epsg_id'            => '7016',
             'semiMajorAxis'      => 6377298.556,
-            'semiMinorAxis'      => 6356097.550,
-            'inverseFlattening'  => 300.801700
+            'inverseFlattening'  => 300.8017
+        ),
+        self::EVEREST_1830_ADJUSTMENT_1975 => array(
+            'name'               => 'Everest (1830) - 1975 Adjustment',
+            'synonyms'           => '',
+            'epsg_id'            => '7045',
+            'semiMajorAxis'      => 6377299.151,
+            'inverseFlattening'  => 300.8017255
+        ),
+        self::EVEREST_1830_RSO_1969 => array(
+            'name'               => 'Everest (1830) - RSO 1969',
+            'synonyms'           => '',
+            'epsg_id'            => '7056',
+            'semiMajorAxis'      => 6377295.664,
+            'inverseFlattening'  => 300.8017
         ),
         self::FISHER_1960 => array(
             'name'               => 'Fisher (1960)',
             'synonyms'           => '',
-            'semiMajorAxis'      => 6378155.0,
-            'semiMinorAxis'      => 6356773.32,
-            'inverseFlattening'  => 298.2999932652668
+            'epsg_id'            => '50002',
+            'semiMajorAxis'      => 6378166.0,
+            'inverseFlattening'  => 298.3
         ),
-        self::FISCHER_MODIFIED_1960 => array(
+        self::FISCHER_MODIFIED => array(
             'name'               => 'Fischer Modified (1960)',
-            'synonyms'           => 'MODIFIED_FISCHER_1960',
-            'semiMajorAxis'      => 6378155.000,
-            'semiMinorAxis'      => 6356773.320,
-            'inverseFlattening'  => 298.300000
+            'synonyms'           => 'MODIFIED_FISCHER',
+            'epsg_id'            => '50001',
+            'semiMajorAxis'      => 6378155.0,
+            'inverseFlattening'  => 298.3
         ),
         self::FISHER_1968 => array(
             'name'               => 'Fisher (1968)',
             'synonyms'           => '',
-            'semiMajorAxis'      => 6378150.000,
-            'semiMinorAxis'      => 6356768.337,
-            'inverseFlattening'  => 298.300000
+            'epsg_id'            => '50003',
+            'semiMajorAxis'      => 6378150.0,
+            'inverseFlattening'  => 298.3
+        ),
+        self::GEM_10C => array(
+            'name'               => 'GEM 10C',
+            'synonyms'           => '',
+            'epsg_id'            => '7031',
+            'semiMajorAxis'      => 6378137.0,
+            'inverseFlattening'  => 298.257223563
+        ),
+        self::GRS_67 => array(
+            'name'               => 'Geodetic Reference System (1967)',
+            'synonyms'           => 'GRS_1967',
+            'epsg_id'            => '7036',
+            'semiMajorAxis'      => 6378160.0,
+            'inverseFlattening'  => 298.247167427
+        ),
+        self::GRS_MODIFIED_67 => array(
+            'name'               => 'Geodetic Reference System (1967) Modified',
+            'synonyms'           => 'GRS_MODIFIED_1967,GRS_1967_MODIFIED,GRS_67_MODIFIED',
+            'epsg_id'            => '7050',
+            'semiMajorAxis'      => 6378160.0,
+            'inverseFlattening'  => 298.25
         ),
         self::GRS_80 => array(
             'name'               => 'Geodetic Reference System (1980)',
             'synonyms'           => 'GRS_1980',
+            'epsg_id'            => '7019',
             'semiMajorAxis'      => 6378137.0,
-            'semiMinorAxis'      => 6356752.3141,
-            'inverseFlattening'  => 298.2572215381486
-        ),
-        self::HAYFORD_1909 => array(
-            'name'               => 'Hayford (1909)',
-            'synonyms'           => '',
-            'semiMajorAxis'      => 6378388.0,
-            'semiMinorAxis'      => 6356911.946,
-            'inverseFlattening'  => 296.9999982305938
+            'inverseFlattening'  => 298.257222101
         ),
         self::HELMERT_1906 => array(
             'name'               => 'Helmert (1906)',
             'synonyms'           => '',
+            'epsg_id'            => '7020',
             'semiMajorAxis'      => 6378200.0,
-            'semiMinorAxis'      => 6356818.17,
-            'inverseFlattening'  => 298.3000051913226
+            'inverseFlattening'  => 298.3
         ),
         self::HOUGH_1906 => array(
             'name'               => 'Hough (1906)',
             'synonyms'           => '',
+            'epsg_id'            => '7053',
             'semiMajorAxis'      => 6378270.0,
-            'semiMinorAxis'      => 6356794.343,
-            'inverseFlattening'  => 296.99999399320365
+            'inverseFlattening'  => 297.0
+        ),
+        self::HUGHES_1980 => array(
+            'name'               => 'Hughes (1980)',
+            'synonyms'           => '',
+            'epsg_id'            => '7058',
+            'semiMajorAxis'      => 6378273.0,
+            'inverseFlattening'  => 298.279411123064
+        ),
+        self::IAG_1975 => array(
+            'name'               => 'IAG (1975)',
+            'synonyms'           => '',
+            'epsg_id'            => '7049',
+            'semiMajorAxis'      => 6378140.0,
+            'inverseFlattening'  => 298.257
         ),
         self::INDONESIAN_1974 => array(
-            'name'               => 'Indonesian (1974)',
+            'name'               => 'Indonesian National Spheroid (1974)',
             'synonyms'           => '',
+            'epsg_id'            => '7021',
             'semiMajorAxis'      => 6378160.0,
-            'semiMinorAxis'      => 6356774.504,
-            'inverseFlattening'  => 298.2469988070381
+            'inverseFlattening'  => 298.247
         ),
         self::INTERNATIONAL_1924 => array(
             'name'               => 'International (1924)',
             'synonyms'           => '',
+            'epsg_id'            => '7022',
             'semiMajorAxis'      => 6378388.0,
-            'semiMinorAxis'      => 6356911.946,
-            'inverseFlattening'  => 296.9999982305938
+            'inverseFlattening'  => 297.0
         ),
-        self::KRASOVSKY_1940 => array(
-            'name'               => 'Krasovsky (1940)',
+        self::INTERNATIONAL_1924_AUTHALIC => array(
+            'name'               => 'International (1924) Authalic Sphere',
             'synonyms'           => '',
+            'epsg_id'            => '7057',
+            'semiMajorAxis'      => 6371228.0,
+            'semiMinorAxis'      => 6371228.0
+        ),
+        self::KRASSOWSKY_1940 => array(
+            'name'               => 'Krassowsky (1940)',
+            'synonyms'           => '',
+            'epsg_id'            => '7024',
             'semiMajorAxis'      => 6378245.0,
-            'semiMinorAxis'      => 6356863.019,
-            'inverseFlattening'  => 298.30000316622187
+            'inverseFlattening'  => 298.3
         ),
-        self::SGS_1985          => array(
-            'name'               => 'Soviet Geodetic System (1985)',
-            'synonyms'           => 'SGS_85',
-            'semiMajorAxis'      => 6378136.000,
-            'semiMinorAxis'      => 6356751.302,
-            'inverseFlattening'  => 298.257000
-        ),
-        self::SOUTH_AMERICAN_1969 => array(
-            'name'               => 'South American (1969)',
+        self::NWL_9D => array(
+            'name'               => 'NWL 9D',
             'synonyms'           => '',
-            'semiMajorAxis'      => 6378160.0,
-            'semiMinorAxis'      => 6356774.719,
-            'inverseFlattening'  => 298.249997276158
+            'epsg_id'            => '7025',
+            'semiMajorAxis'      => 6378145.0,
+            'inverseFlattening'  => 298.25
+        ),
+        self::OSU_86F => array(
+            'name'               => 'OSU 86F',
+            'synonyms'           => '',
+            'epsg_id'            => '7032',
+            'semiMajorAxis'      => 6378136.2,
+            'inverseFlattening'  => 298.257223563
+        ),
+        self::OSU_91A => array(
+            'name'               => 'OSU 91A',
+            'synonyms'           => '',
+            'epsg_id'            => '7033',
+            'semiMajorAxis'      => 6378136.3,
+            'inverseFlattening'  => 298.257223563
+        ),
+        self::PLESSIS_1817 => array(
+            'name'               => 'Plessis (1817)',
+            'synonyms'           => '',
+            'epsg_id'            => '7027',
+            'semiMajorAxis'      => 6376523.0,
+            'inverseFlattening'  => 308.64
+        ),
+        self::POPULAR_VISUALISATION_SPHERE => array(
+            'name'               => 'Popular Visualisation Sphere',
+            'synonyms'           => '',
+            'epsg_id'            => '7059',
+            'semiMajorAxis'      => 6378137.0,
+            'semiMinorAxis'      => 6378137.0
+        ),
+        self::PZ_90 => array(
+            'name'               => 'PZ 90',
+            'synonyms'           => '',
+            'epsg_id'            => '7054',
+            'semiMajorAxis'      => 6378136.0,
+            'inverseFlattening'  => 298.257839303
+        ),
+        self::STRUVE_1860 => array(
+            'name'               => 'Struve (1860)',
+            'synonyms'           => '',
+            'epsg_id'            => '7028',
+            'semiMajorAxis'      => 6378298.3,
+            'inverseFlattening'  => 294.73
+        ),
+        self::WAR_OFFICE => array(
+            'name'               => 'War Office',
+            'synonyms'           => '',
+            'epsg_id'            => '7029',
+            'semiMajorAxis'      => 6378300.0,
+            'inverseFlattening'  => 296.0
         ),
         self::WGS_60 => array(
             'name'               => 'World Geodetic System (1960)',
             'synonyms'           => 'WGS_1960',
+            'epsg_id'            => '',
             'semiMajorAxis'      => 6378165.000,
             'semiMinorAxis'      => 6356783.287,
             'inverseFlattening'  => 298.300000
@@ -249,6 +470,7 @@ class Geodetic_ReferenceEllipsoid
         self::WGS_66 => array(
             'name'               => 'World Geodetic System (1966)',
             'synonyms'           => 'WGS_1966',
+            'epsg_id'            => '',
             'semiMajorAxis'      => 6378145.000,
             'semiMinorAxis'      => 6356759.769,
             'inverseFlattening'  => 298.250000
@@ -256,20 +478,21 @@ class Geodetic_ReferenceEllipsoid
         self::WGS_72 => array(
             'name'               => 'World Geodetic System (1972)',
             'synonyms'           => 'WGS_1972',
+            'epsg_id'            => '7043',
             'semiMajorAxis'      => 6378135.0,
-            'semiMinorAxis'      => 6356750.52,
-            'inverseFlattening'  => 298.2599997755319
+            'inverseFlattening'  => 298.26
         ),
         self::WGS_84 => array(
             'name'               => 'World Geodetic System (1984)',
             'synonyms'           => 'WGS_1984',
+            'epsg_id'            => '7030',
             'semiMajorAxis'      => 6378137.0,
-            'semiMinorAxis'      => 6356752.3142,
-            'inverseFlattening'  => 298.2572229328697
+            'inverseFlattening'  => 298.257223563
         ),
         self::IERS_1989 => array(
             'name'               => 'International Earth Rotation and Reference Systems Service (1989)',
             'synonyms'           => '',
+            'epsg_id'            => '',
             'semiMajorAxis'      => 6378136,
             'semiMinorAxis'      => 6356751.302,
             'inverseFlattening'  => 298.257
@@ -277,6 +500,7 @@ class Geodetic_ReferenceEllipsoid
         self::IERS_2003 => array(
             'name'               => 'International Earth Rotation and Reference Systems Service (2003)',
             'synonyms'           => '',
+            'epsg_id'            => '',
             'semiMajorAxis'      => 6378136.6,
             'semiMinorAxis'      => 6356751.9,
             'inverseFlattening'  => 298.25642
@@ -288,6 +512,7 @@ class Geodetic_ReferenceEllipsoid
 
     protected $_ellipsoidReference;
     protected $_ellipsoidName;
+    protected $_epsgId;
 
     protected $_semiMajorAxis;
 
@@ -319,14 +544,16 @@ class Geodetic_ReferenceEllipsoid
         if ($this->_semiMajorAxis->getValue() === 0.0)
             throw new Geodetic_Exception('Semi-Major (Equatorial) Axis is not set');
 
-        if ($this->_semiMinorAxis->getValue() === 0.0) {
+        if ($this->_semiMinorAxis->getValue() == 0.0) {
             if ($this->_inverseFlattening === 0.0) {
                 throw new Geodetic_Exception('Neither Semi-Minor (Polar) Axis nor Inverse Flattening is set');
             }
             $this->_semiMinorAxis->setValue($this->_semiMajorAxis->getValue() * (1 - (1 / $this->_inverseFlattening)));
-        } elseif ($this->_inverseFlattening === 0.0) {
-            $this->_inverseFlattening = $this->_semiMajorAxis->getValue() /
-                                        ($this->_semiMajorAxis->getValue() - $this->_semiMinorAxis->getValue());
+        } elseif ($this->_inverseFlattening == 0.0) {
+            if ($this->_semiMajorAxis->getValue() !== $this->_semiMinorAxis->getValue()) {
+                $this->_inverseFlattening = $this->_semiMajorAxis->getValue() /
+                                            ($this->_semiMajorAxis->getValue() - $this->_semiMinorAxis->getValue());
+            }
         }
 
         $this->_firstEccentricitySquared = (($this->_semiMajorAxis->getValue() * $this->_semiMajorAxis->getValue()) -
@@ -375,6 +602,16 @@ class Geodetic_ReferenceEllipsoid
     }   //  getEllipsoidName()
 
     /**
+     *  Get the EPSG ID of the Reference Ellipsoid used for this object
+     *
+     *  @return    string    The name of this ellipsoid
+     */
+    public function getEllipsoidID()
+    {
+        return $this->_epsgId;
+    }   //  getEllipsoidID()
+
+    /**
      * Validate an Ellipsoid Name or synonym
      *
      * @param    string    $ellipsoid    The name of the ellipsoid to validate, or a synonym for that name
@@ -414,6 +651,7 @@ class Geodetic_ReferenceEllipsoid
         $this->_semiMinorAxis = new Geodetic_Distance();
         $this->_ellipsoidReference = $ellipsoidName;
         $this->_ellipsoidName = self::$_ellipsoidData[$ellipsoidName]['name'];
+        $this->_epsgId = self::$_ellipsoidData[$ellipsoidName]['epsg_id'];
 
         //    All pre-configured Ellipsoid dimensions are already defined in meters,
         //        so we don't need to do any UOM conversions here
@@ -576,7 +814,9 @@ class Geodetic_ReferenceEllipsoid
         if ($this->_dirty)
             $this->_calculateDerivedParameters();
 
-        return 1 / $this->_inverseFlattening;
+        if ($this->_inverseFlattening > 0.0)
+            return 1 / $this->_inverseFlattening;
+        return INF;
     }
 
     /**
@@ -671,18 +911,20 @@ class Geodetic_ReferenceEllipsoid
         $semiMajorSquared = $this->_semiMajorAxis->getValue() * $this->_semiMajorAxis->getValue();
         $semiMinorSquared = $this->_semiMinorAxis->getValue() * $this->_semiMinorAxis->getValue();
 
-        return Geodetic_Distance::convertFromMeters(
-            sqrt(
-                ($semiMajorSquared +
-                 (($this->_semiMajorAxis->getValue() * $semiMinorSquared) / sqrt($semiMajorSquared - $semiMinorSquared)) *
-                 log(
-                    ($this->_semiMajorAxis->getValue() + sqrt($semiMajorSquared - $semiMinorSquared)) /
-                     $this->_semiMinorAxis->getValue()
-                 )
-                ) / 2
-            ),
-            $uom
-        );
+        if ($this->_inverseFlattening > 0.0)
+            return Geodetic_Distance::convertFromMeters(
+                sqrt(
+                    ($semiMajorSquared +
+                     (($this->_semiMajorAxis->getValue() * $semiMinorSquared) / sqrt($semiMajorSquared - $semiMinorSquared)) *
+                     log(
+                        ($this->_semiMajorAxis->getValue() + sqrt($semiMajorSquared - $semiMinorSquared)) /
+                         $this->_semiMinorAxis->getValue()
+                     )
+                    ) / 2
+                ),
+                $uom
+            );
+        return $this->_semiMajorAxis->getValue($uom);
     }
 
     /**

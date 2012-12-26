@@ -64,12 +64,12 @@ class ReferenceEllipsoidTest extends PHPUnit_Framework_TestCase
         $referenceEllipsoidObject = new Geodetic_ReferenceEllipsoid(Geodetic_ReferenceEllipsoid::MODIFIED_AIRY);
 
         $semiMajorAxis = $referenceEllipsoidObject->getSemiMajorAxis();
-        $this->assertEquals(6377340.189, $semiMajorAxis, '', 0.1e-8);
+        $this->assertEquals(6377340.189, $semiMajorAxis, '', 0.1e-6);
 
         $referenceEllipsoidObject->setEllipsoid(Geodetic_ReferenceEllipsoid::WGS_1984);
 
         $semiMajorAxis = $referenceEllipsoidObject->getSemiMajorAxis();
-        $this->assertEquals(6378137.0, $semiMajorAxis, '', 0.1e-8);
+        $this->assertEquals(6378137.0, $semiMajorAxis, '', 0.1e-6);
     }
 
     public function testSetSemiMajorAxis()
@@ -78,7 +78,7 @@ class ReferenceEllipsoidTest extends PHPUnit_Framework_TestCase
 
         $referenceEllipsoidObject->setSemiMajorAxis(6378137.2);
         $semiMajorAxis = $referenceEllipsoidObject->getSemiMajorAxis();
-        $this->assertEquals(6378137.2, $semiMajorAxis, '', 0.1e-8);
+        $this->assertEquals(6378137.2, $semiMajorAxis, '', 0.1e-6);
     }
 
     public function testGetSemiMinorAxis()
@@ -86,12 +86,12 @@ class ReferenceEllipsoidTest extends PHPUnit_Framework_TestCase
         $referenceEllipsoidObject = new Geodetic_ReferenceEllipsoid(Geodetic_ReferenceEllipsoid::MODIFIED_AIRY);
 
         $semiMinorAxis = $referenceEllipsoidObject->getSemiMinorAxis();
-        $this->assertEquals(6356034.448, $semiMinorAxis, '', 0.1e-8);
+        $this->assertEquals(6356034.4479385, $semiMinorAxis, '', 0.1e-6);
 
         $referenceEllipsoidObject->setEllipsoid(Geodetic_ReferenceEllipsoid::WGS_1984);
 
         $semiMinorAxis = $referenceEllipsoidObject->getSemiMinorAxis();
-        $this->assertEquals(6356752.3142, $semiMinorAxis, '', 0.1e-8);
+        $this->assertEquals(6356752.3142452, $semiMinorAxis, '', 0.1e-6);
     }
 
     public function testSetSemiMinorAxis()
@@ -100,7 +100,7 @@ class ReferenceEllipsoidTest extends PHPUnit_Framework_TestCase
 
         $referenceEllipsoidObject->setSemiMinorAxis(6356752.5);
         $semiMinorAxis = $referenceEllipsoidObject->getSemiMinorAxis();
-        $this->assertEquals(6356752.5, $semiMinorAxis, '', 0.1e-8);
+        $this->assertEquals(6356752.5, $semiMinorAxis, '', 0.1e-6);
     }
 
     public function testGetInverseFlattening()
@@ -108,12 +108,12 @@ class ReferenceEllipsoidTest extends PHPUnit_Framework_TestCase
         $referenceEllipsoidObject = new Geodetic_ReferenceEllipsoid(Geodetic_ReferenceEllipsoid::MODIFIED_AIRY);
 
         $inverseFlattening = $referenceEllipsoidObject->getInverseFlattening();
-        $this->assertEquals(299.32496546352854, $inverseFlattening, '', 0.1e-8);
+        $this->assertEquals(299.3249646, $inverseFlattening, '', 0.1e-6);
 
         $referenceEllipsoidObject->setEllipsoid(Geodetic_ReferenceEllipsoid::WGS_1984);
 
         $inverseFlattening = $referenceEllipsoidObject->getInverseFlattening();
-        $this->assertEquals(298.2572229328697, $inverseFlattening, '', 0.1e-8);
+        $this->assertEquals(298.257223563, $inverseFlattening, '', 0.1e-6);
     }
 
     public function testSetInverseFlattening()
@@ -122,7 +122,7 @@ class ReferenceEllipsoidTest extends PHPUnit_Framework_TestCase
 
         $referenceEllipsoidObject->setInverseFlattening(298);
         $inverseFlattening = $referenceEllipsoidObject->getInverseFlattening();
-        $this->assertEquals(298, $inverseFlattening, '', 0.1e-8);
+        $this->assertEquals(298, $inverseFlattening, '', 0.1e-6);
     }
 
     public function testGetFlattening()
@@ -130,12 +130,12 @@ class ReferenceEllipsoidTest extends PHPUnit_Framework_TestCase
         $referenceEllipsoidObject = new Geodetic_ReferenceEllipsoid(Geodetic_ReferenceEllipsoid::MODIFIED_AIRY);
 
         $flattening = $referenceEllipsoidObject->getFlattening();
-        $this->assertEquals(0.0033408506414971, $flattening, '', 0.1e-8);
+        $this->assertEquals(0.0033408506414971, $flattening, '', 0.1e-6);
 
         $referenceEllipsoidObject->setEllipsoid(Geodetic_ReferenceEllipsoid::WGS_1984);
 
         $flattening = $referenceEllipsoidObject->getFlattening();
-        $this->assertEquals(0.0033528106647475, $flattening, '', 0.1e-8);
+        $this->assertEquals(0.0033528106647475, $flattening, '', 0.1e-6);
     }
 
     public function testSetFlattening()
@@ -144,7 +144,7 @@ class ReferenceEllipsoidTest extends PHPUnit_Framework_TestCase
 
         $referenceEllipsoidObject->setFlattening(298);
         $flattening = $referenceEllipsoidObject->getFlattening();
-        $this->assertEquals(298, $flattening, '', 0.1e-8);
+        $this->assertEquals(298, $flattening, '', 0.1e-6);
     }
 
     public function testGetFirstEccentricity()
@@ -152,12 +152,12 @@ class ReferenceEllipsoidTest extends PHPUnit_Framework_TestCase
         $referenceEllipsoidObject = new Geodetic_ReferenceEllipsoid(Geodetic_ReferenceEllipsoid::MODIFIED_AIRY);
 
         $firstEccentricity = $referenceEllipsoidObject->getFirstEccentricity();
-        $this->assertEquals(0.081673373874142, $firstEccentricity, '', 0.1e-8);
+        $this->assertEquals(0.081673373874142, $firstEccentricity, '', 0.1e-6);
 
         $referenceEllipsoidObject->setEllipsoid(Geodetic_ReferenceEllipsoid::WGS_1984);
 
         $firstEccentricity = $referenceEllipsoidObject->getFirstEccentricity();
-        $this->assertEquals(0.081819190842621, $firstEccentricity, '', 0.1e-8);
+        $this->assertEquals(0.081819190842621, $firstEccentricity, '', 0.1e-6);
     }
 
     public function testGetFirstEccentricitySquared()
@@ -165,12 +165,12 @@ class ReferenceEllipsoidTest extends PHPUnit_Framework_TestCase
         $referenceEllipsoidObject = new Geodetic_ReferenceEllipsoid(Geodetic_ReferenceEllipsoid::MODIFIED_AIRY);
 
         $firstEccentricitySquared = $referenceEllipsoidObject->getFirstEccentricitySquared();
-        $this->assertEquals(0.0066705399999854, $firstEccentricitySquared, '', 0.1e-8);
+        $this->assertEquals(0.0066705399999854, $firstEccentricitySquared, '', 0.1e-6);
 
         $referenceEllipsoidObject->setEllipsoid(Geodetic_ReferenceEllipsoid::WGS_1984);
 
         $firstEccentricitySquared = $referenceEllipsoidObject->getFirstEccentricitySquared();
-        $this->assertEquals(0.0066943799901413, $firstEccentricitySquared, '', 0.1e-8);
+        $this->assertEquals(0.0066943799901413, $firstEccentricitySquared, '', 0.1e-6);
     }
 
     public function testGetSecondEccentricity()
@@ -178,12 +178,12 @@ class ReferenceEllipsoidTest extends PHPUnit_Framework_TestCase
         $referenceEllipsoidObject = new Geodetic_ReferenceEllipsoid(Geodetic_ReferenceEllipsoid::MODIFIED_AIRY);
 
         $secondEccentricity = $referenceEllipsoidObject->getSecondEccentricity();
-        $this->assertEquals(0.081947147052943, $secondEccentricity, '', 0.1e-8);
+        $this->assertEquals(0.081947147052943, $secondEccentricity, '', 0.1e-6);
 
         $referenceEllipsoidObject->setEllipsoid(Geodetic_ReferenceEllipsoid::WGS_1984);
 
         $secondEccentricity = $referenceEllipsoidObject->getSecondEccentricity();
-        $this->assertEquals(0.082094437949696, $secondEccentricity, '', 0.1e-8);
+        $this->assertEquals(0.082094437949696, $secondEccentricity, '', 0.1e-6);
     }
 
     public function testGetSecondEccentricitySquared()
@@ -191,12 +191,12 @@ class ReferenceEllipsoidTest extends PHPUnit_Framework_TestCase
         $referenceEllipsoidObject = new Geodetic_ReferenceEllipsoid(Geodetic_ReferenceEllipsoid::MODIFIED_AIRY);
 
         $secondEccentricitySquared = $referenceEllipsoidObject->getSecondEccentricitySquared();
-        $this->assertEquals(0.0067153349101166, $secondEccentricitySquared, '', 0.1e-8);
+        $this->assertEquals(0.0067153349101166, $secondEccentricitySquared, '', 0.1e-6);
 
         $referenceEllipsoidObject->setEllipsoid(Geodetic_ReferenceEllipsoid::WGS_1984);
 
         $secondEccentricitySquared = $referenceEllipsoidObject->getSecondEccentricitySquared();
-        $this->assertEquals(0.0067394967422764, $secondEccentricitySquared, '', 0.1e-8);
+        $this->assertEquals(0.0067394967422764, $secondEccentricitySquared, '', 0.1e-6);
     }
 
     public function testGetRadiusOfCurvatureMeridian()
@@ -225,7 +225,7 @@ class ReferenceEllipsoidTest extends PHPUnit_Framework_TestCase
                 Geodetic_Angle::DEGREES,
                 Geodetic_Distance::KILOMETRES
             );
-            $this->assertEquals($expectedResult, $radiusOfCurvatureMeridian, '', 0.1e-8);
+            $this->assertEquals($expectedResult, $radiusOfCurvatureMeridian, '', 0.1e-6);
         }
 
     }
@@ -256,7 +256,7 @@ class ReferenceEllipsoidTest extends PHPUnit_Framework_TestCase
                 Geodetic_Angle::DEGREES,
                 Geodetic_Distance::KILOMETRES
             );
-            $this->assertEquals($expectedResult, $radiusOfCurvaturePrimeVertical, '', 0.1e-8);
+            $this->assertEquals($expectedResult, $radiusOfCurvaturePrimeVertical, '', 0.1e-6);
         }
 
     }
@@ -266,7 +266,7 @@ class ReferenceEllipsoidTest extends PHPUnit_Framework_TestCase
         $referenceEllipsoidObject = new Geodetic_ReferenceEllipsoid(Geodetic_ReferenceEllipsoid::WGS_1984);
 
         $meanRadius = $referenceEllipsoidObject->getMeanRadius();
-        $this->assertEquals(6371008.771400, $meanRadius, '', 0.1e-6);
+        $this->assertEquals(6371008.7714151, $meanRadius, '', 0.1e-6);
     }
 
     public function testGetAuthalicRadius()
@@ -274,7 +274,7 @@ class ReferenceEllipsoidTest extends PHPUnit_Framework_TestCase
         $referenceEllipsoidObject = new Geodetic_ReferenceEllipsoid(Geodetic_ReferenceEllipsoid::WGS_1984);
 
         $meanRadius = $referenceEllipsoidObject->getAuthalicRadius();
-        $this->assertEquals(6371007.1809034, $meanRadius, '', 0.1e-6);
+        $this->assertEquals(6371007.1809185, $meanRadius, '', 0.1e-6);
     }
 
     public function testGetVolumetricRadius()
@@ -282,7 +282,7 @@ class ReferenceEllipsoidTest extends PHPUnit_Framework_TestCase
         $referenceEllipsoidObject = new Geodetic_ReferenceEllipsoid(Geodetic_ReferenceEllipsoid::WGS_1984);
 
         $volumetricRadius = $referenceEllipsoidObject->getVolumetricRadius();
-        $this->assertEquals(6371000.789994, $volumetricRadius, '', 0.1e-6);
+        $this->assertEquals(6371000.7900092, $volumetricRadius, '', 0.1e-6);
     }
 
     public function testGetEllipsoidNames()
