@@ -59,6 +59,19 @@ class ReferenceEllipsoidTest extends PHPUnit_Framework_TestCase
         $referenceEllipsoidObject->setEllipsoid('Invalid');
     }
 
+    public function testGetEllipsoidId()
+    {
+        $referenceEllipsoidObject = new Geodetic_ReferenceEllipsoid(Geodetic_ReferenceEllipsoid::MODIFIED_AIRY);
+
+        $ellipsoidId = $referenceEllipsoidObject->getEllipsoidID();
+        $this->assertEquals('7002', $ellipsoidId);
+
+        $referenceEllipsoidObject->setEllipsoid(Geodetic_ReferenceEllipsoid::WGS_1984);
+
+        $ellipsoidId = $referenceEllipsoidObject->getEllipsoidID();
+        $this->assertEquals('7030', $ellipsoidId);
+    }
+
     public function testGetSemiMajorAxis()
     {
         $referenceEllipsoidObject = new Geodetic_ReferenceEllipsoid(Geodetic_ReferenceEllipsoid::MODIFIED_AIRY);
@@ -273,8 +286,8 @@ class ReferenceEllipsoidTest extends PHPUnit_Framework_TestCase
     {
         $referenceEllipsoidObject = new Geodetic_ReferenceEllipsoid(Geodetic_ReferenceEllipsoid::WGS_1984);
 
-        $meanRadius = $referenceEllipsoidObject->getAuthalicRadius();
-        $this->assertEquals(6371007.1809185, $meanRadius, '', 0.1e-6);
+        $authalicRadius = $referenceEllipsoidObject->getAuthalicRadius();
+        $this->assertEquals(6371007.1809185, $authalicRadius, '', 0.1e-6);
     }
 
     public function testGetVolumetricRadius()
@@ -283,6 +296,20 @@ class ReferenceEllipsoidTest extends PHPUnit_Framework_TestCase
 
         $volumetricRadius = $referenceEllipsoidObject->getVolumetricRadius();
         $this->assertEquals(6371000.7900092, $volumetricRadius, '', 0.1e-6);
+    }
+
+    public function testSphere()
+    {
+        $referenceEllipsoidObject = new Geodetic_ReferenceEllipsoid('AUTHALIC_SPHERE');
+
+        $referenceEllipsoidName = $referenceEllipsoidObject->getEllipsoidName();
+        $this->assertEquals('Authalic Sphere', $referenceEllipsoidName);
+
+        $flattening = $referenceEllipsoidObject->getFlattening();
+        $this->assertEquals(INF, $flattening);
+
+        $authalicRadius = $referenceEllipsoidObject->getAuthalicRadius();
+        $this->assertEquals(6371000.0, $authalicRadius, '', 0.1e-6);
     }
 
     public function testGetEllipsoidNames()
