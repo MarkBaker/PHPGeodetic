@@ -24,75 +24,89 @@
  */
 class Geodetic_ReferenceEllipsoid
 {
-    const AIRY_1830                      = 'AIRY_1830';
-    const AIRY_MODIFIED                  = 'AIRY_MODIFIED';
-    const MODIFIED_AIRY                  = 'AIRY_MODIFIED';
-    const AUSTRALIAN_1965                = 'AUSTRALIAN_1965';
-    const AUTHALIC_SPHERE                = 'AUTHALIC_SPHERE';
-    const ATS_1977                       = 'ATS_1977';
-    const BESSEL_1841                    = 'BESSEL_1841';
-    const BESSEL_MODIFIED                = 'BESSEL_MODIFIED';
-    const MODIFIED_BESSEL                = 'BESSEL_MODIFIED';
-    const BESSEL_1841_NAMIBIA            = 'BESSEL_1841_NAMIBIA';
-    const BESSEL_NAMIBIA_GLM             = 'BESSEL_NAMIBIA_GLM';
-    const CGCS_2000                      = 'CGCS_2000';
-    const CLARKE_1858                    = 'CLARKE_1858';
-    const CLARKE_1866                    = 'CLARKE_1866';
-    const CLARKE_1866_MICHIGAN           = 'CLARKE_1866_MICHIGAN';
-    const CLARKE_1880                    = 'CLARKE_1880';
-    const CLARKE_1880_ARC                = 'CLARKE_1880_ARC';
-    const CLARKE_1880_BENOIT             = 'CLARKE_1880_BENOIT';
-    const CLARKE_1880_IGN                = 'CLARKE_1880_IGN';
-    const CLARKE_1880_INTERNATIONAL_FOOT = 'CLARKE_1880_INTERNATIONAL_FOOT';
-    const CLARKE_1880_RGS                = 'CLARKE_1880_RGS';
-    const CLARKE_1880_SGA_1922           = 'CLARKE_1880_SGA_1922';
-    const DANISH_1876                    = 'DANISH_1876';
-    const EVEREST_1830                   = 'EVEREST_1830';
-    const EVEREST_MODIFIED               = 'EVEREST_MODIFIED';
-    const EVEREST_1830_ADJUSTMENT_1937   = 'EVEREST_1830_ADJUSTMENT_1937';
-    const EVEREST_1830_ADJUSTMENT_1962   = 'EVEREST_1830_ADJUSTMENT_1962';
-    const EVEREST_1830_ADJUSTMENT_1967   = 'EVEREST_1830_ADJUSTMENT_1967';
-    const EVEREST_1830_ADJUSTMENT_1975   = 'EVEREST_1830_ADJUSTMENT_1975';
-    const EVEREST_1830_RSO_1969          = 'EVEREST_1830_RSO_1969';
-    const FISHER_1960                    = 'FISHER_1960';
-    const FISHER_1968                    = 'FISHER_1968';
-    const FISCHER_MODIFIED               = 'FISCHER_MODIFIED';
-    const MODIFIED_FISCHER               = 'FISCHER_MODIFIED';
-    const GEM_10C                        = 'GEM_10C';
-    const GRS_1967                       = 'GRS_67';
-    const GRS_67                         = 'GRS_67';
-    const GRS_MODIFIED_1967              = 'GRS_MODIFIED_67';
-    const GRS_MODIFIED_67                = 'GRS_MODIFIED_67';
-    const GRS_1967_MODIFIED              = 'GRS_MODIFIED_67';
-    const GRS_67_MODIFIED                = 'GRS_MODIFIED_67';
-    const GRS_1980                       = 'GRS_80';
-    const GRS_80                         = 'GRS_80';
-    const HELMERT_1906                   = 'HELMERT_1906';
-    const HOUGH_1906                     = 'HOUGH_1906';
-    const HUGHES_1980                    = 'HUGHES_1980';
-    const IAG_1975                       = 'IAG_1975';
-    const INDONESIAN_1974                = 'INDONESIAN_1974';
-    const INTERNATIONAL_1924             = 'INTERNATIONAL_1924';
-    const INTERNATIONAL_1924_AUTHALIC    = 'INTERNATIONAL_1924_AUTHALIC';
-    const KRASSOWSKY_1940                = 'KRASSOWSKY_1940';
-    const NWL_9D                         = 'NWL_9D';
-    const OSU_86F                        = 'OSU_86F';
-    const OSU_91A                        = 'OSU_91A';
-    const PLESSIS_1817                   = 'PLESSIS_1817';
-    const POPULAR_VISUALISATION_SPHERE   = 'POPULAR_VISUALISATION_SPHERE';
-    const PZ_90                          = 'PZ_90';
-    const STRUVE_1860                    = 'STRUVE_1860';
-    const WAR_OFFICE                     = 'WAR_OFFICE';
-    const WGS_1960                       = 'WGS_60';
-    const WGS_60                         = 'WGS_60';
-    const WGS_1966                       = 'WGS_66';
-    const WGS_66                         = 'WGS_66';
-    const WGS_1972                       = 'WGS_72';
-    const WGS_72                         = 'WGS_72';
-    const WGS_1984                       = 'WGS_84';
-    const WGS_84                         = 'WGS_84';
-    const IERS_1989                      = 'IERS_1989';
-    const IERS_2003                      = 'IERS_2003';
+    const AIRY_1830                         = 'AIRY_1830';
+    const AIRY_MODIFIED                     = 'AIRY_MODIFIED';
+    const AIRY_MODIFIED_1849                = 'AIRY_MODIFIED_1849';
+    const MODIFIED_AIRY                     = 'AIRY_MODIFIED';
+    const ANS                               = 'AUSTRALIAN_1965';
+    const ATS_1977                          = 'ATS_1977';
+    const AUSTRALIAN_1965                   = 'AUSTRALIAN_1965';
+    const AUSTRALIAN_NATIONAL_SPHEROID      = 'AUSTRALIAN_1965';
+    const AUTHALIC_SPHERE                   = 'AUTHALIC_SPHERE';
+    const AVERAGE_TERRESTRIAL_SYSTEM_1977   = 'ATS_1977';
+    const BESSEL_1841                       = 'BESSEL_1841';
+    const BESSEL_MODIFIED                   = 'BESSEL_MODIFIED';
+    const MODIFIED_BESSEL                   = 'BESSEL_MODIFIED';
+    const BESSEL_1841_NAMIBIA               = 'BESSEL_1841_NAMIBIA';
+    const BESSEL_NAMIBIA_GLM                = 'BESSEL_NAMIBIA_GLM';
+    const CGCS_2000                         = 'CGCS_2000';
+    const CLARKE_1858                       = 'CLARKE_1858';
+    const CLARKE_1866                       = 'CLARKE_1866';
+    const CLARKE_1866_AUTHALIC_SPHERE       = 'CLARKE_1866_AUTHALIC_SPHERE';
+    const CLARKE_1866_MICHIGAN              = 'CLARKE_1866_MICHIGAN';
+    const CLARKE_1880                       = 'CLARKE_1880';
+    const CLARKE_MODIFIED_1880              = 'CLARKE_1880_RGS';
+    const CLARKE_1880_MODIFIED_SOUTH_AFRICA = 'CLARKE_1880_ARC';
+    const CLARKE_1880_ARC                   = 'CLARKE_1880_ARC';
+    const CLARKE_1880_BENOIT                = 'CLARKE_1880_BENOIT';
+    const CLARKE_1880_CAPE                  = 'CLARKE_1880_ARC';
+    const CLARKE_1880_IGN                   = 'CLARKE_1880_IGN';
+    const CLARKE_1880_INTERNATIONAL_FOOT    = 'CLARKE_1880_INTERNATIONAL_FOOT';
+    const CLARKE_1880_RGS                   = 'CLARKE_1880_RGS';
+    const CLARKE_1880_SGA_1922              = 'CLARKE_1880_SGA_1922';
+    const DANISH_1876                       = 'DANISH_1876';
+    const EVEREST_1830                      = 'EVEREST_1830';
+    const EVEREST_MODIFIED                  = 'EVEREST_MODIFIED';
+    const EVEREST_1830_ADJUSTMENT_1937      = 'EVEREST_1830_ADJUSTMENT_1937';
+    const EVEREST_1830_ADJUSTMENT_1962      = 'EVEREST_1830_ADJUSTMENT_1962';
+    const EVEREST_1830_ADJUSTMENT_1967      = 'EVEREST_1830_ADJUSTMENT_1967';
+    const EVEREST_1830_ADJUSTMENT_1975      = 'EVEREST_1830_ADJUSTMENT_1975';
+    const EVEREST_1830_RSO_1969             = 'EVEREST_1830_RSO_1969';
+    const FISHER_1960                       = 'FISHER_1960';
+    const FISHER_1968                       = 'FISHER_1968';
+    const FISCHER_MODIFIED                  = 'FISCHER_MODIFIED';
+    const MODIFIED_FISCHER                  = 'FISCHER_MODIFIED';
+    const GEM_10C                           = 'GEM_10C';
+    const GRS_1967                          = 'GRS_67';
+    const GRS_67                            = 'GRS_67';
+    const GRS_MODIFIED_1967                 = 'GRS_MODIFIED_67';
+    const GRS_MODIFIED_67                   = 'GRS_MODIFIED_67';
+    const GRS_1967_MODIFIED                 = 'GRS_MODIFIED_67';
+    const GRS_67_MODIFIED                   = 'GRS_MODIFIED_67';
+    const GRS_1980                          = 'GRS_80';
+    const GRS_80                            = 'GRS_80';
+    const HAYFORD_1909                      = 'INTERNATIONAL_1924';
+    const HD_1909                           = 'CGCS_2000';
+    const HELMERT_1906                      = 'HELMERT_1906';
+    const HOUGH_1906                        = 'HOUGH_1906';
+    const HUGHES_1980                       = 'HUGHES_1980';
+    const IAG_1975                          = 'IAG_1975';
+    const INDONESIAN_1974                   = 'INDONESIAN_1974';
+    const INTERNATIONAL_1924                = 'INTERNATIONAL_1924';
+    const INTERNATIONAL_1924_AUTHALIC       = 'INTERNATIONAL_1924_AUTHALIC';
+    const INTERNATIONAL_1967                = 'GRS_1967';
+    const INTERNATIONAL_1979                = 'GRS_1980';
+    const KRASSOWSKY_1940                   = 'KRASSOWSKY_1940';
+    const MCCAW_1924                        = 'WAR_OFFICE';
+    const NWL_9D                            = 'NWL_9D';
+    const NWL_10D                           = 'WGS_72';
+    const OSU_86F                           = 'OSU_86F';
+    const OSU_91A                           = 'OSU_91A';
+    const PLESSIS_1817                      = 'PLESSIS_1817';
+    const POPULAR_VISUALISATION_SPHERE      = 'POPULAR_VISUALISATION_SPHERE';
+    const PZ_90                             = 'PZ_90';
+    const STRUVE_1860                       = 'STRUVE_1860';
+    const WAR_OFFICE                        = 'WAR_OFFICE';
+    const WGS_1960                          = 'WGS_60';
+    const WGS_60                            = 'WGS_60';
+    const WGS_1966                          = 'WGS_66';
+    const WGS_66                            = 'WGS_66';
+    const WGS_1972                          = 'WGS_72';
+    const WGS_72                            = 'WGS_72';
+    const WGS_1984                          = 'WGS_84';
+    const WGS_84                            = 'WGS_84';
+    const IERS_1989                         = 'IERS_1989';
+    const IERS_2003                         = 'IERS_2003';
 
 
     /**
@@ -111,21 +125,21 @@ class Geodetic_ReferenceEllipsoid
         ),
         self::AIRY_MODIFIED => array(
             'name'               => 'Airy Modified (1849)',
-            'synonyms'           => 'MODIFIED_AIRY',
+            'synonyms'           => 'MODIFIED_AIRY,AIRY_MODIFIED_1849',
             'epsg_id'            => '7002',
             'semiMajorAxis'      => 6377340.189,
             'inverseFlattening'  => 299.3249646
         ),
         self::ATS_1977 => array(
             'name'               => 'Average Terrestrial System (1977)',
-            'synonyms'           => '',
+            'synonyms'           => 'AVERAGE_TERRESTRIAL_SYSTEM_1977',
             'epsg_id'            => '7041',
             'semiMajorAxis'      => 6378135.0,
             'inverseFlattening'  => 298.257
         ),
         self::AUSTRALIAN_1965 => array(
-            'name'               => 'Australian National (1965)',
-            'synonyms'           => '',
+            'name'               => 'Australian National Spheroid (1965)',
+            'synonyms'           => 'ANS,AUSTRALIAN_NATIONAL_SPHEROID',
             'epsg_id'            => '7003',
             'semiMajorAxis'      => 6378160.0,
             'inverseFlattening'  => 298.25
@@ -162,12 +176,12 @@ class Geodetic_ReferenceEllipsoid
             'name'               => 'Bessel - Namibia GLM',
             'synonyms'           => '',
             'epsg_id'            => '7046',
-            'semiMajorAxis'      => 6377397.155,
+            'semiMajorAxis'      => 6377483.865280419,
             'inverseFlattening'  => 299.1528128
         ),
         self::CGCS_2000 => array(
             'name'               => 'CGCS 2000',
-            'synonyms'           => '',
+            'synonyms'           => 'HD_1909',
             'epsg_id'            => '1024',
             'semiMajorAxis'      => 6378137.0,
             'inverseFlattening'  => 298.257222101
@@ -176,33 +190,40 @@ class Geodetic_ReferenceEllipsoid
             'name'               => 'Clarke (1858)',
             'synonyms'           => '',
             'epsg_id'            => '7007',
-            'semiMajorAxis'      => 6378293.64520876,
-            'inverseFlattening'  => 294.260676369261
+            'semiMajorAxis'      => 6378293.645208759,
+            'semiMinorAxis'      => 6356617.987679838
         ),
         self::CLARKE_1866 => array(
             'name'               => 'Clarke (1866)',
             'synonyms'           => '',
             'epsg_id'            => '7008',
             'semiMajorAxis'      => 6378206.4,
-            'inverseFlattening'  => 294.978698213898
+            'semiMinorAxis'      => 6356583.8
+        ),
+        self::CLARKE_1866_AUTHALIC_SPHERE => array(
+            'name'               => 'Clarke (1866) Authalic Sphere',
+            'synonyms'           => '',
+            'epsg_id'            => '7052',
+            'semiMajorAxis'      => 6370997.0,
+            'semiMinorAxis'      => 6370997.0
         ),
         self::CLARKE_1866_MICHIGAN => array(
             'name'               => 'Clarke (1866) - Michigan',
             'synonyms'           => '',
             'epsg_id'            => '7009',
-            'semiMajorAxis'      => 6378450.0475489,
-            'inverseFlattening'  => 294.978697164674
+            'semiMajorAxis'      => 6378450.047548895,
+            'semiMinorAxis'      => 6356826.621488444
         ),
         self::CLARKE_1880 => array(
             'name'               => 'Clarke (1880)',
             'synonyms'           => '',
             'epsg_id'            => '7034',
-            'semiMajorAxis'      => 6378249.14480801,
-            'inverseFlattening'  => 293.46630765563
+            'semiMajorAxis'      => 6378249.144808011,
+            'semiMinorAxis'      => 6356514.966204134
         ),
         self::CLARKE_1880_ARC => array(
             'name'               => 'Clarke (1880) - Arc',
-            'synonyms'           => '',
+            'synonyms'           => 'CLARKE_1880_CAPE,CLARKE_1880_MODIFIED_SOUTH_AFRICA',
             'epsg_id'            => '7013',
             'semiMajorAxis'      => 6378249.145,
             'inverseFlattening'  => 293.4663077
@@ -212,25 +233,25 @@ class Geodetic_ReferenceEllipsoid
             'synonyms'           => '',
             'epsg_id'            => '7010',
             'semiMajorAxis'      => 6378300.789,
-            'inverseFlattening'  => 293.466315538981
+            'semiMinorAxis'      => 6356566.435
         ),
         self::CLARKE_1880_IGN => array(
             'name'               => 'Clarke (1880) - IGN',
             'synonyms'           => '',
             'epsg_id'            => '7011',
             'semiMajorAxis'      => 6378249.2,
-            'inverseFlattening'  => 293.466021293627
+            'semiMinorAxis'      => 6356515.0
         ),
         self::CLARKE_1880_INTERNATIONAL_FOOT => array(
             'name'               => 'Clarke (1880) - International Foot',
             'synonyms'           => '',
             'epsg_id'            => '7055',
             'semiMajorAxis'      => 6378306.3696,
-            'inverseFlattening'  => 293.46630765563
+            'semiMinorAxis'      => 6356571.996
         ),
         self::CLARKE_1880_RGS => array(
             'name'               => 'Clarke (1880) - RGS',
-            'synonyms'           => '',
+            'synonyms'           => 'CLARKE_MODIFIED_1880',
             'epsg_id'            => '7012',
             'semiMajorAxis'      => 6378249.145,
             'inverseFlattening'  => 293.465
@@ -246,7 +267,7 @@ class Geodetic_ReferenceEllipsoid
             'name'               => 'Danish (1876)',
             'synonyms'           => '',
             'epsg_id'            => '7051',
-            'semiMajorAxis'      => 6377019.25666,
+            'semiMajorAxis'      => 6377019.27,
             'inverseFlattening'  => 300.0
         ),
         self::EVEREST_1830 => array(
@@ -254,7 +275,7 @@ class Geodetic_ReferenceEllipsoid
             'synonyms'           => '',
             'epsg_id'            => '7042',
             'semiMajorAxis'      => 6377299.36559538,
-            'inverseFlattening'  => 300.801725543361
+            'semiMinorAxis'      => 6356098.359005156
         ),
         self::EVEREST_MODIFIED => array(
             'name'               => 'Everest Modified (1830)',
@@ -328,7 +349,7 @@ class Geodetic_ReferenceEllipsoid
         ),
         self::GRS_67 => array(
             'name'               => 'Geodetic Reference System (1967)',
-            'synonyms'           => 'GRS_1967',
+            'synonyms'           => 'GRS_1967,INTERNATIONAL_1967',
             'epsg_id'            => '7036',
             'semiMajorAxis'      => 6378160.0,
             'inverseFlattening'  => 298.247167427
@@ -342,7 +363,7 @@ class Geodetic_ReferenceEllipsoid
         ),
         self::GRS_80 => array(
             'name'               => 'Geodetic Reference System (1980)',
-            'synonyms'           => 'GRS_1980',
+            'synonyms'           => 'GRS_1980,INTERNATIONAL_1979',
             'epsg_id'            => '7019',
             'semiMajorAxis'      => 6378137.0,
             'inverseFlattening'  => 298.257222101
@@ -366,7 +387,7 @@ class Geodetic_ReferenceEllipsoid
             'synonyms'           => '',
             'epsg_id'            => '7058',
             'semiMajorAxis'      => 6378273.0,
-            'inverseFlattening'  => 298.279411123064
+            'semiMinorAxis'      => 6356889.449
         ),
         self::IAG_1975 => array(
             'name'               => 'IAG (1975)',
@@ -384,7 +405,7 @@ class Geodetic_ReferenceEllipsoid
         ),
         self::INTERNATIONAL_1924 => array(
             'name'               => 'International (1924)',
-            'synonyms'           => '',
+            'synonyms'           => 'HAYFORD_1909',
             'epsg_id'            => '7022',
             'semiMajorAxis'      => 6378388.0,
             'inverseFlattening'  => 297.0
@@ -454,7 +475,7 @@ class Geodetic_ReferenceEllipsoid
         ),
         self::WAR_OFFICE => array(
             'name'               => 'War Office',
-            'synonyms'           => '',
+            'synonyms'           => 'MCCAW_1924',
             'epsg_id'            => '7029',
             'semiMajorAxis'      => 6378300.0,
             'inverseFlattening'  => 296.0
@@ -477,7 +498,7 @@ class Geodetic_ReferenceEllipsoid
         ),
         self::WGS_72 => array(
             'name'               => 'World Geodetic System (1972)',
-            'synonyms'           => 'WGS_1972',
+            'synonyms'           => 'WGS_1972,NWL_10D',
             'epsg_id'            => '7043',
             'semiMajorAxis'      => 6378135.0,
             'inverseFlattening'  => 298.26
