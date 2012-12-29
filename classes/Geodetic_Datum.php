@@ -196,7 +196,7 @@ class Geodetic_Datum
             'synonyms'            => 'WGS1972',
             'epsg_id'             => '4322',
             'esri_name'           => 'D_WGS_1972',
-            'defaultRegion'       => 'Global',
+            'defaultRegion'       => 'Europe',
             'referenceEllipsoid'  => Geodetic_ReferenceEllipsoid::WGS_72,
             'regions'             => array(
                 'Europe' => array(
