@@ -96,7 +96,10 @@ class Geodetic_UTM
     /**
      * Create a new UTM
      *
-     *  @param     Geodetic_XyzFormat_Interface    $xyzCoordinates    The UTM Northing, Easting, and Zone values
+     *  @param     integer|float    $northing         The UTM Northing value
+     *  @param     integer|float    $easting          The UTM Easting value
+     *  @param     string           $latitudeZone     The UTM Latitude Zone value
+     *  @param     string           $longitudeZone    The UTM Longitude Zone value
      *  @throws    Geodetic_Exception
      */
     function __construct($northing = NULL,
