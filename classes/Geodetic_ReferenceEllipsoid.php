@@ -2,25 +2,25 @@
 
 /**
  *  In geodesy, a reference ellipsoid is a mathematically-defined surface that approximates the geoid, the
- *  truer figure of the Earth. Because of their relative simplicity, reference ellipsoids are used as a
- *  preferred surface on which geodetic network computations are performed and point coordinates such as
- *  latitude, longitude, and elevation are defined.
+ *      truer figure of the Earth. Because of their relative simplicity, reference ellipsoids are used as a
+ *      preferred surface on which geodetic network computations are performed and point coordinates such as
+ *      latitude, longitude, and elevation are defined.
  *
  *  The shape of an ellipsoid is determined by the shape parameters of that ellipse which generates the
- *  ellipsoid when it is rotated about its minor axis. The semi-major axis of the ellipse (a) is identified as
- *  the equatorial radius of the ellipsoid: the semi-minor axis of the ellipse (b) is identified with the
- *  polar distances (from the centre). These two lengths completely specify the shape of the ellipsoid but in
- *  practice geodesy publications classify reference ellipsoids by giving the semi-major axis and the inverse
- *  flattening (1/f). The flattening (f) is simply a measure of how much the symmetry axis is compressed
- *  relative to the equatorial radius.
+ *      ellipsoid when it is rotated about its minor axis. The semi-major axis of the ellipse (a) is identified
+ *      as the equatorial radius of the ellipsoid: the semi-minor axis of the ellipse (b) is identified with the
+ *      polar distances (from the centre). These two lengths completely specify the shape of the ellipsoid but in
+ *      practice geodesy publications classify reference ellipsoids by giving the semi-major axis and the inverse
+ *      flattening (1/f). The flattening (f) is simply a measure of how much the symmetry axis is compressed
+ *      relative to the equatorial radius.
  *
  *  Traditional reference ellipsoids are defined regionally and therefore non-geocentric.
  *
- *  -    http://en.wikipedia.org/wiki/Reference_ellipsoid
+ *      -    http://en.wikipedia.org/wiki/Reference_ellipsoid
  *
- *  @package Geodetic
- *  @copyright  Copyright (c) 2012 Mark Baker (https://github.com/MarkBaker/PHPGeodetic)
- *  @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ * @package Geodetic
+ * @copyright  Copyright (c) 2012 Mark Baker (https://github.com/MarkBaker/PHPGeodetic)
+ * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
  */
 class Geodetic_ReferenceEllipsoid
 {
@@ -110,10 +110,10 @@ class Geodetic_ReferenceEllipsoid
 
 
     /**
-     *  Values for all pre-defined Reference Ellipsoids
+     * Values for all pre-defined Reference Ellipsoids
      *
-     *  @access private
-     *  @var    mixed[]
+     * @access private
+     * @var    mixed[]
      */
     private static $_ellipsoidData = array(
         self::AIRY_1830 => array(
@@ -529,36 +529,100 @@ class Geodetic_ReferenceEllipsoid
     );
 
 
+    /**
+     * Flag indicating whether secondary attributes need calculating
+     *
+     * @access protected
+     * @var    boolean
+     */
     protected $_dirty = TRUE;
 
+    /**
+     * Reference code for this ellipsoid
+     *
+     * @access protected
+     * @var    string
+     */
     protected $_ellipsoidReference;
+
+    /**
+     * Name of this ellipsoid
+     *
+     * @access protected
+     * @var    string
+     */
     protected $_ellipsoidName;
+
+    /**
+     * EPSG ID value for this ellipsoid
+     *
+     * @access protected
+     * @var    string
+     */
     protected $_epsgId;
 
+    /**
+     * The semi-major (Equatorial) axis of this ellipsoid
+     *
+     * @access protected
+     * @var    float
+     */
     protected $_semiMajorAxis;
 
+    /**
+     * The semi-minor (Polar) axis of this ellipsoid
+     *
+     * @access protected
+     * @var    float
+     */
     protected $_semiMinorAxis;
+
+    /**
+     * The Inverse Flattening of this ellipsoid
+     *
+     * @access protected
+     * @var    float
+     */
     protected $_inverseFlattening;
 
+    /**
+     * The First Eccentricity Squared of this ellipsoid
+     *
+     * @access protected
+     * @var    float
+     */
     protected $_firstEccentricitySquared;
+
+    /**
+     * The Second Eccentricity Squared of this ellipsoid
+     *
+     * @access protected
+     * @var    float
+     */
     protected $_secondEccentricitySquared;
 
 
-    private static function _sinSquared($xValue) {
-        return sin($xValue) * sin($xValue);
+    /**
+     * Helper method to return the sine squared value
+     *
+     * @param     int|float    $value    The value on which to perform the calculation
+     * @return    float        The sine squared result
+     */
+    private static function _sinSquared($value) {
+        return sin($value) * sin($value);
     }
 
     /**
-     *  Calculate the secondary properties for this Reference Ellipsoid object
-     *  We calculate the Semi-Minor (Polar) Axis if it han't been provided,
-     *      using the Semi-Major (Equatorial) Axis and the Inverse Flattening values
-     *  We calculate the Inverse Flattening if it han't been provided,
-     *      using the Semi-Major (Equatorial) and the Semi-Minor (Polar) Axis values
-     *  We also calculate the First and Second Eccentricity Squared values
+     * Calculate the secondary properties for this Reference Ellipsoid object
+     * We calculate the Semi-Minor (Polar) Axis if it han't been provided,
+     * using the Semi-Major (Equatorial) Axis and the Inverse Flattening values
+     * We calculate the Inverse Flattening if it han't been provided,
+     * using the Semi-Major (Equatorial) and the Semi-Minor (Polar) Axis values
+     * We also calculate the First and Second Eccentricity Squared values
      *
-     *  @access    private
-     *  @return    void
-     *  @throws    Geodetic_Exception
+     * @access    private
+     * @return    void
+     * @throws    Geodetic_Exception
      */
     private function _calculateDerivedParameters()
     {
@@ -589,11 +653,11 @@ class Geodetic_ReferenceEllipsoid
 
 
     /**
-     *  Create a new Reference Ellipsoid object
+     * Create a new Reference Ellipsoid object
      *
-     *  @param     string    $ellipsoid    The name of the ellipsoid to use
-     *  @return    void
-     *  @throws    Geodetic_Exception
+     * @param     string    $ellipsoid    The name of the ellipsoid to use
+     * @return    void
+     * @throws    Geodetic_Exception
      */
     function __construct($ellipsoid = Geodetic_ReferenceEllipsoid::WGS_1984)
     {
@@ -603,9 +667,9 @@ class Geodetic_ReferenceEllipsoid
 
 
     /**
-     *  Get the internal reference name of the Reference Ellipsoid used for this object
+     * Get the internal reference name of the Reference Ellipsoid used for this object
      *
-     *  @return    string    The name of this ellipsoid
+     * @return    string    The name of this ellipsoid
      */
     public function getEllipsoidReference()
     {
@@ -613,9 +677,9 @@ class Geodetic_ReferenceEllipsoid
     }   //  getEllipsoidName()
 
     /**
-     *  Get the descriptive name of the Reference Ellipsoid used for this object
+     * Get the descriptive name of the Reference Ellipsoid used for this object
      *
-     *  @return    string    The name of this ellipsoid
+     * @return    string    The name of this ellipsoid
      */
     public function getEllipsoidName()
     {
@@ -623,9 +687,9 @@ class Geodetic_ReferenceEllipsoid
     }   //  getEllipsoidName()
 
     /**
-     *  Get the EPSG ID of the Reference Ellipsoid used for this object
+     * Get the EPSG ID of the Reference Ellipsoid used for this object
      *
-     *  @return    string    The name of this ellipsoid
+     * @return    string    The name of this ellipsoid
      */
     public function getEllipsoidID()
     {
@@ -658,11 +722,11 @@ class Geodetic_ReferenceEllipsoid
     }
 
     /**
-     *  Set the Data for this Reference Ellipsoid object
+     * Set the Data for this Reference Ellipsoid object
      *
-     *  @param     string    $ellipsoidName    The name of the ellipsoid to use
-     *  @return    Geodetic_ReferenceEllipsoid
-     *  @throws    Geodetic_Exception
+     * @param     string    $ellipsoidName    The name of the ellipsoid to use
+     * @return    Geodetic_ReferenceEllipsoid
+     * @throws    Geodetic_Exception
      */
     public function setEllipsoid($ellipsoidName = NULL)
     {
@@ -692,12 +756,12 @@ class Geodetic_ReferenceEllipsoid
     }   //  public function setEllipsoid()
 
     /**
-     *  Set the Semi-Major (Equatorial) Axis for this Reference Ellipsoid object
+     * Set the Semi-Major (Equatorial) Axis for this Reference Ellipsoid object
      *
-     *  @param     integer|float    $semiMajorAxis    Length of the Semi-Major (Equatorial) Axis
-     *                                                    to use for this ellipsoid
-     *  @param     string           $uom              Unit of Measure for this axis length
-     *  @throws    Geodetic_Exception
+     * @param     integer|float    $semiMajorAxis    Length of the Semi-Major (Equatorial) Axis
+     *                                                   to use for this ellipsoid
+     * @param     string           $uom              Unit of Measure for this axis length
+     * @throws    Geodetic_Exception
      */
     public function setSemiMajorAxis($semiMajorAxis = NULL,
                                      $uom = Geodetic_Distance::METRES)
@@ -715,11 +779,11 @@ class Geodetic_ReferenceEllipsoid
     }
 
     /**
-     *  Get the Semi-Major (Equatorial) Axis for this Reference Ellipsoid object
+     * Get the Semi-Major (Equatorial) Axis for this Reference Ellipsoid object
      *
-     *  @param     string    $uom    Unit of Measure for the returned value
-     *  @return    float     Length of the Semi-Major (Equatorial) Axis for this ellipsoid
-     *  @throws    Geodetic_Exception
+     * @param     string    $uom    Unit of Measure for the returned value
+     * @return    float     Length of the Semi-Major (Equatorial) Axis for this ellipsoid
+     * @throws    Geodetic_Exception
      */
     public function getSemiMajorAxis($uom = Geodetic_Distance::METRES)
     {
@@ -727,14 +791,14 @@ class Geodetic_ReferenceEllipsoid
     }
 
     /**
-     *  Set the Semi-Minor (Polar) Axis for this Reference Ellipsoid object
-     *  This will nullify the Inverse Flattening,
-     *      and force a recalculation from the Semi-Major (Equatorial) axis and the Semi-Minor (Polar) Axis
+     * Set the Semi-Minor (Polar) Axis for this Reference Ellipsoid object
+     * This will nullify the Inverse Flattening,
+     * and force a recalculation from the Semi-Major (Equatorial) axis and the Semi-Minor (Polar) Axis
      *
-     *  @param     integer|float    $semiMinorAxis   Length of the Semi-Minor (Polar) Axis
-     *                                                   to use for this ellipsoid
-     *  @param     string           $uom             Unit of Measure for this axis length
-     *  @throws    Geodetic_Exception
+     * @param     integer|float    $semiMinorAxis   Length of the Semi-Minor (Polar) Axis
+     *                                                  to use for this ellipsoid
+     * @param     string           $uom             Unit of Measure for this axis length
+     * @throws    Geodetic_Exception
      */
     public function setSemiMinorAxis($semiMinorAxis = NULL,
                                      $uom = Geodetic_Distance::METRES)
@@ -753,11 +817,11 @@ class Geodetic_ReferenceEllipsoid
     }
 
     /**
-     *  Get the Semi-Minor (Polar) Axis for this Reference Ellipsoid object
+     * Get the Semi-Minor (Polar) Axis for this Reference Ellipsoid object
      *
-     *  @param     string    $uom    Unit of Measure for the returned value
-     *  @return    float     Length of the Semi-Minor (Polar) Axis for this ellipsoid
-     *  @throws    Geodetic_Exception
+     * @param     string    $uom    Unit of Measure for the returned value
+     * @return    float     Length of the Semi-Minor (Polar) Axis for this ellipsoid
+     * @throws    Geodetic_Exception
      */
     public function getSemiMinorAxis($uom = Geodetic_Distance::METRES)
     {
@@ -765,12 +829,12 @@ class Geodetic_ReferenceEllipsoid
     }
 
     /**
-     *  Set the Inverse Flattening for this Reference Ellipsoid object
-     *  This will nullify the Semi-Minor (Polar) Axis,
-     *      and force a recalculation from the Semi-Major (Equatorial) axis and the specified flattening
+     * Set the Inverse Flattening for this Reference Ellipsoid object
+     * This will nullify the Semi-Minor (Polar) Axis,
+     * and force a recalculation from the Semi-Major (Equatorial) axis and the specified flattening
      *
-     *  @param     integer|float    $inverseFlattening    Inverse Flattening to use for this ellipsoid
-     *  @throws    Geodetic_Exception
+     * @param     integer|float    $inverseFlattening    Inverse Flattening to use for this ellipsoid
+     * @throws    Geodetic_Exception
      */
     public function setInverseFlattening($inverseFlattening = NULL)
     {
@@ -788,10 +852,10 @@ class Geodetic_ReferenceEllipsoid
     }
 
     /**
-     *  Get the Inverse Flattening for this Reference Ellipsoid object
+     * Get the Inverse Flattening for this Reference Ellipsoid object
      *
-     *  @return    float    Inverse Flattening for this ellipsoid
-     *  @throws    Geodetic_Exception
+     * @return    float    Inverse Flattening for this ellipsoid
+     * @throws    Geodetic_Exception
      */
     public function getInverseFlattening()
     {
@@ -802,12 +866,12 @@ class Geodetic_ReferenceEllipsoid
     }
 
     /**
-     *  Set the Flattening for this Reference Ellipsoid object
-     *  This will nullify the Semi-Minor (Polar) Axis,
-     *      and force a recalculation from the Semi-Major (Equatorial) axis and the specified flattening
+     * Set the Flattening for this Reference Ellipsoid object
+     * This will nullify the Semi-Minor (Polar) Axis,
+     * and force a recalculation from the Semi-Major (Equatorial) axis and the specified flattening
      *
-     *  @param     integer|float    $flattening    Flattening to use for this ellipsoid
-     *  @throws    Geodetic_Exception
+     * @param     integer|float    $flattening    Flattening to use for this ellipsoid
+     * @throws    Geodetic_Exception
      */
     public function setFlattening($flattening = NULL)
     {
@@ -825,10 +889,10 @@ class Geodetic_ReferenceEllipsoid
     }
 
     /**
-     *  Get the Flattening for this Reference Ellipsoid object
+     * Get the Flattening for this Reference Ellipsoid object
      *
-     *  @return    float    Flattening for this ellipsoid
-     *  @throws    Geodetic_Exception
+     * @return    float    Flattening for this ellipsoid
+     * @throws    Geodetic_Exception
      */
     public function getFlattening()
     {
@@ -841,10 +905,10 @@ class Geodetic_ReferenceEllipsoid
     }
 
     /**
-     *  Get the First Eccentricity for this Reference Ellipsoid object
+     * Get the First Eccentricity for this Reference Ellipsoid object
      *
-     *  @return    float    First Eccentricity for this ellipsoid
-     *  @throws    Geodetic_Exception
+     * @return    float    First Eccentricity for this ellipsoid
+     * @throws    Geodetic_Exception
      */
     public function getFirstEccentricity()
     {
@@ -855,10 +919,10 @@ class Geodetic_ReferenceEllipsoid
     }
 
     /**
-     *  Get the First Eccentricity Squared for this Reference Ellipsoid object
+     * Get the First Eccentricity Squared for this Reference Ellipsoid object
      *
-     *  @return    float    First Eccentricity Squared for this ellipsoid
-     *  @throws    Geodetic_Exception
+     * @return    float    First Eccentricity Squared for this ellipsoid
+     * @throws    Geodetic_Exception
      */
     public function getFirstEccentricitySquared()
     {
@@ -869,10 +933,10 @@ class Geodetic_ReferenceEllipsoid
     }
 
     /**
-     *  Get the Second Eccentricity for this Reference Ellipsoid object
+     * Get the Second Eccentricity for this Reference Ellipsoid object
      *
-     *  @return    float    Second Eccentricity for this ellipsoid
-     *  @throws    Geodetic_Exception
+     * @return    float    Second Eccentricity for this ellipsoid
+     * @throws    Geodetic_Exception
      */
     public function getSecondEccentricity()
     {
@@ -883,10 +947,10 @@ class Geodetic_ReferenceEllipsoid
     }
 
     /**
-     *  Get the Second Eccentricity Squared for this Reference Ellipsoid object
+     * Get the Second Eccentricity Squared for this Reference Ellipsoid object
      *
-     *  @return    float    Second Eccentricity Squared for this ellipsoid
-     *  @throws    Geodetic_Exception
+     * @return    float    Second Eccentricity Squared for this ellipsoid
+     * @throws    Geodetic_Exception
      */
     public function getSecondEccentricitySquared()
     {
@@ -897,11 +961,11 @@ class Geodetic_ReferenceEllipsoid
     }
 
     /**
-     *  Get the Mean Radius this Reference Ellipsoid object
+     * Get the Mean Radius this Reference Ellipsoid object
      *
-     *  @param     string    $uom    Unit of Measure for the returned value
-     *  @return    float     Mean Radius for this ellipsoid
-     *  @throws    Geodetic_Exception
+     * @param     string    $uom    Unit of Measure for the returned value
+     * @return    float     Mean Radius for this ellipsoid
+     * @throws    Geodetic_Exception
      */
     public function getMeanRadius($uom = Geodetic_Distance::METRES)
     {
@@ -915,14 +979,14 @@ class Geodetic_ReferenceEllipsoid
     }
 
     /**
-     *  Get the Authalic Radius this Reference Ellipsoid object
+     * Get the Authalic Radius this Reference Ellipsoid object
      *
-     *  The authalic ("equal area") radius is the radius of a hypothetical perfect sphere which has the same surface area
-     *      as the reference ellipsoid.
+     * The authalic ("equal area") radius is the radius of a hypothetical perfect sphere which has the same surface area
+     * as the reference ellipsoid.
      *
-     *  @param     string    $uom    Unit of Measure for the returned value
-     *  @return    float     Authalic Radius for this ellipsoid
-     *  @throws    Geodetic_Exception
+     * @param     string    $uom    Unit of Measure for the returned value
+     * @return    float     Authalic Radius for this ellipsoid
+     * @throws    Geodetic_Exception
      */
     public function getAuthalicRadius($uom = Geodetic_Distance::METRES)
     {
@@ -949,13 +1013,13 @@ class Geodetic_ReferenceEllipsoid
     }
 
     /**
-     *  Get the Volumetric Radius this Reference Ellipsoid object
+     * Get the Volumetric Radius this Reference Ellipsoid object
      *
-     *  This is the radius of a sphere of equal volume to the ellipsoid
+     * This is the radius of a sphere of equal volume to the ellipsoid
      *
-     *  @param     string    $uom    Unit of Measure for the returned value
-     *  @return    float     Volumetric Radius for this ellipsoid
-     *  @throws    Geodetic_Exception
+     * @param     string    $uom    Unit of Measure for the returned value
+     * @return    float     Volumetric Radius for this ellipsoid
+     * @throws    Geodetic_Exception
      */
     public function getVolumetricRadius($uom = Geodetic_Distance::METRES)
     {
@@ -973,19 +1037,19 @@ class Geodetic_ReferenceEllipsoid
     }
 
     /**
-     *  Get the Radius of Curvature along the Meridian at a specified latitude
-     *      for this Reference Ellipsoid object
+     * Get the Radius of Curvature along the Meridian at a specified latitude
+     * for this Reference Ellipsoid object
      *
-     *  The formula used here is from http://www.epsg.org/guides/docs/G7-2.pdf
+     * The formula used here is from http://www.epsg.org/guides/docs/G7-2.pdf
      *
-     *  @param     integer|float    $latitude    Angle of Latitude for the Radius of Curvature,
-     *                                               positive when to the north of the equator, negative when to the south
-     *  @param     string           $degRad      Indicating whether the Angle of Latitude is being specified
-     *                                               in degrees or radians
-     *  @param     string           $uom         Unit of Measure for the returned value
-     *  @return    float            The Radius of Curvature along the Meridian
-     *                                  at the specified latitude for this ellipsoid
-     *  @throws    Geodetic_Exception
+     * @param     integer|float    $latitude    Angle of Latitude for the Radius of Curvature,
+     *                                              positive when to the north of the equator, negative when to the south
+     * @param     string           $degrad      Indicating whether the Angle of Latitude is being specified
+     *                                              in degrees or radians
+     * @param     string           $uom         Unit of Measure for the returned value
+     * @return    float            The Radius of Curvature along the Meridian
+     *                                 at the specified latitude for this ellipsoid
+     * @throws    Geodetic_Exception
      */
     public function getRadiusOfCurvatureMeridian($latitude = NULL,
                                                  $degrad = Geodetic_Angle::DEGREES,
@@ -1003,19 +1067,19 @@ class Geodetic_ReferenceEllipsoid
     }
 
     /**
-     *  Get the Radius of Curvature along the Prime Vertical at a specified latitude
-     *      for this Reference Ellipsoid object
+     * Get the Radius of Curvature along the Prime Vertical at a specified latitude
+     * for this Reference Ellipsoid object
      *
-     *  The formula used here is from http://www.epsg.org/guides/docs/G7-2.pdf
+     * The formula used here is from http://www.epsg.org/guides/docs/G7-2.pdf
      *
-     *  @param     integer|float    $latitude    Angle of Latitude for the Radius of Curvature,
-     *                                               positive when to the north of the equator, negative when to the south
-     *  @param     string           $degRad      Indicating whether the Angle of Latitude is being specified
-     *                                               in degrees or radians
-     *  @param     string           $uom         Unit of Measure for the returned value
-     *  @return    float            The Radius of Curvature along the Prime Vertical at the specified latitude
-     *                                  for this ellipsoid
-     *  @throws    Geodetic_Exception
+     * @param     integer|float    $latitude    Angle of Latitude for the Radius of Curvature,
+     *                                              positive when to the north of the equator, negative when to the south
+     * @param     string           $degrad      Indicating whether the Angle of Latitude is being specified
+     *                                              in degrees or radians
+     * @param     string           $uom         Unit of Measure for the returned value
+     * @return    float            The Radius of Curvature along the Prime Vertical at the specified latitude
+     *                                 for this ellipsoid
+     * @throws    Geodetic_Exception
      */
     public function getRadiusOfCurvaturePrimeVertical($latitude = NULL,
                                                       $degrad = Geodetic_Angle::DEGREES,
@@ -1033,12 +1097,12 @@ class Geodetic_ReferenceEllipsoid
     }
 
     /**
-     *  Get a list of the supported Reference Ellipsoid names
+     * Get a list of the supported Reference Ellipsoid names
      *
-     *  @return    string[]    An array listing the permitted Reference Ellipsoid names
-     *                         The array value is the descriptive name that can be passed to the constructor,
-     *                             or to the setEllipsoid() method, while the key is an internal constant value
-     *                             for that ellipsoid.
+     * @return    string[]    An array listing the permitted Reference Ellipsoid names
+     *                        The array value is the descriptive name that can be passed to the constructor,
+     *                            or to the setEllipsoid() method, while the key is an internal constant value
+     *                            for that ellipsoid.
      */
     public static function getEllipsoidNames()
     {

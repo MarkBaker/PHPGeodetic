@@ -1,38 +1,38 @@
 <?php
 
 /**
- *  Translation Vectors.
+ * Translation Vectors.
  *
- *  @package Geodetic
- *  @copyright  Copyright (c) 2012 Mark Baker (https://github.com/MarkBaker/PHPGeodetic)
- *  @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ * @package Geodetic
+ * @copyright  Copyright (c) 2012 Mark Baker (https://github.com/MarkBaker/PHPGeodetic)
+ * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
  */
 class Geodetic_TranslationVectors
 {
     /**
-     *  The Translation in the X-Plane value of this TranslationVectors object.
-     *  This value will always be maintained internally in meters (m)
+     * The Translation in the X-Plane value of this TranslationVectors object.
+     * This value will always be maintained internally in meters (m)
      *
-     *  @access protected
-     *  @var Geodetic_Distance
+     * @access protected
+     * @var Geodetic_Distance
      */
     protected $_xVector;
 
     /**
-     *  The Translation in the Y-Plane value of this TranslationVectors object.
-     *  This value will always be maintained internally in meters (m)
+     * The Translation in the Y-Plane value of this TranslationVectors object.
+     * This value will always be maintained internally in meters (m)
      *
-     *  @access protected
-     *  @var Geodetic_Distance
+     * @access protected
+     * @var Geodetic_Distance
      */
     protected $_yVector;
 
     /**
-     *  The Translation in the Z-Plane value of this TranslationVectors object.
-     *  This value will always be maintained internally in meters (m)
+     * The Translation in the Z-Plane value of this TranslationVectors object.
+     * This value will always be maintained internally in meters (m)
      *
-     *  @access protected
-     *  @var Geodetic_Distance
+     * @access protected
+     * @var Geodetic_Distance
      */
     protected $_zVector;
 
@@ -40,8 +40,8 @@ class Geodetic_TranslationVectors
     /**
      * Create a new Translation Vector
      *
-     *  @param     Geodetic_XyzFormat_Interface    $xyzCoordinates    The Translation Vector values
-     *  @throws    Geodetic_Exception
+     * @param     Geodetic_XyzFormat_Interface    $xyzCoordinates    The Translation Vector values
+     * @throws    Geodetic_Exception
      */
     function __construct(Geodetic_XyzFormat_Interface $xyzCoordinates = NULL)
     {
@@ -60,11 +60,11 @@ class Geodetic_TranslationVectors
 
 
     /**
-     *  Set the Translation Vector in the X-plane
+     * Set the Translation Vector in the X-plane
      *
-     *  @param     Geodetic_Distance    $xDistance    The Translation Vector in the X-plane
-     *  @return    Geodetic_TranslationVectors
-     *  @throws    Geodetic_Exception
+     * @param     Geodetic_Distance    $xDistance    The Translation Vector in the X-plane
+     * @return    Geodetic_TranslationVectors
+     * @throws    Geodetic_Exception
      */
     public function setX(Geodetic_Distance $xDistance = NULL)
     {
@@ -77,10 +77,10 @@ class Geodetic_TranslationVectors
     }
 
     /**
-     *  Get the Translation Vector in the X-plane
+     * Get the Translation Vector in the X-plane
      *
-     *  @return    Geodetic_Distance    The Translation Vector in the X-plane
-     *  @throws    Geodetic_Exception
+     * @return    Geodetic_Distance    The Translation Vector in the X-plane
+     * @throws    Geodetic_Exception
      */
     public function getX()
     {
@@ -88,11 +88,11 @@ class Geodetic_TranslationVectors
     }
 
     /**
-     *  Set the Translation Vector in the Y-plane
+     * Set the Translation Vector in the Y-plane
      *
-     *  @param     Geodetic_Distance    $yDistance    The Translation Vector in the Y-plane
-     *  @return    Geodetic_TranslationVectors
-     *  @throws    Geodetic_Exception
+     * @param     Geodetic_Distance    $yDistance    The Translation Vector in the Y-plane
+     * @return    Geodetic_TranslationVectors
+     * @throws    Geodetic_Exception
      */
     public function setY(Geodetic_Distance $yDistance = NULL)
     {
@@ -105,10 +105,10 @@ class Geodetic_TranslationVectors
     }
 
     /**
-     *  Get the Translation Vector in the Y-plane
+     * Get the Translation Vector in the Y-plane
      *
-     *  @return    Geodetic_Distance    The Translation Vector in the Y-plane
-     *  @throws    Geodetic_Exception
+     * @return    Geodetic_Distance    The Translation Vector in the Y-plane
+     * @throws    Geodetic_Exception
      */
     public function getY()
     {
@@ -116,11 +116,11 @@ class Geodetic_TranslationVectors
     }
 
     /**
-     *  Set the Translation Vector in the Z-plane
+     * Set the Translation Vector in the Z-plane
      *
-     *  @param     Geodetic_Distance    $zDistance    The Translation Vector in the Z-plane
-     *  @return    Geodetic_TranslationVectors
-     *  @throws    Geodetic_Exception
+     * @param     Geodetic_Distance    $zDistance    The Translation Vector in the Z-plane
+     * @return    Geodetic_TranslationVectors
+     * @throws    Geodetic_Exception
      */
     public function setZ(Geodetic_Distance $zDistance = NULL)
     {
@@ -133,10 +133,10 @@ class Geodetic_TranslationVectors
     }
 
     /**
-     *  Get the Translation Vector in the Z-plane
+     * Get the Translation Vector in the Z-plane
      *
-     *  @return    Geodetic_Distance    The Translation Vector in the Z-plane
-     *  @throws    Geodetic_Exception
+     * @return    Geodetic_Distance    The Translation Vector in the Z-plane
+     * @throws    Geodetic_Exception
      */
     public function getZ()
     {

@@ -1,47 +1,47 @@
 <?php
 
 /**
- *  A set of Bursa-Wolf Parameters for a Helmert Translation.
+ * A set of Bursa-Wolf Parameters for a Helmert Translation.
  *
- *  @package Geodetic
- *  @copyright  Copyright (c) 2012 Mark Baker (https://github.com/MarkBaker/PHPGeodetic)
- *  @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ * @package Geodetic
+ * @copyright  Copyright (c) 2012 Mark Baker (https://github.com/MarkBaker/PHPGeodetic)
+ * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
  */
 class Geodetic_BursaWolfParameters
 {
 
     /**
-     *  The Rotation Matrix for this set of Bursa-Wolf Parameters.
+     * The Rotation Matrix for this set of Bursa-Wolf Parameters.
      *
-     *  @access protected
-     *  @var Geodetic_RotationMatrix
+     * @access protected
+     * @var Geodetic_RotationMatrix
      */
     protected $_rotationMatrix;
 
     /**
-     *  The Translation Vectors for this set of Bursa-Wolf Parameters.
+     * The Translation Vectors for this set of Bursa-Wolf Parameters.
      *
-     *  @access protected
-     *  @var Geodetic_TranslationVectors
+     * @access protected
+     * @var Geodetic_TranslationVectors
      */
     protected $_translationVectors;
 
     /**
-     *  The Scale Factor value of this Bursa-Wolf Parameters object.
+     * The Scale Factor value of this Bursa-Wolf Parameters object.
      *
-     *  @access protected
-     *  @var float
+     * @access protected
+     * @var float
      */
     protected $_scaleFactor = 0.0;
 
 
     /**
-     *  Create a new object for Bursa-Wolf Parameters
+     * Create a new object for Bursa-Wolf Parameters
      *
-     *  @param     Geodetic_RotationMatrix        $rotationMatrix        Rotation Matrix object
-     *  @param     Geodetic_TranslationVectors    $translationVectors    Translation Vectors object
-     *  @param     integer|float                  $scaleFactor           Scale Factor value
-     *  @throws    Geodetic_Exception
+     * @param     Geodetic_RotationMatrix        $rotationMatrix        Rotation Matrix object
+     * @param     Geodetic_TranslationVectors    $translationVectors    Translation Vectors object
+     * @param     integer|float                  $scaleFactor           Scale Factor value
+     * @throws    Geodetic_Exception
      */
     function __construct(Geodetic_RotationMatrix $rotationMatrix = NULL,
                          Geodetic_TranslationVectors $translationVectors = NULL,
@@ -59,11 +59,11 @@ class Geodetic_BursaWolfParameters
 
 
     /**
-     *  Set the Rotation Matrix
+     * Set the Rotation Matrix
      *
-     *  @param     Geodetic_RotationMatrix    $rotationMatrix    The Rotation Matrix
-     *  @return    Geodetic_BursaWolfParameters
-     *  @throws    Geodetic_Exception
+     * @param     Geodetic_RotationMatrix    $rotationMatrix    The Rotation Matrix
+     * @return    Geodetic_BursaWolfParameters
+     * @throws    Geodetic_Exception
      */
     public function setRotationMatrix(Geodetic_RotationMatrix $rotationMatrix = NULL)
     {
@@ -76,9 +76,9 @@ class Geodetic_BursaWolfParameters
     }
 
     /**
-     *  Get the Rotation Matrix
+     * Get the Rotation Matrix
      *
-     *  @return    Geodetic_RotationMatrix    The Rotation Matrix
+     * @return    Geodetic_RotationMatrix    The Rotation Matrix
      */
     public function getRotationMatrix()
     {
@@ -86,11 +86,11 @@ class Geodetic_BursaWolfParameters
     }
 
     /**
-     *  Set the Translation Vectors
+     * Set the Translation Vectors
      *
-     *  @param     Geodetic_TranslationVectors    $translationVectors    The Translation Vectors
-     *  @return    Geodetic_BursaWolfParameters
-     *  @throws    Geodetic_Exception
+     * @param     Geodetic_TranslationVectors    $translationVectors    The Translation Vectors
+     * @return    Geodetic_BursaWolfParameters
+     * @throws    Geodetic_Exception
      */
     public function setTranslationVectors(Geodetic_TranslationVectors $translationVectors = NULL)
     {
@@ -103,9 +103,9 @@ class Geodetic_BursaWolfParameters
     }
 
     /**
-     *  Get the Translation Vectors
+     * Get the Translation Vectors
      *
-     *  @return    Geodetic_TranslationVectors    The Translation Vectors
+     * @return    Geodetic_TranslationVectors    The Translation Vectors
      */
     public function getTranslationVectors()
     {
@@ -113,11 +113,11 @@ class Geodetic_BursaWolfParameters
     }
 
     /**
-     *  Set the ScaleFactor
+     * Set the ScaleFactor
      *
-     *  @param     integer|float    $scaleFactor    The Scale Factor
-     *  @return    Geodetic_BursaWolfParameters
-     *  @throws    Geodetic_Exception
+     * @param     integer|float    $scaleFactor    The Scale Factor
+     * @return    Geodetic_BursaWolfParameters
+     * @throws    Geodetic_Exception
      */
     public function setScaleFactor($scaleFactor = NULL)
     {
@@ -130,9 +130,9 @@ class Geodetic_BursaWolfParameters
     }
 
     /**
-     *  Get the ScaleFactor as a Geodetic_Distance object
+     * Get the ScaleFactor as a Geodetic_Distance object
      *
-     *  @return    float    The Scale Factor
+     * @return    float    The Scale Factor
      */
     public function getScaleFactor()
     {
@@ -140,9 +140,9 @@ class Geodetic_BursaWolfParameters
     }
 
     /**
-     *  Reverse the sign of all the Bursa-Wolf parameter values
+     * Reverse the sign of all the Bursa-Wolf parameter values
      *
-     *  @return    void
+     * @return    void
      */
     public function invert()
     {

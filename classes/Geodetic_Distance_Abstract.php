@@ -2,45 +2,48 @@
 
 /**
  *
- *  @package Geodetic
- *  @subpackage Measures
- *  @copyright  Copyright (c) 2012 Mark Baker (https://github.com/MarkBaker/PHPGeodetic)
- *  @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ * Interface for overloading constructor in classes that require x, y and z arguments
+ *     with distance values
+ *
+ * @package Geodetic
+ * @subpackage Measures
+ * @copyright  Copyright (c) 2012 Mark Baker (https://github.com/MarkBaker/PHPGeodetic)
+ * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
  */
 abstract class Geodetic_Distance_Abstract implements Geodetic_XyzFormat_Interface
 {
     /**
-     *  The X-distance
+     * The X-distance
      *
-     *  @access protected
-     *  @var    Geodetic_Distance
+     * @access protected
+     * @var    Geodetic_Distance
      */
     protected $_xValue;
 
     /**
-     *  The Y-distance
+     * The Y-distance
      *
-     *  @access protected
-     *  @var    Geodetic_Distance
+     * @access protected
+     * @var    Geodetic_Distance
      */
     protected $_yValue;
 
     /**
-     *  The Z-distance
+     * The Z-distance
      *
-     *  @access protected
-     *  @var    Geodetic_Distance
+     * @access protected
+     * @var    Geodetic_Distance
      */
     protected $_zValue;
 
     /**
-     *  Set the three Distance values, as used for the Translation Vectors
+     * Set the three Distance values, as used for the Translation Vectors
      *
-     *  @param     Integer|Float|Geodetic_Distance    $xDistance    The X-Distance value
-     *  @param     Integer|Float|Geodetic_Distance    $yDistance    The Y-Distance value
-     *  @param     Integer|Float|Geodetic_Distance    $zDistance    The Z-Distance value
-     *  @param     string                              $uom         Unit of measure for all three Distance values
-     *                                                                  (if they are passed as integer or float)
+     * @param     Integer|Float|Geodetic_Distance    $xDistance    The X-Distance value
+     * @param     Integer|Float|Geodetic_Distance    $yDistance    The Y-Distance value
+     * @param     Integer|Float|Geodetic_Distance    $zDistance    The Z-Distance value
+     * @param     string                             $uom          Unit of measure for all three Distance values
+     *                                                                 (if they are passed as integer or float)
      */
     protected function setValues($xDistance,
                                  $yDistance,
@@ -61,9 +64,9 @@ abstract class Geodetic_Distance_Abstract implements Geodetic_XyzFormat_Interfac
     }
 
     /**
-     *  Set the X-Distance value
+     * Set the X-Distance value
      *
-     *  @param     Geodetic_Distance    $distance    The Distance value
+     * @param     Geodetic_Distance    $xValue    The Distance value
      */
     protected function setX($xValue)
     {
@@ -71,9 +74,9 @@ abstract class Geodetic_Distance_Abstract implements Geodetic_XyzFormat_Interfac
     }
 
     /**
-     *  Get the X-Distance value
+     * Get the X-Distance value
      *
-     *  @return     Geodetic_Distance    The Distance value
+     * @return     Geodetic_Distance    The Distance value
      */
     public function getX()
     {
@@ -81,9 +84,9 @@ abstract class Geodetic_Distance_Abstract implements Geodetic_XyzFormat_Interfac
     }
 
     /**
-     *  Set the Y-Distance value
+     * Set the Y-Distance value
      *
-     *  @param     Geodetic_Distance    $distance    The Distance value
+     * @param     Geodetic_Distance    $yValue    The Distance value
      */
     protected function setY($yValue)
     {
@@ -91,9 +94,9 @@ abstract class Geodetic_Distance_Abstract implements Geodetic_XyzFormat_Interfac
     }
 
     /**
-     *  Get the Y-Distance value
+     * Get the Y-Distance value
      *
-     *  @return     Geodetic_Distance    The Distance value
+     * @return     Geodetic_Distance    The Distance value
      */
     public function getY()
     {
@@ -101,9 +104,9 @@ abstract class Geodetic_Distance_Abstract implements Geodetic_XyzFormat_Interfac
     }
 
     /**
-     *  Set the Z-Distance value
+     * Set the Z-Distance value
      *
-     *  @param     Geodetic_Distance    $distance    The Distance value
+     * @param     Geodetic_Distance    $zValue    The Distance value
      */
     protected function setZ($zValue)
     {
@@ -111,9 +114,9 @@ abstract class Geodetic_Distance_Abstract implements Geodetic_XyzFormat_Interfac
     }
 
     /**
-     *  Get the Z-Distance value
+     * Get the Z-Distance value
      *
-     *  @return     Geodetic_Distance    The Distance value
+     * @return     Geodetic_Distance    The Distance value
      */
     public function getZ()
     {

@@ -1,12 +1,12 @@
 <?php
 
 /**
- *  A Distance Object.
+ * A Distance Object.
  *
- *  @package Geodetic
- *  @subpackage Measures
- *  @copyright  Copyright (c) 2012 Mark Baker (https://github.com/MarkBaker/PHPGeodetic)
- *  @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ * @package Geodetic
+ * @subpackage Measures
+ * @copyright  Copyright (c) 2012 Mark Baker (https://github.com/MarkBaker/PHPGeodetic)
+ * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
  */
 class Geodetic_Distance extends Geodetic_Measure_Abstract
 {
@@ -20,11 +20,11 @@ class Geodetic_Distance extends Geodetic_Measure_Abstract
     const AU              = 'AU';     //    Astronomical Unit
 
     /**
-     *  Unit of Measure conversion reference values
-     *  This array, indexed by the UoM names, holds the conversion factor for each UoM translating to/from metres
+     * Unit of Measure conversion reference values
+     * This array, indexed by the UoM names, holds the conversion factor for each UoM translating to/from metres
      *
-     *  @access private
-     *  @var    float[]
+     * @access private
+     * @var    float[]
      */
     protected static $_conversions = array(
             self::METRES          => 1.0,
@@ -39,21 +39,21 @@ class Geodetic_Distance extends Geodetic_Measure_Abstract
 
 
     /**
-     *  The distance
-     *  This value will always be maintained internally in meters (m)
+     * The distance
+     * This value will always be maintained internally in meters (m)
      *
-     *  @access protected
-     *  @var    float
+     * @access protected
+     * @var    float
      */
     protected $_distance = 0.0;
 
 
     /**
-     *  Create a new Distance object
+     * Create a new Distance object
      *
-     *  @param     integer|float    $distance    The Distance value in the specified unit
-     *  @param     string           $uom         Unit of Measure (default is METRES)
-     *  @throws    Geodetic_Exception
+     * @param     integer|float    $distance    The Distance value in the specified unit
+     * @param     string           $uom         Unit of Measure (default is METRES)
+     * @throws    Geodetic_Exception
      */
     function __construct($distance = NULL,
                          $uom = self::METRES)
@@ -64,12 +64,12 @@ class Geodetic_Distance extends Geodetic_Measure_Abstract
 
 
     /**
-     *  Set the Distance value in the specified Unit of Measure
+     * Set the Distance value in the specified Unit of Measure
      *
-     *  @param     integer|float    $distance    The Distance value in the specified unit
-     *  @param     string           $uom         Unit of Measure (default is METRES)
-     *  @return    void
-     *  @throws    Geodetic_Exception
+     * @param     integer|float    $distance    The Distance value in the specified unit
+     * @param     string           $uom         Unit of Measure (default is METRES)
+     * @return    void
+     * @throws    Geodetic_Exception
      */
     public function setValue($distance = 0.0,
                              $uom = self::METRES)
@@ -86,11 +86,11 @@ class Geodetic_Distance extends Geodetic_Measure_Abstract
     }
 
     /**
-     *  Get the Distance value in the requested Unit of Measure
+     * Get the Distance value in the requested Unit of Measure
      *
-     *  @param     string    $uom    Unit of Measure (default is METRES)
-     *  @return    float             The Distance value in the specified unit
-     *  @throws    Geodetic_Exception
+     * @param     string    $uom    Unit of Measure (default is METRES)
+     * @return    float             The Distance value in the specified unit
+     * @throws    Geodetic_Exception
      */
     public function getValue($uom = self::METRES)
     {
@@ -104,9 +104,9 @@ class Geodetic_Distance extends Geodetic_Measure_Abstract
     }
 
     /**
-     *  Reverse the sign of the Distance
+     * Reverse the sign of the Distance
      *
-     *  @return    void
+     * @return    void
      */
     public function invertValue()
     {
@@ -114,11 +114,11 @@ class Geodetic_Distance extends Geodetic_Measure_Abstract
     }
 
     /**
-     *  Convert a specified distance and unit of measure to meters
+     * Convert a specified distance and unit of measure to meters
      *
-     *  @param     integer|float    $distance    Distance measurement to convert
-     *  @param     string           $uom         Unit of Measure to convert the distance from
-     *  @throws    Geodetic_Exception
+     * @param     integer|float    $distance    Distance measurement to convert
+     * @param     string           $uom         Unit of Measure to convert the distance from
+     * @throws    Geodetic_Exception
      */
     public static function convertToMeters($distance = 0.0,
                                            $uom = NULL)
@@ -139,11 +139,11 @@ class Geodetic_Distance extends Geodetic_Measure_Abstract
     }   //  public static function convertToMeters()
 
     /**
-     *  Convert a specified distance in meters to the specified unit of measure
+     * Convert a specified distance in meters to the specified unit of measure
      *
-     *  @param     integer|float    $value    Distance measurement to convert
-     *  @param     string           $uom      Unit of Measure to convert the distance to
-     *  @throws    Geodetic_Exception
+     * @param     integer|float    $distance    Distance measurement to convert
+     * @param     string           $uom         Unit of Measure to convert the distance to
+     * @throws    Geodetic_Exception
      */
     public static function convertFromMeters($distance = 0.0,
                                              $uom = NULL)
@@ -164,12 +164,12 @@ class Geodetic_Distance extends Geodetic_Measure_Abstract
     }   //  public static function convertFromMeters()
 
     /**
-     *  Convert a specified distance and unit of measure to a different unit of measure
+     * Convert a specified distance and unit of measure to a different unit of measure
      *
-     *  @param     integer|float    $value      Distance measurement to convert
-     *  @param     string           $uomFrom    Unit of Measure to convert the distance from
-     *  @param     string           $uomTo      Unit of Measure to convert the distance to
-     *  @throws    Geodetic_Exception
+     * @param     integer|float    $distance    Distance measurement to convert
+     * @param     string           $uomFrom     Unit of Measure to convert the distance from
+     * @param     string           $uomTo       Unit of Measure to convert the distance to
+     * @throws    Geodetic_Exception
      */
     public static function convertDistance($distance = 0.0,
                                            $uomFrom = NULL,

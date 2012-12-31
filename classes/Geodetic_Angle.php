@@ -1,12 +1,12 @@
 <?php
 
 /**
- *  An Angle Object.
+ * An Angle Object.
  *
- *  @package Geodetic
- *  @subpackage Measures
- *  @copyright  Copyright (c) 2012 Mark Baker (https://github.com/MarkBaker/PHPGeodetic)
- *  @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ * @package Geodetic
+ * @subpackage Measures
+ * @copyright  Copyright (c) 2012 Mark Baker (https://github.com/MarkBaker/PHPGeodetic)
+ * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
  */
 class Geodetic_Angle extends Geodetic_Measure_Abstract
 {
@@ -19,11 +19,11 @@ class Geodetic_Angle extends Geodetic_Measure_Abstract
     const GRADIANS    = 'gradians';
 
     /**
-     *  Unit of Measure conversion reference values
-     *  This array, indexed by the UoM names, holds the conversion factor for each UoM translating to/from degrees
+     * Unit of Measure conversion reference values
+     * This array, indexed by the UoM names, holds the conversion factor for each UoM translating to/from degrees
      *
-     *  @access private
-     *  @var    float[]
+     * @access private
+     * @var    float[]
      */
     protected static $_conversions = array(
             self::DEGREES     => 1.0,
@@ -37,21 +37,21 @@ class Geodetic_Angle extends Geodetic_Measure_Abstract
 
 
     /**
-     *  The angle
-     *  This value will always be maintained internally in degrees (°)
+     * The angle
+     * This value will always be maintained internally in degrees (°)
      *
-     *  @access protected
-     *  @var    float
+     * @access protected
+     * @var    float
      */
     protected $_angle = 0.0;
 
 
     /**
-     *  Create a new Angle object
+     * Create a new Angle object
      *
-     *  @param     integer|float    $angle    The Angle value in the specified unit
-     *  @param     string           $uom      Unit of Measure (default is DEGREES)
-     *  @throws    Geodetic_Exception
+     * @param     integer|float    $angle    The Angle value in the specified unit
+     * @param     string           $uom      Unit of Measure (default is DEGREES)
+     * @throws    Geodetic_Exception
      */
     function __construct($angle = NULL,
                          $uom = self::DEGREES)
@@ -62,12 +62,12 @@ class Geodetic_Angle extends Geodetic_Measure_Abstract
 
 
     /**
-     *  Set the Angle in the specified Unit of Measure
+     * Set the Angle in the specified Unit of Measure
      *
-     *  @param     integer|float    $angle    The Angle in the specified unit
-     *  @param     string           $uom      Unit of Measure (default is DEGREES)
-     *  @return    void
-     *  @throws    Geodetic_Exception
+     * @param     integer|float    $angle    The Angle in the specified unit
+     * @param     string           $uom      Unit of Measure (default is DEGREES)
+     * @return    void
+     * @throws    Geodetic_Exception
      */
     public function setValue($angle = 0.0,
                              $uom = self::DEGREES)
@@ -84,9 +84,9 @@ class Geodetic_Angle extends Geodetic_Measure_Abstract
     }
 
     /**
-     *  Reverse the sign of the Angle
+     * Reverse the sign of the Angle
      *
-     *  @return    void
+     * @return    void
      */
     public function invertValue()
     {
@@ -94,11 +94,11 @@ class Geodetic_Angle extends Geodetic_Measure_Abstract
     }
 
     /**
-     *  Get the Angle in the requested Unit of Measure
+     * Get the Angle in the requested Unit of Measure
      *
-     *  @param     string    $uom    Unit of Measure (default is DEGREES)
-     *  @return    float             The Angle value in the specified unit
-     *  @throws    Geodetic_Exception
+     * @param     string    $uom    Unit of Measure (default is DEGREES)
+     * @return    float             The Angle value in the specified unit
+     * @throws    Geodetic_Exception
      */
     public function getValue($uom = self::DEGREES)
     {
@@ -112,11 +112,11 @@ class Geodetic_Angle extends Geodetic_Measure_Abstract
     }
 
     /**
-     *  Return the angle as a string formatted as decimal degrees and minutes (to a specified number of decimals)
+     * Return the angle as a string formatted as decimal degrees and minutes (to a specified number of decimals)
      *
-     *  @param     integer    $decimals    Number of decimals for the minutes display
-     *  @return    string                  The Angle value formatted as a degrees/minutes string
-     *  @throws    Geodetic_Exception
+     * @param     integer    $decimals    Number of decimals for the minutes display
+     * @return    string                  The Angle value formatted as a degrees/minutes string
+     * @throws    Geodetic_Exception
      */
     public function toDM($decimals = 3)
     {
@@ -133,11 +133,11 @@ class Geodetic_Angle extends Geodetic_Measure_Abstract
     }
 
     /**
-     *  Return the angle as a string formatted as decimal degrees, minutes and seconds (to a specified number of decimals)
+     * Return the angle as a string formatted as decimal degrees, minutes and seconds (to a specified number of decimals)
      *
-     *  @param     integer    $decimals    Number of decimals for the seconds display
-     *  @return    string                  The Angle value formatted as a degrees/minutes/seconds string
-     *  @throws    Geodetic_Exception
+     * @param     integer    $decimals    Number of decimals for the seconds display
+     * @return    string                  The Angle value formatted as a degrees/minutes/seconds string
+     * @throws    Geodetic_Exception
      */
     public function toDMS($decimals = 3)
     {
@@ -156,12 +156,12 @@ class Geodetic_Angle extends Geodetic_Measure_Abstract
     }
 
     /**
-     *  Convert a specified angle and unit of measure to degrees
+     * Convert a specified angle and unit of measure to degrees
      *
-     *  @param     integer|float    $angle    Angle measurement to convert in the specified unit
-     *  @param     string           $uom      Unit of Measure to convert the angle from
-     *  @return    float            The converted angle value
-     *  @throws    Geodetic_Exception
+     * @param     integer|float    $angle    Angle measurement to convert in the specified unit
+     * @param     string           $uom      Unit of Measure to convert the angle from
+     * @return    float            The converted angle value
+     * @throws    Geodetic_Exception
      */
     public static function convertToDegrees($angle = 0.0,
                                             $uom = NULL)
@@ -182,12 +182,12 @@ class Geodetic_Angle extends Geodetic_Measure_Abstract
     }   //  public static function convertToDegrees()
 
     /**
-     *  Convert a specified angle in degrees to the specified unit of measure
+     * Convert a specified angle in degrees to the specified unit of measure
      *
-     *  @param     integer|float    $angle    Angle measurement to convert
-     *  @param     string           $uom      Unit of Measure to convert the angle to
-     *  @return    float            The converted angle value
-     *  @throws    Geodetic_Exception
+     * @param     integer|float    $angle    Angle measurement to convert
+     * @param     string           $uom      Unit of Measure to convert the angle to
+     * @return    float            The converted angle value
+     * @throws    Geodetic_Exception
      */
     public static function convertFromDegrees($angle = 0.0,
                                               $uom = NULL)
@@ -208,13 +208,13 @@ class Geodetic_Angle extends Geodetic_Measure_Abstract
     }   //  public static function convertFromDegrees()
 
     /**
-     *  Convert a specified angle and unit of measure to a different unit of measure
+     * Convert a specified angle and unit of measure to a different unit of measure
      *
-     *  @param     integer|float    $angle      Angle measurement to convert in the specified from unit
-     *  @param     string           $uomFrom    Unit of Measure to convert the angle from
-     *  @param     string           $uomTo      Unit of Measure to convert the angle to
-     *  @return    float            The converted angle value
-     *  @throws    Geodetic_Exception
+     * @param     integer|float    $angle      Angle measurement to convert in the specified from unit
+     * @param     string           $uomFrom    Unit of Measure to convert the angle from
+     * @param     string           $uomTo      Unit of Measure to convert the angle to
+     * @return    float            The converted angle value
+     * @throws    Geodetic_Exception
      */
     public static function convertAngle($angle = 0.0,
                                         $uomFrom = NULL,

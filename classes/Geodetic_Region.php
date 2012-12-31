@@ -1,20 +1,20 @@
 <?php
 
 /**
- *  Region coordinate object.
+ * Region coordinate object.
  *
- *  @package Geodetic
- *  @copyright  Copyright (c) 2012 Mark Baker (https://github.com/MarkBaker/PHPGeodetic)
- *  @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ * @package Geodetic
+ * @copyright  Copyright (c) 2012 Mark Baker (https://github.com/MarkBaker/PHPGeodetic)
+ * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
  */
 class Geodetic_Region
 {
 
     /**
-     *  An array of Latitude/Longitude points that defines the region
+     * An array of Latitude/Longitude points that defines the region
      *
-     *  @access protected
-     *  @var Geodetic_Angle[]
+     * @access protected
+     * @var Geodetic_Angle[]
      */
     protected $_perimeterPoints;
 
@@ -22,8 +22,8 @@ class Geodetic_Region
     /**
      * Create a new Region
      *
-     *  @param     Geodetic_LatLong[]    $perimeterPoints
-     *  @throws    Geodetic_Exception
+     * @param     Geodetic_LatLong[]    $perimeterPoints
+     * @throws    Geodetic_Exception
      */
     function __construct(array $perimeterPoints = array())
     {
@@ -31,11 +31,11 @@ class Geodetic_Region
     }
 
     /**
-     *  Set the perimeter points that define this region
+     * Set the perimeter points that define this region
      *
-     *  @param     Geodetic_LatLong[]    $perimeterPoints
-     *  @return    Geodetic_Region
-     *  @throws    Geodetic_Exception
+     * @param     Geodetic_LatLong[]    $perimeterPoints
+     * @return    Geodetic_Region
+     * @throws    Geodetic_Exception
      */
     public function setPerimeterPoints(array $perimeterPoints = array())
     {
@@ -54,24 +54,32 @@ class Geodetic_Region
     }
 
     /**
-     *  Get the Perimeter Points that define this region
+     * Get the Perimeter Points that define this region
      *
-     *  @return    Geodetic_LatLong[]    Array of Latitude/Longitude objects that define the perimeter of this region
+     * @return    Geodetic_LatLong[]    Array of Latitude/Longitude objects that define the perimeter of this region
      */
     public function getPerimeterPoints()
     {
         return $this->_perimeterPoints;
     }
 
+    /**
+     * Helper method to adjust haversine values
+     *
+     * @param     int|float    $x    The value on which to perform the calculation
+     * @return    float        The adjusted haversine result
+     */
     private static function _haversineAdjust($x)
     {
         return (1.0 - cos($x)) / 2.0;
     }
 
     /**
-     *  Get the Planar Area of this region
+     * Get the Planar Area of this region
      *
-     *  @return    Geodetic_Area    The planar area of this region
+     * @param     Geodetic_ReferenceEllipsoid|NULL    $ellipsoid    Reference Ellipsoid to use for this calculation
+     *                                                              If NULL, then the WGS 1984 Ellipsoid will be used
+     * @return    Geodetic_Area    The planar area of this region
      */
     public function getAreaPlanar(Geodetic_ReferenceEllipsoid $ellipsoid = NULL)
     {
@@ -127,9 +135,11 @@ class Geodetic_Region
     }
 
     /**
-     *  Get the Area of this region
+     * Get the Area of this region
      *
-     *  @return    Geodetic_Area    The area of this region
+     * @param     Geodetic_ReferenceEllipsoid|NULL    $ellipsoid    Reference Ellipsoid to use for this calculation
+     *                                                              If NULL, then the WGS 1984 Ellipsoid will be used
+     * @return    Geodetic_Area    The area of this region
      */
     public function getArea(Geodetic_ReferenceEllipsoid $ellipsoid = NULL)
     {
@@ -160,13 +170,14 @@ class Geodetic_Region
     }
 
     /**
-     *  Get the length along the Perimeter for this region
+     * Get the length along the Perimeter for this region
      *
-     *  @param     Geodetic_ReferenceEllipsoid    $ellipsoid       If left blank or NULL, then WGS 84 Ellipsoid will be used
-     *  @param     boolean                        $useHaversine    If true, then the Haversine formula will be used for the
-     *                                                                 calculation, otherwise the more accurate Vincenty
-     *                                                                 formula will be used instead.
-     *  @return    Geodetic_Distance    The length along the perimeter for this region
+     * @param     Geodetic_ReferenceEllipsoid|NULL    $ellipsoid       Reference Ellipsoid to use for this calculation
+     *                                                                     If NULL, then the WGS 1984 Ellipsoid will be used
+     * @param     boolean                             $useHaversine    If true, then the Haversine formula will be used
+     *                                                                     for the calculation, otherwise the more accurate
+     *                                                                     Vincenty formula will be used instead.
+     * @return    Geodetic_Distance    The length along the perimeter for this region
      */
     public function getPerimeter(Geodetic_ReferenceEllipsoid $ellipsoid = NULL,
                                  $useHaversine = FALSE)
@@ -201,10 +212,10 @@ class Geodetic_Region
     }
 
     /**
-     *  Identify whether a specified Latitude/Longitude falls within the bounds of this region
+     * Identify whether a specified Latitude/Longitude falls within the bounds of this region
      *
-     *  @param     Geodetic_LatLong    The Latitude/Longitude object that we wish to test
-     *  @return    boolean
+     * @param     Geodetic_LatLong    The Latitude/Longitude object that we wish to test
+     * @return    boolean
      */
     function isInRegion(Geodetic_LatLong $position)
     {

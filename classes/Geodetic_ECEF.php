@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  Earth-Centered, Earth-Fixed coordinate object.
+ * Earth-Centered, Earth-Fixed coordinate object.
  *
  *  An ECEF Object represents an Earth-Centered, Earth-Fixed set of Cartesian coordinates.
  *  The point (0,0,0) is defined as the center of mass of the earth (hence the expression Earth-Centered).
@@ -17,49 +17,55 @@
  *  -    Description modified from the Wikipedia article at
  *           http://en.wikipedia.org/wiki/ECEF
  *
- *  @package Geodetic
- *  @copyright  Copyright (c) 2012 Mark Baker (https://github.com/MarkBaker/PHPGeodetic)
- *  @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ * @package Geodetic
+ * @copyright  Copyright (c) 2012 Mark Baker (https://github.com/MarkBaker/PHPGeodetic)
+ * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
  */
 class Geodetic_ECEF
 {
     /**
-     *  The x-coordinate value of this ECEF object.
-     *  This value will always be maintained internally in meters (m)
+     * The x-coordinate value of this ECEF object.
+     * This value will always be maintained internally in meters (m)
      *
-     *  @access protected
-     *  @var Geodetic_Distance
+     * @access protected
+     * @var Geodetic_Distance
      */
     protected $_xCoordinate;
 
     /**
-     *  The y-coordinate value of this ECEF object.
-     *  This value will always be maintained internally in meters (m)
+     * The y-coordinate value of this ECEF object.
+     * This value will always be maintained internally in meters (m)
      *
-     *  @access protected
-     *  @var Geodetic_Distance
+     * @access protected
+     * @var Geodetic_Distance
      */
     protected $_yCoordinate;
 
     /**
-     *  The z-coordinate value of this ECEF object.
-     *  This value will always be maintained internally in meters (m)
+     * The z-coordinate value of this ECEF object.
+     * This value will always be maintained internally in meters (m)
      *
-     *  @access protected
-     *  @var Geodetic_Distance
+     * @access protected
+     * @var Geodetic_Distance
      */
     protected $_zCoordinate;
 
 
-    private static function _sinSquared($xValue) {
-        return sin($xValue) * sin($xValue);
+    /**
+     * Helper method to return the sine squared value
+     *
+     * @param     int|float    $value    The value on which to perform the calculation
+     * @return    float        The sine squared result
+     */
+    private static function _sinSquared($value) {
+        return sin($value) * sin($value);
     }
 
     /**
      * Create a new ECEF
      *
-     *  @param     Geodetic_XyzFormat_Interface    $xyzCoordinates    The ECEF X-, Y-, and Z-Coordinate values
-     *  @throws    Geodetic_Exception
+     * @param     Geodetic_XyzFormat_Interface    $xyzCoordinates    The ECEF X-, Y-, and Z-Coordinate values
+     * @throws    Geodetic_Exception
      */
     function __construct(Geodetic_XyzFormat_Interface $xyzCoordinates = NULL)
     {
@@ -78,11 +84,11 @@ class Geodetic_ECEF
 
 
     /**
-     *  Set the Distance from earth centre on the X-Axis
+     * Set the Distance from earth centre on the X-Axis
      *
-     *  @param     Geodetic_Distance    $xDistance    The Distance from earth centre on the X-Axis
-     *  @return    Geodetic_ECEF
-     *  @throws    Geodetic_Exception
+     * @param     Geodetic_Distance    $xDistance    The Distance from earth centre on the X-Axis
+     * @return    Geodetic_ECEF
+     * @throws    Geodetic_Exception
      */
     public function setX(Geodetic_Distance $xDistance = NULL)
     {
@@ -95,9 +101,9 @@ class Geodetic_ECEF
     }
 
     /**
-     *  Get the Distance from earth centre on the X-Axis
+     * Get the Distance from earth centre on the X-Axis
      *
-     *  @return    Geodetic_Distance    The Distance from earth centre on the X-Axis
+     * @return    Geodetic_Distance    The Distance from earth centre on the X-Axis
      */
     public function getX()
     {
@@ -105,11 +111,11 @@ class Geodetic_ECEF
     }
 
     /**
-     *  Set the Distance from earth centre on the Y-Axis
+     * Set the Distance from earth centre on the Y-Axis
      *
-     *  @param     Geodetic_Distance    $yDistance    The Distance from earth centre on the Y-Axis
-     *  @return    Geodetic_ECEF
-     *  @throws    Geodetic_Exception
+     * @param     Geodetic_Distance    $yDistance    The Distance from earth centre on the Y-Axis
+     * @return    Geodetic_ECEF
+     * @throws    Geodetic_Exception
      */
     public function setY(Geodetic_Distance $yDistance = NULL)
     {
@@ -122,9 +128,9 @@ class Geodetic_ECEF
     }
 
     /**
-     *  Get the Distance from earth centre on the Y-Axis
+     * Get the Distance from earth centre on the Y-Axis
      *
-     *  @return    Geodetic_Distance    The Distance from earth centre on the Y-Axis
+     * @return    Geodetic_Distance    The Distance from earth centre on the Y-Axis
      */
     public function getY()
     {
@@ -132,11 +138,11 @@ class Geodetic_ECEF
     }
 
     /**
-     *  Set the Distance from earth centre on the Z-Axis
+     * Set the Distance from earth centre on the Z-Axis
      *
-     *  @param     Geodetic_Distance    $zDistance    The Distance from earth centre on the Z-Axis
-     *  @return    Geodetic_ECEF
-     *  @throws    Geodetic_Exception
+     * @param     Geodetic_Distance    $zDistance    The Distance from earth centre on the Z-Axis
+     * @return    Geodetic_ECEF
+     * @throws    Geodetic_Exception
      */
     public function setZ(Geodetic_Distance $zDistance = NULL)
     {
@@ -149,9 +155,9 @@ class Geodetic_ECEF
     }
 
     /**
-     *  Get the Distance from earth centre on the Z-Axis
+     * Get the Distance from earth centre on the Z-Axis
      *
-     *  @return    Geodetic_Distance    The Distance from earth centre on the Z-Axis
+     * @return    Geodetic_Distance    The Distance from earth centre on the Z-Axis
      */
     public function getZ()
     {
@@ -159,11 +165,11 @@ class Geodetic_ECEF
     }
 
     /**
-     *  Convert this ECEF to a Latitude/Longitude Geodetic_LatLong object using a specified Datum
+     * Convert this ECEF to a Latitude/Longitude Geodetic_LatLong object using a specified Datum
      *
-     *  @param     Geodetic_Datum      $datum    The Datum to use for this transform
-     *  @return    Geodetic_LatLong    The Latitude/Longitude Geodetic_LatLong object that matches this ECEF
-     *  @throws    Geodetic_Exception
+     * @param     Geodetic_Datum      $datum    The Datum to use for this transform
+     * @return    Geodetic_LatLong    The Latitude/Longitude Geodetic_LatLong object that matches this ECEF
+     * @throws    Geodetic_Exception
      */
     public function toLatLong(Geodetic_Datum $datum = NULL)
     {
@@ -208,11 +214,11 @@ class Geodetic_ECEF
 
 
     /**
-     *  Execute a Helmert Transform on this ECEF using the specified Bursa-Wolf Parameters
+     * Execute a Helmert Transform on this ECEF using the specified Bursa-Wolf Parameters
      *
-     *  @param     Geodetic_BursaWolfParameters    $bursaWolfParameters    The Bursa-Wolf parameter to use for the transform
-     *  @return    void
-     *  @throws    Geodetic_Exception
+     * @param     Geodetic_BursaWolfParameters    $bursaWolfParameters    The Bursa-Wolf parameter to use for the transform
+     * @return    void
+     * @throws    Geodetic_Exception
      */
     private function _helmertTransform(Geodetic_BursaWolfParameters $bursaWolfParameters)
     {
@@ -243,11 +249,11 @@ class Geodetic_ECEF
     }
 
     /**
-     *  Transform this ECEF from the specified Datum to WGS84
+     * Transform this ECEF from the specified Datum to WGS84
      *
-     *  @param     Geodetic_Datum      $fromDatum    The Datum to convert this ECEF from
-     *  @return    Geodetic_ECEF
-     *  @throws    Geodetic_Exception
+     * @param     Geodetic_Datum      $fromDatum    The Datum to convert this ECEF from
+     * @return    Geodetic_ECEF
+     * @throws    Geodetic_Exception
      */
     public function toWGS84(Geodetic_Datum $fromDatum = NULL)
     {
@@ -260,11 +266,11 @@ class Geodetic_ECEF
     }
 
     /**
-     *  Transform this ECEF to the specified Datum from WGS84
+     * Transform this ECEF to the specified Datum from WGS84
      *
-     *  @param     Geodetic_Datum      $toDatum    The Datum to convert that ECEF from
-     *  @return    Geodetic_ECEF
-     *  @throws    Geodetic_Exception
+     * @param     Geodetic_Datum      $toDatum    The Datum to convert that ECEF from
+     * @return    Geodetic_ECEF
+     * @throws    Geodetic_Exception
      */
     public function fromWGS84(Geodetic_Datum $toDatum = NULL)
     {

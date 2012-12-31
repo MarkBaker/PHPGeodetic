@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  Universal Transverse Mercator object.
+ * Universal Transverse Mercator object.
  *
  *  The Universal Transverse Mercator (UTM) geographic coordinate system uses a 2-dimensional Cartesian coordinate
  *      system to give locations on the surface of the Earth. It is a horizontal position representation, i.e. it is
@@ -30,13 +30,19 @@
  *  -    Description modified from the Wikipedia article at
  *           http://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system
  *
- *  @package Geodetic
- *  @copyright  Copyright (c) 2012 Mark Baker (https://github.com/MarkBaker/PHPGeodetic)
- *  @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ * @package Geodetic
+ * @copyright  Copyright (c) 2012 Mark Baker (https://github.com/MarkBaker/PHPGeodetic)
+ * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
  */
 class Geodetic_UTM
 {
-
+    /**
+     * Array for the upper and lower bounds of each latitude zone,
+     *     indexed by the zone ID.
+     *
+     * @access protected
+     * @var array[]
+     */
     protected static $_latitudeZones = array(
         'X' => array(72, 84),
         'W' => array(64, 72),
@@ -61,34 +67,34 @@ class Geodetic_UTM
     );
 
     /**
-     *  The Northing value of this UTM object.
+     * The Northing value of this UTM object.
      *
-     *  @access protected
-     *  @var float
+     * @access protected
+     * @var float
      */
     protected $_northing;
 
     /**
-     *  The Easting value of this UTM object.
+     * The Easting value of this UTM object.
      *
-     *  @access protected
-     *  @var float
+     * @access protected
+     * @var float
      */
     protected $_easting;
 
     /**
-     *  The Latitude Zone of this UTM object.
+     * The Latitude Zone of this UTM object.
      *
-     *  @access protected
-     *  @var string
+     * @access protected
+     * @var string
      */
     protected $_latitudeZone;
 
     /**
-     *  The Longitude Zone of this UTM object.
+     * The Longitude Zone of this UTM object.
      *
-     *  @access protected
-     *  @var string
+     * @access protected
+     * @var string
      */
     protected $_longitudeZone;
 
@@ -96,11 +102,11 @@ class Geodetic_UTM
     /**
      * Create a new UTM
      *
-     *  @param     integer|float    $northing         The UTM Northing value
-     *  @param     integer|float    $easting          The UTM Easting value
-     *  @param     string           $latitudeZone     The UTM Latitude Zone value
-     *  @param     string           $longitudeZone    The UTM Longitude Zone value
-     *  @throws    Geodetic_Exception
+     * @param     integer|float    $northing         The UTM Northing value
+     * @param     integer|float    $easting          The UTM Easting value
+     * @param     string           $latitudeZone     The UTM Latitude Zone value
+     * @param     string           $longitudeZone    The UTM Longitude Zone value
+     * @throws    Geodetic_Exception
      */
     function __construct($northing = NULL,
                          $easting = NULL,
@@ -119,11 +125,11 @@ class Geodetic_UTM
 
 
     /**
-     *  Set the Northing value
+     * Set the Northing value
      *
-     *  @param     float    $northing    The Northing value
-     *  @return    Geodetic_UTM
-     *  @throws    Geodetic_Exception
+     * @param     float    $northing    The Northing value
+     * @return    Geodetic_UTM
+     * @throws    Geodetic_Exception
      */
     public function setNorthing($northing = NULL)
     {
@@ -137,9 +143,9 @@ class Geodetic_UTM
     }
 
     /**
-     *  Get the Northing value
+     * Get the Northing value
      *
-     *  @return    float    The Northing value
+     * @return    float    The Northing value
      */
     public function getNorthing()
     {
@@ -147,11 +153,11 @@ class Geodetic_UTM
     }
 
     /**
-     *  Set the Easting value
+     * Set the Easting value
      *
-     *  @param     float    $easting    The Easting value
-     *  @return    Geodetic_UTM
-     *  @throws    Geodetic_Exception
+     * @param     float    $easting    The Easting value
+     * @return    Geodetic_UTM
+     * @throws    Geodetic_Exception
      */
     public function setEasting($easting = NULL)
     {
@@ -165,9 +171,9 @@ class Geodetic_UTM
     }
 
     /**
-     *  Get the Easting value
+     * Get the Easting value
      *
-     *  @return    float    The Easting value
+     * @return    float    The Easting value
      */
     public function getEasting()
     {
@@ -175,11 +181,11 @@ class Geodetic_UTM
     }
 
     /**
-     *  Set the Latitude Zone
+     * Set the Latitude Zone
      *
-     *  @param     string    $latitudeZone    The Latitude Zone
-     *  @return    Geodetic_UTM
-     *  @throws    Geodetic_Exception
+     * @param     string    $latitudeZone    The Latitude Zone
+     * @return    Geodetic_UTM
+     * @throws    Geodetic_Exception
      */
     public function setLatitudeZone($latitudeZone = NULL)
     {
@@ -194,9 +200,9 @@ class Geodetic_UTM
     }
 
     /**
-     *  Get the Latitude Zone
+     * Get the Latitude Zone
      *
-     *  @return    string    The Latitude Zone
+     * @return    string    The Latitude Zone
      */
     public function getLatitudeZone()
     {
@@ -204,11 +210,11 @@ class Geodetic_UTM
     }
 
     /**
-     *  Set the Longitude Zone
+     * Set the Longitude Zone
      *
-     *  @param     integer    $longitudeZone    The Longitude Zone
-     *  @return    Geodetic_UTM
-     *  @throws    Geodetic_Exception
+     * @param     integer    $longitudeZone    The Longitude Zone
+     * @return    Geodetic_UTM
+     * @throws    Geodetic_Exception
      */
     public function setLongitudeZone($longitudeZone = NULL)
     {
@@ -222,9 +228,9 @@ class Geodetic_UTM
     }
 
     /**
-     *  Get the Longitude Zone
+     * Get the Longitude Zone
      *
-     *  @return    integer    The Longitude Zone
+     * @return    integer    The Longitude Zone
      */
     public function getLongitudeZone()
     {
@@ -232,11 +238,11 @@ class Geodetic_UTM
     }
 
     /**
-     *  Convert this Univeral Transverse Mercator to a Latitude/Longitude Geodetic_LatLong object using a specified Datum
+     * Convert this Univeral Transverse Mercator to a Latitude/Longitude Geodetic_LatLong object using a specified Datum
      *
-     *  @param     Geodetic_Datum    $datum    The Datum to use for this transform
-     *  @return    Geodetic_LatLong            The Latitude/Longitude Geodetic_LatLong object that matches this UTM
-     *  @throws    Geodetic_Exception
+     * @param     Geodetic_Datum    $datum    The Datum to use for this transform
+     * @return    Geodetic_LatLong            The Latitude/Longitude Geodetic_LatLong object that matches this UTM
+     * @throws    Geodetic_Exception
      */
     public function toLatLong(Geodetic_Datum $datum = NULL)
     {
@@ -305,11 +311,11 @@ class Geodetic_UTM
     }
 
     /**
-     *  Work out the UTM longitude zone from the latitude and longitude
+     * Work out the UTM longitude zone from the latitude and longitude
      *
-     *  @param     $latitude     The Latitude value (in degrees)
-     *  @param     $longitude    The Longitude value (in degrees)
-     *  @return    string        The UTM Zone letter for the specified Latitude and Longitude
+     * @param     $latitude     The Latitude value (in degrees)
+     * @param     $longitude    The Longitude value (in degrees)
+     * @return    string        The UTM Zone letter for the specified Latitude and Longitude
      */
     public static function identifyLongitudeZone($latitude,
                                                  $longitude)
@@ -337,10 +343,10 @@ class Geodetic_UTM
     }
 
     /**
-     *  Work out the UTM latitude zone from the latitude
+     * Work out the UTM latitude zone from the latitude
      *
-     *  @param     $latitude    The Latitude value (in degrees)
-     *  @return    string       The UTM Zone letter for the specified Latitude
+     * @param     $latitude    The Latitude value (in degrees)
+     * @return    string       The UTM Zone letter for the specified Latitude
      */
     public static function identifyLatitudeZone($latitude)
     {

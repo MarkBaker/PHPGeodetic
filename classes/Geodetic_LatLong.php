@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  Latitude/Longitude coordinate object.
+ * Latitude/Longitude coordinate object.
  *
  *  Latitude is a geographic coordinate that specifies the north-south position of a point on the Earth's surface.
  *      Lines of constant latitude, or parallels, run east-west as circles parallel to the equator. Latitude is an
@@ -20,37 +20,37 @@
  *       and
  *           http://en.wikipedia.org/wiki/Longitude
  *
- *  @package Geodetic
- *  @copyright  Copyright (c) 2012 Mark Baker (https://github.com/MarkBaker/PHPGeodetic)
- *  @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ * @package Geodetic
+ * @copyright  Copyright (c) 2012 Mark Baker (https://github.com/MarkBaker/PHPGeodetic)
+ * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
  */
 class Geodetic_LatLong
 {
 
     /**
-     *  The Latitude value of this LatLong object.
-     *  This value will always be maintained internally in degrees (°)
+     * The Latitude value of this LatLong object.
+     * This value will always be maintained internally in degrees (°)
      *
-     *  @access protected
-     *  @var Geodetic_Angle
+     * @access protected
+     * @var Geodetic_Angle
      */
     protected $_latitude;
 
     /**
-     *  The Longitude value of this LatLong object.
-     *  This value will always be maintained internally in degrees (°)
+     * The Longitude value of this LatLong object.
+     * This value will always be maintained internally in degrees (°)
      *
-     *  @access protected
-     *  @var Geodetic_Angle
+     * @access protected
+     * @var Geodetic_Angle
      */
     protected $_longitude;
 
     /**
-     *  The Height value of this LatLong object.
-     *  This value will always be maintained internally in meters (m)
+     * The Height value of this LatLong object.
+     * This value will always be maintained internally in meters (m)
      *
-     *  @access protected
-     *  @var Geodetic_Distance
+     * @access protected
+     * @var Geodetic_Distance
      */
     protected $_height;
 
@@ -58,9 +58,9 @@ class Geodetic_LatLong
     /**
      * Create a new LatLong
      *
-     *  @param     Geodetic_XyzFormat_Interface    $xyzCoordinates    The LatLong Latitude, Longitude and
-     *                                                                    Height/Elevation values expressed as X, Y and Z values
-     *  @throws    Geodetic_Exception
+     * @param     Geodetic_XyzFormat_Interface    $xyzCoordinates    The LatLong Latitude, Longitude and
+     *                                                                   Height/Elevation values expressed as X, Y and Z values
+     * @throws    Geodetic_Exception
      */
     function __construct(Geodetic_XyzFormat_Interface $xyzCoordinates = NULL)
     {
@@ -79,11 +79,11 @@ class Geodetic_LatLong
 
 
     /**
-     *  Set the Latitude
+     * Set the Latitude
      *
-     *  @param     Geodetic_Angle    $latitudeObj    The Latitude
-     *  @return    Geodetic_LatLong
-     *  @throws    Geodetic_Exception
+     * @param     Geodetic_Angle    $latitudeObj    The Latitude
+     * @return    Geodetic_LatLong
+     * @throws    Geodetic_Exception
      */
     public function setLatitude(Geodetic_Angle $latitudeObj = NULL)
     {
@@ -96,9 +96,9 @@ class Geodetic_LatLong
     }
 
     /**
-     *  Get the Latitude as a Geodetic_Angle object
+     * Get the Latitude as a Geodetic_Angle object
      *
-     *  @return    Geodetic_Angle    The Latitude
+     * @return    Geodetic_Angle    The Latitude
      */
     public function getLatitude()
     {
@@ -106,11 +106,11 @@ class Geodetic_LatLong
     }
 
     /**
-     *  Set the Longitude
+     * Set the Longitude
      *
-     *  @param     Geodetic_Angle    $longitudeObj    The Longitude
-     *  @return    Geodetic_LatLong
-     *  @throws    Geodetic_Exception
+     * @param     Geodetic_Angle    $longitudeObj    The Longitude
+     * @return    Geodetic_LatLong
+     * @throws    Geodetic_Exception
      */
     public function setLongitude(Geodetic_Angle $longitudeObj = NULL)
     {
@@ -123,9 +123,9 @@ class Geodetic_LatLong
     }
 
     /**
-     *  Get the Longitude as a Geodetic_Angle object
+     * Get the Longitude as a Geodetic_Angle object
      *
-     *  @return    Geodetic_Angle    The Longitude
+     * @return    Geodetic_Angle    The Longitude
      */
     public function getLongitude()
     {
@@ -133,11 +133,11 @@ class Geodetic_LatLong
     }
 
     /**
-     *  Set the Height
+     * Set the Height
      *
-     *  @param     Geodetic_Distance    $heightObj    The Height
-     *  @return    Geodetic_LatLong
-     *  @throws    Geodetic_Exception
+     * @param     Geodetic_Distance    $heightObj    The Height
+     * @return    Geodetic_LatLong
+     * @throws    Geodetic_Exception
      */
     public function setHeight(Geodetic_Distance $heightObj = NULL)
     {
@@ -150,9 +150,9 @@ class Geodetic_LatLong
     }
 
     /**
-     *  Get the Height as a Geodetic_Distance object
+     * Get the Height as a Geodetic_Distance object
      *
-     *  @return    Geodetic_Distance    The Height
+     * @return    Geodetic_Distance    The Height
      */
     public function getHeight()
     {
@@ -160,14 +160,14 @@ class Geodetic_LatLong
     }
 
     /**
-     *  Validate a latitude, and return its value in radians
+     * Validate a latitude, and return its value in radians
      *
-     *  @public
-     *  @param     integer|float    $latitude    Angle of Latitude for the Radius of Curvature
-     *  @param     string           $degRad      Indicating whether the Angle of Latitude is being specified
-     *                                               in degrees or radians
-     *  @return    float            The specified latitude in radians
-     *  @throws    Geodetic_Exception
+     * @public
+     * @param     integer|float    $latitude    Angle of Latitude for the Radius of Curvature
+     * @param     string           $degrad      Indicating whether the Angle of Latitude is being specified
+     *                                              in degrees or radians
+     * @return    float            The specified latitude in radians
+     * @throws    Geodetic_Exception
      */
     public static function validateLatitude($latitude = NULL,
                                             $degrad = Geodetic_Angle::DEGREES)
@@ -190,14 +190,14 @@ class Geodetic_LatLong
     }
 
     /**
-     *  Validate a longitude, and return its value in radians
+     * Validate a longitude, and return its value in radians
      *
-     *  @public
-     *  @param     integer|float    $longitude    Angle of Longitude for the Radius of Curvature
-     *  @param     string           $degRad       Indicating whether the Angle of Longitude is being specified
-     *                                                in degrees or radians
-     *  @return    float            The specified longitude in radians
-     *  @throws    Geodetic_Exception
+     * @public
+     * @param     integer|float    $longitude    Angle of Longitude for the Radius of Curvature
+     * @param     string           $degrad       Indicating whether the Angle of Longitude is being specified
+     *                                               in degrees or radians
+     * @return    float            The specified longitude in radians
+     * @throws    Geodetic_Exception
      */
     public static function validateLongitude($longitude = NULL,
                                              $degrad = Geodetic_Angle::DEGREES)
@@ -220,11 +220,11 @@ class Geodetic_LatLong
     }
 
     /**
-     *  Convert this Latitude/Longitude to an Earth-Centric Earth-Fixed Geodetic_ECEF object using a specified Datum
+     * Convert this Latitude/Longitude to an Earth-Centric Earth-Fixed Geodetic_ECEF object using a specified Datum
      *
-     *  @param     Geodetic_Datum    $datum    The Datum to use for this transform
-     *  @return    Geodetic_ECEF     The Earth-Centric Earth-Fixed Geodetic_ECEF object that matches this Latitude/Longitude
-     *  @throws    Geodetic_Exception
+     * @param     Geodetic_Datum    $datum    The Datum to use for this transform
+     * @return    Geodetic_ECEF     The Earth-Centric Earth-Fixed Geodetic_ECEF object that matches this Latitude/Longitude
+     * @throws    Geodetic_Exception
      */
     public function toECEF(Geodetic_Datum $datum = NULL)
     {
@@ -253,11 +253,11 @@ class Geodetic_LatLong
     }
 
     /**
-     *  Convert this Latitude/Longitude to a Univeral Transverse Mercator Geodetic_UTM object using a specified Datum
+     * Convert this Latitude/Longitude to a Univeral Transverse Mercator Geodetic_UTM object using a specified Datum
      *
-     *  @param     Geodetic_Datum    $datum    The Datum to use for this transform
-     *  @return    Geodetic_UTF      The Univeral Transverse Mercator Geodetic_UTM object that matches this Latitude/Longitude
-     *  @throws    Geodetic_Exception
+     * @param     Geodetic_Datum    $datum    The Datum to use for this transform
+     * @return    Geodetic_UTF      The Univeral Transverse Mercator Geodetic_UTM object that matches this Latitude/Longitude
+     * @throws    Geodetic_Exception
      */
     public function toUTM(Geodetic_Datum $datum = NULL)
     {
@@ -330,17 +330,17 @@ class Geodetic_LatLong
     }
 
     /**
-     *  Get the distance between two Latitude/Longitude objects using the Haversine formula
+     * Get the distance between two Latitude/Longitude objects using the Haversine formula
      *
-     *  The Haversine Formula calculates the distance to your destination point assuming a spherical Earth
+     * The Haversine Formula calculates the distance to your destination point assuming a spherical Earth
      *
-     *  @param     Geodetic_LatLong               $distanceToPoint    The destination point
-     *  @param     Geodetic_ReferenceEllipsoid    $ellipsoid          If left blank, a default value of 6371009.0 metres will
-     *                                                                    be used for the Earth Mean Radius for the calculation;
-     *                                                                If a reference ellipsoid is specified, the Authalic Radius
-     *                                                                    for that ellipsoid will be used.
-     *  @return    Geodetic_Distance              The great circle distance between this Lat/Long and the $endpoint Lat/Long
-     *  @throws    Geodetic_Exception
+     * @param     Geodetic_LatLong               $distanceToPoint    The destination point
+     * @param     Geodetic_ReferenceEllipsoid    $ellipsoid          If left blank, a default value of 6371009.0 metres will
+     *                                                                   be used for the Earth Mean Radius for the calculation;
+     *                                                               If a reference ellipsoid is specified, the Authalic Radius
+     *                                                                   for that ellipsoid will be used.
+     * @return    Geodetic_Distance              The great circle distance between this Lat/Long and the $endpoint Lat/Long
+     * @throws    Geodetic_Exception
      */
     public function getDistanceHaversine(Geodetic_LatLong $distanceToPoint,
                                          Geodetic_ReferenceEllipsoid $ellipsoid = NULL)
@@ -367,14 +367,14 @@ class Geodetic_LatLong
     }
 
     /**
-     *  Get the distance between two Latitude/Longitude objects using the Vincenty formula
+     * Get the distance between two Latitude/Longitude objects using the Vincenty formula
      *
-     *  The Vincenty Formula calculates the distance to your destination point based on the specified ellipsoid
+     * The Vincenty Formula calculates the distance to your destination point based on the specified ellipsoid
      *
-     *  @param     Geodetic_LatLong               $endPoint    The destination point
-     *  @param     Geodetic_ReferenceEllipsoid    $ellipsoid
-     *  @return    Geodetic_Distance              The great circle distance between this Lat/Long and the $endpoint Lat/Long
-     *  @throws    Geodetic_Exception
+     * @param     Geodetic_LatLong               $endPoint    The destination point
+     * @param     Geodetic_ReferenceEllipsoid    $ellipsoid
+     * @return    Geodetic_Distance              The great circle distance between this Lat/Long and the $endpoint Lat/Long
+     * @throws    Geodetic_Exception
      */
     public function getDistanceVincenty(Geodetic_LatLong $endPoint,
                                         Geodetic_ReferenceEllipsoid $ellipsoid = NULL)
@@ -437,11 +437,11 @@ class Geodetic_LatLong
     }
 
     /**
-     *  Get the initial bearing for a great circle route between two Latitude/Longitude objects
+     * Get the initial bearing for a great circle route between two Latitude/Longitude objects
      *
-     *  @param     Geodetic_LatLong    $endPoint    The destination point
-     *  @return    Geodetic_Angle      The initial bearing to reach $endPoint
-     *  @throws    Geodetic_Exception
+     * @param     Geodetic_LatLong    $endPoint    The destination point
+     * @return    Geodetic_Angle      The initial bearing to reach $endPoint
+     * @throws    Geodetic_Exception
      */
     public function getInitialBearing(Geodetic_LatLong $endPoint)
     {
@@ -461,11 +461,11 @@ class Geodetic_LatLong
     }
 
     /**
-     *  Get the final bearing for a great circle route between two Latitude/Longitude objects
+     * Get the final bearing for a great circle route between two Latitude/Longitude objects
      *
-     *  @param     Geodetic_LatLong    $endPoint    The destination point
-     *  @return    Geodetic_Angle      The final bearing when $endPoint is reached
-     *  @throws    Geodetic_Exception
+     * @param     Geodetic_LatLong    $endPoint    The destination point
+     * @return    Geodetic_Angle      The final bearing when $endPoint is reached
+     * @throws    Geodetic_Exception
      */
     public function getFinalBearing(Geodetic_LatLong $endPoint)
     {
@@ -476,10 +476,10 @@ class Geodetic_LatLong
     }
 
     /**
-     *  Ensure that a latitude value falls within a valid range
+     * Ensure that a latitude value falls within a valid range
      *
-     *  @param     float    $latitude    The latitude in radians
-     *  @return    float    The "fixed" latitude in radians
+     * @param     float    $latitude    The latitude in radians
+     * @return    float    The "fixed" latitude in radians
      */
     private static function _cleanLatitude($latitude)
     {
@@ -492,10 +492,10 @@ class Geodetic_LatLong
     }
 
     /**
-     *  Ensure that a longitude value falls within a valid range
+     * Ensure that a longitude value falls within a valid range
      *
-     *  @param     float    $latitude    The latitude in radians
-     *  @return    float    The "fixed" latitude in radians
+     * @param     float    $longitude    The longitude in radians
+     * @return    float    The "fixed" longitude in radians
      */
     private static function _cleanLongitude($longitude)
     {
@@ -508,11 +508,11 @@ class Geodetic_LatLong
     }
 
     /**
-     *  Get the midpoint for a great circle route between two Latitude/Longitude objects
+     * Get the midpoint for a great circle route between two Latitude/Longitude objects
      *
-     *  @param     Geodetic_LatLong    $endPoint    The destination point
-     *  @return    Geodetic_LatLong    The midpoint Lat/Long between this Lat/Long and the $endpoint Lat/Long
-     *  @throws    Geodetic_Exception
+     * @param     Geodetic_LatLong    $endPoint    The destination point
+     * @return    Geodetic_LatLong    The midpoint Lat/Long between this Lat/Long and the $endpoint Lat/Long
+     * @throws    Geodetic_Exception
      */
     public function getMidpoint(Geodetic_LatLong $endPoint)
     {
@@ -543,17 +543,17 @@ class Geodetic_LatLong
     }
 
     /**
-     *  Get the destination for a given initial bearing and distance along a great circle route
+     * Get the destination for a given initial bearing and distance along a great circle route
      *
-     *  @param     Geodetic_Angle                 $bearing      Initial bearing
-     *  @param     Geodetic_Distance              $distance     Distance to travel along the route
-     *  @param     Geodetic_ReferenceEllipsoid    $ellipsoid    If left blank, a default value of 6371009.0 metres will
-     *                                                              be used for the Earth Mean Radius for the calculation;
-     *                                                          If a reference ellipsoid is specified, the Authalic Radius for
-     *                                                              that ellipsoid will be used.
-     *  @return    Geodetic_LatLong               The endpoint Lat/Long for a journey from this Lat/Long starting on a bearing
-     *                                                of $bearing and travelling for $distance along a great circle route
-     *  @throws    Geodetic_Exception
+     * @param     Geodetic_Angle                 $bearing      Initial bearing
+     * @param     Geodetic_Distance              $distance     Distance to travel along the route
+     * @param     Geodetic_ReferenceEllipsoid    $ellipsoid    If left blank, a default value of 6371009.0 metres will
+     *                                                             be used for the Earth Mean Radius for the calculation;
+     *                                                         If a reference ellipsoid is specified, the Authalic Radius for
+     *                                                             that ellipsoid will be used.
+     * @return    Geodetic_LatLong               The endpoint Lat/Long for a journey from this Lat/Long starting on a bearing
+     *                                               of $bearing and travelling for $distance along a great circle route
+     * @throws    Geodetic_Exception
      */
     public function getDestination(Geodetic_Angle $bearing,
                                    Geodetic_Distance $distance,

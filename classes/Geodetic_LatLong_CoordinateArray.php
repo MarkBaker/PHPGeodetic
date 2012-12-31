@@ -2,20 +2,23 @@
 
 /**
  *
- *  @package Geodetic
- *  @copyright  Copyright (c) 2012 Mark Baker (https://github.com/MarkBaker/PHPGeodetic)
- *  @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ * Class that accepts an array of values for a Lat/Long object and creates a standardised interface
+ * that can be passed to the Lat/Long constructor
+ *
+ * @package Geodetic
+ * @copyright  Copyright (c) 2012 Mark Baker (https://github.com/MarkBaker/PHPGeodetic)
+ * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
  */
 class Geodetic_LatLong_CoordinateArray extends Geodetic_LatLong_Coordinates_Abstract
 {
     /**
-     *  Create a new set of coordinates for a Latitude/Longitude object
+     * Create a new set of coordinates for a Latitude/Longitude object
      *
-     *  @param     integer[]|float[]    $latLongCoordinates    Latitude value
-     *  @param     string               $latLongUom            Unit of Measure for Latitude and Longitude values
-     *  @param     integer|float        $height                Height value
-     *  @param     string               $heightUom             Unit of Measure for Height value
-     *  @throws    Geodetic_Exception
+     * @param     integer[]|float[]    $latLongCoordinates    Latitude value
+     * @param     string               $latLongUom            Unit of Measure for Latitude and Longitude values
+     * @param     integer|float        $zHeight               Height value
+     * @param     string               $heightUom             Unit of Measure for Height value
+     * @throws    Geodetic_Exception
      */
     public function __construct(array $latLongCoordinates = NULL,
                                 $latLongUom = Geodetic_Angle::DEGREES,

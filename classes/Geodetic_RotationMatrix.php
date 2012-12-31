@@ -1,38 +1,38 @@
 <?php
 
 /**
- *  Rotation Matrix.
+ * Rotation Matrix.
  *
- *  @package Geodetic
- *  @copyright  Copyright (c) 2012 Mark Baker (https://github.com/MarkBaker/PHPGeodetic)
- *  @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ * @package Geodetic
+ * @copyright  Copyright (c) 2012 Mark Baker (https://github.com/MarkBaker/PHPGeodetic)
+ * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
  */
 class Geodetic_RotationMatrix
 {
     /**
-     *  The Angle of Rotation on the X-Axis value of this RotationMatrix object.
-     *  This value will always be maintained internally in degrees (°)
+     * The Angle of Rotation on the X-Axis value of this RotationMatrix object.
+     * This value will always be maintained internally in degrees (°)
      *
-     *  @access protected
-     *  @var Geodetic_Angle
+     * @access protected
+     * @var Geodetic_Angle
      */
     protected $_xAngle;
 
     /**
-     *  The Angle of Rotation on the Y-Axis value of this RotationMatrix object.
-     *  This value will always be maintained internally in degrees (°)
+     * The Angle of Rotation on the Y-Axis value of this RotationMatrix object.
+     * This value will always be maintained internally in degrees (°)
      *
-     *  @access protected
-     *  @var Geodetic_Angle
+     * @access protected
+     * @var Geodetic_Angle
      */
     protected $_yAngle;
 
     /**
-     *  The Angle of Rotation on the Z-Axis value of this RotationMatrix object.
-     *  This value will always be maintained internally in degrees (°)
+     * The Angle of Rotation on the Z-Axis value of this RotationMatrix object.
+     * This value will always be maintained internally in degrees (°)
      *
-     *  @access protected
-     *  @var Geodetic_Angle
+     * @access protected
+     * @var Geodetic_Angle
      */
     protected $_zAngle;
 
@@ -40,8 +40,8 @@ class Geodetic_RotationMatrix
     /**
      * Create a new Rotation Matrix
      *
-     *  @param     Geodetic_XyzFormat_Interface    $xyzCoordinates    The Rotation Matrix values
-     *  @throws    Geodetic_Exception
+     * @param     Geodetic_XyzFormat_Interface    $xyzCoordinates    The Rotation Matrix values
+     * @throws    Geodetic_Exception
      */
     function __construct(Geodetic_XyzFormat_Interface $xyzCoordinates = NULL)
     {
@@ -60,11 +60,11 @@ class Geodetic_RotationMatrix
 
 
     /**
-     *  Set the Angle of Rotation on the X-Axis
+     * Set the Angle of Rotation on the X-Axis
      *
-     *  @param     Geodetic_Angle    $xAngle      The Angle of Rotation on the X-Axis
-     *  @return    Geodetic_RotationMatrix
-     *  @throws    Geodetic_Exception
+     * @param     Geodetic_Angle    $xAngle      The Angle of Rotation on the X-Axis
+     * @return    Geodetic_RotationMatrix
+     * @throws    Geodetic_Exception
      */
     public function setX(Geodetic_Angle $xAngle = NULL)
     {
@@ -77,10 +77,10 @@ class Geodetic_RotationMatrix
     }
 
     /**
-     *  Get the Angle of Rotation on the X-Axis
+     * Get the Angle of Rotation on the X-Axis
      *
-     *  @return    Geodetic_Angle    The Angle of Rotation on the X-Axis
-     *  @throws    Geodetic_Exception
+     * @return    Geodetic_Angle    The Angle of Rotation on the X-Axis
+     * @throws    Geodetic_Exception
      */
     public function getX()
     {
@@ -88,11 +88,11 @@ class Geodetic_RotationMatrix
     }
 
     /**
-     *  Set the Angle of Rotation on the Y-Axis
+     * Set the Angle of Rotation on the Y-Axis
      *
-     *  @param     Geodetic_Angle    $yAngle    The Angle of Rotation on the Z-Axis
-     *  @return    Geodetic_RotationMatrix
-     *  @throws    Geodetic_Exception
+     * @param     Geodetic_Angle    $yAngle    The Angle of Rotation on the Z-Axis
+     * @return    Geodetic_RotationMatrix
+     * @throws    Geodetic_Exception
      */
     public function setY(Geodetic_Angle $yAngle = NULL)
     {
@@ -105,10 +105,10 @@ class Geodetic_RotationMatrix
     }
 
     /**
-     *  Get the Angle of Rotation on the Y-Axis
+     * Get the Angle of Rotation on the Y-Axis
      *
-     *  @return    Geodetic_Angle    The Angle of Rotation on the Y-Axis
-     *  @throws    Geodetic_Exception
+     * @return    Geodetic_Angle    The Angle of Rotation on the Y-Axis
+     * @throws    Geodetic_Exception
      */
     public function getY()
     {
@@ -116,11 +116,11 @@ class Geodetic_RotationMatrix
     }
 
     /**
-     *  Set the Angle of Rotation on the Z-Axis
+     * Set the Angle of Rotation on the Z-Axis
      *
-     *  @param     Geodetic_Angle    $zAngle    The Angle of Rotation on the Z-Axis
-     *  @return    Geodetic_RotationMatrix
-     *  @throws    Geodetic_Exception
+     * @param     Geodetic_Angle    $zAngle    The Angle of Rotation on the Z-Axis
+     * @return    Geodetic_RotationMatrix
+     * @throws    Geodetic_Exception
      */
     public function setZ(Geodetic_Angle $zAngle = NULL)
     {
@@ -133,10 +133,10 @@ class Geodetic_RotationMatrix
     }
 
     /**
-     *  Get the Angle of Rotation on the Z-Axis
+     * Get the Angle of Rotation on the Z-Axis
      *
-     *  @return    Geodetic_Angle    The Angle of Rotation on the Z-Axis
-     *  @throws    Geodetic_Exception
+     * @return    Geodetic_Angle    The Angle of Rotation on the Z-Axis
+     * @throws    Geodetic_Exception
      */
     public function getZ()
     {

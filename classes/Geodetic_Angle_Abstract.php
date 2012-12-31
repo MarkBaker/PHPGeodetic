@@ -2,45 +2,48 @@
 
 /**
  *
- *  @package Geodetic
- *  @subpackage Measures
- *  @copyright  Copyright (c) 2012 Mark Baker (https://github.com/MarkBaker/PHPGeodetic)
- *  @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ * Interface for overloading constructor in classes that require x, y and z arguments
+ *     with angle values
+ *
+ * @package Geodetic
+ * @subpackage Measures
+ * @copyright  Copyright (c) 2012 Mark Baker (https://github.com/MarkBaker/PHPGeodetic)
+ * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
  */
 abstract class Geodetic_Angle_Abstract implements Geodetic_XyzFormat_Interface
 {
     /**
-     *  The X-angle
+     * The X-angle
      *
-     *  @access protected
-     *  @var    Geodetic_Angle
+     * @access protected
+     * @var    Geodetic_Angle
      */
     protected $_xAngle;
 
     /**
-     *  The Y-angle
+     * The Y-angle
      *
-     *  @access protected
-     *  @var    Geodetic_Angle
+     * @access protected
+     * @var    Geodetic_Angle
      */
     protected $_yAngle;
 
     /**
-     *  The Z-angle
+     * The Z-angle
      *
-     *  @access protected
-     *  @var    Geodetic_Angle
+     * @access protected
+     * @var    Geodetic_Angle
      */
     protected $_zAngle;
 
     /**
-     *  Set the three Angle values, as used for the Rotation Matrix
+     * Set the three Angle values, as used for the Rotation Matrix
      *
-     *  @param     Integer|Float|Geodetic_Angle    $xAngle    The X-Angle value
-     *  @param     Integer|Float|Geodetic_Angle    $yAngle    The Y-Angle value
-     *  @param     Integer|Float|Geodetic_Angle    $zAngle    The Z-Angle value
-     *  @param     string                          $uom       Unit of measure for all Angle values
-     *                                                            (if they are passed as integer or float)
+     * @param    integer|float|Geodetic_Angle    $xAngle    The X-Angle value
+     * @param    integer|float|Geodetic_Angle    $yAngle    The Y-Angle value
+     * @param    integer|float|Geodetic_Angle    $zAngle    The Z-Angle value
+     * @param    string                          $uom       Unit of measure for all Angle values
+     *                                                          (if they are passed as integer or float)
      */
     protected function setValues($xAngle,
                                  $yAngle,
@@ -61,9 +64,9 @@ abstract class Geodetic_Angle_Abstract implements Geodetic_XyzFormat_Interface
     }
 
     /**
-     *  Set the X-Angle value
+     * Set the X-Angle value
      *
-     *  @param     Geodetic_Angle    $angle    The Angle value
+     * @param     Geodetic_Angle    $xAngle    The Angle value
      */
     protected function setX(Geodetic_Angle $xAngle)
     {
@@ -71,9 +74,9 @@ abstract class Geodetic_Angle_Abstract implements Geodetic_XyzFormat_Interface
     }
 
     /**
-     *  Get the X-Angle value
+     * Get the X-Angle value
      *
-     *  @return     Geodetic_Angle    The Angle value
+     * @return     Geodetic_Angle    The Angle value
      */
     public function getX()
     {
@@ -81,9 +84,9 @@ abstract class Geodetic_Angle_Abstract implements Geodetic_XyzFormat_Interface
     }
 
     /**
-     *  Set the Y-Angle value
+     * Set the Y-Angle value
      *
-     *  @param     Geodetic_Angle    $angle    The Angle value
+     * @param     Geodetic_Angle    $yAngle    The Angle value
      */
     protected function setY(Geodetic_Angle $yAngle)
     {
@@ -91,9 +94,9 @@ abstract class Geodetic_Angle_Abstract implements Geodetic_XyzFormat_Interface
     }
 
     /**
-     *  Get the Y-Angle value
+     * Get the Y-Angle value
      *
-     *  @return     Geodetic_Angle    The Angle value
+     * @return     Geodetic_Angle    The Angle value
      */
     public function getY()
     {
@@ -101,9 +104,9 @@ abstract class Geodetic_Angle_Abstract implements Geodetic_XyzFormat_Interface
     }
 
     /**
-     *  Set the Z-Angle value
+     * Set the Z-Angle value
      *
-     *  @param     Geodetic_Angle    $angle    The Angle value
+     * @param     Geodetic_Angle    $zAngle    The Angle value
      */
     protected function setZ(Geodetic_Angle $zAngle)
     {
@@ -111,9 +114,9 @@ abstract class Geodetic_Angle_Abstract implements Geodetic_XyzFormat_Interface
     }
 
     /**
-     *  Get the Z-Angle value
+     * Get the Z-Angle value
      *
-     *  @return     Geodetic_Angle    The Angle value
+     * @return     Geodetic_Angle    The Angle value
      */
     public function getZ()
     {

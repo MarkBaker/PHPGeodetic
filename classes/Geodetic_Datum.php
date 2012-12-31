@@ -13,11 +13,12 @@
  *  covering the British Isles than the global WGS 84 ellipsoid. However, as the benefits of a global system
  *  outweigh the greater accuracy, the global WGS 84 datum is becoming increasingly adopted.
  *
- *  -    Description modified from the Wikipedia article at http://en.wikipedia.org/wiki/Geodetic_datum
+ *  -    Description modified from the Wikipedia article at
+ *           http://en.wikipedia.org/wiki/Geodetic_datum
  *
- *  @package Geodetic
- *  @copyright  Copyright (c) 2012 Mark Baker (https://github.com/MarkBaker/PHPGeodetic)
- *  @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ * @package Geodetic
+ * @copyright  Copyright (c) 2012 Mark Baker (https://github.com/MarkBaker/PHPGeodetic)
+ * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
  */
 class Geodetic_Datum
 {
@@ -37,10 +38,10 @@ class Geodetic_Datum
 
 
     /**
-     *  Values for all pre-defined Datums
+     * Values for all pre-defined Datums
      *
-     *  @access private
-     *  @var    mixed[]
+     * @access private
+     * @var    mixed[]
      */
     private static $_geodeticDatums = array(
         self::OSGB36 => array(
@@ -449,12 +450,52 @@ class Geodetic_Datum
     );
 
 
+    /**
+     * Reference code for this datum
+     *
+     * @access protected
+     * @var    string
+     */
     protected $_datumReference;
+
+    /**
+     * Name of this datum
+     *
+     * @access protected
+     * @var    string
+     */
     protected $_datumName;
+
+    /**
+     * Name of the selected region for this datum
+     *
+     * @access protected
+     * @var    string
+     */
     protected $_regionName;
 
+    /**
+     * Name of reference ellipsoid for this datum
+     *
+     * @access protected
+     * @var    string
+     */
     protected $_ellipsoidName;
+
+    /**
+     * The reference ellipsoid for this datum
+     *
+     * @access protected
+     * @var    Geodetic_ReferenceEllipsoid
+     */
     protected $_ellipsoid;
+
+    /**
+     * The bursa wolf parameter set used for converting this datum to and from WGS_84
+     *
+     * @access protected
+     * @var    Geodetic_BursaWolfParameters
+     */
     protected $_bursaWolfParameters;
 
     /**
@@ -472,9 +513,9 @@ class Geodetic_Datum
 
 
     /**
-     *    Get the internal reference name of this Datum object
+     * Get the internal reference name of this Datum object
      *
-     *    @return   string    The reference name of this datum
+     * @return   string    The reference name of this datum
      */
     public function getDatumReference()
     {
@@ -482,9 +523,9 @@ class Geodetic_Datum
     }
 
     /**
-     *    Get the descriptive name of this Datum object
+     * Get the descriptive name of this Datum object
      *
-     *    @return   string    The name of this datum
+     * @return   string    The name of this datum
      */
     public function getDatumName()
     {
@@ -492,9 +533,9 @@ class Geodetic_Datum
     }
 
     /**
-     *    Get the Name of the Datum region
+     * Get the Name of the Datum region
      *
-     *    @return   string    The name of this datum region
+     * @return   string    The name of this datum region
      */
     public function getRegionName()
     {
@@ -531,9 +572,9 @@ class Geodetic_Datum
      *
      * @param    string    $datum     The name of the datum to use for this ellipsoid
      * @param    string    $region    The name of a region within this datum to use for Helmert Transform Bursa-Wolf parameters.
-     *                                If no region is specified, the object will use a default set of values for the
-     *                                    Helmert transform Bursa-Wolf parameters from the region defined in defaultRegion for
-     *                                    the Datum.
+     *                    If no region is specified, the object will use a default set of values for the
+     *                        Helmert transform Bursa-Wolf parameters from the region defined in defaultRegion for
+     *                        the Datum.
      * @return   Geodetic_Datum
      * @throws   Geodetic_Exception
      */
@@ -594,9 +635,9 @@ class Geodetic_Datum
     }
 
     /**
-     *    Get the name of the Reference Elipsoid used for this Datum
+     * Get the name of the Reference Elipsoid used for this Datum
      *
-     *    @return   string    The Name of the Reference Ellipsoid for this Datum
+     * @return   string    The Name of the Reference Ellipsoid for this Datum
      */
     public function getReferenceEllipsoidName()
     {
@@ -604,9 +645,9 @@ class Geodetic_Datum
     }
 
     /**
-     *    Get the Reference Elipsoid used for this Datum
+     * Get the Reference Elipsoid used for this Datum
      *
-     *    @return   Geodetic_ReferenceEllipsoid    The Reference Ellipsoid for this Datum
+     * @return   Geodetic_ReferenceEllipsoid    The Reference Ellipsoid for this Datum
      */
     public function getReferenceEllipsoid()
     {
@@ -614,9 +655,9 @@ class Geodetic_Datum
     }
 
     /**
-     *    Get the Bursa-Wolf Parameters used to transpose this Datum to WGS84
+     * Get the Bursa-Wolf Parameters used to transpose this Datum to WGS84
      *
-     *    @return   Geodetic_BursaWolfParameters    The Bursa-Wolf Parameters used to transpose this Datum to WGS84
+     * @return   Geodetic_BursaWolfParameters    The Bursa-Wolf Parameters used to transpose this Datum to WGS84
      */
     public function getBursaWolfParameters()
     {
@@ -624,9 +665,9 @@ class Geodetic_Datum
     }
 
     /**
-     *    Get a list of the supported Datum names
+     * Get a list of the supported Datum names
      *
-     *    @return   array of string        An array listing the supported Datum names
+     * @return   array of string        An array listing the supported Datum names
      */
     public static function getDatumNames()
     {
@@ -644,9 +685,10 @@ class Geodetic_Datum
     }
 
     /**
-     *    Get a list of the supported Region names for the specified Datum
+     * Get a list of the supported Region names for the specified Datum
      *
-     *    @return   array of string        An array listing the supported Region names for the specified Datum
+     * @param    string    $datum    The name of the datum for whic we want a list of regions
+     * @return   string[]            An array listing the supported Region names for the specified Datum
      */
     public static function getRegionNamesForDatum($datum = NULL)
     {
