@@ -135,6 +135,65 @@ class Geodetic_Region
     }
 
     /**
+     * Get the Planar Area of this region
+     *
+     * @return    float    The planar area of this region in degrees squared
+     */
+    private function _getAreaPlanarDegrees()
+    {
+        $pointCount = count($this->_perimeterPoints);
+
+        $area = 0;
+        for($i = 0; $i < $pointCount; ++$i) {
+            $j = ($i+1) % $pointCount;
+            $area += (($this->_perimeterPoints[$i]->getLongitude()->getValue() *
+                       $this->_perimeterPoints[$j]->getLatitude()->getValue()) -
+                      ($this->_perimeterPoints[$j]->getLongitude()->getValue() *
+                       $this->_perimeterPoints[$i]->getLatitude()->getValue())
+                     );
+        }
+
+        return $area / 2;
+    }
+
+    /**
+     * Get the Planar Centre Point of this region
+     *
+     * @return    Geodetic_LatLong    The planar centre point of this region
+     * @throws    Geodetic_Exception
+     */
+    public function getCentrePointPlanar()
+    {
+        $pointCount = count($this->_perimeterPoints);
+        if ($pointCount == 0)
+            throw new Geodetic_Exception('Area is not defined, so cannot have a centre point');
+
+        $cLong = $cLat = 0;
+        for($i = 0; $i < $pointCount; ++$i) {
+            $j = ($i+1) % $pointCount;
+            $cTemp = (($this->_perimeterPoints[$i]->getLongitude()->getValue() *
+                       $this->_perimeterPoints[$j]->getLatitude()->getValue()) -
+                      ($this->_perimeterPoints[$j]->getLongitude()->getValue() *
+                       $this->_perimeterPoints[$i]->getLatitude()->getValue())
+                     );
+            $cLat +=  ($this->_perimeterPoints[$i]->getLatitude()->getValue() +
+                       $this->_perimeterPoints[$j]->getLatitude()->getValue()) *
+                      $cTemp;
+            $cLong += ($this->_perimeterPoints[$i]->getLongitude()->getValue() +
+                       $this->_perimeterPoints[$j]->getLongitude()->getValue()) *
+                      $cTemp;
+        }
+
+        return new Geodetic_LatLong(
+            new Geodetic_LatLong_CoordinateValues(
+                $cLat,
+                $cLong,
+                Geodetic_Angle::RADIANS
+            )
+        );
+    }
+
+    /**
      * Get the Area of this region
      *
      * @param     Geodetic_ReferenceEllipsoid|NULL    $ellipsoid    Reference Ellipsoid to use for this calculation
