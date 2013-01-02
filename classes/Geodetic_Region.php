@@ -3,7 +3,12 @@
 /**
  * Region coordinate object.
  *
+ * Regions can be used to represent enclosed geographic features such as islands, country borders and legislative
+ *     boundaries and end at another point, rather than linear features such as roads and rivers that can be
+ *     represented by the Geodetic_Line object.
+ *
  * @package Geodetic
+ * @subpackage Features
  * @copyright  Copyright (c) 2012 Mark Baker (https://github.com/MarkBaker/PHPGeodetic)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
  */
@@ -16,7 +21,7 @@ class Geodetic_Region
      * @access protected
      * @var Geodetic_Angle[]
      */
-    protected $_perimeterPoints;
+    protected $_nodePoints;
 
 
     /**
@@ -48,7 +53,7 @@ class Geodetic_Region
             }
         }
 
-        $this->_perimeterPoints = $perimeterPoints;
+        $this->_nodePoints = $perimeterPoints;
 
         return $this;
     }
@@ -60,7 +65,7 @@ class Geodetic_Region
      */
     public function getPerimeterPoints()
     {
-        return $this->_perimeterPoints;
+        return $this->_nodePoints;
     }
 
     /**
@@ -83,7 +88,7 @@ class Geodetic_Region
      */
     public function getAreaPlanar(Geodetic_ReferenceEllipsoid $ellipsoid = NULL)
     {
-        $pointCount = count($this->_perimeterPoints);
+        $pointCount = count($this->_nodePoints);
         if ($pointCount == 0)
             return new Geodetic_Area();
 
@@ -96,18 +101,18 @@ class Geodetic_Region
         for($j = 0; $j < $pointCount; ++$j) {
             $k = $j + 1;
             if ($j == 0) {
-                $lambda1 = $this->_perimeterPoints[$j]->getLongitude()->getValue(Geodetic_Angle::RADIANS);
-                $beta1 = $this->_perimeterPoints[$j]->getLatitude()->getValue(Geodetic_Angle::RADIANS);
-                $lambda2 = $this->_perimeterPoints[$k]->getLongitude()->getValue(Geodetic_Angle::RADIANS);
-                $beta2 = $this->_perimeterPoints[$k]->getLatitude()->getValue(Geodetic_Angle::RADIANS);
+                $lambda1 = $this->_nodePoints[$j]->getLongitude()->getValue(Geodetic_Angle::RADIANS);
+                $beta1 = $this->_nodePoints[$j]->getLatitude()->getValue(Geodetic_Angle::RADIANS);
+                $lambda2 = $this->_nodePoints[$k]->getLongitude()->getValue(Geodetic_Angle::RADIANS);
+                $beta2 = $this->_nodePoints[$k]->getLatitude()->getValue(Geodetic_Angle::RADIANS);
                 $cosB1 = cos($beta1);
                 $cosB2 = cos($beta2);
             } else {
                 $k = ($j+1) % $pointCount;
                 $lambda1 = $lambda2;
                 $beta1 = $beta2;
-                $lambda2 = $this->_perimeterPoints[$k]->getLongitude()->getValue(Geodetic_Angle::RADIANS);
-                $beta2 = $this->_perimeterPoints[$k]->getLatitude()->getValue(Geodetic_Angle::RADIANS);
+                $lambda2 = $this->_nodePoints[$k]->getLongitude()->getValue(Geodetic_Angle::RADIANS);
+                $beta2 = $this->_nodePoints[$k]->getLatitude()->getValue(Geodetic_Angle::RADIANS);
                 $cosB1 = $cosB2;
                 $cosB2 = cos($beta2);
             }
@@ -135,21 +140,21 @@ class Geodetic_Region
     }
 
     /**
-     * Get the Planar Area of this region
+     * Get the Signed Area of this region
      *
-     * @return    float    The planar area of this region in degrees squared
+     * @return    float    The signed area of this region in degrees squared
      */
-    private function _getAreaPlanarDegrees()
+    private function _getSignedArea()
     {
-        $pointCount = count($this->_perimeterPoints);
+        $pointCount = count($this->_nodePoints);
 
         $area = 0;
         for($i = 0; $i < $pointCount; ++$i) {
             $j = ($i+1) % $pointCount;
-            $area += (($this->_perimeterPoints[$i]->getLongitude()->getValue() *
-                       $this->_perimeterPoints[$j]->getLatitude()->getValue()) -
-                      ($this->_perimeterPoints[$j]->getLongitude()->getValue() *
-                       $this->_perimeterPoints[$i]->getLatitude()->getValue())
+            $area += (($this->_nodePoints[$i]->getLongitude()->getValue() *
+                       $this->_nodePoints[$j]->getLatitude()->getValue()) -
+                      ($this->_nodePoints[$j]->getLongitude()->getValue() *
+                       $this->_nodePoints[$i]->getLatitude()->getValue())
                      );
         }
 
@@ -159,33 +164,39 @@ class Geodetic_Region
     /**
      * Get the Planar Centre Point of this region
      *
+     * @TODO regions that span the poles, or cross the dateline
+     *
      * @return    Geodetic_LatLong    The planar centre point of this region
      * @throws    Geodetic_Exception
      */
     public function getCentrePointPlanar()
     {
-        $pointCount = count($this->_perimeterPoints);
+        $pointCount = count($this->_nodePoints);
         if ($pointCount == 0)
             throw new Geodetic_Exception('Area is not defined, so cannot have a centre point');
 
         $cLong = $cLat = 0;
         for($i = 0; $i < $pointCount; ++$i) {
             $j = ($i+1) % $pointCount;
-            $cTemp = (($this->_perimeterPoints[$i]->getLongitude()->getValue() *
-                       $this->_perimeterPoints[$j]->getLatitude()->getValue()) -
-                      ($this->_perimeterPoints[$j]->getLongitude()->getValue() *
-                       $this->_perimeterPoints[$i]->getLatitude()->getValue())
+            $cTemp = (($this->_nodePoints[$i]->getLongitude()->getValue() *
+                       $this->_nodePoints[$j]->getLatitude()->getValue()) -
+                      ($this->_nodePoints[$j]->getLongitude()->getValue() *
+                       $this->_nodePoints[$i]->getLatitude()->getValue())
                      );
-            $cLat +=  ($this->_perimeterPoints[$i]->getLatitude()->getValue() +
-                       $this->_perimeterPoints[$j]->getLatitude()->getValue()) *
+            $cLat +=  ($this->_nodePoints[$i]->getLatitude()->getValue() +
+                       $this->_nodePoints[$j]->getLatitude()->getValue()) *
                       $cTemp;
-            $cLong += ($this->_perimeterPoints[$i]->getLongitude()->getValue() +
-                       $this->_perimeterPoints[$j]->getLongitude()->getValue()) *
+            $cLong += ($this->_nodePoints[$i]->getLongitude()->getValue() +
+                       $this->_nodePoints[$j]->getLongitude()->getValue()) *
                       $cTemp;
         }
 
-        $area = $this->_getAreaPlanarDegrees();
-        $areaAdjust = 1 / (6 * $area);
+        $area = $this->_getSignedArea();
+        if ($area == 0) {
+            $areaAdjust = 1;
+        } else {
+            $areaAdjust = 1 / (6 * $area);
+        }
         $cLat *= $areaAdjust;
         $cLong *= $areaAdjust;
 
@@ -198,6 +209,20 @@ class Geodetic_Region
         );
     }
 
+    private function _Q($x)
+    {
+        $sinx = sin($x);
+        $sinx2 = $sinx * $sinx;
+        return $sinx * (1 + $sinx2 * ($this->QA + $sinx2 * ($this->QB + $sinx2 * $this->QC)));
+    }
+
+    private function _Qbar($x)
+    {
+        $cosx = cos($x);
+        $cosx2 = $cosx * $cosx;
+        return $cosx * ($this->QbarA + $cosx2 * ($this->QbarB + $cosx2 * ($this->QbarC + $cosx2 * $this->QbarD)));
+    }
+
     /**
      * Get the Area of this region
      *
@@ -207,29 +232,76 @@ class Geodetic_Region
      */
     public function getArea(Geodetic_ReferenceEllipsoid $ellipsoid = NULL)
     {
-        $pointCount = count($this->_perimeterPoints);
+        $pointCount = count($this->_nodePoints);
         if ($pointCount == 0)
             return new Geodetic_Area();
 
         if (is_null($ellipsoid)) {
             $ellipsoid = new Geodetic_ReferenceEllipsoid(Geodetic_ReferenceEllipsoid::WGS_1984);
         }
-        $radius1 = $ellipsoid->getSemiMajorAxis();
-        $radius2 = $ellipsoid->getSemiMinorAxis();
+        $semiMajorAxis = $ellipsoid->getSemiMajorAxis();
+        $eccentricitySquared = $ellipsoid->getFirstEccentricitySquared();
 
+        $eccentricity4 = $eccentricitySquared * $eccentricitySquared;
+        $eccentricity6 = $eccentricity4 * $eccentricitySquared;
+        $AE = $semiMajorAxis * $semiMajorAxis * (1 - $eccentricitySquared);
+        $this->QA = (2.0 / 3.0) * $eccentricitySquared;
+        $this->QB = (3.0 / 5.0) * $eccentricity4;
+        $this->QC = (4.0 / 7.0) * $eccentricity6;
+        $this->QbarA = -1.0 - (2.0 / 3.0) * $eccentricitySquared - (3.0 / 5.0) * $eccentricity4 - (4.0 / 7.0) * $eccentricity6;
+        $this->QbarB = (2.0 / 9.0) * $eccentricitySquared + (2.0 / 5.0) * $eccentricity4 + (4.0 / 7.0) * $eccentricity6;
+        $this->QbarC = -(3.0 / 25.0) * $eccentricity4 - (12.0 / 35.0) * $eccentricity6;
+        $this->QbarD = (4.0 / 49.0) * $eccentricity6;
+        $Qp = $this->_Q(M_PI_2);
+
+        $earthSurfaceArea = 4 * M_PI * $Qp * $AE;
+        if ($earthSurfaceArea < 0.0)
+            $earthSurfaceArea = -$earthSurfaceArea;
+
+        $pointCount--;
         $area = 0;
-        for($i = 0; $i < $pointCount; ++$i) {
-            $j = ($i+1) % $pointCount;
-            $h = ($i-1) % $pointCount;
-            if ($h < 0)
-                $h += $pointCount;
-            $area += ($this->_perimeterPoints[$j]->getLongitude()->getValue(Geodetic_Angle::RADIANS) -
-                      $this->_perimeterPoints[$h]->getLongitude()->getValue(Geodetic_Angle::RADIANS)) *
-                     sin($this->_perimeterPoints[$i]->getLatitude()->getValue(Geodetic_Angle::RADIANS));
+
+        $longitude2 = $this->_nodePoints[$pointCount]->getLongitude()->getValue(Geodetic_Angle::RADIANS);
+        $latitude2 = $this->_nodePoints[$pointCount]->getLatitude()->getValue(Geodetic_Angle::RADIANS);
+
+        $Qbar2 = $this->_Qbar($latitude2);
+        $area = 0.0;
+        $n = 0;
+        while ($n++ < $pointCount) {
+            $longitude1 = $longitude2;
+            $latitude1 = $latitude2;
+            $Qbar1 = $Qbar2;
+            $longitude2 = $this->_nodePoints[$n]->getLongitude()->getValue(Geodetic_Angle::RADIANS);
+            $latitude2 = $this->_nodePoints[$n]->getLatitude()->getValue(Geodetic_Angle::RADIANS);
+            $Qbar2 = $this->_Qbar($latitude2);
+            if ($longitude1 > $longitude2) {
+                while ($longitude1 - $longitude2 > M_PI) {
+                    $longitude2 += M_PI + M_PI;
+                }
+            } elseif ($longitude2 > $longitude1) {
+                while ($longitude2 - $longitude1 > M_PI) {
+                    $longitude1 += M_PI + M_PI;
+                }
+            }
+            $deltaLongitude = $longitude2 - $longitude1;
+            $area += $deltaLongitude * ($Qp - $this->_Q($latitude2));
+            if (($deltaLatitude = $latitude2 - $latitude1) != 0.0)
+                $area += $deltaLongitude * $this->_Q($latitude2) - ($deltaLongitude / $deltaLatitude) * ($Qbar2 - $Qbar1);
         }
+        if (($area *= $AE) < 0.0)
+            $area = -$area;
+
+        /*
+         * kludge - if polygon circles the south pole the area will be computed as if it cirlced the north pole.
+         * The correction is the difference between total surface area of the earth and the "north pole" area.
+         */
+        if ($area > $earthSurfaceArea)
+            $area = $earthSurfaceArea;
+        if ($area > $earthSurfaceArea / 2)
+            $area = $earthSurfaceArea - $area;
 
         return new Geodetic_Area(
-            abs($area * $radius1 * $radius2 / 2)
+            $area
         );
     }
 
@@ -246,7 +318,7 @@ class Geodetic_Region
     public function getPerimeter(Geodetic_ReferenceEllipsoid $ellipsoid = NULL,
                                  $useHaversine = FALSE)
     {
-        $pointCount = count($this->_perimeterPoints);
+        $pointCount = count($this->_nodePoints);
         if ($pointCount == 0)
             return new Geodetic_Area();
 
@@ -258,13 +330,13 @@ class Geodetic_Region
         for($i = 0; $i < $pointCount; ++$i) {
             $j = ($i+1) % $pointCount;
             if ($useHaversine) {
-                $distance += $this->_perimeterPoints[$i]->getDistanceHaversine(
-                    $this->_perimeterPoints[$j],
+                $distance += $this->_nodePoints[$i]->getDistanceHaversine(
+                    $this->_nodePoints[$j],
                     $ellipsoid
                 )->getValue();
             } else {
-                $distance += $this->_perimeterPoints[$i]->getDistanceVincenty(
-                    $this->_perimeterPoints[$j],
+                $distance += $this->_nodePoints[$i]->getDistanceVincenty(
+                    $this->_nodePoints[$j],
                     $ellipsoid
                 )->getValue();
             }
@@ -285,18 +357,18 @@ class Geodetic_Region
     {
         $latitude = $position->getLatitude()->getValue();
         $longitude = $position->getLongitude()->getValue();
-        $perimeterNodeCount = count($this->_perimeterPoints);
+        $perimeterNodeCount = count($this->_nodePoints);
 
         $jIndex = $perimeterNodeCount - 1 ;
         $oddNodes = FALSE;
         for ($iIndex = 0; $iIndex < $perimeterNodeCount; ++$iIndex) {
-            $iLatitude = $this->_perimeterPoints[$iIndex]->getLatitude()->getValue();
-            $jLatitude = $this->_perimeterPoints[$jIndex]->getLatitude()->getValue();
+            $iLatitude = $this->_nodePoints[$iIndex]->getLatitude()->getValue();
+            $jLatitude = $this->_nodePoints[$jIndex]->getLatitude()->getValue();
 
             if (($iLatitude < $latitude && $jLatitude >= $latitude) ||
                 ($jLatitude < $latitude && $iLatitude >= $latitude)) {
-                $iLongitude = $this->_perimeterPoints[$iIndex]->getLongitude()->getValue();
-                $jLongitude = $this->_perimeterPoints[$jIndex]->getLongitude()->getValue();
+                $iLongitude = $this->_nodePoints[$iIndex]->getLongitude()->getValue();
+                $jLongitude = $this->_nodePoints[$jIndex]->getLongitude()->getValue();
 
                 if ($iLongitude +
                     ($latitude - $iLatitude) /

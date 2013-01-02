@@ -3,7 +3,12 @@
 /**
  * Line coordinate object.
  *
+ * Lines can be used to represent linear geographic features such as roads and rivers that start at one point
+ *     and end at another point, rather than enclosed features such as borders that can be represented by the
+ *     Geodetic_Region object.
+ *
  * @package Geodetic
+ * @subpackage Features
  * @copyright  Copyright (c) 2012 Mark Baker (https://github.com/MarkBaker/PHPGeodetic)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
  */
@@ -39,12 +44,12 @@ class Geodetic_Line
      */
     public function setNodePoints(array $nodePoints = array())
     {
-        if ((count($nodePoints) > 0) && (count($nodePoints) < 3)) {
-            throw new Geodetic_Exception('A Line must be defined by at least 3 perimeter points');
+        if ((count($nodePoints) > 0) && (count($nodePoints) < 2)) {
+            throw new Geodetic_Exception('A Line must be defined by at least 2 points: start and end');
         }
         foreach($nodePoints as $perimeterPoint) {
             if (!($perimeterPoint instanceof Geodetic_LatLong)) {
-                throw new Geodetic_Exception('Each perimeter point must be a Geodetic_LatLong object');
+                throw new Geodetic_Exception('Each line point must be a Geodetic_LatLong object');
             }
         }
 
