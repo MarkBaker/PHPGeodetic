@@ -184,11 +184,16 @@ class Geodetic_Region
                       $cTemp;
         }
 
+        $area = $this->_getAreaPlanarDegrees();
+        $areaAdjust = 1 / (6 * $area);
+        $cLat *= $areaAdjust;
+        $cLong *= $areaAdjust;
+
         return new Geodetic_LatLong(
             new Geodetic_LatLong_CoordinateValues(
                 $cLat,
                 $cLong,
-                Geodetic_Angle::RADIANS
+                Geodetic_Angle::DEGREES
             )
         );
     }
