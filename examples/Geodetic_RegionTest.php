@@ -84,7 +84,7 @@ $latLongArray = array(
     array(1, 1),    //      _
     array(0, 1),    //
     array(0, 0),    //
-    array(-1, 0),   //
+//    array(-1, 0),   //
 );
 //
 //$latLongArray = array(

@@ -12,31 +12,11 @@
  * @copyright  Copyright (c) 2012 Mark Baker (https://github.com/MarkBaker/PHPGeodetic)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
  */
-class Geodetic_Line
+class Geodetic_Line extends Geodetic_Feature
 {
 
     /**
-     * An array of Latitude/Longitude points that defines the Line
-     *
-     * @access protected
-     * @var Geodetic_Angle[]
-     */
-    protected $_nodePoints;
-
-
-    /**
-     * Create a new Line
-     *
-     * @param     Geodetic_LatLong[]    $nodePoints
-     * @throws    Geodetic_Exception
-     */
-    function __construct(array $nodePoints = array())
-    {
-        $this->setnodePoints($nodePoints);
-    }
-
-    /**
-     * Set the perimeter points that define this Line
+     * Set the node points that define this Line
      *
      * @param     Geodetic_LatLong[]    $nodePoints
      * @return    Geodetic_Line
@@ -44,28 +24,12 @@ class Geodetic_Line
      */
     public function setNodePoints(array $nodePoints = array())
     {
-        if ((count($nodePoints) > 0) && (count($nodePoints) < 2)) {
+        if (count($nodePoints) < 2) {
             throw new Geodetic_Exception('A Line must be defined by at least 2 points: start and end');
         }
-        foreach($nodePoints as $perimeterPoint) {
-            if (!($perimeterPoint instanceof Geodetic_LatLong)) {
-                throw new Geodetic_Exception('Each line point must be a Geodetic_LatLong object');
-            }
-        }
-
-        $this->_nodePoints = $nodePoints;
+        $this->_setNodePoints($nodePoints);
 
         return $this;
-    }
-
-    /**
-     * Get the Perimeter Points that define this Line
-     *
-     * @return    Geodetic_LatLong[]    Array of Latitude/Longitude objects that define the perimeter of this Line
-     */
-    public function getNodePoints()
-    {
-        return $this->_nodePoints;
     }
 
     /**
