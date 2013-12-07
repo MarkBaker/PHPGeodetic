@@ -16,7 +16,7 @@ $sourceDir = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEP
 
 // default meta information
 $metaData = array(
-    'Author'      => 'Mark Baker <mbaker@inviqa.com>',
+    'Author'      => 'Mark Baker <mark@lange.demon.co.uk>',
     'Description' => 'A Geodetic library',
     'Copyright'   => 'Mark Baker (c) 2012-' . date('Y'),
     'Timestamp'   => time(),
