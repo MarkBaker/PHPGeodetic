@@ -13,6 +13,7 @@ This library provides methods for:
  * Great Circle distance calculations using either the Haversine or Vincenty formulae.
  * Calculation of Initial and final bearings, and midpoint value for great circle routes.
  * Calculation of destinations from a start point, initial bearing and distance.
+ * Calculation of perimeter, area and centrepoint for regions on an ellipsoid
 
 
 ## Requirements
