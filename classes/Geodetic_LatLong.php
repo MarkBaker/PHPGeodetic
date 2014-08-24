@@ -334,7 +334,8 @@ class Geodetic_LatLong
      *
      * The Haversine Formula calculates the distance to your destination point assuming a spherical Earth
      *
-     * @param     Geodetic_LatLong               $distanceToPoint    The destination point
+     * @param     Geodetic_LatLong               $endPoint           The destination point
+     * @param     string                         $method             Geodetic_Distance::METHOD_HAVERSINE or Geodetic_Distance::METHOD_VINCENTY
      * @param     Geodetic_ReferenceEllipsoid    $ellipsoid          If left blank, a default value of 6371009.0 metres will
      *                                                                   be used for the Earth Mean Radius for the calculation;
      *                                                               If a reference ellipsoid is specified, the Authalic Radius
@@ -342,7 +343,33 @@ class Geodetic_LatLong
      * @return    Geodetic_Distance              The great circle distance between this Lat/Long and the $endpoint Lat/Long
      * @throws    Geodetic_Exception
      */
-    public function getDistanceHaversine(Geodetic_LatLong $distanceToPoint,
+    public function getDistance(Geodetic_LatLong $endPoint,
+                                $method = Geodetic_Distance::METHOD_HAVERSINE,
+                                Geodetic_ReferenceEllipsoid $ellipsoid = NULL)
+    {
+        if ($method == Geodetic_Distance::METHOD_HAVERSINE) {
+            return $this->getDistanceHaversine($endPoint, $ellipsoid);
+        } elseif ($method == Geodetic_Distance::METHOD_VINCENTY) {
+            return $this->getDistanceVincenty($endPoint, $ellipsoid);
+        }
+
+        throw new Geodetic_Exception('Calculation method must be Vincenty or Haversine');
+    }
+
+     /**
+     * Get the distance between two Latitude/Longitude objects using the Haversine formula
+     *
+     * The Haversine Formula calculates the distance to your destination point assuming a spherical Earth
+     *
+     * @param     Geodetic_LatLong               $endPoint           The destination point
+     * @param     Geodetic_ReferenceEllipsoid    $ellipsoid          If left blank, a default value of 6371009.0 metres will
+     *                                                                   be used for the Earth Mean Radius for the calculation;
+     *                                                               If a reference ellipsoid is specified, the Authalic Radius
+     *                                                                   for that ellipsoid will be used.
+     * @return    Geodetic_Distance              The great circle distance between this Lat/Long and the $endpoint Lat/Long
+     * @throws    Geodetic_Exception
+     */
+    public function getDistanceHaversine(Geodetic_LatLong $endPoint,
                                          Geodetic_ReferenceEllipsoid $ellipsoid = NULL)
     {
         if (!is_null($ellipsoid)) {
@@ -351,13 +378,13 @@ class Geodetic_LatLong
             $earthMeanRadius = 6371009.0; // metres
         }
 
-        $deltaLatitude =  $distanceToPoint->getLatitude()->getValue(Geodetic_Angle::RADIANS) -
+        $deltaLatitude =  $endPoint->getLatitude()->getValue(Geodetic_Angle::RADIANS) -
             $this->_latitude->getValue(Geodetic_Angle::RADIANS);
-        $deltaLongitude = $distanceToPoint->getLongitude()->getValue(Geodetic_Angle::RADIANS) -
+        $deltaLongitude = $endPoint->getLongitude()->getValue(Geodetic_Angle::RADIANS) -
             $this->_longitude->getValue(Geodetic_Angle::RADIANS);
         $aValue = sin($deltaLatitude / 2) * sin($deltaLatitude / 2) +
              cos($this->_latitude->getValue(Geodetic_Angle::RADIANS)) *
-                 cos($distanceToPoint->getLatitude()->getValue(Geodetic_Angle::RADIANS)) *
+                 cos($endPoint->getLatitude()->getValue(Geodetic_Angle::RADIANS)) *
              sin($deltaLongitude / 2) * sin($deltaLongitude / 2);
         $cValue = 2 * atan2(sqrt($aValue), sqrt(1 - $aValue));
 

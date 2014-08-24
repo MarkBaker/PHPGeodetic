@@ -35,7 +35,7 @@ abstract class Geodetic_Feature
      * Set the node points that define this cluster
      *
      * @param     Geodetic_LatLong[]    $nodePoints
-     * @return    Geodetic_Cluster
+     * @return    Geodetic_Feature
      * @throws    Geodetic_Exception
      */
     public function setNodePoints(array $nodePoints = array())
@@ -49,7 +49,6 @@ abstract class Geodetic_Feature
      * Set the node points that define this feature
      *
      * @param     Geodetic_LatLong[]    $nodePoints
-     * @return    Geodetic_Line
      * @throws    Geodetic_Exception
      */
     protected function _setNodePoints(array $nodePoints = array())
@@ -74,6 +73,14 @@ abstract class Geodetic_Feature
         return $this->_nodePoints;
     }
 
+    /**
+     * Insert a new node point before a particular index position in this feature
+     *
+     * @param     Geodetic_LatLong    $nodePoint
+     * @param     integer             $beforeKey
+     * @return    Geodetic_Feature
+     * @throws    Geodetic_Exception
+     */
     public function insertNodeBefore(Geodetic_LatLong $newNode, $beforeKey) {
         if (!isset($this->_nodePoints[$beforeKey])) {
             throw new Geodetic_Exception('Insert before node does not exist');
@@ -89,6 +96,14 @@ abstract class Geodetic_Feature
         return $this;
     }
 
+    /**
+     * Insert a new node point after a particular index position in this feature
+     *
+     * @param     Geodetic_LatLong    $nodePoint
+     * @param     integer             $beforeKey
+     * @return    Geodetic_Feature
+     * @throws    Geodetic_Exception
+     */
     public function insertNodeAfter(Geodetic_LatLong $newNode, $afterKey) {
         if (!isset($this->_nodePoints[$afterKey])) {
             throw new Geodetic_Exception('Insert after node does not exist');
@@ -104,6 +119,13 @@ abstract class Geodetic_Feature
         return $this;
     }
 
+    /**
+     * Delete a node point at a particular index position in this feature
+     *
+     * @param     integer             $beforeKey
+     * @return    Geodetic_Feature
+     * @throws    Geodetic_Exception
+     */
     public function deleteNode($nodeKey) {
         if (!isset($this->_nodePoints[$nodeKey])) {
             throw new Geodetic_Exception('Node does not exist');
@@ -118,4 +140,13 @@ abstract class Geodetic_Feature
         return $this;
     }
 
+    public function getNearestNeighbour(Geodetic_LatLong $position, $method = Geodetic_Distance::METHOD_HAVERSINE) {
+        $distances = array()
+        foreach($this->_nodePoints as $nodeKey => $nodePoint) {
+            $distances[$nodeKey] = $nodePoint->getDistance($position, $method);
+        }
+        arsort($distances);
+        $key = array_pop($distances);
+        return clone $this->_nodePoints[$key];
+    }
 }
