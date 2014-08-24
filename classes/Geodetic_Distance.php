@@ -10,6 +10,9 @@
  */
 class Geodetic_Distance extends Geodetic_Measure_Abstract
 {
+    const METHOD_HAVERSINE = 'h';
+    const METHOD_VINCENTY  = 'v';
+
     const METRES          = 'm';      //    metre (SI base unit)
     const KILOMETRES      = 'km';     //    1000 metres (SI unit)
     const MILES           = 'mi';     //    mile (International)
