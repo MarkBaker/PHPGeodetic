@@ -140,6 +140,14 @@ abstract class Geodetic_Feature
         return $this;
     }
 
+    /**
+     * Get the nearest feature node to a specified position
+     *
+     * @param     Geodetic_LatLong               $position           The point for which we want the nearest feature node
+     * @param     string                         $method             Geodetic_Distance::METHOD_HAVERSINE or Geodetic_Distance::METHOD_VINCENTY
+     * @return    Geodetic_LatLong
+     * @throws    Geodetic_Exception
+     */
     public function getNearestNeighbour(Geodetic_LatLong $position, $method = Geodetic_Distance::METHOD_HAVERSINE) {
         $distances = array()
         foreach($this->_nodePoints as $nodeKey => $nodePoint) {
@@ -149,4 +157,37 @@ abstract class Geodetic_Feature
         $key = array_pop($distances);
         return clone $this->_nodePoints[$key];
     }
+
+    /**
+     * Get the centre point for a collection of lat/long values
+     *
+     * @return    Geodetic_LatLong
+     * @throws    Geodetic_Exception
+     */
+    public function getCentrePoint()
+    {
+        $xPoints = $yPoints = $zPoints = array();
+        foreach($this->_nodePoints as $nodePoint) {
+            $latitude = $nodePoint->getLatitude->getValue(Geodetic_Angle::RADIANS);
+            $longitude = $nodePoint->getLatitude->getValue(Geodetic_Angle::RADIANS);
+            $xPoints[] = cos($latitude) * cos($longitude);
+            $yPoints[] = cos($latitude) * sin($longitude);
+            $zPoints[] = sin($latitude);
+        }
+        $x = array_sum($xPoints) / count($xPoints);
+        $y = array_sum($yPoints) / count($yPoints);
+        $z = array_sum($zPoints) / count($zPoints);
+        
+        $longitude = atan2($y, $x);
+        $latitude = atan2($z, sqrt($x * $x + $y * $y));
+        
+        return new Geodetic_LatLong(
+            new Geodetic_LatLong_CoordinateValues(
+                $latitude,
+                $longitude,
+                Geodetic_Angle::RADIANS
+            )
+        );
+    }
+
 }
