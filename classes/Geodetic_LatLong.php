@@ -617,4 +617,15 @@ class Geodetic_LatLong
         );
     }
 
+    /**
+     * Get the nearest feature node to a specified position
+     *
+     * @param     Geodetic_Feature               $pointSet           The series of points from which we want the nearest feature node
+     * @param     string                         $method             Geodetic_Distance::METHOD_HAVERSINE or Geodetic_Distance::METHOD_VINCENTY
+     * @return    Geodetic_LatLong
+     * @throws    Geodetic_Exception
+     */
+    public function getNearestNeighbour(Geodetic_Feature $pointSet, $method = Geodetic_Distance::METHOD_HAVERSINE) {
+        return $pointSet->getNearestNeighbour($this, $method);
+    }
 }
