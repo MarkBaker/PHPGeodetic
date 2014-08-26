@@ -149,7 +149,7 @@ abstract class Geodetic_Feature
      * @throws    Geodetic_Exception
      */
     public function getNearestNeighbour(Geodetic_LatLong $position, $method = Geodetic_Distance::METHOD_HAVERSINE) {
-        $distances = array()
+        $distances = array();
         foreach($this->_nodePoints as $nodeKey => $nodePoint) {
             $distances[$nodeKey] = $nodePoint->getDistance($position, $method);
         }
@@ -164,12 +164,12 @@ abstract class Geodetic_Feature
      * @return    Geodetic_LatLong
      * @throws    Geodetic_Exception
      */
-    public function getCentrePoint()
+    public function getGeographicCentrePoint()
     {
         $xPoints = $yPoints = $zPoints = array();
         foreach($this->_nodePoints as $nodePoint) {
-            $latitude = $nodePoint->getLatitude->getValue(Geodetic_Angle::RADIANS);
-            $longitude = $nodePoint->getLatitude->getValue(Geodetic_Angle::RADIANS);
+            $latitude = $nodePoint->getLatitude()->getValue(Geodetic_Angle::RADIANS);
+            $longitude = $nodePoint->getLatitude()->getValue(Geodetic_Angle::RADIANS);
             $xPoints[] = cos($latitude) * cos($longitude);
             $yPoints[] = cos($latitude) * sin($longitude);
             $zPoints[] = sin($latitude);
