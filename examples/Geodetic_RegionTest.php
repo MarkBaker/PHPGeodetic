@@ -196,5 +196,10 @@ echo '    Square Kilometres: ', $area2->getValue(Geodetic_Area::SQUARE_KILOMETRE
 echo '    Square Metres: ', $area2->getValue() , PHP_EOL;
 echo '    Hectares: ', $area2->getValue(Geodetic_Area::HECTARES) , PHP_EOL;
 echo '    Square Miles: ', $area2->getValue(Geodetic_Area::SQUARE_MILES) , PHP_EOL;
-echo '    Acres: ', $area2->getValue(Geodetic_Area::ACRES) , PHP_EOL;
+echo '    Acres: ', $area2->getValue(Geodetic_Area::ACRES) , PHP_EOL , PHP_EOL;
+
+$centrePoint = $region->getGeographicCentrePoint();
+
+echo 'Latitude: ' , $centrePoint->getLatitude()->getValue() , ' ' ,Geodetic_Angle::DEGREES , PHP_EOL;
+echo 'Longitude: ' , $centrePoint->getLongitude()->getValue() , ' ' ,Geodetic_Angle::DEGREES , PHP_EOL;
 
