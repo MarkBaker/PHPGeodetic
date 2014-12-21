@@ -12,7 +12,7 @@ if (ini_get('phar.readonly')) {
 $pharName = 'Geodetic.phar';
 
 // target folder
-$sourceDir = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR;
+$sourceDir = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR;
 
 // default meta information
 $metaData = array(

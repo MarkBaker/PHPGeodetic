@@ -1,0 +1,9 @@
+Geodetic.phar
+unitTests/codeCoverage
+analysis
+
+## IDE support
+*.buildpath
+*.project
+/.settings
+/.idea
