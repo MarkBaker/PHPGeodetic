@@ -509,8 +509,9 @@ class Datum
      */
     public function __construct($datum = Datum::WGS84, $region = null)
     {
-        if (!is_null($datum))
+        if (!is_null($datum)) {
             $this->setDatum($datum, $region);
+        }
     }
 
 
@@ -612,8 +613,9 @@ class Datum
         }
 
         $datum = $this->_datumReference;
-        if (!isset(self::$_geodeticDatums[$datum]['regions'][$region]))
+        if (!isset(self::$_geodeticDatums[$datum]['regions'][$region])) {
             throw new Exception('"'.$region.'" is not a valid region for this datum');
+        }
 
         $rotationMatrix = new RotationMatrix(
             new RotationMatrixArray(

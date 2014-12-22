@@ -90,10 +90,10 @@ abstract class Feature
         }
 
         array_splice(
-                $this->_nodePoints,
-                $beforeKey,
-                0,
-                $newNode
+            $this->_nodePoints,
+            $beforeKey,
+            0,
+            $newNode
         );
 
         return $this;
@@ -114,10 +114,10 @@ abstract class Feature
         }
 
         array_splice(
-                $this->_nodePoints,
-                $afterKey + 1,
-                0,
-                $newNode
+            $this->_nodePoints,
+            $afterKey + 1,
+            0,
+            $newNode
         );
 
         return $this;
@@ -137,9 +137,9 @@ abstract class Feature
         }
 
         array_splice(
-                $this->_nodePoints,
-                $nodeKey,
-                1
+            $this->_nodePoints,
+            $nodeKey,
+            1
         );
 
         return $this;

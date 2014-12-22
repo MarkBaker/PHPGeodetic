@@ -41,12 +41,13 @@ abstract class LatLong_Coordinates_Abstract implements XyzFormat_Interface
      *                                                                   (if it is passed as integer or float)
      * @throws    Exception
      */
-    protected function setCoordinates($xLatitude,
-                                      $yLongitude,
-                                      $latLongUom,
-                                      $zHeight,
-                                      $heightUom)
-    {
+    protected function setCoordinates(
+        $xLatitude,
+        $yLongitude,
+        $latLongUom,
+        $zHeight,
+        $heightUom
+    ) {
         $this->setX(
             ($xLatitude instanceof Angle) ? $xLatitude : new Angle($xLatitude, $latLongUom)
         );
@@ -119,5 +120,4 @@ abstract class LatLong_Coordinates_Abstract implements XyzFormat_Interface
     {
         return $this->_zHeight;
     }
-
 }

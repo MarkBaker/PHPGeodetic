@@ -44,19 +44,18 @@ class Line extends Feature
      *                                                                     Vincenty formula will be used instead.
      * @return    Distance    The length along the perimeter for this Line
      */
-    public function getLength(ReferenceEllipsoid $ellipsoid = null,
-                              $useHaversine = FALSE)
+    public function getLength(ReferenceEllipsoid $ellipsoid = null, $useHaversine = false)
     {
         $pointCount = count($this->_nodePoints);
-        if ($pointCount == 0)
+        if ($pointCount == 0) {
             return new Area();
-
+        }
         if (is_null($ellipsoid)) {
             $ellipsoid = new ReferenceEllipsoid(ReferenceEllipsoid::WGS_1984);
         }
 
         $distance = 0;
-        for($i = 0, $j = 1; $j < $pointCount; ++$i, ++$j) {
+        for ($i = 0, $j = 1; $j < $pointCount; ++$i, ++$j) {
             if ($useHaversine) {
                 $distance += $this->_nodePoints[$i]->getDistanceHaversine(
                     $this->_nodePoints[$j],
@@ -74,5 +73,4 @@ class Line extends Feature
             $distance
         );
     }
-
 }

@@ -59,7 +59,8 @@ class ECEF
      * @param     int|float    $value    The value on which to perform the calculation
      * @return    float        The sine squared result
      */
-    private static function _sinSquared($value) {
+    private static function _sinSquared($value)
+    {
         return sin($value) * sin($value);
     }
 

@@ -171,22 +171,21 @@ class LatLong
      * @return    float            The specified latitude in radians
      * @throws    Exception
      */
-    public static function validateLatitude($latitude = null,
-                                            $degrad = Angle::DEGREES)
+    public static function validateLatitude($latitude = null, $degrad = Angle::DEGREES)
     {
-        if (is_null($latitude))
+        if (is_null($latitude)) {
             throw new Exception('You must specify Latitude');
-
-        if (!is_numeric($latitude))
+        } elseif (!is_numeric($latitude)) {
             throw new Exception('Latitude must be a numeric value');
-
-        if (is_null($degrad))
+        } elseif (is_null($degrad)) {
             $degrad = Angle::DEGREES;
+        }
 
         $latitude = ($degrad == Angle::DEGREES) ? deg2rad($latitude) : $latitude;
 
-        if (($latitude < (-M_PI)) || ($latitude > (M_PI)))
+        if (($latitude < (-M_PI)) || ($latitude > (M_PI))) {
             throw new Exception('Latitude is out of range');
+        }
 
         return $latitude;
     }
@@ -201,22 +200,21 @@ class LatLong
      * @return    float            The specified longitude in radians
      * @throws    Exception
      */
-    public static function validateLongitude($longitude = null,
-                                             $degrad = Angle::DEGREES)
+    public static function validateLongitude($longitude = null, $degrad = Angle::DEGREES)
     {
-        if (is_null($longitude))
+        if (is_null($longitude)) {
             throw new Exception('You must specify Longitude');
-
-        if (!is_numeric($longitude))
+        } elseif (!is_numeric($longitude)) {
             throw new Exception('Longitude must be a numeric value');
-
-        if (is_null($degrad))
+        } elseif (is_null($degrad)) {
             $degrad = Angle::DEGREES;
+        }
 
         $longitude = ($degrad == Angle::DEGREES) ? deg2rad($longitude) : $longitude;
 
-        if (($longitude < (-M_PI * 2)) || ($longitude > (M_PI * 2)))
+        if (($longitude < (-M_PI * 2)) || ($longitude > (M_PI * 2))) {
             throw new Exception('Longitude is out of range');
+        }
 
         return $longitude;
     }
@@ -238,8 +236,7 @@ class LatLong
 
         $phi = $this->_latitude->getValue(Angle::RADIANS);
         $lambda = $this->_longitude->getValue(Angle::RADIANS);
-        $radiusOfCurvature = $ellipsoid->getRadiusOfCurvaturePrimeVertical($phi,
-                                                                           Angle::RADIANS);
+        $radiusOfCurvature = $ellipsoid->getRadiusOfCurvaturePrimeVertical($phi, Angle::RADIANS);
 
         $xCoordinate = ($radiusOfCurvature + $this->_height->getValue()) * cos($phi) * cos($lambda);
         $yCoordinate = ($radiusOfCurvature + $this->_height->getValue()) * cos($phi) * sin($lambda);
@@ -296,7 +293,7 @@ class LatLong
                   tan($this->_latitude->getValue(Angle::RADIANS));
         $cValue = $ePrimeSquared *
                   cos($this->_latitude->getValue(Angle::RADIANS)) *
-                  cos($this->_latitude->getValue(Angle::RADIANS) );
+                  cos($this->_latitude->getValue(Angle::RADIANS));
         $aValue = cos($this->_latitude->getValue(Angle::RADIANS)) *
                   ($this->_longitude->getValue(Angle::RADIANS) - $longitudeOrigin);
 
@@ -324,10 +321,11 @@ class LatLong
             $UTMNorthing += 10000000.0;
         }
 
-        return new UTM($UTMNorthing,
-                                $UTMEasting,
-                                $utmLatitudeZone,
-                                $utmLongitudeZone
+        return new UTM(
+            $UTMNorthing,
+            $UTMEasting,
+            $utmLatitudeZone,
+            $utmLongitudeZone
         );
     }
 
@@ -345,10 +343,11 @@ class LatLong
      * @return    Distance              The great circle distance between this Lat/Long and the $endpoint Lat/Long
      * @throws    Exception
      */
-    public function getDistance(LatLong $endPoint,
-                                $method = Distance::METHOD_HAVERSINE,
-                                ReferenceEllipsoid $ellipsoid = null)
-    {
+    public function getDistance(
+        LatLong $endPoint,
+        $method = Distance::METHOD_HAVERSINE,
+        ReferenceEllipsoid $ellipsoid = null
+    ) {
         if ($method == Distance::METHOD_HAVERSINE) {
             return $this->getDistanceHaversine($endPoint, $ellipsoid);
         } elseif ($method == Distance::METHOD_VINCENTY) {
@@ -371,8 +370,7 @@ class LatLong
      * @return    Distance              The great circle distance between this Lat/Long and the $endpoint Lat/Long
      * @throws    Exception
      */
-    public function getDistanceHaversine(LatLong $endPoint,
-                                         ReferenceEllipsoid $ellipsoid = null)
+    public function getDistanceHaversine(LatLong $endPoint, ReferenceEllipsoid $ellipsoid = null)
     {
         if (!is_null($ellipsoid)) {
             $earthMeanRadius = $ellipsoid->getAuthalicRadius();
@@ -405,11 +403,11 @@ class LatLong
      * @return    Distance              The great circle distance between this Lat/Long and the $endpoint Lat/Long
      * @throws    Exception
      */
-    public function getDistanceVincenty(LatLong $endPoint,
-                                        ReferenceEllipsoid $ellipsoid = null)
+    public function getDistanceVincenty(LatLong $endPoint, ReferenceEllipsoid $ellipsoid = null)
     {
-        if (is_null($ellipsoid))
+        if (is_null($ellipsoid)) {
             $ellipsoid = new ReferenceEllipsoid(ReferenceEllipsoid::WGS_84);
+        }
 
         $semiMinor = $ellipsoid->getSemiMinorAxis();
         $flattening = $ellipsoid->getFlattening();
@@ -428,7 +426,7 @@ class LatLong
         $lambda = $lDifference;
         $lambdaP = 2 * M_PI;
         $iterLimit = 20;
-        while(abs($lambda - $lambdaP) > 1E-12 && $iterLimit>0) {
+        while (abs($lambda - $lambdaP) > 1E-12 && $iterLimit>0) {
             $sinLambda = sin($lambda);
             $cosLambda = cos($lambda);
             $sinSigma = sqrt(
@@ -436,8 +434,9 @@ class LatLong
                 ($cosU1 * $sinU2 - $sinU1 * $cosU2 * $cosLambda) *
                 ($cosU1 * $sinU2 - $sinU1 * $cosU2 * $cosLambda)
             );
-            if ($sinSigma == 0.0)  //  co-incident points
+            if ($sinSigma == 0.0) { //  co-incident points
                 return new Distance();
+            }
 
             $cosSigma = $sinU1 * $sinU2 + $cosU1 * $cosU2 * $cosLambda;
             $sigma = atan2($sinSigma, $cosSigma);
@@ -512,10 +511,11 @@ class LatLong
      */
     private static function _cleanLatitude($latitude)
     {
-        if ($latitude > M_PI_2)
+        if ($latitude > M_PI_2) {
             $latitude -= M_PI;
-        elseif ($latitude < -M_PI_2)
+        } elseif ($latitude < -M_PI_2) {
             $latitude += M_PI;
+        }
 
         return $latitude;
     }
@@ -528,10 +528,11 @@ class LatLong
      */
     private static function _cleanLongitude($longitude)
     {
-        if ($longitude > M_PI)
+        if ($longitude > M_PI) {
             $longitude -= 2 * M_PI;
-        elseif ($longitude < -M_PI)
+        } elseif ($longitude < -M_PI) {
             $longitude += 2 * M_PI;
+        }
 
         return $longitude;
     }
