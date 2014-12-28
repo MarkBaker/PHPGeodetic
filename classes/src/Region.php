@@ -74,7 +74,7 @@ class Region extends Feature
      * @param     int|float    $x    The value on which to perform the calculation
      * @return    float        The adjusted haversine result
      */
-    private static function _haversineAdjust($x)
+    private static function haversineAdjust($x)
     {
         return (1.0 - cos($x)) / 2.0;
     }
@@ -117,8 +117,8 @@ class Region extends Feature
                 $cosB2 = cos($beta2);
             }
             if ($lambda1 != $lambda2) {
-                $haversine = self::_haversineAdjust($beta2 - $beta1) +
-                    $cosB1 * $cosB2 * self::_haversineAdjust($lambda2 - $lambda1);
+                $haversine = self::haversineAdjust($beta2 - $beta1) +
+                    $cosB1 * $cosB2 * self::haversineAdjust($lambda2 - $lambda1);
                 $a = 2 * asin(sqrt($haversine));
                 $b = M_PI / 2 - $beta2;
                 $c = M_PI / 2 - $beta1;
@@ -144,7 +144,7 @@ class Region extends Feature
      *
      * @return    float    The signed area of this region in degrees squared
      */
-    private function _getSignedArea()
+    private function getSignedArea()
     {
         $pointCount = count($this->_nodePoints);
 
@@ -191,7 +191,7 @@ class Region extends Feature
                       $cTemp;
         }
 
-        $area = $this->_getSignedArea();
+        $area = $this->getSignedArea();
         if ($area == 0) {
             $areaAdjust = 1;
         } else {
@@ -230,8 +230,7 @@ class Region extends Feature
      * @param     float    &$longitude2    Longitude position 2
      * @return    void
      */
-    private static function _datelineAdjust(&$longitude1,
-                                            &$longitude2)
+    private static function datelineAdjust(&$longitude1, &$longitude2)
     {
         if ($longitude1 > $longitude2) {
             while ($longitude1 - $longitude2 > M_PI) {
@@ -252,25 +251,26 @@ class Region extends Feature
      * @param     float    $Qp
      * @return    float    The adjusted area
      */
-    private static function _polarAdjust($area,
-                                         $AE,
-                                         $Qp)
+    private static function polarAdjust($area, $AE, $Qp)
     {
         $earthSurfaceArea = 4 * M_PI * $Qp * $AE;
-        if ($earthSurfaceArea < 0.0)
+        if ($earthSurfaceArea < 0.0) {
             $earthSurfaceArea = -$earthSurfaceArea;
-
-        if (($area *= $AE) < 0.0)
+        }
+        if (($area *= $AE) < 0.0) {
             $area = -$area;
+        }
 
         /*
          * kludge - if polygon circles the south pole the area will be computed as if it cirlced the north pole.
          * The correction is the difference between total surface area of the earth and the "north pole" area.
          */
-        if ($area > $earthSurfaceArea)
+        if ($area > $earthSurfaceArea) {
             $area = $earthSurfaceArea;
-        if ($area > $earthSurfaceArea / 2)
+        }
+        if ($area > $earthSurfaceArea / 2) {
             $area = $earthSurfaceArea - $area;
+        }
 
         return $area;
     }
@@ -324,7 +324,7 @@ class Region extends Feature
             $latitude2 = $this->_nodePoints[$n]->getLatitude()->getValue(Angle::RADIANS);
             $Qbar2 = $this->_Qbar($latitude2);
 
-            self::_datelineAdjust($longitude1, $longitude2);
+            self::datelineAdjust($longitude1, $longitude2);
 
             $deltaLongitude = $longitude2 - $longitude1;
             $area += $deltaLongitude * ($Qp - $this->_Q($latitude2));
@@ -332,7 +332,7 @@ class Region extends Feature
                 $area += $deltaLongitude * $this->_Q($latitude2) - ($deltaLongitude / $deltaLatitude) * ($Qbar2 - $Qbar1);
         }
 
-        $area = self::_polarAdjust($area, $AE, $Qp);
+        $area = self::polarAdjust($area, $AE, $Qp);
 
         return new Area(
             $area

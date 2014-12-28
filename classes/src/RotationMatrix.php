@@ -18,7 +18,7 @@ class RotationMatrix
      * @access protected
      * @var Angle
      */
-    protected $_xAngle;
+    protected $xAngle;
 
     /**
      * The Angle of Rotation on the Y-Axis value of this RotationMatrix object.
@@ -27,7 +27,7 @@ class RotationMatrix
      * @access protected
      * @var Angle
      */
-    protected $_yAngle;
+    protected $yAngle;
 
     /**
      * The Angle of Rotation on the Z-Axis value of this RotationMatrix object.
@@ -36,7 +36,7 @@ class RotationMatrix
      * @access protected
      * @var Angle
      */
-    protected $_zAngle;
+    protected $zAngle;
 
 
     /**
@@ -48,16 +48,16 @@ class RotationMatrix
     public function __construct(XyzFormat_Interface $xyzCoordinates = null)
     {
         if (!is_null($xyzCoordinates)) {
-            $this->_xAngle = $xyzCoordinates->getX();
-            $this->_yAngle = $xyzCoordinates->getY();
-            $this->_zAngle = $xyzCoordinates->getZ();
+            $this->xAngle = $xyzCoordinates->getX();
+            $this->yAngle = $xyzCoordinates->getY();
+            $this->zAngle = $xyzCoordinates->getZ();
             return;
         }
 
         //    Defaults
-        $this->_xAngle = new Angle();
-        $this->_yAngle = new Angle();
-        $this->_zAngle = new Angle();
+        $this->xAngle = new Angle();
+        $this->yAngle = new Angle();
+        $this->zAngle = new Angle();
     }
 
 
@@ -73,7 +73,7 @@ class RotationMatrix
         if (is_null($xAngle)) {
             throw new Exception('The Angle of Rotation on the X-Axis must be a Angle object');
         }
-        $this->_xAngle = $xAngle;
+        $this->xAngle = $xAngle;
 
         return $this;
     }
@@ -86,7 +86,7 @@ class RotationMatrix
      */
     public function getX()
     {
-        return $this->_xAngle;
+        return $this->xAngle;
     }
 
     /**
@@ -101,7 +101,7 @@ class RotationMatrix
         if (is_null($yAngle)) {
             throw new Exception('The Angle of Rotation on the Y-Axis must be a Angle object');
         }
-        $this->_yAngle = $yAngle;
+        $this->yAngle = $yAngle;
 
         return $this;
     }
@@ -114,7 +114,7 @@ class RotationMatrix
      */
     public function getY()
     {
-        return $this->_yAngle;
+        return $this->yAngle;
     }
 
     /**
@@ -129,7 +129,7 @@ class RotationMatrix
         if (is_null($zAngle)) {
             throw new Exception('The Angle of Rotation on the Z-Axis must be a Angle object');
         }
-        $this->_zAngle = $zAngle;
+        $this->zAngle = $zAngle;
 
         return $this;
     }
@@ -142,6 +142,6 @@ class RotationMatrix
      */
     public function getZ()
     {
-        return $this->_zAngle;
+        return $this->zAngle;
     }
 }

@@ -16,17 +16,17 @@ abstract class LatLong_Coordinates_Abstract implements XyzFormat_Interface
     /**
      * @var    Angle    The Latitude
      */
-    protected $_xLatitude;
+    protected $xLatitude;
 
     /**
      * @var    Angle    The Longitude
      */
-    protected $_yLongitude;
+    protected $yLongitude;
 
     /**
      * @var    Distance    The Height/Elevation
      */
-    protected $_zHeight;
+    protected $zHeight;
 
 
     /**
@@ -68,7 +68,7 @@ abstract class LatLong_Coordinates_Abstract implements XyzFormat_Interface
      */
     protected function setX($xLatitude)
     {
-        $this->_xLatitude = $xLatitude;
+        $this->xLatitude = $xLatitude;
     }
 
     /**
@@ -78,7 +78,7 @@ abstract class LatLong_Coordinates_Abstract implements XyzFormat_Interface
      */
     public function getX()
     {
-        return $this->_xLatitude;
+        return $this->xLatitude;
     }
 
     /**
@@ -88,7 +88,7 @@ abstract class LatLong_Coordinates_Abstract implements XyzFormat_Interface
      */
     protected function setY($yLongitude)
     {
-        $this->_yLongitude = $yLongitude;
+        $this->yLongitude = $yLongitude;
     }
 
     /**
@@ -98,7 +98,7 @@ abstract class LatLong_Coordinates_Abstract implements XyzFormat_Interface
      */
     public function getY()
     {
-        return $this->_yLongitude;
+        return $this->yLongitude;
     }
 
     /**
@@ -108,7 +108,7 @@ abstract class LatLong_Coordinates_Abstract implements XyzFormat_Interface
      */
     protected function setZ($zHeight)
     {
-        $this->_zHeight = $zHeight;
+        $this->zHeight = $zHeight;
     }
 
     /**
@@ -118,6 +118,6 @@ abstract class LatLong_Coordinates_Abstract implements XyzFormat_Interface
      */
     public function getZ()
     {
-        return $this->_zHeight;
+        return $this->zHeight;
     }
 }

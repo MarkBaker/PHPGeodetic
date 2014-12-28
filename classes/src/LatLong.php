@@ -509,7 +509,7 @@ class LatLong
      * @param     float    $latitude    The latitude in radians
      * @return    float    The "fixed" latitude in radians
      */
-    private static function _cleanLatitude($latitude)
+    private static function cleanLatitude($latitude)
     {
         if ($latitude > M_PI_2) {
             $latitude -= M_PI;
@@ -526,7 +526,7 @@ class LatLong
      * @param     float    $longitude    The longitude in radians
      * @return    float    The "fixed" longitude in radians
      */
-    private static function _cleanLongitude($longitude)
+    private static function cleanLongitude($longitude)
     {
         if ($longitude > M_PI) {
             $longitude -= 2 * M_PI;
@@ -565,8 +565,8 @@ class LatLong
 
         return new LatLong(
             new LatLong_CoordinateValues(
-                self::_cleanLatitude($midpointLatitude),
-                self::_cleanLongitude($midpointLongitude),
+                self::cleanLatitude($midpointLatitude),
+                self::cleanLongitude($midpointLongitude),
                 Angle::RADIANS
             )
         );
@@ -614,8 +614,8 @@ class LatLong
 
         return new LatLong(
             new LatLong_CoordinateValues(
-                self::_cleanLatitude($destinationLatitude),
-                self::_cleanLongitude($destinationLongitude),
+                self::cleanLatitude($destinationLatitude),
+                self::cleanLongitude($destinationLongitude),
                 Angle::RADIANS
             )
         );

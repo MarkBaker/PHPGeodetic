@@ -18,7 +18,7 @@ class TranslationVectors
      * @access protected
      * @var Distance
      */
-    protected $_xVector;
+    protected $xVector;
 
     /**
      * The Translation in the Y-Plane value of this TranslationVectors object.
@@ -27,7 +27,7 @@ class TranslationVectors
      * @access protected
      * @var Distance
      */
-    protected $_yVector;
+    protected $yVector;
 
     /**
      * The Translation in the Z-Plane value of this TranslationVectors object.
@@ -36,7 +36,7 @@ class TranslationVectors
      * @access protected
      * @var Distance
      */
-    protected $_zVector;
+    protected $zVector;
 
 
     /**
@@ -48,16 +48,16 @@ class TranslationVectors
     public function __construct(XyzFormat_Interface $xyzCoordinates = null)
     {
         if (!is_null($xyzCoordinates)) {
-            $this->_xVector = $xyzCoordinates->getX();
-            $this->_yVector = $xyzCoordinates->getY();
-            $this->_zVector = $xyzCoordinates->getZ();
+            $this->xVector = $xyzCoordinates->getX();
+            $this->yVector = $xyzCoordinates->getY();
+            $this->zVector = $xyzCoordinates->getZ();
             return;
         }
 
         //    Defaults
-        $this->_xVector = new Distance();
-        $this->_yVector = new Distance();
-        $this->_zVector = new Distance();
+        $this->xVector = new Distance();
+        $this->yVector = new Distance();
+        $this->zVector = new Distance();
     }
 
 
@@ -73,7 +73,7 @@ class TranslationVectors
         if (is_null($xDistance)) {
             throw new Exception('The X Translation Vector must be a Distance object');
         }
-        $this->_xVector = $xDistance;
+        $this->xVector = $xDistance;
 
         return $this;
     }
@@ -86,7 +86,7 @@ class TranslationVectors
      */
     public function getX()
     {
-        return $this->_xVector;
+        return $this->xVector;
     }
 
     /**
@@ -101,7 +101,7 @@ class TranslationVectors
         if (is_null($yDistance)) {
             throw new Exception('The Y Translation Vector must be a Distance object');
         }
-        $this->_yVector = $yDistance;
+        $this->yVector = $yDistance;
 
         return $this;
     }
@@ -114,7 +114,7 @@ class TranslationVectors
      */
     public function getY()
     {
-        return $this->_yVector;
+        return $this->yVector;
     }
 
     /**
@@ -129,7 +129,7 @@ class TranslationVectors
         if (is_null($zDistance)) {
             throw new Exception('The Z Translation Vector must be a Distance object');
         }
-        $this->_zVector = $zDistance;
+        $this->zVector = $zDistance;
 
         return $this;
     }
@@ -142,6 +142,6 @@ class TranslationVectors
      */
     public function getZ()
     {
-        return $this->_zVector;
+        return $this->zVector;
     }
 }
