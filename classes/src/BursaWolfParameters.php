@@ -18,7 +18,7 @@ class BursaWolfParameters
      * @access protected
      * @var RotationMatrix
      */
-    protected $_rotationMatrix;
+    protected $rotationMatrix;
 
     /**
      * The Translation Vectors for this set of Bursa-Wolf Parameters.
@@ -26,7 +26,7 @@ class BursaWolfParameters
      * @access protected
      * @var TranslationVectors
      */
-    protected $_translationVectors;
+    protected $translationVectors;
 
     /**
      * The Scale Factor value of this Bursa-Wolf Parameters object.
@@ -34,7 +34,7 @@ class BursaWolfParameters
      * @access protected
      * @var float
      */
-    protected $_scaleFactor = 0.0;
+    protected $scaleFactor = 0.0;
 
 
     /**
@@ -51,13 +51,13 @@ class BursaWolfParameters
         $scaleFactor = null
     ) {
         if (!is_null($rotationMatrix)) {
-            $this->_rotationMatrix = $rotationMatrix;
+            $this->rotationMatrix = $rotationMatrix;
         }
         if (!is_null($translationVectors)) {
-            $this->_translationVectors = $translationVectors;
+            $this->translationVectors = $translationVectors;
         }
         if (!is_null($scaleFactor)) {
-            $this->_scaleFactor = $scaleFactor;
+            $this->scaleFactor = $scaleFactor;
         }
     }
 
@@ -74,7 +74,7 @@ class BursaWolfParameters
         if (is_null($rotationMatrix)) {
             throw new Exception('The Rotation Matrix must be a RotationMatrix object');
         }
-        $this->_rotationMatrix = $rotationMatrix;
+        $this->rotationMatrix = $rotationMatrix;
 
         return $this;
     }
@@ -86,7 +86,7 @@ class BursaWolfParameters
      */
     public function getRotationMatrix()
     {
-        return $this->_rotationMatrix;
+        return $this->rotationMatrix;
     }
 
     /**
@@ -101,7 +101,7 @@ class BursaWolfParameters
         if (is_null($translationVectors)) {
             throw new Exception('The Translation Vectors must be a TranslationVectors object');
         }
-        $this->_translationVectors = $translationVectors;
+        $this->translationVectors = $translationVectors;
 
         return $this;
     }
@@ -113,7 +113,7 @@ class BursaWolfParameters
      */
     public function getTranslationVectors()
     {
-        return $this->_translationVectors;
+        return $this->translationVectors;
     }
 
     /**
@@ -128,7 +128,7 @@ class BursaWolfParameters
         if (is_null($scaleFactor) || !is_numeric($scaleFactor)) {
             throw new Exception('The ScaleFactor must be set to a numeric value');
         }
-        $this->_scaleFactor = (float) $scaleFactor;
+        $this->scaleFactor = (float) $scaleFactor;
 
         return $this;
     }
@@ -140,7 +140,7 @@ class BursaWolfParameters
      */
     public function getScaleFactor()
     {
-        return $this->_scaleFactor;
+        return $this->scaleFactor;
     }
 
     /**
@@ -150,14 +150,14 @@ class BursaWolfParameters
      */
     public function invert()
     {
-        $this->_translationVectors->getX()->invertValue();
-        $this->_translationVectors->getY()->invertValue();
-        $this->_translationVectors->getZ()->invertValue();
+        $this->translationVectors->getX()->invertValue();
+        $this->translationVectors->getY()->invertValue();
+        $this->translationVectors->getZ()->invertValue();
 
-        $this->_rotationMatrix->getX()->invertValue();
-        $this->_rotationMatrix->getY()->invertValue();
-        $this->_rotationMatrix->getZ()->invertValue();
+        $this->rotationMatrix->getX()->invertValue();
+        $this->rotationMatrix->getY()->invertValue();
+        $this->rotationMatrix->getZ()->invertValue();
 
-        $this->_scaleFactor = 0 - $this->_scaleFactor;
+        $this->scaleFactor = 0 - $this->scaleFactor;
     }
 }

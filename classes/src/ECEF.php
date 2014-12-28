@@ -32,7 +32,7 @@ class ECEF
      * @access protected
      * @var Distance
      */
-    protected $_xCoordinate;
+    protected $xCoordinate;
 
     /**
      * The y-coordinate value of this ECEF object.
@@ -41,7 +41,7 @@ class ECEF
      * @access protected
      * @var Distance
      */
-    protected $_yCoordinate;
+    protected $yCoordinate;
 
     /**
      * The z-coordinate value of this ECEF object.
@@ -50,7 +50,7 @@ class ECEF
      * @access protected
      * @var Distance
      */
-    protected $_zCoordinate;
+    protected $zCoordinate;
 
 
     /**
@@ -59,7 +59,7 @@ class ECEF
      * @param     int|float    $value    The value on which to perform the calculation
      * @return    float        The sine squared result
      */
-    private static function _sinSquared($value)
+    private static function sinSquared($value)
     {
         return sin($value) * sin($value);
     }
@@ -73,16 +73,16 @@ class ECEF
     public function __construct(XyzFormat_Interface $xyzCoordinates = null)
     {
         if (!is_null($xyzCoordinates)) {
-            $this->_xCoordinate = $xyzCoordinates->getX();
-            $this->_yCoordinate = $xyzCoordinates->getY();
-            $this->_zCoordinate = $xyzCoordinates->getZ();
+            $this->xCoordinate = $xyzCoordinates->getX();
+            $this->yCoordinate = $xyzCoordinates->getY();
+            $this->zCoordinate = $xyzCoordinates->getZ();
             return;
         }
 
         //    Defaults
-        $this->_xCoordinate = new Distance();
-        $this->_yCoordinate = new Distance();
-        $this->_zCoordinate = new Distance();
+        $this->xCoordinate = new Distance();
+        $this->yCoordinate = new Distance();
+        $this->zCoordinate = new Distance();
     }
 
 
@@ -98,7 +98,7 @@ class ECEF
         if (is_null($xDistance)) {
             throw new Exception('The Distance on the X-Axis must be a Distance object');
         }
-        $this->_xCoordinate = $xDistance;
+        $this->xCoordinate = $xDistance;
 
         return $this;
     }
@@ -110,7 +110,7 @@ class ECEF
      */
     public function getX()
     {
-        return $this->_xCoordinate;
+        return $this->xCoordinate;
     }
 
     /**
@@ -125,7 +125,7 @@ class ECEF
         if (is_null($yDistance)) {
             throw new Exception('The Distance on the Y-Axis must be a Distance object');
         }
-        $this->_yCoordinate = $yDistance;
+        $this->yCoordinate = $yDistance;
 
         return $this;
     }
@@ -137,7 +137,7 @@ class ECEF
      */
     public function getY()
     {
-        return $this->_yCoordinate;
+        return $this->yCoordinate;
     }
 
     /**
@@ -152,7 +152,7 @@ class ECEF
         if (is_null($zDistance)) {
             throw new Exception('The Distance on the Z-Axis must be a Distance object');
         }
-        $this->_zCoordinate = $zDistance;
+        $this->zCoordinate = $zDistance;
 
         return $this;
     }
@@ -164,7 +164,7 @@ class ECEF
      */
     public function getZ()
     {
-        return $this->_zCoordinate;
+        return $this->zCoordinate;
     }
 
     /**
@@ -183,26 +183,26 @@ class ECEF
         $ellipsoid = $datum->getReferenceEllipsoid();
 
         $pValue = sqrt(
-            ($this->_xCoordinate->getValue() * $this->_xCoordinate->getValue()) +
-            ($this->_yCoordinate->getValue() * $this->_yCoordinate->getValue())
+            ($this->xCoordinate->getValue() * $this->xCoordinate->getValue()) +
+            ($this->yCoordinate->getValue() * $this->yCoordinate->getValue())
         );
 
         $lat = atan2(
-            $this->_zCoordinate->getValue(),
+            $this->zCoordinate->getValue(),
             $pValue * (1 - $ellipsoid->getFirstEccentricitySquared())
         );
         $tempLat = 2 * M_PI;
         while (abs($lat - $tempLat) > 4) { // Accuracy to about 4 metres
             $vValue = $ellipsoid->getSemiMajorAxis() /
-                (sqrt(1 - $ellipsoid->getFirstEccentricitySquared() * self::_sinSquared($lat)));
+                (sqrt(1 - $ellipsoid->getFirstEccentricitySquared() * self::sinSquared($lat)));
             $tempLat = $lat;
             $lat = atan2(
-                $this->_zCoordinate->getValue() +
+                $this->zCoordinate->getValue() +
                     $ellipsoid->getFirstEccentricitySquared() * $vValue * sin($lat),
                 $pValue
             );
         }
-        $long = atan2($this->_yCoordinate->getValue(), $this->_xCoordinate->getValue());
+        $long = atan2($this->yCoordinate->getValue(), $this->xCoordinate->getValue());
         $height = $pValue / cos($lat) - $vValue;
 
         $latLongCoordinates = new LatLong_CoordinateValues(
@@ -223,32 +223,32 @@ class ECEF
      * @return    void
      * @throws    Exception
      */
-    private function _helmertTransform(BursaWolfParameters $bursaWolfParameters)
+    private function helmertTransform(BursaWolfParameters $bursaWolfParameters)
     {
         $ppmScaling = 1 + $bursaWolfParameters->getScaleFactor() / 1000000;
 
         $xCoordinate = $bursaWolfParameters->getTranslationVectors()->getX()->getValue() +
-            ($this->_xCoordinate->getValue() * $ppmScaling) +
+            ($this->xCoordinate->getValue() * $ppmScaling) +
             (-$bursaWolfParameters->getRotationMatrix()->getX()->getValue(Angle::RADIANS) *
-                $this->_yCoordinate->getValue()) +
+                $this->yCoordinate->getValue()) +
             ($bursaWolfParameters->getRotationMatrix()->getY()->getValue(Angle::RADIANS) *
-                $this->_zCoordinate->getValue());
+                $this->zCoordinate->getValue());
         $yCoordinate = $bursaWolfParameters->getTranslationVectors()->getY()->getValue() +
             ($bursaWolfParameters->getRotationMatrix()->getZ()->getValue(Angle::RADIANS) *
-                $this->_xCoordinate->getValue()) +
-            ($this->_yCoordinate->getValue() * $ppmScaling) +
+                $this->xCoordinate->getValue()) +
+            ($this->yCoordinate->getValue() * $ppmScaling) +
             (-$bursaWolfParameters->getRotationMatrix()->getX()->getValue(Angle::RADIANS) *
-                $this->_zCoordinate->getValue());
+                $this->zCoordinate->getValue());
         $zCoordinate = $bursaWolfParameters->getTranslationVectors()->getZ()->getValue() +
             (-$bursaWolfParameters->getRotationMatrix()->getY()->getValue(Angle::RADIANS) *
-                $this->_xCoordinate->getValue()) +
+                $this->xCoordinate->getValue()) +
             ($bursaWolfParameters->getRotationMatrix()->getX()->getValue(Angle::RADIANS) *
-                $this->_yCoordinate->getValue()) +
-            ($this->_zCoordinate->getValue() * $ppmScaling);
+                $this->yCoordinate->getValue()) +
+            ($this->zCoordinate->getValue() * $ppmScaling);
 
-        $this->_xCoordinate->setValue($xCoordinate);
-        $this->_yCoordinate->setValue($yCoordinate);
-        $this->_zCoordinate->setValue($zCoordinate);
+        $this->xCoordinate->setValue($xCoordinate);
+        $this->yCoordinate->setValue($yCoordinate);
+        $this->zCoordinate->setValue($zCoordinate);
     }
 
     /**
@@ -265,7 +265,7 @@ class ECEF
         }
 
         $bursaWolfParameters = $fromDatum->getBursaWolfParameters();
-        $this->_helmertTransform($bursaWolfParameters);
+        $this->helmertTransform($bursaWolfParameters);
     }
 
     /**
@@ -282,6 +282,6 @@ class ECEF
         }
         $bursaWolfParameters = clone $toDatum->getBursaWolfParameters();
         $bursaWolfParameters->invert();
-        $this->_helmertTransform($bursaWolfParameters);
+        $this->helmertTransform($bursaWolfParameters);
     }
 }

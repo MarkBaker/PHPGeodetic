@@ -45,7 +45,7 @@ class Datum
      * @access private
      * @var    mixed[]
      */
-    private static $_geodeticDatums = array(
+    private static $geodeticDatums = array(
         self::OSGB36 => array(
             'name' => 'Ordnance Survey - Great Britain (1936)',
             'synonyms'            => 'OSGB',
@@ -458,7 +458,7 @@ class Datum
      * @access protected
      * @var    string
      */
-    protected $_datumReference;
+    protected $datumReference;
 
     /**
      * Name of this datum
@@ -466,7 +466,7 @@ class Datum
      * @access protected
      * @var    string
      */
-    protected $_datumName;
+    protected $datumName;
 
     /**
      * Name of the selected region for this datum
@@ -474,7 +474,7 @@ class Datum
      * @access protected
      * @var    string
      */
-    protected $_regionName;
+    protected $regionName;
 
     /**
      * Name of reference ellipsoid for this datum
@@ -482,7 +482,7 @@ class Datum
      * @access protected
      * @var    string
      */
-    protected $_ellipsoidName;
+    protected $ellipsoidName;
 
     /**
      * The reference ellipsoid for this datum
@@ -490,7 +490,7 @@ class Datum
      * @access protected
      * @var    ReferenceEllipsoid
      */
-    protected $_ellipsoid;
+    protected $ellipsoid;
 
     /**
      * The bursa wolf parameter set used for converting this datum to and from WGS_84
@@ -498,7 +498,7 @@ class Datum
      * @access protected
      * @var    BursaWolfParameters
      */
-    protected $_bursaWolfParameters;
+    protected $bursaWolfParameters;
 
     /**
      * Create a new Datum
@@ -522,7 +522,7 @@ class Datum
      */
     public function getDatumReference()
     {
-        return $this->_datumReference;
+        return $this->datumReference;
     }
 
     /**
@@ -532,7 +532,7 @@ class Datum
      */
     public function getDatumName()
     {
-        return $this->_datumName;
+        return $this->datumName;
     }
 
     /**
@@ -542,7 +542,7 @@ class Datum
      */
     public function getRegionName()
     {
-        return $this->_regionName;
+        return $this->regionName;
     }
 
     /**
@@ -552,15 +552,15 @@ class Datum
      * @return   string    The actual name used internally for the requested datum
      * @throws   Exception
      */
-    private static function _isValidDatum($datum)
+    private static function isValidDatum($datum)
     {
         if (is_null($datum)) {
             throw new Exception('A Datum name must be specified');
         }
-        if (!isset(self::$_geodeticDatums[$datum])) {
+        if (!isset(self::$geodeticDatums[$datum])) {
             if (defined('self::'.$datum)) {
                 $datum = constant('self::'.$datum);
-                if (!isset(self::$_geodeticDatums[$datum])) {
+                if (!isset(self::$geodeticDatums[$datum])) {
                     throw new Exception('"'.$datum.'" is not a valid datum');
                 }
             } else {
@@ -575,25 +575,26 @@ class Datum
      * Set the Data for this Datum object
      *
      * @param    string    $datum     The name of the datum to use for this ellipsoid
-     * @param    string    $region    The name of a region within this datum to use for Helmert Transform Bursa-Wolf parameters.
+     * @param    string    $region    The name of a region within this datum to use for Helmert Transform
+     *                                    Bursa-Wolf parameters.
      *                    If no region is specified, the object will use a default set of values for the
-     *                        Helmert transform Bursa-Wolf parameters from the region defined in defaultRegion for
-     *                        the Datum.
+     *                        Helmert transform Bursa-Wolf parameters from the region defined in defaultRegion
+     *                        for the Datum.
      * @return   Datum
      * @throws   Exception
      */
     public function setDatum($datum = null, $region = null)
     {
-        $datum = self::_isValidDatum($datum);
+        $datum = self::isValidDatum($datum);
 
         if (is_null($region)) {
-            $region = self::$_geodeticDatums[$datum]['defaultRegion'];
+            $region = self::$geodeticDatums[$datum]['defaultRegion'];
         }
 
-        $this->_datumReference = $datum;
-        $this->_datumName = self::$_geodeticDatums[$datum]['name'];
-        $this->_ellipsoidName = self::$_geodeticDatums[$datum]['referenceEllipsoid'];
-        $this->_ellipsoid = new ReferenceEllipsoid($this->_ellipsoidName);
+        $this->datumReference = $datum;
+        $this->datumName = self::$geodeticDatums[$datum]['name'];
+        $this->ellipsoidName = self::$geodeticDatums[$datum]['referenceEllipsoid'];
+        $this->ellipsoid = new ReferenceEllipsoid($this->ellipsoidName);
 
         $this->setRegion($region);
 
@@ -603,7 +604,8 @@ class Datum
     /**
      * Set the Region for this Datum object to use for Helmert Transform Bursa-Wolf parameters
      *
-     * @param    $region    The name of a region within the current datum to use for Helmert Transform Bursa-Wolf parameters.
+     * @param    $region    The name of a region within the current datum to use for Helmert Transform
+     *                          Bursa-Wolf parameters.
      * @throws   Exception
      */
     public function setRegion($region = null)
@@ -612,29 +614,29 @@ class Datum
             throw new Exception('A Region name must be specified');
         }
 
-        $datum = $this->_datumReference;
-        if (!isset(self::$_geodeticDatums[$datum]['regions'][$region])) {
+        $datum = $this->datumReference;
+        if (!isset(self::$geodeticDatums[$datum]['regions'][$region])) {
             throw new Exception('"'.$region.'" is not a valid region for this datum');
         }
 
         $rotationMatrix = new RotationMatrix(
             new RotationMatrixArray(
-                self::$_geodeticDatums[$datum]['regions'][$region]['rotationMatrix'],
-                self::$_geodeticDatums[$datum]['regions'][$region]['rotationMatrixUOM']
+                self::$geodeticDatums[$datum]['regions'][$region]['rotationMatrix'],
+                self::$geodeticDatums[$datum]['regions'][$region]['rotationMatrixUOM']
             )
         );
         $translationVectors = new TranslationVectors(
             new TranslationVectorArray(
-                self::$_geodeticDatums[$datum]['regions'][$region]['translationVectors'],
-                self::$_geodeticDatums[$datum]['regions'][$region]['translationVectorsUOM']
+                self::$geodeticDatums[$datum]['regions'][$region]['translationVectors'],
+                self::$geodeticDatums[$datum]['regions'][$region]['translationVectorsUOM']
             )
         );
 
-        $this->_regionName = $region;
-        $this->_bursaWolfParameters = new BursaWolfParameters(
+        $this->regionName = $region;
+        $this->bursaWolfParameters = new BursaWolfParameters(
             $rotationMatrix,
             $translationVectors,
-            self::$_geodeticDatums[$datum]['regions'][$region]['scaleFactor']
+            self::$geodeticDatums[$datum]['regions'][$region]['scaleFactor']
         );
 
         return $this;
@@ -647,7 +649,7 @@ class Datum
      */
     public function getReferenceEllipsoidName()
     {
-        return $this->_ellipsoidName;
+        return $this->ellipsoidName;
     }
 
     /**
@@ -657,7 +659,7 @@ class Datum
      */
     public function getReferenceEllipsoid()
     {
-        return $this->_ellipsoid;
+        return $this->ellipsoid;
     }
 
     /**
@@ -667,7 +669,7 @@ class Datum
      */
     public function getBursaWolfParameters()
     {
-        return $this->_bursaWolfParameters;
+        return $this->bursaWolfParameters;
     }
 
     /**
@@ -679,13 +681,13 @@ class Datum
     {
         return array_combine(
             array_keys(
-                self::$_geodeticDatums
+                self::$geodeticDatums
             ),
             array_map(
                 function ($datum) {
                     return $datum['name'];
                 },
-                self::$_geodeticDatums
+                self::$geodeticDatums
             )
         );
     }
@@ -698,10 +700,10 @@ class Datum
      */
     public static function getRegionNamesForDatum($datum = null)
     {
-        $datum = self::_isValidDatum($datum);
+        $datum = self::isValidDatum($datum);
 
         return array_unique(
-            array_keys(self::$_geodeticDatums[$datum]['regions'])
+            array_keys(self::$geodeticDatums[$datum]['regions'])
         );
     }
 }

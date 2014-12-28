@@ -89,10 +89,9 @@ class Region extends Feature
     public function getAreaPlanar(ReferenceEllipsoid $ellipsoid = null)
     {
         $pointCount = count($this->_nodePoints);
-        if ($pointCount == 0)
+        if ($pointCount == 0) {
             return new Area();
-
-        if (is_null($ellipsoid)) {
+        } elseif (is_null($ellipsoid)) {
             $ellipsoid = new ReferenceEllipsoid(ReferenceEllipsoid::WGS_1984);
         }
         $radius = $ellipsoid->getSemiMajorAxis();
@@ -172,8 +171,9 @@ class Region extends Feature
     public function getCentrePointPlanar()
     {
         $pointCount = count($this->_nodePoints);
-        if ($pointCount == 0)
+        if ($pointCount == 0) {
             throw new Exception('Area is not defined, so cannot have a centre point');
+        }
 
         $cLong = $cLat = 0;
         for ($i = 0; $i < $pointCount; ++$i) {
@@ -287,10 +287,9 @@ class Region extends Feature
     public function getArea(ReferenceEllipsoid $ellipsoid = null)
     {
         $pointCount = count($this->_nodePoints);
-        if ($pointCount == 0)
+        if ($pointCount == 0) {
             return new Area();
-
-        if (is_null($ellipsoid)) {
+        } elseif (is_null($ellipsoid)) {
             $ellipsoid = new ReferenceEllipsoid(ReferenceEllipsoid::WGS_1984);
         }
         $semiMajorAxis = $ellipsoid->getSemiMajorAxis();
@@ -328,8 +327,9 @@ class Region extends Feature
 
             $deltaLongitude = $longitude2 - $longitude1;
             $area += $deltaLongitude * ($Qp - $this->_Q($latitude2));
-            if (($deltaLatitude = $latitude2 - $latitude1) != 0.0)
+            if (($deltaLatitude = $latitude2 - $latitude1) != 0.0) {
                 $area += $deltaLongitude * $this->_Q($latitude2) - ($deltaLongitude / $deltaLatitude) * ($Qbar2 - $Qbar1);
+            }
         }
 
         $area = self::polarAdjust($area, $AE, $Qp);
@@ -349,8 +349,7 @@ class Region extends Feature
      *                                                                     Vincenty formula will be used instead.
      * @return    Distance    The length along the perimeter for this region
      */
-    public function getPerimeter(ReferenceEllipsoid $ellipsoid = null,
-                                 $useHaversine = false)
+    public function getPerimeter(ReferenceEllipsoid $ellipsoid = null, $useHaversine = false)
     {
         $pointCount = count($this->_nodePoints);
         if ($pointCount == 0) {
