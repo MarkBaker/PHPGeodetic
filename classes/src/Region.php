@@ -201,7 +201,7 @@ class Region extends Feature
         $cLong *= $areaAdjust;
 
         return new LatLong(
-            new LatLong_CoordinateValues(
+            new LatLong\CoordinateValues(
                 $cLat,
                 $cLong,
                 Angle::DEGREES

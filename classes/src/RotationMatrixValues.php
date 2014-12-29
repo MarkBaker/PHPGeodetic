@@ -11,7 +11,7 @@ namespace Geodetic;
  * @copyright  Copyright (c) 2012 Mark Baker (https://github.com/MarkBaker/PHPGeodetic)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
  */
-class RotationMatrixValues extends Angle_Abstract
+class RotationMatrixValues extends Base\Angle
 {
     /**
      * Create an XYZ_Format interface object for Rotation Matrix Angles from individual values

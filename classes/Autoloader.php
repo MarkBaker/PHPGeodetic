@@ -40,7 +40,11 @@ class Autoloader
 
         $pClassFilePath = __DIR__ . DIRECTORY_SEPARATOR .
                           'src' . DIRECTORY_SEPARATOR .
-                          str_replace('Geodetic\\', '', $pClassName) .
+                          str_replace(
+                                '\\', 
+                                '/',
+                                str_replace('Geodetic\\', '', $pClassName)
+                            ) .
                           '.php';
 
         if ((file_exists($pClassFilePath) === FALSE) || (is_readable($pClassFilePath) === FALSE)) {

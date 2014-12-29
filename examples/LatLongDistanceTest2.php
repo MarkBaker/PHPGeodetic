@@ -11,7 +11,7 @@ $height = 0.0;
 
 
 $latLongTokyo = new \Geodetic\LatLong(
-    new \Geodetic\LatLong_CoordinateValues(
+    new \Geodetic\LatLong\CoordinateValues(
         $latTokyo,
         $longTokyo,
         \Geodetic\Angle::DEGREES,
@@ -21,7 +21,7 @@ $latLongTokyo = new \Geodetic\LatLong(
 );
 
 $latLongSeattle = new \Geodetic\LatLong(
-    new \Geodetic\LatLong_CoordinateValues(
+    new \Geodetic\LatLong\CoordinateValues(
         $latSeattle,
         $longSeattle,
         \Geodetic\Angle::DEGREES,

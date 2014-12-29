@@ -10,7 +10,7 @@ namespace Geodetic;
  * @copyright  Copyright (c) 2012 Mark Baker (https://github.com/MarkBaker/PHPGeodetic)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
  */
-class Angle extends Measure_Abstract
+class Angle extends Base\Measure
 {
     const DEGREES     = 'degrees';
     const MINUTES     = 'minutes';

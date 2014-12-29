@@ -11,7 +11,7 @@ $height = 0.0;
 
 
 $latLongLiverpool = new \Geodetic\LatLong(
-    new \Geodetic\LatLong_CoordinateValues(
+    new \Geodetic\LatLong\CoordinateValues(
         $latLiverpool,
         $longLiverpool,
         \Geodetic\Angle::DEGREES,
@@ -21,7 +21,7 @@ $latLongLiverpool = new \Geodetic\LatLong(
 );
 
 $latLongLondon = new \Geodetic\LatLong(
-    new \Geodetic\LatLong_CoordinateValues(
+    new \Geodetic\LatLong\CoordinateValues(
         $latLondon,
         $longLondon,
         \Geodetic\Angle::DEGREES,

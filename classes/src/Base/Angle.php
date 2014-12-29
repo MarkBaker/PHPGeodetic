@@ -1,6 +1,6 @@
 <?php
 
-namespace Geodetic;
+namespace Geodetic\Base;
 
 /**
  *
@@ -12,7 +12,7 @@ namespace Geodetic;
  * @copyright  Copyright (c) 2012 Mark Baker (https://github.com/MarkBaker/PHPGeodetic)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
  */
-abstract class Angle_Abstract implements XyzFormat_Interface
+abstract class Angle implements XyzFormat
 {
     /**
      * The X-angle
@@ -44,30 +44,30 @@ abstract class Angle_Abstract implements XyzFormat_Interface
      * @param    integer|float|Angle    $xAngle    The X-Angle value
      * @param    integer|float|Angle    $yAngle    The Y-Angle value
      * @param    integer|float|Angle    $zAngle    The Z-Angle value
-     * @param    string                          $uom       Unit of measure for all Angle values
-     *                                                          (if they are passed as integer or float)
+     * @param    string                 $uom       Unit of measure for all Angle values
+     *                                                  (if they are passed as integer or float)
      */
     protected function setValues($xAngle, $yAngle, $zAngle, $uom)
     {
         $this->setX(
-            ($xAngle instanceof Angle) ? $xAngle : new Angle($xAngle, $uom)
+            ($xAngle instanceof \Geodetic\Angle) ? $xAngle : new \Geodetic\Angle($xAngle, $uom)
         );
 
         $this->setY(
-            ($yAngle instanceof Angle) ? $yAngle : new Angle($yAngle, $uom)
+            ($yAngle instanceof \Geodetic\Angle) ? $yAngle : new \Geodetic\Angle($yAngle, $uom)
         );
 
         $this->setZ(
-            ($zAngle instanceof Angle) ? $zAngle : new Angle($zAngle, $uom)
+            ($zAngle instanceof \Geodetic\Angle) ? $zAngle : new \Geodetic\Angle($zAngle, $uom)
         );
     }
 
     /**
      * Set the X-Angle value
      *
-     * @param     Angle    $xAngle    The Angle value
+     * @param     \Geodetic\Angle    $xAngle    The Angle value
      */
-    protected function setX(Angle $xAngle)
+    protected function setX(\Geodetic\Angle $xAngle)
     {
         $this->xAngle = $xAngle;
     }
@@ -75,7 +75,7 @@ abstract class Angle_Abstract implements XyzFormat_Interface
     /**
      * Get the X-Angle value
      *
-     * @return     Angle    The Angle value
+     * @return     \Geodetic\Angle    The Angle value
      */
     public function getX()
     {
@@ -85,9 +85,9 @@ abstract class Angle_Abstract implements XyzFormat_Interface
     /**
      * Set the Y-Angle value
      *
-     * @param     Angle    $yAngle    The Angle value
+     * @param     \Geodetic\Angle    $yAngle    The Angle value
      */
-    protected function setY(Angle $yAngle)
+    protected function setY(\Geodetic\Angle $yAngle)
     {
         $this->yAngle = $yAngle;
     }
@@ -95,7 +95,7 @@ abstract class Angle_Abstract implements XyzFormat_Interface
     /**
      * Get the Y-Angle value
      *
-     * @return     Angle    The Angle value
+     * @return     \Geodetic\Angle    The Angle value
      */
     public function getY()
     {
@@ -105,9 +105,9 @@ abstract class Angle_Abstract implements XyzFormat_Interface
     /**
      * Set the Z-Angle value
      *
-     * @param     Angle    $zAngle    The Angle value
+     * @param     \Geodetic\Angle    $zAngle    The Angle value
      */
-    protected function setZ(Angle $zAngle)
+    protected function setZ(\Geodetic\Angle $zAngle)
     {
         $this->zAngle = $zAngle;
     }
@@ -115,7 +115,7 @@ abstract class Angle_Abstract implements XyzFormat_Interface
     /**
      * Get the Z-Angle value
      *
-     * @return     Angle    The Angle value
+     * @return     \Geodetic\Angle    The Angle value
      */
     public function getZ()
     {

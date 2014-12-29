@@ -42,10 +42,10 @@ class RotationMatrix
     /**
      * Create a new Rotation Matrix
      *
-     * @param     XyzFormat_Interface    $xyzCoordinates    The Rotation Matrix values
+     * @param     Base\XyzFormat    $xyzCoordinates    The Rotation Matrix values
      * @throws    Exception
      */
-    public function __construct(XyzFormat_Interface $xyzCoordinates = null)
+    public function __construct(Base\XyzFormat $xyzCoordinates = null)
     {
         if (!is_null($xyzCoordinates)) {
             $this->xAngle = $xyzCoordinates->getX();

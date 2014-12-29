@@ -39,7 +39,7 @@ $phar->setStub(
 <<<'EOT'
 <?php
     spl_autoload_register(function ($className) {
-        include 'phar://' . $className . '.php';
+        include 'phar://' . str_replace('\\', '/', $className) . '.php';
     });
 
     try {

@@ -42,10 +42,10 @@ class TranslationVectors
     /**
      * Create a new Translation Vector
      *
-     * @param     XyzFormat_Interface    $xyzCoordinates    The Translation Vector values
+     * @param     Base\XyzFormat    $xyzCoordinates    The Translation Vector values
      * @throws    Exception
      */
-    public function __construct(XyzFormat_Interface $xyzCoordinates = null)
+    public function __construct(Base\XyzFormat $xyzCoordinates = null)
     {
         if (!is_null($xyzCoordinates)) {
             $this->xVector = $xyzCoordinates->getX();

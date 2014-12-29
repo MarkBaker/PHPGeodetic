@@ -307,7 +307,7 @@ class UTM
                          cos($phi)) *
                      (180.0 / M_PI);
 
-        $latLongCoordinates = new LatLong_CoordinateValues(
+        $latLongCoordinates = new LatLong\CoordinateValues(
             $latitude,
             $longitude,
             Angle::DEGREES,

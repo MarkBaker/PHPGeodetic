@@ -1,8 +1,8 @@
 <?php
 
-namespace Geodetic;
+namespace Geodetic\ECEF;
 
-class ECEF_CoordinateArrayTest extends \PHPUnit_Framework_TestCase
+class CoordinateArrayTest extends \PHPUnit_Framework_TestCase
 {
 
     protected $_xDdistance;
@@ -28,7 +28,7 @@ class ECEF_CoordinateArrayTest extends \PHPUnit_Framework_TestCase
 
     public function testInstantiate()
     {
-        $matrixObject = new ECEF_CoordinateArray(
+        $matrixObject = new CoordinateArray(
             array(
                 $this->_xDistance,
                 $this->_yDistance,
@@ -38,7 +38,7 @@ class ECEF_CoordinateArrayTest extends \PHPUnit_Framework_TestCase
         //    Must return an object...
         $this->assertTrue(is_object($matrixObject));
         //    ... of the correct type
-        $this->assertTrue(is_a($matrixObject, 'Geodetic\\ECEF_CoordinateArray'));
+        $this->assertTrue(is_a($matrixObject, 'Geodetic\\ECEF\\CoordinateArray'));
 
         $matrixXValue = $matrixObject->getX();
         $matrixDefaultX = $matrixObject->getX();
@@ -64,7 +64,7 @@ class ECEF_CoordinateArrayTest extends \PHPUnit_Framework_TestCase
      */
     public function testInstantiateWithInvalidArray()
     {
-        $matrixObject = new ECEF_CoordinateArray(
+        $matrixObject = new CoordinateArray(
             array(
                 $this->_xDistance,
                 $this->_yDistance

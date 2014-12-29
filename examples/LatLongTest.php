@@ -9,7 +9,7 @@ $height = 0.0;
 
 
 $latLong = new \Geodetic\LatLong(
-    new \Geodetic\LatLong_CoordinateValues(
+    new \Geodetic\LatLong\CoordinateValues(
         $lat,
         $long,
         \Geodetic\Angle::DEGREES,

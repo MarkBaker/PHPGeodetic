@@ -1,6 +1,6 @@
 <?php
 
-namespace Geodetic;
+namespace Geodetic\LatLong;
 
 /**
  *
@@ -11,7 +11,7 @@ namespace Geodetic;
  * @copyright  Copyright (c) 2012 Mark Baker (https://github.com/MarkBaker/PHPGeodetic)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
  */
-class LatLong_CoordinateValues extends LatLong_Coordinates_Abstract
+class CoordinateValues extends \Geodetic\Base\LatLongCoordinates
 {
     /**
      * Create a new set of coordinates for a Latitude/Longitude object
@@ -21,14 +21,14 @@ class LatLong_CoordinateValues extends LatLong_Coordinates_Abstract
      * @param     string           $latLongUom     Unit of Measure for Latitude and Longitude values
      * @param     integer|float    $zHeight        Height value
      * @param     string           $heightUom      Unit of Measure for Height value
-     * @throws    Exception
+     * @throws    \Geodetic\Exception
      */
     public function __construct(
         $xLatitude = null,
         $yLongitude = null,
-        $latLongUom = Angle::DEGREES,
+        $latLongUom = \Geodetic\Angle::DEGREES,
         $zHeight = null,
-        $heightUom = Distance::METRES
+        $heightUom = \Geodetic\Distance::METRES
     ) {
         $this->setCoordinates($xLatitude, $yLongitude, $latLongUom, $zHeight, $heightUom);
     }

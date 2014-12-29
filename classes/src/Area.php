@@ -10,7 +10,7 @@ namespace Geodetic;
  * @copyright  Copyright (c) 2012 Mark Baker (https://github.com/MarkBaker/PHPGeodetic)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
  */
-class Area extends Measure_Abstract
+class Area extends Base\Measure
 {
     const SQUARE_METRES       = 'metres2';
     const SQUARE_KILOMETRES   = 'kilometres2';
@@ -55,7 +55,7 @@ class Area extends Measure_Abstract
      *
      * @param     integer|float    $area    The Area value in the specified unit
      * @param     string           $uom     Unit of Measure (default is SQUARE_METRES)
-     * @throws    Exception
+     * @throws    \Geodetic\Exception
      */
     public function __construct($area = null, $uom = self::SQUARE_METRES)
     {
@@ -71,7 +71,7 @@ class Area extends Measure_Abstract
      * @param     integer|float    $area    The Area in the specified unit
      * @param     string           $uom     Unit of Measure (default is SQUARE_METRES)
      * @return    void
-     * @throws    Exception
+     * @throws    \Geodetic\Exception
      */
     public function setValue($area = 0.0, $uom = self::SQUARE_METRES)
     {
@@ -84,7 +84,7 @@ class Area extends Measure_Abstract
      *
      * @param     string    $uom    Unit of Measure (default is SQUARE_METRES)
      * @return    float             The Area value in the specified unit
-     * @throws    Exception
+     * @throws    \Geodetic\Exception
      */
     public function getValue($uom = self::SQUARE_METRES)
     {
@@ -98,7 +98,7 @@ class Area extends Measure_Abstract
      * @param     integer|float    $area    Area measurement to convert in the specified unit
      * @param     string           $uom     Unit of Measure to convert the area from
      * @return    float            The converted area value
-     * @throws    Exception
+     * @throws    \Geodetic\Exception
      */
     public static function convertToSquareMetres(
         $area = 0.0,
@@ -116,7 +116,7 @@ class Area extends Measure_Abstract
      * @param     integer|float    $area    Area measurement to convert
      * @param     string           $uom     Unit of Measure to convert the area to
      * @return    float            The converted area value
-     * @throws    Exception
+     * @throws    \Geodetic\Exception
      */
     public static function convertFromSquareMetres(
         $area = 0.0,
@@ -135,7 +135,7 @@ class Area extends Measure_Abstract
      * @param     string           $uomFrom    Unit of Measure to convert the area from
      * @param     string           $uomTo      Unit of Measure to convert the area to
      * @return    float            The converted area value
-     * @throws    Exception
+     * @throws    \Geodetic\Exception
      */
     public static function convertArea(
         $area = 0.0,

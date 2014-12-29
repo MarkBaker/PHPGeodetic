@@ -135,7 +135,7 @@ $latLongArray = array(
 
 $regionArray = array();
 foreach($latLongArray as $latLongValues) {
-    $latLong = new \Geodetic\LatLong_CoordinateValues(
+    $latLong = new \Geodetic\LatLong\CoordinateValues(
         $latLongValues[0],
         $latLongValues[1],
         \Geodetic\Angle::DEGREES,

@@ -11,7 +11,7 @@ namespace Geodetic;
  * @copyright  Copyright (c) 2012 Mark Baker (https://github.com/MarkBaker/PHPGeodetic)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
  */
-class TranslationVectorArray extends Distance_Abstract
+class TranslationVectorArray extends Base\Distance
 {
     /**
      * Create an XYZ-Format interface object for Translation Vector Distance Coordinates from an array of values

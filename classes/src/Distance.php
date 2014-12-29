@@ -10,7 +10,7 @@ namespace Geodetic;
  * @copyright  Copyright (c) 2012 Mark Baker (https://github.com/MarkBaker/PHPGeodetic)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
  */
-class Distance extends Measure_Abstract
+class Distance extends Base\Measure
 {
     const METHOD_HAVERSINE = 'h';
     const METHOD_VINCENTY  = 'v';

@@ -1,8 +1,8 @@
 <?php
 
-namespace Geodetic;
+namespace Geodetic\ECEF;
 
-class ECEF_CoordinateValuesTest extends \PHPUnit_Framework_TestCase
+class CoordinateValuesTest extends \PHPUnit_Framework_TestCase
 {
 
     protected $_xDdistance;
@@ -28,11 +28,11 @@ class ECEF_CoordinateValuesTest extends \PHPUnit_Framework_TestCase
 
     public function testInstantiate()
     {
-        $matrixObject = new ECEF_CoordinateValues();
+        $matrixObject = new CoordinateValues();
         //    Must return an object...
         $this->assertTrue(is_object($matrixObject));
         //    ... of the correct type
-        $this->assertTrue(is_a($matrixObject, 'Geodetic\\ECEF_CoordinateValues'));
+        $this->assertTrue(is_a($matrixObject, 'Geodetic\\ECEF\\CoordinateValues'));
 
         $matrixDefaultX = $matrixObject->getX();
         $this->assertTrue(is_object($matrixDefaultX));
@@ -61,7 +61,7 @@ class ECEF_CoordinateValuesTest extends \PHPUnit_Framework_TestCase
 
     public function testInstantiateWithValues()
     {
-        $matrixObject = new ECEF_CoordinateValues(
+        $matrixObject = new CoordinateValues(
             $this->_xDistance,
             $this->_yDistance,
             $this->_zDistance

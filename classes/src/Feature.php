@@ -188,7 +188,7 @@ abstract class Feature
         $latitude = atan2($z, sqrt($x * $x + $y * $y));
         
         return new LatLong(
-            new LatLong_CoordinateValues(
+            new LatLong\CoordinateValues(
                 $latitude,
                 $longitude,
                 Angle::RADIANS

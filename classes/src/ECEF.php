@@ -67,10 +67,10 @@ class ECEF
     /**
      * Create a new ECEF
      *
-     * @param     XyzFormat_Interface    $xyzCoordinates    The ECEF X-, Y-, and Z-Coordinate values
+     * @param     Base\XyzFormat    $xyzCoordinates    The ECEF X-, Y-, and Z-Coordinate values
      * @throws    Exception
      */
-    public function __construct(XyzFormat_Interface $xyzCoordinates = null)
+    public function __construct(Base\XyzFormat $xyzCoordinates = null)
     {
         if (!is_null($xyzCoordinates)) {
             $this->xCoordinate = $xyzCoordinates->getX();
@@ -205,7 +205,7 @@ class ECEF
         $long = atan2($this->yCoordinate->getValue(), $this->xCoordinate->getValue());
         $height = $pValue / cos($lat) - $vValue;
 
-        $latLongCoordinates = new LatLong_CoordinateValues(
+        $latLongCoordinates = new LatLong\CoordinateValues(
             $lat,
             $long,
             Angle::RADIANS,

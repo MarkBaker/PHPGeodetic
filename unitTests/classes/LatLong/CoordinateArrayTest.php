@@ -1,8 +1,8 @@
 <?php
 
-namespace Geodetic;
+namespace Geodetic\LatLong;
 
-class LatLongCoordinateArrayTest extends \PHPUnit_Framework_TestCase
+class CoordinateArrayTest extends \PHPUnit_Framework_TestCase
 {
 
     protected $_xAngle;
@@ -28,7 +28,7 @@ class LatLongCoordinateArrayTest extends \PHPUnit_Framework_TestCase
 
     public function testInstantiate()
     {
-        $matrixObject = new LatLong_CoordinateArray(
+        $matrixObject = new CoordinateArray(
             array(
                 $this->_xAngle,
                 $this->_yAngle
@@ -39,7 +39,7 @@ class LatLongCoordinateArrayTest extends \PHPUnit_Framework_TestCase
         //    Must return an object...
         $this->assertTrue(is_object($matrixObject));
         //    ... of the correct type
-        $this->assertTrue(is_a($matrixObject, 'Geodetic\\LatLong_CoordinateArray'));
+        $this->assertTrue(is_a($matrixObject, 'Geodetic\\LatLong\\CoordinateArray'));
 
         $matrixXValue = $matrixObject->getX();
         $matrixDefaultX = $matrixObject->getX();
@@ -65,7 +65,7 @@ class LatLongCoordinateArrayTest extends \PHPUnit_Framework_TestCase
      */
     public function testInstantiateWithInvalidArray()
     {
-        $matrixObject = new LatLong_CoordinateArray(
+        $matrixObject = new CoordinateArray(
             array(
                 $this->_xAngle,
                 $this->_yAngle,

@@ -31,7 +31,7 @@ class DistanceMatrixTest extends \PHPUnit_Framework_TestCase
             ->method('getValue')
             ->will($this->returnValue(45.0));
 
-        $this->_xyz = $this->getMock('Geodetic\\ECEF_CoordinateValues');
+        $this->_xyz = $this->getMock('Geodetic\\ECEF\\CoordinateValues');
         $this->_xyz->expects($this->any())
             ->method('getX')
             ->will($this->returnValue($this->_xDistance));

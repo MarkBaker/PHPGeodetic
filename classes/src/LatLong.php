@@ -60,11 +60,11 @@ class LatLong
     /**
      * Create a new LatLong
      *
-     * @param     XyzFormat_Interface    $xyzCoordinates    The LatLong Latitude, Longitude and
-     *                                                                   Height/Elevation values expressed as X, Y and Z values
+     * @param     Base\XyzFormat    $xyzCoordinates    The LatLong Latitude, Longitude and
+     *                                                     Height/Elevation values expressed as X, Y and Z values
      * @throws    Exception
      */
-    public function __construct(XyzFormat_Interface $xyzCoordinates = null)
+    public function __construct(Base\XyzFormat $xyzCoordinates = null)
     {
         if (!is_null($xyzCoordinates)) {
             $this->_latitude = $xyzCoordinates->getX();
@@ -243,7 +243,7 @@ class LatLong
         $zCoordinate = ((1 - $ellipsoid->getFirstEccentricitySquared()) * $radiusOfCurvature +
             $this->_height->getValue()) * sin($phi);
 
-        $ecefCoordinates = new ECEF_CoordinateValues(
+        $ecefCoordinates = new ECEF\CoordinateValues(
             $xCoordinate,
             $yCoordinate,
             $zCoordinate
@@ -564,7 +564,7 @@ class LatLong
             atan2($yModified, cos($this->_latitude->getValue(Angle::RADIANS)) + $xModified);
 
         return new LatLong(
-            new LatLong_CoordinateValues(
+            new LatLong\CoordinateValues(
                 self::cleanLatitude($midpointLatitude),
                 self::cleanLongitude($midpointLongitude),
                 Angle::RADIANS
@@ -613,7 +613,7 @@ class LatLong
             );
 
         return new LatLong(
-            new LatLong_CoordinateValues(
+            new LatLong\CoordinateValues(
                 self::cleanLatitude($destinationLatitude),
                 self::cleanLongitude($destinationLongitude),
                 Angle::RADIANS

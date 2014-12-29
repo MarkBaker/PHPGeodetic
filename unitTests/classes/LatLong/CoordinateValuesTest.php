@@ -1,8 +1,8 @@
 <?php
 
-namespace Geodetic;
+namespace Geodetic\LatLong;
 
-class LatLongCoordinateValuesTest extends \PHPUnit_Framework_TestCase
+class CoordinateValuesTest extends \PHPUnit_Framework_TestCase
 {
 
     protected $_xAngle;
@@ -28,7 +28,7 @@ class LatLongCoordinateValuesTest extends \PHPUnit_Framework_TestCase
 
     public function testInstantiate()
     {
-        $matrixObject = new LatLong_CoordinateValues(
+        $matrixObject = new CoordinateValues(
             $this->_xAngle,
             $this->_yAngle,
             NULL,
@@ -37,7 +37,7 @@ class LatLongCoordinateValuesTest extends \PHPUnit_Framework_TestCase
         //    Must return an object...
         $this->assertTrue(is_object($matrixObject));
         //    ... of the correct type
-        $this->assertTrue(is_a($matrixObject, 'Geodetic\\LatLong_CoordinateValues'));
+        $this->assertTrue(is_a($matrixObject, 'Geodetic\\LatLong\\CoordinateValues'));
 
         $matrixXValue = $matrixObject->getX();
         $matrixDefaultX = $matrixObject->getX();

@@ -9,7 +9,7 @@ $z = 5097.7821917469;
 
 
 $ecef = new \Geodetic\ECEF(
-    new \Geodetic\ECEF_CoordinateValues(
+    new \Geodetic\ECEF\CoordinateValues(
         $x,
         $y,
         $z,

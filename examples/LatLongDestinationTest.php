@@ -9,7 +9,7 @@ $height = 0.0;
 
 
 $latLongLiverpool = new \Geodetic\LatLong(
-    new \Geodetic\LatLong_CoordinateValues(
+    new \Geodetic\LatLong\CoordinateValues(
         $latLiverpool,
         $longLiverpool,
         \Geodetic\Angle::DEGREES,

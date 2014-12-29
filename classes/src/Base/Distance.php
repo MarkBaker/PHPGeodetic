@@ -1,6 +1,6 @@
 <?php
 
-namespace Geodetic;
+namespace Geodetic\Base;
 
 /**
  *
@@ -12,7 +12,7 @@ namespace Geodetic;
  * @copyright  Copyright (c) 2012 Mark Baker (https://github.com/MarkBaker/PHPGeodetic)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
  */
-abstract class Distance_Abstract implements XyzFormat_Interface
+abstract class Distance implements XyzFormat
 {
     /**
      * The X-distance
@@ -50,22 +50,22 @@ abstract class Distance_Abstract implements XyzFormat_Interface
     protected function setValues($xDistance, $yDistance, $zDistance, $uom)
     {
         $this->setX(
-            ($xDistance instanceof Distance) ? $xDistance : new Distance($xDistance, $uom)
+            ($xDistance instanceof \Geodetic\Distance) ? $xDistance : new \Geodetic\Distance($xDistance, $uom)
         );
 
         $this->setY(
-            ($yDistance instanceof Distance) ? $yDistance : new Distance($yDistance, $uom)
+            ($yDistance instanceof \Geodetic\Distance) ? $yDistance : new \Geodetic\Distance($yDistance, $uom)
         );
 
         $this->setZ(
-            ($zDistance instanceof Distance) ? $zDistance : new Distance($zDistance, $uom)
+            ($zDistance instanceof \Geodetic\Distance) ? $zDistance : new \Geodetic\Distance($zDistance, $uom)
         );
     }
 
     /**
      * Set the X-Distance value
      *
-     * @param     Distance    $xValue    The Distance value
+     * @param     \Geodetic\Distance    $xValue    The Distance value
      */
     protected function setX($xValue)
     {
@@ -75,7 +75,7 @@ abstract class Distance_Abstract implements XyzFormat_Interface
     /**
      * Get the X-Distance value
      *
-     * @return     Distance    The Distance value
+     * @return     \Geodetic\Distance    The Distance value
      */
     public function getX()
     {
@@ -85,7 +85,7 @@ abstract class Distance_Abstract implements XyzFormat_Interface
     /**
      * Set the Y-Distance value
      *
-     * @param     Distance    $yValue    The Distance value
+     * @param     \Geodetic\Distance    $yValue    The Distance value
      */
     protected function setY($yValue)
     {
@@ -95,7 +95,7 @@ abstract class Distance_Abstract implements XyzFormat_Interface
     /**
      * Get the Y-Distance value
      *
-     * @return     Distance    The Distance value
+     * @return     \Geodetic\Distance    The Distance value
      */
     public function getY()
     {
@@ -105,7 +105,7 @@ abstract class Distance_Abstract implements XyzFormat_Interface
     /**
      * Set the Z-Distance value
      *
-     * @param     Distance    $zValue    The Distance value
+     * @param     \Geodetic\Distance    $zValue    The Distance value
      */
     protected function setZ($zValue)
     {
@@ -115,7 +115,7 @@ abstract class Distance_Abstract implements XyzFormat_Interface
     /**
      * Get the Z-Distance value
      *
-     * @return     Distance    The Distance value
+     * @return     \Geodetic\Distance    The Distance value
      */
     public function getZ()
     {

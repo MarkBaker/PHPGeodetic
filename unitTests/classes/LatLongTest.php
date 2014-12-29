@@ -33,7 +33,7 @@ class LatLongTest extends \PHPUnit_Framework_TestCase
             ->method('getValue')
             ->will($this->returnValue(1.0));
 
-        $this->_xyz = $this->getMock('Geodetic\\LatLong_CoordinateValues');
+        $this->_xyz = $this->getMock('Geodetic\\LatLong\\CoordinateValues');
         $this->_xyz->expects($this->any())
             ->method('getX')
             ->will($this->returnValue($this->_xLatitude));
@@ -44,7 +44,7 @@ class LatLongTest extends \PHPUnit_Framework_TestCase
             ->method('getZ')
             ->will($this->returnValue($this->_zHeight));
 
-        $this->_zyx = $this->getMock('Geodetic\\LatLong_CoordinateValues');
+        $this->_zyx = $this->getMock('Geodetic\\LatLong\\CoordinateValues');
         $this->_zyx->expects($this->any())
             ->method('getY')
             ->will($this->returnValue($this->_xLatitude));
