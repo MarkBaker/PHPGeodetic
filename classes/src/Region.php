@@ -14,7 +14,7 @@ namespace Geodetic;
  * @copyright  Copyright (c) 2012 Mark Baker (https://github.com/MarkBaker/PHPGeodetic)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
  */
-class Region extends Feature
+class Region extends Base\Feature
 {
 
     /**
@@ -44,15 +44,15 @@ class Region extends Feature
             throw new Exception('A region must be defined by at least 3 node points');
         }
 
-        $this->_setNodePoints($perimeterPoints);
+        $this->populateNodePoints($perimeterPoints);
 
         // Start and end nodes must be the same
         // If they aren't, then we create a new end node to match the start node so that the region is fully enclosed
-        if (($this->_nodePoints[0]->getLatitude()->getValue() !==
-             $this->_nodePoints[$pointCount-1]->getLatitude()->getValue()) ||
-            ($this->_nodePoints[0]->getLongitude()->getValue() !==
-             $this->_nodePoints[$pointCount-1]->getLongitude()->getValue())) {
-             $this->_nodePoints[] = $this->_nodePoints[0];
+        if (($this->nodePoints[0]->getLatitude()->getValue() !==
+             $this->nodePoints[$pointCount-1]->getLatitude()->getValue()) ||
+            ($this->nodePoints[0]->getLongitude()->getValue() !==
+             $this->nodePoints[$pointCount-1]->getLongitude()->getValue())) {
+             $this->nodePoints[] = $this->nodePoints[0];
         }
 
         return $this;
@@ -88,7 +88,7 @@ class Region extends Feature
      */
     public function getAreaPlanar(ReferenceEllipsoid $ellipsoid = null)
     {
-        $pointCount = count($this->_nodePoints);
+        $pointCount = count($this->nodePoints);
         if ($pointCount == 0) {
             return new Area();
         } elseif (is_null($ellipsoid)) {
@@ -100,18 +100,18 @@ class Region extends Feature
         for ($j = 0; $j < $pointCount; ++$j) {
             $k = $j + 1;
             if ($j == 0) {
-                $lambda1 = $this->_nodePoints[$j]->getLongitude()->getValue(Angle::RADIANS);
-                $beta1 = $this->_nodePoints[$j]->getLatitude()->getValue(Angle::RADIANS);
-                $lambda2 = $this->_nodePoints[$k]->getLongitude()->getValue(Angle::RADIANS);
-                $beta2 = $this->_nodePoints[$k]->getLatitude()->getValue(Angle::RADIANS);
+                $lambda1 = $this->nodePoints[$j]->getLongitude()->getValue(Angle::RADIANS);
+                $beta1 = $this->nodePoints[$j]->getLatitude()->getValue(Angle::RADIANS);
+                $lambda2 = $this->nodePoints[$k]->getLongitude()->getValue(Angle::RADIANS);
+                $beta2 = $this->nodePoints[$k]->getLatitude()->getValue(Angle::RADIANS);
                 $cosB1 = cos($beta1);
                 $cosB2 = cos($beta2);
             } else {
                 $k = ($j+1) % $pointCount;
                 $lambda1 = $lambda2;
                 $beta1 = $beta2;
-                $lambda2 = $this->_nodePoints[$k]->getLongitude()->getValue(Angle::RADIANS);
-                $beta2 = $this->_nodePoints[$k]->getLatitude()->getValue(Angle::RADIANS);
+                $lambda2 = $this->nodePoints[$k]->getLongitude()->getValue(Angle::RADIANS);
+                $beta2 = $this->nodePoints[$k]->getLatitude()->getValue(Angle::RADIANS);
                 $cosB1 = $cosB2;
                 $cosB2 = cos($beta2);
             }
@@ -145,15 +145,15 @@ class Region extends Feature
      */
     private function getSignedArea()
     {
-        $pointCount = count($this->_nodePoints);
+        $pointCount = count($this->nodePoints);
 
         $area = 0;
         for ($i = 0; $i < $pointCount; ++$i) {
             $j = ($i+1) % $pointCount;
-            $area += (($this->_nodePoints[$i]->getLongitude()->getValue() *
-                       $this->_nodePoints[$j]->getLatitude()->getValue()) -
-                      ($this->_nodePoints[$j]->getLongitude()->getValue() *
-                       $this->_nodePoints[$i]->getLatitude()->getValue())
+            $area += (($this->nodePoints[$i]->getLongitude()->getValue() *
+                       $this->nodePoints[$j]->getLatitude()->getValue()) -
+                      ($this->nodePoints[$j]->getLongitude()->getValue() *
+                       $this->nodePoints[$i]->getLatitude()->getValue())
                      );
         }
 
@@ -170,7 +170,7 @@ class Region extends Feature
      */
     public function getCentrePointPlanar()
     {
-        $pointCount = count($this->_nodePoints);
+        $pointCount = count($this->nodePoints);
         if ($pointCount == 0) {
             throw new Exception('Area is not defined, so cannot have a centre point');
         }
@@ -178,16 +178,16 @@ class Region extends Feature
         $cLong = $cLat = 0;
         for ($i = 0; $i < $pointCount; ++$i) {
             $j = ($i+1) % $pointCount;
-            $cTemp = (($this->_nodePoints[$i]->getLongitude()->getValue() *
-                       $this->_nodePoints[$j]->getLatitude()->getValue()) -
-                      ($this->_nodePoints[$j]->getLongitude()->getValue() *
-                       $this->_nodePoints[$i]->getLatitude()->getValue())
+            $cTemp = (($this->nodePoints[$i]->getLongitude()->getValue() *
+                       $this->nodePoints[$j]->getLatitude()->getValue()) -
+                      ($this->nodePoints[$j]->getLongitude()->getValue() *
+                       $this->nodePoints[$i]->getLatitude()->getValue())
                      );
-            $cLat +=  ($this->_nodePoints[$i]->getLatitude()->getValue() +
-                       $this->_nodePoints[$j]->getLatitude()->getValue()) *
+            $cLat +=  ($this->nodePoints[$i]->getLatitude()->getValue() +
+                       $this->nodePoints[$j]->getLatitude()->getValue()) *
                       $cTemp;
-            $cLong += ($this->_nodePoints[$i]->getLongitude()->getValue() +
-                       $this->_nodePoints[$j]->getLongitude()->getValue()) *
+            $cLong += ($this->nodePoints[$i]->getLongitude()->getValue() +
+                       $this->nodePoints[$j]->getLongitude()->getValue()) *
                       $cTemp;
         }
 
@@ -286,7 +286,7 @@ class Region extends Feature
      */
     public function getArea(ReferenceEllipsoid $ellipsoid = null)
     {
-        $pointCount = count($this->_nodePoints);
+        $pointCount = count($this->nodePoints);
         if ($pointCount == 0) {
             return new Area();
         } elseif (is_null($ellipsoid)) {
@@ -309,8 +309,8 @@ class Region extends Feature
 
         $pointCount--;
 
-        $longitude2 = $this->_nodePoints[$pointCount]->getLongitude()->getValue(Angle::RADIANS);
-        $latitude2 = $this->_nodePoints[$pointCount]->getLatitude()->getValue(Angle::RADIANS);
+        $longitude2 = $this->nodePoints[$pointCount]->getLongitude()->getValue(Angle::RADIANS);
+        $latitude2 = $this->nodePoints[$pointCount]->getLatitude()->getValue(Angle::RADIANS);
 
         $Qbar2 = $this->_Qbar($latitude2);
         $area = 0.0;
@@ -319,8 +319,8 @@ class Region extends Feature
             $longitude1 = $longitude2;
             $latitude1 = $latitude2;
             $Qbar1 = $Qbar2;
-            $longitude2 = $this->_nodePoints[$n]->getLongitude()->getValue(Angle::RADIANS);
-            $latitude2 = $this->_nodePoints[$n]->getLatitude()->getValue(Angle::RADIANS);
+            $longitude2 = $this->nodePoints[$n]->getLongitude()->getValue(Angle::RADIANS);
+            $latitude2 = $this->nodePoints[$n]->getLatitude()->getValue(Angle::RADIANS);
             $Qbar2 = $this->_Qbar($latitude2);
 
             self::datelineAdjust($longitude1, $longitude2);
@@ -351,7 +351,7 @@ class Region extends Feature
      */
     public function getPerimeter(ReferenceEllipsoid $ellipsoid = null, $useHaversine = false)
     {
-        $pointCount = count($this->_nodePoints);
+        $pointCount = count($this->nodePoints);
         if ($pointCount == 0) {
             return new Area();
         }
@@ -364,13 +364,13 @@ class Region extends Feature
         for ($i = 0; $i < $pointCount; ++$i) {
             $j = ($i+1) % $pointCount;
             if ($useHaversine) {
-                $distance += $this->_nodePoints[$i]->getDistanceHaversine(
-                    $this->_nodePoints[$j],
+                $distance += $this->nodePoints[$i]->getDistanceHaversine(
+                    $this->nodePoints[$j],
                     $ellipsoid
                 )->getValue();
             } else {
-                $distance += $this->_nodePoints[$i]->getDistanceVincenty(
-                    $this->_nodePoints[$j],
+                $distance += $this->nodePoints[$i]->getDistanceVincenty(
+                    $this->nodePoints[$j],
                     $ellipsoid
                 )->getValue();
             }
@@ -391,18 +391,18 @@ class Region extends Feature
     {
         $latitude = $position->getLatitude()->getValue();
         $longitude = $position->getLongitude()->getValue();
-        $perimeterNodeCount = count($this->_nodePoints);
+        $perimeterNodeCount = count($this->nodePoints);
 
         $jIndex = $perimeterNodeCount - 1 ;
         $oddNodes = false;
         for ($iIndex = 0; $iIndex < $perimeterNodeCount; ++$iIndex) {
-            $iLatitude = $this->_nodePoints[$iIndex]->getLatitude()->getValue();
-            $jLatitude = $this->_nodePoints[$jIndex]->getLatitude()->getValue();
+            $iLatitude = $this->nodePoints[$iIndex]->getLatitude()->getValue();
+            $jLatitude = $this->nodePoints[$jIndex]->getLatitude()->getValue();
 
             if (($iLatitude < $latitude && $jLatitude >= $latitude) ||
                 ($jLatitude < $latitude && $iLatitude >= $latitude)) {
-                $iLongitude = $this->_nodePoints[$iIndex]->getLongitude()->getValue();
-                $jLongitude = $this->_nodePoints[$jIndex]->getLongitude()->getValue();
+                $iLongitude = $this->nodePoints[$iIndex]->getLongitude()->getValue();
+                $jLongitude = $this->nodePoints[$jIndex]->getLongitude()->getValue();
 
                 if ($iLongitude +
                     ($latitude - $iLatitude) /

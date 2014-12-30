@@ -15,7 +15,7 @@ namespace Geodetic;
  * @copyright  Copyright (c) 2012 Mark Baker (https://github.com/MarkBaker/PHPGeodetic)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
  */
-class Cluster extends Feature
+class Cluster extends Base\Feature
 {
 
     /**
@@ -30,7 +30,7 @@ class Cluster extends Feature
         if (count($nodePoints) < 2) {
             throw new Exception('A cluster must be defined by at least 2 node points');
         }
-        $this->_setNodePoints($nodePoints);
+        $this->populateNodePoints($nodePoints);
 
         return $this;
     }

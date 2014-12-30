@@ -117,7 +117,7 @@ class ReferenceEllipsoid
      * @access private
      * @var    mixed[]
      */
-    private static $_ellipsoidData = array(
+    private static $ellipsoidData = array(
         self::AIRY_1830 => array(
             'name'               => 'Airy (1830)',
             'synonyms'           => '',
@@ -545,7 +545,7 @@ class ReferenceEllipsoid
      * @access protected
      * @var    string
      */
-    protected $_ellipsoidReference;
+    protected $ellipsoidReference;
 
     /**
      * Name of this ellipsoid
@@ -553,7 +553,7 @@ class ReferenceEllipsoid
      * @access protected
      * @var    string
      */
-    protected $_ellipsoidName;
+    protected $ellipsoidName;
 
     /**
      * EPSG ID value for this ellipsoid
@@ -561,7 +561,7 @@ class ReferenceEllipsoid
      * @access protected
      * @var    string
      */
-    protected $_epsgId;
+    protected $epsgId;
 
     /**
      * The semi-major (Equatorial) axis of this ellipsoid
@@ -569,7 +569,7 @@ class ReferenceEllipsoid
      * @access protected
      * @var    float
      */
-    protected $_semiMajorAxis;
+    protected $semiMajorAxis;
 
     /**
      * The semi-minor (Polar) axis of this ellipsoid
@@ -577,7 +577,7 @@ class ReferenceEllipsoid
      * @access protected
      * @var    float
      */
-    protected $_semiMinorAxis;
+    protected $semiMinorAxis;
 
     /**
      * The Inverse Flattening of this ellipsoid
@@ -585,7 +585,7 @@ class ReferenceEllipsoid
      * @access protected
      * @var    float
      */
-    protected $_inverseFlattening;
+    protected $inverseFlattening;
 
     /**
      * The First Eccentricity Squared of this ellipsoid
@@ -593,7 +593,7 @@ class ReferenceEllipsoid
      * @access protected
      * @var    float
      */
-    protected $_firstEccentricitySquared;
+    protected $firstEccentricitySquared;
 
     /**
      * The Second Eccentricity Squared of this ellipsoid
@@ -601,7 +601,7 @@ class ReferenceEllipsoid
      * @access protected
      * @var    float
      */
-    protected $_secondEccentricitySquared;
+    protected $secondEccentricitySquared;
 
 
     /**
@@ -629,28 +629,28 @@ class ReferenceEllipsoid
      */
     private function calculateDerivedParameters()
     {
-        if ($this->_semiMajorAxis->getValue() === 0.0) {
+        if ($this->semiMajorAxis->getValue() === 0.0) {
             throw new Exception('Semi-Major (Equatorial) Axis is not set');
         }
 
-        if ($this->_semiMinorAxis->getValue() == 0.0) {
-            if ($this->_inverseFlattening === 0.0) {
+        if ($this->semiMinorAxis->getValue() == 0.0) {
+            if ($this->inverseFlattening === 0.0) {
                 throw new Exception('Neither Semi-Minor (Polar) Axis nor Inverse Flattening is set');
             }
-            $this->_semiMinorAxis->setValue($this->_semiMajorAxis->getValue() * (1 - (1 / $this->_inverseFlattening)));
-        } elseif ($this->_inverseFlattening == 0.0) {
-            if ($this->_semiMajorAxis->getValue() !== $this->_semiMinorAxis->getValue()) {
-                $this->_inverseFlattening = $this->_semiMajorAxis->getValue() /
-                                            ($this->_semiMajorAxis->getValue() - $this->_semiMinorAxis->getValue());
+            $this->semiMinorAxis->setValue($this->semiMajorAxis->getValue() * (1 - (1 / $this->inverseFlattening)));
+        } elseif ($this->inverseFlattening == 0.0) {
+            if ($this->semiMajorAxis->getValue() !== $this->semiMinorAxis->getValue()) {
+                $this->inverseFlattening = $this->semiMajorAxis->getValue() /
+                                           ($this->semiMajorAxis->getValue() - $this->semiMinorAxis->getValue());
             }
         }
 
-        $this->_firstEccentricitySquared = (($this->_semiMajorAxis->getValue() * $this->_semiMajorAxis->getValue()) -
-                                            ($this->_semiMinorAxis->getValue() * $this->_semiMinorAxis->getValue())) /
-                                           ($this->_semiMajorAxis->getValue() * $this->_semiMajorAxis->getValue());
-        $this->_secondEccentricitySquared = (($this->_semiMajorAxis->getValue() * $this->_semiMajorAxis->getValue()) -
-                                             ($this->_semiMinorAxis->getValue() * $this->_semiMinorAxis->getValue())) /
-                                            ($this->_semiMinorAxis->getValue() * $this->_semiMinorAxis->getValue());
+        $this->firstEccentricitySquared = (($this->semiMajorAxis->getValue() * $this->semiMajorAxis->getValue()) -
+                                           ($this->semiMinorAxis->getValue() * $this->semiMinorAxis->getValue())) /
+                                          ($this->semiMajorAxis->getValue() * $this->semiMajorAxis->getValue());
+        $this->secondEccentricitySquared = (($this->semiMajorAxis->getValue() * $this->semiMajorAxis->getValue()) -
+                                            ($this->semiMinorAxis->getValue() * $this->semiMinorAxis->getValue())) /
+                                           ($this->semiMinorAxis->getValue() * $this->semiMinorAxis->getValue());
 
         $this->dirty = false;
     }   //  private function calculateDerivedParameters()
@@ -678,7 +678,7 @@ class ReferenceEllipsoid
      */
     public function getEllipsoidReference()
     {
-        return $this->_ellipsoidReference;
+        return $this->ellipsoidReference;
     }   //  getEllipsoidName()
 
     /**
@@ -688,7 +688,7 @@ class ReferenceEllipsoid
      */
     public function getEllipsoidName()
     {
-        return $this->_ellipsoidName;
+        return $this->ellipsoidName;
     }   //  getEllipsoidName()
 
     /**
@@ -698,7 +698,7 @@ class ReferenceEllipsoid
      */
     public function getEllipsoidID()
     {
-        return $this->_epsgId;
+        return $this->epsgId;
     }   //  getEllipsoidID()
 
     /**
@@ -714,10 +714,10 @@ class ReferenceEllipsoid
             throw new Exception('An Ellipsoid name must be specified');
         }
 
-        if (!isset(self::$_ellipsoidData[$ellipsoid])) {
+        if (!isset(self::$ellipsoidData[$ellipsoid])) {
             if (defined('self::'.$ellipsoid)) {
                 $ellipsoid = constant('self::'.$ellipsoid);
-                if (!isset(self::$_ellipsoidData[$ellipsoid])) {
+                if (!isset(self::$ellipsoidData[$ellipsoid])) {
                     throw new Exception('"'.$ellipsoid.'" is not a valid ellipsoid');
                 }
             } else {
@@ -739,22 +739,22 @@ class ReferenceEllipsoid
     {
         $ellipsoidName = self::isValidEllipsoid($ellipsoidName);
 
-        $this->_semiMajorAxis = new Distance();
-        $this->_semiMinorAxis = new Distance();
-        $this->_ellipsoidReference = $ellipsoidName;
-        $this->_ellipsoidName = self::$_ellipsoidData[$ellipsoidName]['name'];
-        $this->_epsgId = self::$_ellipsoidData[$ellipsoidName]['epsg_id'];
+        $this->semiMajorAxis = new Distance();
+        $this->semiMinorAxis = new Distance();
+        $this->ellipsoidReference = $ellipsoidName;
+        $this->ellipsoidName = self::$ellipsoidData[$ellipsoidName]['name'];
+        $this->epsgId = self::$ellipsoidData[$ellipsoidName]['epsg_id'];
 
         //    All pre-configured Ellipsoid dimensions are already defined in meters,
         //        so we don't need to do any UOM conversions here
-        $this->_semiMajorAxis->setValue(self::$_ellipsoidData[$ellipsoidName]['semiMajorAxis']);
-        $this->_semiMinorAxis->setValue(
-            isset(self::$_ellipsoidData[$ellipsoidName]['semiMinorAxis']) ?
-                self::$_ellipsoidData[$ellipsoidName]['semiMinorAxis'] :
+        $this->semiMajorAxis->setValue(self::$ellipsoidData[$ellipsoidName]['semiMajorAxis']);
+        $this->semiMinorAxis->setValue(
+            isset(self::$ellipsoidData[$ellipsoidName]['semiMinorAxis']) ?
+                self::$ellipsoidData[$ellipsoidName]['semiMinorAxis'] :
                 0.0
             );
-        $this->_inverseFlattening = isset(self::$_ellipsoidData[$ellipsoidName]['inverseFlattening']) ?
-            self::$_ellipsoidData[$ellipsoidName]['inverseFlattening'] :
+        $this->inverseFlattening = isset(self::$ellipsoidData[$ellipsoidName]['inverseFlattening']) ?
+            self::$ellipsoidData[$ellipsoidName]['inverseFlattening'] :
             0.0;
 
         $this->calculateDerivedParameters();
@@ -778,7 +778,7 @@ class ReferenceEllipsoid
             throw new Exception('Semi-Major (Equatorial) Axis is not a numeric value');
         }
 
-        $this->_semiMajorAxis->setValue($semiMajorAxis, $uom);
+        $this->semiMajorAxis->setValue($semiMajorAxis, $uom);
         $this->dirty = true;
 
         return $this;
@@ -793,7 +793,7 @@ class ReferenceEllipsoid
      */
     public function getSemiMajorAxis($uom = Distance::METRES)
     {
-        return $this->_semiMajorAxis->getValue($uom);
+        return $this->semiMajorAxis->getValue($uom);
     }
 
     /**
@@ -814,8 +814,8 @@ class ReferenceEllipsoid
             throw new Exception('Semi-Minor (Polar) Axis is not a numeric value');
         }
 
-        $this->_semiMinorAxis->setValue($semiMinorAxis, $uom);
-        $this->_inverseFlattening = null;
+        $this->semiMinorAxis->setValue($semiMinorAxis, $uom);
+        $this->inverseFlattening = null;
         $this->dirty = true;
 
         return $this;
@@ -830,7 +830,7 @@ class ReferenceEllipsoid
      */
     public function getSemiMinorAxis($uom = Distance::METRES)
     {
-        return $this->_semiMinorAxis->getValue($uom);
+        return $this->semiMinorAxis->getValue($uom);
     }
 
     /**
@@ -849,8 +849,8 @@ class ReferenceEllipsoid
             throw new Exception('Inverse Flattening is not a numeric value');
         }
 
-        $this->_inverseFlattening = (float) $inverseFlattening;
-        $this->_semiMinorAxis->setValue();
+        $this->inverseFlattening = (float) $inverseFlattening;
+        $this->semiMinorAxis->setValue();
         $this->dirty = true;
 
         return $this;
@@ -868,7 +868,7 @@ class ReferenceEllipsoid
             $this->calculateDerivedParameters();
         }
 
-        return $this->_inverseFlattening;
+        return $this->inverseFlattening;
     }
 
     /**
@@ -887,8 +887,8 @@ class ReferenceEllipsoid
             throw new Exception('Flattening is not a numeric value');
         }
 
-        $this->_inverseFlattening = (float) 1 / $flattening;
-        $this->_semiMinorAxis->setValue();
+        $this->inverseFlattening = (float) 1 / $flattening;
+        $this->semiMinorAxis->setValue();
         $this->dirty = true;
 
         return $this;
@@ -906,8 +906,8 @@ class ReferenceEllipsoid
             $this->calculateDerivedParameters();
         }
 
-        if ($this->_inverseFlattening > 0.0) {
-            return 1 / $this->_inverseFlattening;
+        if ($this->inverseFlattening > 0.0) {
+            return 1 / $this->inverseFlattening;
         }
         return INF;
     }
@@ -924,7 +924,7 @@ class ReferenceEllipsoid
             $this->calculateDerivedParameters();
         }
 
-        return sqrt($this->_firstEccentricitySquared);
+        return sqrt($this->firstEccentricitySquared);
     }
 
     /**
@@ -939,7 +939,7 @@ class ReferenceEllipsoid
             $this->calculateDerivedParameters();
         }
 
-        return $this->_firstEccentricitySquared;
+        return $this->firstEccentricitySquared;
     }
 
     /**
@@ -954,7 +954,7 @@ class ReferenceEllipsoid
             $this->calculateDerivedParameters();
         }
 
-        return sqrt($this->_secondEccentricitySquared);
+        return sqrt($this->secondEccentricitySquared);
     }
 
     /**
@@ -969,7 +969,7 @@ class ReferenceEllipsoid
             $this->calculateDerivedParameters();
         }
 
-        return $this->_secondEccentricitySquared;
+        return $this->secondEccentricitySquared;
     }
 
     /**
@@ -986,7 +986,7 @@ class ReferenceEllipsoid
         }
 
         return Distance::convertFromMeters(
-            (2 * $this->_semiMajorAxis->getValue() + $this->_semiMinorAxis->getValue()) / 3,
+            (2 * $this->semiMajorAxis->getValue() + $this->semiMinorAxis->getValue()) / 3,
             $uom
         );
     }
@@ -1007,24 +1007,24 @@ class ReferenceEllipsoid
             $this->calculateDerivedParameters();
         }
 
-        $semiMajorSquared = $this->_semiMajorAxis->getValue() * $this->_semiMajorAxis->getValue();
-        $semiMinorSquared = $this->_semiMinorAxis->getValue() * $this->_semiMinorAxis->getValue();
+        $semiMajorSquared = $this->semiMajorAxis->getValue() * $this->semiMajorAxis->getValue();
+        $semiMinorSquared = $this->semiMinorAxis->getValue() * $this->semiMinorAxis->getValue();
 
-        if ($this->_inverseFlattening > 0.0) {
+        if ($this->inverseFlattening > 0.0) {
             return Distance::convertFromMeters(
                 sqrt(
                     ($semiMajorSquared +
-                     (($this->_semiMajorAxis->getValue() * $semiMinorSquared) / sqrt($semiMajorSquared - $semiMinorSquared)) *
+                     (($this->semiMajorAxis->getValue() * $semiMinorSquared) / sqrt($semiMajorSquared - $semiMinorSquared)) *
                      log(
-                        ($this->_semiMajorAxis->getValue() + sqrt($semiMajorSquared - $semiMinorSquared)) /
-                         $this->_semiMinorAxis->getValue()
+                        ($this->semiMajorAxis->getValue() + sqrt($semiMajorSquared - $semiMinorSquared)) /
+                         $this->semiMinorAxis->getValue()
                      )
                     ) / 2
                 ),
                 $uom
             );
         }
-        return $this->_semiMajorAxis->getValue($uom);
+        return $this->semiMajorAxis->getValue($uom);
     }
 
     /**
@@ -1044,8 +1044,8 @@ class ReferenceEllipsoid
 
         return Distance::convertFromMeters(
             pow(
-                $this->_semiMajorAxis->getValue() * $this->_semiMajorAxis->getValue() *
-                    $this->_semiMinorAxis->getValue(),
+                $this->semiMajorAxis->getValue() * $this->semiMajorAxis->getValue() *
+                    $this->semiMinorAxis->getValue(),
                 1/3
             ),
             $uom
@@ -1078,8 +1078,8 @@ class ReferenceEllipsoid
             $this->calculateDerivedParameters();
         }
 
-        $radius = ($this->_semiMajorAxis->getValue() * (1 - $this->_firstEccentricitySquared)) /
-                  pow(1 - $this->_firstEccentricitySquared * self::sinSquared($latitude), 1.5);
+        $radius = ($this->semiMajorAxis->getValue() * (1 - $this->firstEccentricitySquared)) /
+                  pow(1 - $this->firstEccentricitySquared * self::sinSquared($latitude), 1.5);
 
         return Distance::convertFromMeters($radius, $uom);
     }
@@ -1110,8 +1110,8 @@ class ReferenceEllipsoid
             $this->calculateDerivedParameters();
         }
 
-        $radius = $this->_semiMajorAxis->getValue() /
-                   pow(1 - $this->_firstEccentricitySquared * self::sinSquared($latitude), 0.5);
+        $radius = $this->semiMajorAxis->getValue() /
+                   pow(1 - $this->firstEccentricitySquared * self::sinSquared($latitude), 0.5);
 
         return Distance::convertFromMeters($radius, $uom);
     }
@@ -1128,13 +1128,13 @@ class ReferenceEllipsoid
     {
         return array_combine(
             array_keys(
-                self::$_ellipsoidData
+                self::$ellipsoidData
             ),
             array_map(
                 function ($ellipsoidData) {
                     return $ellipsoidData['name'];
                 },
-                self::$_ellipsoidData
+                self::$ellipsoidData
             )
         );
     }

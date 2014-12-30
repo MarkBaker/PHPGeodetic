@@ -36,7 +36,7 @@ class LatLong
      * @access protected
      * @var Angle
      */
-    protected $_latitude;
+    protected $latitude;
 
     /**
      * The Longitude value of this LatLong object.
@@ -45,7 +45,7 @@ class LatLong
      * @access protected
      * @var Angle
      */
-    protected $_longitude;
+    protected $longitude;
 
     /**
      * The Height value of this LatLong object.
@@ -54,7 +54,7 @@ class LatLong
      * @access protected
      * @var Distance
      */
-    protected $_height;
+    protected $height;
 
 
     /**
@@ -67,16 +67,16 @@ class LatLong
     public function __construct(Base\XyzFormat $xyzCoordinates = null)
     {
         if (!is_null($xyzCoordinates)) {
-            $this->_latitude = $xyzCoordinates->getX();
-            $this->_longitude = $xyzCoordinates->getY();
-            $this->_height = $xyzCoordinates->getZ();
+            $this->latitude = $xyzCoordinates->getX();
+            $this->longitude = $xyzCoordinates->getY();
+            $this->height = $xyzCoordinates->getZ();
             return;
         }
 
         //    Defaults
-        $this->_latitude = new Angle();
-        $this->_longitude = new Angle();
-        $this->_height = new Distance();
+        $this->latitude = new Angle();
+        $this->longitude = new Angle();
+        $this->height = new Distance();
     }
 
 
@@ -92,7 +92,7 @@ class LatLong
         if (is_null($latitudeObj)) {
             throw new Exception('The Latitude must be a Angle object');
         }
-        $this->_latitude = $latitudeObj;
+        $this->latitude = $latitudeObj;
 
         return $this;
     }
@@ -104,7 +104,7 @@ class LatLong
      */
     public function getLatitude()
     {
-        return $this->_latitude;
+        return $this->latitude;
     }
 
     /**
@@ -119,7 +119,7 @@ class LatLong
         if (is_null($longitudeObj)) {
             throw new Exception('The Longitude must be a Angle object');
         }
-        $this->_longitude = $longitudeObj;
+        $this->longitude = $longitudeObj;
 
         return $this;
     }
@@ -131,7 +131,7 @@ class LatLong
      */
     public function getLongitude()
     {
-        return $this->_longitude;
+        return $this->longitude;
     }
 
     /**
@@ -146,7 +146,7 @@ class LatLong
         if (is_null($heightObj)) {
             throw new Exception('The Height must be a Distance object');
         }
-        $this->_height = $heightObj;
+        $this->height = $heightObj;
 
         return $this;
     }
@@ -158,7 +158,7 @@ class LatLong
      */
     public function getHeight()
     {
-        return $this->_height;
+        return $this->height;
     }
 
     /**
@@ -234,14 +234,14 @@ class LatLong
 
         $ellipsoid = $datum->getReferenceEllipsoid();
 
-        $phi = $this->_latitude->getValue(Angle::RADIANS);
-        $lambda = $this->_longitude->getValue(Angle::RADIANS);
+        $phi = $this->latitude->getValue(Angle::RADIANS);
+        $lambda = $this->longitude->getValue(Angle::RADIANS);
         $radiusOfCurvature = $ellipsoid->getRadiusOfCurvaturePrimeVertical($phi, Angle::RADIANS);
 
-        $xCoordinate = ($radiusOfCurvature + $this->_height->getValue()) * cos($phi) * cos($lambda);
-        $yCoordinate = ($radiusOfCurvature + $this->_height->getValue()) * cos($phi) * sin($lambda);
+        $xCoordinate = ($radiusOfCurvature + $this->height->getValue()) * cos($phi) * cos($lambda);
+        $yCoordinate = ($radiusOfCurvature + $this->height->getValue()) * cos($phi) * sin($lambda);
         $zCoordinate = ((1 - $ellipsoid->getFirstEccentricitySquared()) * $radiusOfCurvature +
-            $this->_height->getValue()) * sin($phi);
+            $this->height->getValue()) * sin($phi);
 
         $ecefCoordinates = new ECEF\CoordinateValues(
             $xCoordinate,
@@ -272,10 +272,10 @@ class LatLong
         $utmF0 = 0.9996;
 
         $utmLongitudeZone = UTM::identifyLongitudeZone(
-            $this->_latitude->getValue(),
-            $this->_longitude->getValue()
+            $this->latitude->getValue(),
+            $this->longitude->getValue()
         );
-        $utmLatitudeZone = UTM::identifyLatitudeZone($this->_latitude->getValue());
+        $utmLatitudeZone = UTM::identifyLatitudeZone($this->latitude->getValue());
         $longitudeOrigin = Angle::convertFromDegrees(
             ($utmLongitudeZone - 1) * 6 - 180 + 3,
             Angle::RADIANS
@@ -286,38 +286,38 @@ class LatLong
         $nValue = $ellipsoid->getSemiMajorAxis() /
             sqrt(
                 1 - $eSquared *
-                sin($this->_latitude->getValue(Angle::RADIANS)) *
-                sin($this->_latitude->getValue(Angle::RADIANS))
+                sin($this->latitude->getValue(Angle::RADIANS)) *
+                sin($this->latitude->getValue(Angle::RADIANS))
             );
-        $tValue = tan($this->_latitude->getValue(Angle::RADIANS)) *
-                  tan($this->_latitude->getValue(Angle::RADIANS));
+        $tValue = tan($this->latitude->getValue(Angle::RADIANS)) *
+                  tan($this->latitude->getValue(Angle::RADIANS));
         $cValue = $ePrimeSquared *
-                  cos($this->_latitude->getValue(Angle::RADIANS)) *
-                  cos($this->_latitude->getValue(Angle::RADIANS));
-        $aValue = cos($this->_latitude->getValue(Angle::RADIANS)) *
-                  ($this->_longitude->getValue(Angle::RADIANS) - $longitudeOrigin);
+                  cos($this->latitude->getValue(Angle::RADIANS)) *
+                  cos($this->latitude->getValue(Angle::RADIANS));
+        $aValue = cos($this->latitude->getValue(Angle::RADIANS)) *
+                  ($this->longitude->getValue(Angle::RADIANS) - $longitudeOrigin);
 
         $mValue = $ellipsoid->getSemiMajorAxis() * (
             (1 - $eSquared / 4 - 3 * $eSquared2 / 64 - 5 * $eSquared3 / 256) *
-            $this->_latitude->getValue(Angle::RADIANS) -
+            $this->latitude->getValue(Angle::RADIANS) -
                 (3 * $eSquared / 8 + 3 * $eSquared2 / 32 + 45 * $eSquared3 / 1024) *
-            sin(2 * $this->_latitude->getValue(Angle::RADIANS)) +
+            sin(2 * $this->latitude->getValue(Angle::RADIANS)) +
                 (15 * $eSquared2 / 256 + 45 * $eSquared3 / 1024) *
-            sin(4 * $this->_latitude->getValue(Angle::RADIANS)) -
-                (35 * $eSquared3 / 3072) * sin(6 * $this->_latitude->getValue(Angle::RADIANS))
+            sin(4 * $this->latitude->getValue(Angle::RADIANS)) -
+                (35 * $eSquared3 / 3072) * sin(6 * $this->latitude->getValue(Angle::RADIANS))
         );
 
         $UTMEasting = ($utmF0 * $nValue * ($aValue + (1 - $tValue + $cValue) * pow($aValue, 3.0) / 6 +
                       (5 - 18 * $tValue + $tValue * $tValue + 72 * $cValue - 58 * $ePrimeSquared) *
                       pow($aValue, 5.0) / 120) + 500000.0);
 
-        $UTMNorthing = ($utmF0 * ($mValue + $nValue * tan($this->_latitude->getValue(Angle::RADIANS)) *
+        $UTMNorthing = ($utmF0 * ($mValue + $nValue * tan($this->latitude->getValue(Angle::RADIANS)) *
                        ($aValue * $aValue / 2 + (5 - $tValue + (9 * $cValue) + (4 * $cValue * $cValue)) * pow($aValue, 4.0) / 24 +
                        (61 - (58 * $tValue) + ($tValue * $tValue) + (600 * $cValue) - (330 * $ePrimeSquared)) *
                        pow($aValue, 6.0) / 720)));
 
         // Adjust for the southern hemisphere
-        if ($this->_latitude->getValue(Angle::RADIANS) < 0) {
+        if ($this->latitude->getValue(Angle::RADIANS) < 0) {
             $UTMNorthing += 10000000.0;
         }
 
@@ -379,11 +379,11 @@ class LatLong
         }
 
         $deltaLatitude =  $endPoint->getLatitude()->getValue(Angle::RADIANS) -
-            $this->_latitude->getValue(Angle::RADIANS);
+            $this->latitude->getValue(Angle::RADIANS);
         $deltaLongitude = $endPoint->getLongitude()->getValue(Angle::RADIANS) -
-            $this->_longitude->getValue(Angle::RADIANS);
+            $this->longitude->getValue(Angle::RADIANS);
         $aValue = sin($deltaLatitude / 2) * sin($deltaLatitude / 2) +
-             cos($this->_latitude->getValue(Angle::RADIANS)) *
+             cos($this->latitude->getValue(Angle::RADIANS)) *
                  cos($endPoint->getLatitude()->getValue(Angle::RADIANS)) *
              sin($deltaLongitude / 2) * sin($deltaLongitude / 2);
         $cValue = 2 * atan2(sqrt($aValue), sqrt(1 - $aValue));
@@ -412,11 +412,11 @@ class LatLong
         $semiMinor = $ellipsoid->getSemiMinorAxis();
         $flattening = $ellipsoid->getFlattening();
 
-        $lDifference = $this->_longitude->getValue(Angle::RADIANS) -
+        $lDifference = $this->longitude->getValue(Angle::RADIANS) -
             $endPoint->getLongitude()->getValue(Angle::RADIANS);
 
         $U1Value = atan((1 - $flattening) * tan($endPoint->getLatitude()->getValue(Angle::RADIANS)));
-        $U2Value = atan((1 - $flattening) * tan($this->_latitude->getValue(Angle::RADIANS)));
+        $U2Value = atan((1 - $flattening) * tan($this->latitude->getValue(Angle::RADIANS)));
 
         $sinU1 = sin($U1Value);
         $cosU1 = cos($U1Value);
@@ -474,12 +474,12 @@ class LatLong
     public function getInitialBearing(LatLong $endPoint)
     {
         $deltaLongitude = $endPoint->getLongitude()->getValue(Angle::RADIANS) -
-            $this->_longitude->getValue(Angle::RADIANS);
+            $this->longitude->getValue(Angle::RADIANS);
 
         $yValue = sin($deltaLongitude) * cos($endPoint->getLatitude()->getValue(Angle::RADIANS));
-        $xValue = cos($this->_latitude->getValue(Angle::RADIANS)) *
+        $xValue = cos($this->latitude->getValue(Angle::RADIANS)) *
             sin($endPoint->getLatitude()->getValue(Angle::RADIANS)) -
-            sin($this->_latitude->getValue(Angle::RADIANS)) *
+            sin($this->latitude->getValue(Angle::RADIANS)) *
             cos($endPoint->getLatitude()->getValue(Angle::RADIANS)) *
             cos($deltaLongitude);
 
@@ -547,7 +547,7 @@ class LatLong
     public function getMidpoint(LatLong $endPoint)
     {
         $deltaLongitude = $endPoint->getLongitude()->getValue(Angle::RADIANS) -
-            $this->_longitude->getValue(Angle::RADIANS);
+            $this->longitude->getValue(Angle::RADIANS);
 
         $xModified = cos($endPoint->getLatitude()->getValue(Angle::RADIANS)) *
             cos($deltaLongitude);
@@ -555,13 +555,13 @@ class LatLong
             sin($deltaLongitude);
 
         $midpointLatitude = atan2(
-            sin($this->_latitude->getValue(Angle::RADIANS)) +
+            sin($this->latitude->getValue(Angle::RADIANS)) +
                 sin($endPoint->getLatitude()->getValue(Angle::RADIANS)),
-            sqrt((cos($this->_latitude->getValue(Angle::RADIANS)) + $xModified) *
-                (cos($this->_latitude->getValue(Angle::RADIANS)) + $xModified) + $yModified * $yModified)
+            sqrt((cos($this->latitude->getValue(Angle::RADIANS)) + $xModified) *
+                (cos($this->latitude->getValue(Angle::RADIANS)) + $xModified) + $yModified * $yModified)
         );
-        $midpointLongitude = $this->_longitude->getValue(Angle::RADIANS) +
-            atan2($yModified, cos($this->_latitude->getValue(Angle::RADIANS)) + $xModified);
+        $midpointLongitude = $this->longitude->getValue(Angle::RADIANS) +
+            atan2($yModified, cos($this->latitude->getValue(Angle::RADIANS)) + $xModified);
 
         return new LatLong(
             new LatLong\CoordinateValues(
@@ -597,19 +597,19 @@ class LatLong
         }
 
         $destinationLatitude = asin(
-            sin($this->_latitude->getValue(Angle::RADIANS)) *
+            sin($this->latitude->getValue(Angle::RADIANS)) *
                 cos($distance->getValue() / $earthMeanRadius) +
-            cos($this->_latitude->getValue(Angle::RADIANS)) *
+            cos($this->latitude->getValue(Angle::RADIANS)) *
                 sin($distance->getValue() / $earthMeanRadius) *
                 cos($bearing->getValue(Angle::RADIANS))
         );
-        $destinationLongitude = $this->_longitude->getValue(Angle::RADIANS) +
+        $destinationLongitude = $this->longitude->getValue(Angle::RADIANS) +
             atan2(
                 sin($bearing->getValue(Angle::RADIANS)) *
                     sin($distance->getValue() / $earthMeanRadius) *
-                    cos($this->_latitude->getValue(Angle::RADIANS)),
+                    cos($this->latitude->getValue(Angle::RADIANS)),
                 cos($distance->getValue() / $earthMeanRadius) -
-                    sin($this->_latitude->getValue(Angle::RADIANS)) * sin($destinationLatitude)
+                    sin($this->latitude->getValue(Angle::RADIANS)) * sin($destinationLatitude)
             );
 
         return new LatLong(
@@ -624,12 +624,12 @@ class LatLong
     /**
      * Get the nearest feature node to a specified position
      *
-     * @param     Feature               $pointSet           The series of points from which we want the nearest feature node
-     * @param     string                         $method             Distance::METHOD_HAVERSINE or Distance::METHOD_VINCENTY
+     * @param     Base\Feature    $pointSet    The series of points from which we want the nearest feature node
+     * @param     string          $method      Distance::METHOD_HAVERSINE or Distance::METHOD_VINCENTY
      * @return    LatLong
      * @throws    Exception
      */
-    public function getNearestNeighbour(Feature $pointSet, $method = Distance::METHOD_HAVERSINE)
+    public function getNearestNeighbour(Base\Feature $pointSet, $method = Distance::METHOD_HAVERSINE)
     {
         return $pointSet->getNearestNeighbour($this, $method);
     }
