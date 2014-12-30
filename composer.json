@@ -1,5 +1,5 @@
 {
-    "name": "MarkBaker/PHPGeodetic",
+    "name": "markbaker/phpgeodetic",
     "type": "library",
     "description": "Geodetic library",
     "keywords": ["geo","geodetic","latitude","longitude","ECEF","UTM","mercator","ellipsoid"],
