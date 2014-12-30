@@ -14,7 +14,7 @@ namespace Geodetic;
  * @copyright  Copyright (c) 2012 Mark Baker (https://github.com/MarkBaker/PHPGeodetic)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
  */
-class Line extends Feature
+class Line extends Base\Feature
 {
 
     /**
@@ -29,7 +29,7 @@ class Line extends Feature
         if (count($nodePoints) < 2) {
             throw new Exception('A Line must be defined by at least 2 points: start and end');
         }
-        $this->_setNodePoints($nodePoints);
+        $this->populateNodePoints($nodePoints);
 
         return $this;
     }
@@ -46,7 +46,7 @@ class Line extends Feature
      */
     public function getLength(ReferenceEllipsoid $ellipsoid = null, $useHaversine = false)
     {
-        $pointCount = count($this->_nodePoints);
+        $pointCount = count($this->nodePoints);
         if ($pointCount == 0) {
             return new Area();
         }
@@ -57,13 +57,13 @@ class Line extends Feature
         $distance = 0;
         for ($i = 0, $j = 1; $j < $pointCount; ++$i, ++$j) {
             if ($useHaversine) {
-                $distance += $this->_nodePoints[$i]->getDistanceHaversine(
-                    $this->_nodePoints[$j],
+                $distance += $this->nodePoints[$i]->getDistanceHaversine(
+                    $this->nodePoints[$j],
                     $ellipsoid
                 )->getValue();
             } else {
-                $distance += $this->_nodePoints[$i]->getDistanceVincenty(
-                    $this->_nodePoints[$j],
+                $distance += $this->nodePoints[$i]->getDistanceVincenty(
+                    $this->nodePoints[$j],
                     $ellipsoid
                 )->getValue();
             }

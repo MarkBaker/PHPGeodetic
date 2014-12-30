@@ -1,6 +1,6 @@
 <?php
 
-namespace Geodetic;
+namespace Geodetic\Base;
 
 /**
  * Feature coordinate object.
@@ -17,32 +17,32 @@ abstract class Feature
      * An array of Latitude/Longitude points that defines the node for this feature
      *
      * @access protected
-     * @var LatLong[]
+     * @var \Geodetic\LatLong[]
      */
-    protected $_nodePoints;
+    protected $nodePoints;
 
 
     /**
      * Create a new set of node points for a feature
      *
-     * @param     LatLong[]    $nodePoints
+     * @param     \Geodetic\LatLong[]    $nodePoints
      * @throws    Exception
      */
     public function __construct(array $nodePoints = array())
     {
-        $this->setNodePoints($nodePoints);
+        $this->populateNodePoints($nodePoints);
     }
 
     /**
      * Set the node points that define this cluster
      *
-     * @param     LatLong[]    $nodePoints
+     * @param     \Geodetic\LatLong[]    $nodePoints
      * @return    Feature
-     * @throws    Exception
+     * @throws    \Geodetic\Exception
      */
     public function setNodePoints(array $nodePoints = array())
     {
-        $this->_setNodePoints($nodePoints);
+        $this->setNodePoints($nodePoints);
 
         return $this;
     }
@@ -50,47 +50,47 @@ abstract class Feature
     /**
      * Set the node points that define this feature
      *
-     * @param     LatLong[]    $nodePoints
-     * @throws    Exception
+     * @param     \Geodetic\LatLong[]    $nodePoints
+     * @throws    \Geodetic\Exception
      */
-    protected function _setNodePoints(array $nodePoints = array())
+    protected function populateNodePoints(array $nodePoints = array())
     {
         foreach ($nodePoints as $nodePoint) {
-            if (!($nodePoint instanceof LatLong)) {
-                throw new Exception('Each node must be a LatLong object');
+            if (!($nodePoint instanceof \Geodetic\LatLong)) {
+                throw new \Geodetic\Exception('Each node must be a LatLong object');
             }
         }
 
         // We want a simple numerically indexed array, so use array_values() to enforce this
-        $this->_nodePoints = array_values($nodePoints);
+        $this->nodePoints = array_values($nodePoints);
     }
 
     /**
      * Get the Node Points that define this feature
      *
-     * @return    LatLong[]    Array of Latitude/Longitude objects that define the node points of this feature
+     * @return    \Geodetic\LatLong[]    Array of Latitude/Longitude objects that define the node points of this feature
      */
     public function getNodePoints()
     {
-        return $this->_nodePoints;
+        return $this->nodePoints;
     }
 
     /**
      * Insert a new node point before a particular index position in this feature
      *
-     * @param     LatLong    $nodePoint
-     * @param     integer             $beforeKey
+     * @param     \Geodetic\LatLong    $newNode      The new node to add
+     * @param     integer              $beforeKey    The position at which this new node should be added
      * @return    Feature
-     * @throws    Exception
+     * @throws    \Geodetic\Exception
      */
-    public function insertNodeBefore(LatLong $newNode, $beforeKey)
+    public function insertNodeBefore(\Geodetic\LatLong $newNode, $beforeKey)
     {
-        if (!isset($this->_nodePoints[$beforeKey])) {
-            throw new Exception('Insert before node does not exist');
+        if (!isset($this->nodePoints[$beforeKey])) {
+            throw new \Geodetic\Exception('Insert before node does not exist');
         }
 
         array_splice(
-            $this->_nodePoints,
+            $this->nodePoints,
             $beforeKey,
             0,
             $newNode
@@ -102,19 +102,19 @@ abstract class Feature
     /**
      * Insert a new node point after a particular index position in this feature
      *
-     * @param     LatLong    $nodePoint
-     * @param     integer             $beforeKey
+     * @param     \Geodetic\LatLong    $newNode      The new node to add
+     * @param     integer              $afterKey    The position at which this new node should be added
      * @return    Feature
-     * @throws    Exception
+     * @throws    \Geodetic\Exception
      */
-    public function insertNodeAfter(LatLong $newNode, $afterKey)
+    public function insertNodeAfter(\Geodetic\LatLong $newNode, $afterKey)
     {
-        if (!isset($this->_nodePoints[$afterKey])) {
-            throw new Exception('Insert after node does not exist');
+        if (!isset($this->nodePoints[$afterKey])) {
+            throw new \Geodetic\Exception('Insert after node does not exist');
         }
 
         array_splice(
-            $this->_nodePoints,
+            $this->nodePoints,
             $afterKey + 1,
             0,
             $newNode
@@ -126,18 +126,18 @@ abstract class Feature
     /**
      * Delete a node point at a particular index position in this feature
      *
-     * @param     integer             $beforeKey
+     * @param     integer    $nodeKey    The position of the node that should be deleted
      * @return    Feature
-     * @throws    Exception
+     * @throws    \Geodetic\Exception
      */
     public function deleteNode($nodeKey)
     {
-        if (!isset($this->_nodePoints[$nodeKey])) {
-            throw new Exception('Node does not exist');
+        if (!isset($this->nodePoints[$nodeKey])) {
+            throw new \Geodetic\Exception('Node does not exist');
         }
 
         array_splice(
-            $this->_nodePoints,
+            $this->nodePoints,
             $nodeKey,
             1
         );
@@ -148,32 +148,32 @@ abstract class Feature
     /**
      * Get the nearest feature node to a specified position
      *
-     * @param     LatLong               $position           The point for which we want the nearest feature node
-     * @param     string                         $method             Distance::METHOD_HAVERSINE or Distance::METHOD_VINCENTY
-     * @return    LatLong
-     * @throws    Exception
+     * @param     \Geodetic\LatLong    $position    The point for which we want the nearest feature node
+     * @param     string               $method      Distance::METHOD_HAVERSINE or Distance::METHOD_VINCENTY
+     * @return    \Geodetic\LatLong
+     * @throws    \Geodetic\Exception
      */
-    public function getNearestNeighbour(LatLong $position, $method = Distance::METHOD_HAVERSINE)
+    public function getNearestNeighbour(\Geodetic\LatLong $position, $method = \Geodetic\Distance::METHOD_HAVERSINE)
     {
         $distances = array();
-        foreach ($this->_nodePoints as $nodeKey => $nodePoint) {
+        foreach ($this->nodePoints as $nodeKey => $nodePoint) {
             $distances[$nodeKey] = $nodePoint->getDistance($position, $method);
         }
         arsort($distances);
         $key = array_pop($distances);
-        return clone $this->_nodePoints[$key];
+        return clone $this->nodePoints[$key];
     }
 
     /**
      * Get the centre point for a collection of lat/long values
      *
-     * @return    LatLong
-     * @throws    Exception
+     * @return    \Geodetic\LatLong
+     * @throws    \Geodetic\Exception
      */
     public function getGeographicCentrePoint()
     {
         $xPoints = $yPoints = $zPoints = array();
-        foreach ($this->_nodePoints as $nodePoint) {
+        foreach ($this->nodePoints as $nodePoint) {
             $latitude = $nodePoint->getLatitude()->getValue(Angle::RADIANS);
             $longitude = $nodePoint->getLatitude()->getValue(Angle::RADIANS);
             $xPoints[] = cos($latitude) * cos($longitude);
@@ -187,11 +187,11 @@ abstract class Feature
         $longitude = atan2($y, $x);
         $latitude = atan2($z, sqrt($x * $x + $y * $y));
         
-        return new LatLong(
-            new LatLong\CoordinateValues(
+        return new \Geodetic\LatLong(
+            new \Geodetic\LatLong\CoordinateValues(
                 $latitude,
                 $longitude,
-                Angle::RADIANS
+                \Geodetic\Angle::RADIANS
             )
         );
     }
