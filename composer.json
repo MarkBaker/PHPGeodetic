@@ -18,7 +18,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Tries\\": "classes/src/"
+            "Geodetic\\": "classes/src/"
         }
     },
     "minimum-stability": "dev"
