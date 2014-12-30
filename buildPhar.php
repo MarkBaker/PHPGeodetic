@@ -12,7 +12,7 @@ if (ini_get('phar.readonly')) {
 $pharName = 'Geodetic.phar';
 
 // target folder
-$sourceDir = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR;
+$sourceDir = __DIR__ . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR;
 
 // default meta information
 $metaData = array(
@@ -20,7 +20,7 @@ $metaData = array(
     'Description' => 'A Geodetic library',
     'Copyright'   => 'Mark Baker (c) 2012-' . date('Y'),
     'Timestamp'   => time(),
-    'Version'     => '0.1',
+    'Version'     => '0.2',
     'Date'        => date('Y-m-d')
 );
 
@@ -39,12 +39,11 @@ $phar->setStub(
 <<<'EOT'
 <?php
     spl_autoload_register(function ($className) {
-        include 'phar://Geodetic/' . $className . '.php';
+        include 'phar://' . str_replace('\\', '/', $className) . '.php';
     });
 
     try {
         Phar::mapPhar();
-        include 'phar://Geodetic/Geodetic_Autoloader.php';
     } catch (PharException $e) {
         error_log($e->getMessage());
         exit(1);

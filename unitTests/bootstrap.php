@@ -43,4 +43,4 @@ if(extension_loaded('xdebug')) {
 }
 
 
-require_once(APPLICATION_PATH . '/Geodetic_Autoloader.php');
+require_once(APPLICATION_PATH . '/Bootstrap.php');
