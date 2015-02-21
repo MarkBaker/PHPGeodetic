@@ -149,7 +149,7 @@ abstract class Feature
      * Get the nearest feature node to a specified position
      *
      * @param     \Geodetic\LatLong    $position    The point for which we want the nearest feature node
-     * @param     string               $method      Distance::METHOD_HAVERSINE or Distance::METHOD_VINCENTY
+     * @param     string               $method      \Geodetic\Distance::METHOD_HAVERSINE or \Geodetic\Distance::METHOD_VINCENTY
      * @return    \Geodetic\LatLong
      * @throws    \Geodetic\Exception
      */
@@ -174,8 +174,8 @@ abstract class Feature
     {
         $xPoints = $yPoints = $zPoints = array();
         foreach ($this->nodePoints as $nodePoint) {
-            $latitude = $nodePoint->getLatitude()->getValue(Angle::RADIANS);
-            $longitude = $nodePoint->getLatitude()->getValue(Angle::RADIANS);
+            $latitude = $nodePoint->getLatitude()->getValue(\Geodetic\Angle::RADIANS);
+            $longitude = $nodePoint->getLatitude()->getValue(\Geodetic\Angle::RADIANS);
             $xPoints[] = cos($latitude) * cos($longitude);
             $yPoints[] = cos($latitude) * sin($longitude);
             $zPoints[] = sin($latitude);
