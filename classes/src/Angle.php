@@ -137,13 +137,14 @@ class Angle extends Base\Measure
         } elseif (!is_numeric($decimals)) {
             throw new Exception('Decimals argument must be a numeric value');
         }
+        $width = $decimals + 2;
 
         $degrees = intval($this->angle);
         $tempMS = abs($this->angle - $degrees) * 3600;
         $minutes = floor($tempMS / 60);
         $seconds = $tempMS - ($minutes * 60);
 
-        $mask = "%d°%02d'%02.{$decimals}f\"";
+        $mask = "%3d°%02d'%0{$width}.{$decimals}f\"";
         return sprintf($mask, $degrees, $minutes, $seconds);
     }
 
