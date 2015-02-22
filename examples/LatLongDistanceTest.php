@@ -60,4 +60,4 @@ $finalBearing = $latLongLiverpool->getFinalBearing($latLongLondon);
 echo 'Final Bearing: ' , round($finalBearing->getValue(\Geodetic\Angle::DEGREES), 3), ' ' ,\Geodetic\Angle::DEGREES , PHP_EOL;
 
 $midpoint = $latLongLiverpool->getMidpoint($latLongLondon);
-echo 'Midpoint: ' , $midpoint->getLatitude()->toDMS(2), ' ' ,$midpoint->getLongitude()->toDMS(2) , PHP_EOL;
+echo 'Midpoint: ' , $midpoint->getLatitude()->toDMS(3), ' ' ,$midpoint->getLongitude()->toDMS(3) , PHP_EOL;
